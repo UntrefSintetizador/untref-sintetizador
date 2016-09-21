@@ -1,0 +1,42 @@
+
+# built libs
+libs/libpd.*
+libs/libpdcpp.*
+libs/libpdnative.*
+
+# python
+python/pylibpd_wrap.c
+python/pylibpd.py
+python/MANIFEST
+python/build
+*.o
+*.so
+*.class
+*.pyc
+
+# xcode
+build/*
+*.mode1v3
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.swp
+xcuserdata
+libpd.xcodeproj/project.xcworkspace
+libpd.xcodeproj/xcuserdata
+
+# osx
+.DS_STORE
+*.app
+
+# csharp
+csharp/obj/*
+csharp/bin/*
+libs/libpd.*
+libs/libpdnative.*
+libs/libpdcsharp.*
+
+# java
+java-build/*

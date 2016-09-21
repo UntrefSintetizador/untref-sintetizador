@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PianoView"><attr format="reference" name="blackKeyDrawable"/><attr format="reference" name="whiteKeyDrawable"/><attr format="integer" name="keyCount"/></declare-styleable>
+</resources>

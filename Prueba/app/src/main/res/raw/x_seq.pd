@@ -1,0 +1,16 @@
+#N canvas 383 214 500 511 10;
+#X obj 109 376 sig~, f 9;
+#X obj 109 440 outlet~;
+#X obj 29 376 sig~, f 9;
+#X obj 29 440 outlet~;
+#X obj 29 303 expr ($f1*2/120)-1;
+#X text 154 296 entre -1 y 1 a 0.2 v por octava hay 10 octavas;
+#X text 154 306 hay 120 semitonos en 10 octavas;
+#X obj 29 107 r X_SEQ_midi_note;
+#X obj 49 137 r X_SEQ_gate;
+#X connect 0 0 1 0;
+#X connect 2 0 3 0;
+#X connect 4 0 2 0;
+#X connect 7 0 4 0;
+#X connect 8 0 0 0;
+#X coords 0 -1 1 1 120 120 1 200 100;

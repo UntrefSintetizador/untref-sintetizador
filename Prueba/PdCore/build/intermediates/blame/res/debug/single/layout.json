@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\PdCore\\build\\intermediates\\res\\merged\\debug\\layout\\device_list.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\PdCore\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\layout\\device_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\PdCore\\build\\intermediates\\res\\merged\\debug\\layout\\device_name.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\PdCore\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\layout\\device_name.xml"
+    }
+]

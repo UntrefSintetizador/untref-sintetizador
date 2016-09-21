@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button"
+    android:layout_width="80dip"
+    android:layout_height="80dip"
+    android:height="60dp"
+    android:textSize="9sp"
+    android:background="@android:color/holo_blue_light"
+    android:textColor="@android:color/black"
+    android:textStyle="bold" />
+
+<!-- el textSize era 12sp
+y no existia la linea de android:height
+-->

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:piano="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.evilduck.piano.views.instrument.PianoView
+        android:id="@+id/pianito"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        piano:overlay_bitmaps="true"
+        piano:overlay_circle_radius="18dip"
+        piano:overlay_circle_text_size="18sp"
+        android:layout_weight="0.4"
+        piano:overlay_color="#00FF00"/>
+
+    <LinearLayout
+        android:id="@+id/tablaBotonesOctavas"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <Button android:id="@+id/botonOctavaMenos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Octava -"
+                android:onClick="onClickMenosOctava"/>
+
+            <TextView
+                android:id="@+id/labelOctava"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                />
+
+            <Button android:id="@+id/botonOctavaMas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Octava +"
+                android:onClick="onClickMasOctava"/>
+
+    </LinearLayout>
+
+</LinearLayout>

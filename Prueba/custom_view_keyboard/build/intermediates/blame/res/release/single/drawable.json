@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\black_key_selector.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\src\\main\\res\\drawable\\black_key_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\white_key_selector.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\src\\main\\res\\drawable\\white_key_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\din5.png",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\drawable\\din5.png"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable\\icon.png",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\PdCore\\1.0.2-SNAPSHOT\\res\\drawable\\icon.png"
+    }
+]

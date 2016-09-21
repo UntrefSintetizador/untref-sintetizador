@@ -1,0 +1,108 @@
+#N canvas 217 61 1280 669 10;
+#X obj 44 21 r reset_presets;
+#X obj 217 28 r herbie;
+#X obj 419 25 r filter_tone;
+#X obj 635 23 r chord_pad;
+#X obj 833 30 r extasis;
+#X msg 1011 71 \; X_VCO1_shape 1 \; X_VCO2_shape 1 \; X_VCO2_freq 263.636
+\; X_VCO3_shape 4 \; X_VCO3_freq 8 \; X_VCF1_mode 0 \; X_VCF1_freq
+100 \; X_VCF1_q 2 \; X_VCF2_mode 2 \; X_VCF2_freq 400 \; X_VCF2_q 1
+\; X_EG1_attack 2 \; X_EG1_decay 50 \; X_EG1_sustain 0.5 \; X_EG1_release
+25 \; X_EG2_attack 4 \; X_EG2_decay 85 \; X_EG2_sustain 0.05 \; X_EG2_release
+55 \; connect-0-11 1 \; connect-1-11 1 \; connect-5-13 1 \; connect-6-15
+1 \; connect-7-17 1 \; connect-8-21 1 \; connect-11-25 1 \; connect-9-16
+1 \; connect-10-12 1 \; connect-2-19 1 \; connect-2-20 1 \; connect-12-0
+1 \; connect-12-3 1 \; connect-13-18 1 \;;
+#X obj 1011 24 r saw_seq;
+#X obj 1156 23 r bell;
+#X obj 1303 22 r sq_bass;
+#X msg 1466 56 \; X_VCO1_shape 4 \; X_VCO2_shape 4 \; X_VCO3_shape
+1 \; X_VCO1_offset -24 \; X_VCO2_offset -8 \; X_VCO3_freq 0.05 \; X_VCO1_att_pw
+0.6 \; X_VCO2_att_pw 0.5 \; X_VCF1_freq 200 \; X_VCF1_q 2 \; X_EG1_attack
+1 \; X_EG1_decay 20 \; X_EG1_sustain 0.6 \; X_EG1_release 5000 \; X_EG2_attack
+5 \; X_EG2_decay 3000 \; X_EG2_sustain 0.4 \; X_EG2_release 1500 \;
+connect-0-11 1 \; connect-1-11 1 \; connect-2-2 1 \; connect-2-5 1
+\; connect-2-2 1 \; connect-5-15 1 \; connect-7-21 1 \; connect-11-25
+1 \; connect-12-0 1 \; connect-12-3 1 \; connect-12-6 1 \; connect-13-19
+1 \; connect-9-16 1 \; connect-13-20 1 \; connect-10-12 1;
+#X obj 1465 18 r sq_bass1;
+#X msg 1619 63 \; X_VCO1_att_freq1 0.5 \; X_VCO2_offset 24 \; X_EG1_attack
+1 \; X_EG1_decay 1 \; X_EG1_sustain 0.6 \; X_EG1_release 5000 \; X_EG2_attack
+1 \; X_EG2_decay 750 \; X_EG2_sustain 0.5 \; X_EG2_release 5000 \;
+connect-0-11 1 \; connect-5-15 1 \; connect-7-21 1 \; connect-11-25
+1 \; connect-12-0 1 \; connect-12-3 1 \; connect-13-19 1 \; connect-9-16
+1 \; connect-1-17 1 \; connect-8-1 1 \; connect-10-18 1 \; connect-13-20
+1 \;;
+#X obj 1616 13 r fm;
+#X msg 635 68 \; X_VCO2_offset 7 \; X_VCO3_offset 11 \; X_VCO1_shape
+1 \; X_VCO2_shape 2 \; X_VCO3_shape 3 \; X_EG1_attack 1500 \; X_EG1_decay
+500 \; X_EG1_sustain 0.9 \; X_EG1_release 4000 \; X_MIX_ch1 0.3 \;
+X_MIX_ch2 0.5 \; X_MIX_ch3 0.7 \; X_VCF1_att_freq 0.5 \; X_KB_glide
+400 \; connect-0-21 1 \; connect-1-22 1 \; connect-2-23 1 \; connect-11-11
+1 \; connect-5-15 1 \; connect-7-25 1 \; connect-9-16 1 \; connect-9-12
+1 \; connect-12-0 1 \; connect-12-3 1 \; connect-12-6 1 \; connect-13-19
+1, f 27;
+#X msg 210 79 \; X_VCO1_shape 1 \; X_VCO2_shape 1 \; X_VCO2_offset
+12 \; X_VCF1_freq 75 \; X_VCF1_att_freq 0.8 \; X_VCF1_q 15 \; X_EG1_attack
+10 \; X_EG1_decay 75 \; X_EG1_sustain 0.5 \; X_EG1_release 75 \; connect-0-11
+1 \; connect-5-15 1 \; connect-7-21 1 \; connect-11-25 1 \; connect-12-0
+1 \; connect-12-3 1 \; connect-13-19 1 \; connect-9-16 1 \; connect-9-12
+1, f 27;
+#X msg 421 66 \; X_VCO1_shape 1 \; X_VCO1_offset -24 \; X_VCO2_shape
+2 \; X_VCO2_freq 64.9663 \; X_VCF1_freq 75 \; X_VCF1_att_freq 0.9 \;
+X_VCF1_q 15 \; X_EG1_attack 1 \; X_EG1_decay 1 \; X_EG1_sustain 0.5
+\; X_EG1_release 4000 \; X_SH_att_signal 0.25 \; X_VCA2_base 0.75 \;
+connect-0-11 1 \; connect-5-15 1 \; connect-7-21 1 \; connect-11-25
+1 \; connect-1-11 1 \; connect-4-17 1 \; connect-8-12 1 \; connect-3-9
+1 \; connect-13-10 1 \; connect-13-19 1 \; connect-9-16 1 \; connect-9-12
+1, f 27;
+#X msg 44 57 \; X_EG1_attack 0 \; X_EG1_decay 0 \; X_EG1_sustain 0
+\; X_EG1_release 0 \; X_EG2_gate 0 \; X_EG2_attack 0 \; X_EG2_decay
+0 \; X_EG2_sustain 0 \; X_EG2_release 0 \; X_EG2_gate 0 \; X_KB_midi_note
+0 \; X_KB_gate 0 \; X_KB_glide 0 \; X_MIX_ch1 0.5 \; X_MIX_ch2 0.5
+\; X_MIX_ch3 0.5 \; X_MIX_ch4 0.5 \; X_MIX_master 1 \; X_SEQ_midi_note
+0 \; X_SEQ_gate 0 \; X_SH_att_signal 1 \; X_VCA1_att_control 1 \; X_VCA1_base
+0 \; X_VCA1_clip 0 \; X_VCA2_att_control 1 \; X_VCA2_base 0 \; X_VCA2_clip
+0 \; X_VCF1_att_signal 1 \; X_VCF1_att_freq 1 \; X_VCF1_mode 0 \; X_VCF1_freq
+261.626 \; X_VCF1_q 1 \; X_VCF2_att_signal 1 \; X_VCF2_att_freq 1 \;
+X_VCF2_mode 0 \; X_VCF2_freq 261.626 \; X_VCF2_q 1 \; X_VCO1_att_freq0
+1 \; X_VCO1_att_freq1 1 \; X_VCO1_att_pw 1 \; X_VCO1_shape 0 \; X_VCO1_offset
+0 \; X_VCO1_pw 50 \; X_VCO2_att_freq0 1 \; X_VCO2_att_freq1 1 \; X_VCO2_att_pw
+1 \; X_VCO2_shape 0 \; X_VCO2_offset 0 \; X_VCO2_pw 50 \; X_VCO3_att_freq0
+1 \; X_VCO3_att_freq1 1 \; X_VCO3_att_pw 1 \; X_VCO3_shape 0 \; X_VCO3_offset
+0 \; X_VCO3_pw 50 \; X_MTX_reset 0 \;;
+#X msg 833 53 \; X_VCO1_att_freq0 0.5 \; X_VCO1_att_freq1 0.5 \; X_VCO1_att_pw
+0.5 \; X_VCO1_shape 2 \; X_VCO1_offset 0 \; X_VCO1_pw 80 \; X_VCO2_att_freq0
+0.5 \; X_VCO2_att_freq1 0.5 \; X_VCO2_att_pw 0.5 \; X_VCO2_shape 3
+\; X_VCO2_freq 2 \; X_VCO2_pw 80 \; X_VCF1_att_signal 0.9 \; X_VCF1_att_freq
+0.9 \; X_VCF1_mode 1 \; X_VCF1_freq 2010 \; X_VCF1_q 50 \; connect-12-0
+1 \; connect-12-3 1 \; connect-0-11 1 \; connect-1-12 1 \; connect-5-25
+1 \;;
+#X msg 1158 68 \; X_VCO1_shape 0 \; X_VCO2_shape 2 \; X_VCO3_shape
+0 \; X_VCO1_offset 0 \; X_VCO2_offset 24 \; X_VCO3_offset 29 \; X_VCO1_att_freq1
+0.2 \; X_VCO3_att_freq1 0.4 \; X_VCF1_mode 2 \; X_VCF1_freq 700 \;
+X_VCF1_q 1 \; X_VCF2_mode 1 \; X_VCF2_freq 200 \; X_VCF2_q 10 \; X_EG1_attack
+1 \; X_EG1_decay 5 \; X_EG1_sustain 0.4 \; X_EG1_release 3500 \; X_EG2_attack
+5 \; X_EG2_decay 4000 \; X_EG2_sustain 0 \; X_EG2_release 5000 \; X_MIX_master
+0.75 \; connect-0-11 1 \; connect-2-11 1 \; connect-0-13 1 \; connect-2-13
+1 \; connect-6-17 1 \; connect-8-22 1 \; connect-10-14 1 \; connect-1-1
+1 \; connect-1-7 1 \; connect-5-15 1 \; connect-7-21 1 \; connect-11-25
+1 \; connect-12-0 1 \; connect-12-3 1 \; connect-12-6 1 \; connect-13-19
+1 \; connect-9-16 1 \; connect-9-18 1 \; connect-13-20 1 \;;
+#X msg 1307 65 \; X_VCO1_shape 4 \; X_VCO2_shape 4 \; X_VCO1_offset
+-24 \; X_VCO2_freq 66.5264 \; X_VCF1_freq 20 \; X_VCF1_q 10 \; X_EG1_attack
+1 \; X_EG1_decay 20 \; X_EG1_sustain 0.6 \; X_EG1_release 2500 \; X_EG2_attack
+5 \; X_EG2_decay 3000 \; X_EG2_sustain 0.5 \; X_EG2_release 1500 \;
+connect-0-11 1 \; connect-1-11 1 \; connect-5-15 1 \; connect-7-21
+1 \; connect-11-25 1 \; connect-12-0 1 \; connect-12-3 1 \; connect-13-19
+1 \; connect-9-16 1 \; connect-13-20 1 \; connect-10-12 1;
+#X connect 0 0 16 0;
+#X connect 1 0 14 0;
+#X connect 2 0 15 0;
+#X connect 3 0 13 0;
+#X connect 4 0 17 0;
+#X connect 6 0 5 0;
+#X connect 7 0 18 0;
+#X connect 8 0 19 0;
+#X connect 10 0 9 0;
+#X connect 12 0 11 0;

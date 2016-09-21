@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name">XUL</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_salir">Salir</string>
+    <string name="action_sqBass">Sq Bass</string>
+    <string name="action_sqBass1">Sq Bass 1</string>
+    <string name="action_filterTone">Filter Tone</string>
+    <string name="action_chordPad">Chord Pad</string>
+    <string name="action_herbie">Herbie</string>
+    <string name="action_extasis">Extasis</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_sawSeq">Saw Seq</string>
+    <string name="action_bell">Bell</string>
+    <string name="action_fm">Fm</string>
+
+    <string name="left_label">Sine wave in left channel</string>
+    <string name="right_label">Sine wave in right channel</string>
+    <string name="mic_label">Patch mic to both channels</string>
+    <string name="default_msg">Enter message to Pure Data</string>
+    <string name="pref_button_text">Preferences</string>
+    <string name="about_title">About Pure Data</string>
+    <string name="about_msg">Pure Data is a real-time graphical programming
+    environment for audio, video, and graphical processing, originally
+    developed by Miller Puckette and company at IRCAM. Android port by
+    Peter Brinkmann, Peter Kirn, Hans-Christoph Steiner, and others.
+    </string>
+</resources>
