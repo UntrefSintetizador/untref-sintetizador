@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
     private static final int MIN_OCTIVE = 5;
     private static final int MAX_OCTIVE = 8;
 
-    PianoView pianoView;
+    MyGridView matriz_modulos;
+    GridViewCustomAdapter gridViewAdapter;
 
     private EditText msg;
     private TextView logs;
@@ -98,6 +99,14 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
 
     public int getOctava(){
         return octava;
+    }
+
+    public void setMatriz(MyGridView matriz){
+        matriz_modulos = matriz;
+    }
+
+    public MyGridView getMatriz_modulos(){
+        return matriz_modulos;
     }
 
     public void setOctava(int valor){
@@ -228,6 +237,7 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("labelOctava", "5");
         editor.commit();
+
     }
 
     @Override
@@ -244,8 +254,128 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         setContentView(R.layout.tabs_view);
         initializeActionBar();
         initializePureData();
+        initializeGridViewAdapter();
+
         createTabs();
         setOctava(5);
+    }
+
+    public GridViewCustomAdapter getGridViewAdapter(){
+        return gridViewAdapter;
+    }
+
+    private void initializeGridViewAdapter() {
+        int CantColumnas = 17; //SIN LOS TITULOS CANTIDAD ERA 12 (CON PD TEST5 ERA 13, ahora 17 porque piden 16)
+        int CantFilas = 27; // SIN LOS TITULOS CANTIDAD ERA 23 (CON PD TEST5 ERA 24, ahora 27 porque piden 26)
+        //int CantColumnas = 3;
+        //int CantFilas = 5;
+        ArrayList<String> data = new ArrayList<>();
+        //CON ESTE CODIGO LLENA TODA LA MATRIZ CON SU POSICION
+        /*
+        for (int i = 0; i < CantFilas; i++) {
+            for (int j = 0; j < CantColumnas; j++)
+                data.add(j + "-" + i);
+        }
+        */
+        //CON ESTE CODIGO PONE PRIMERA COLUMNA NOMBRES
+        for (int i = -1; i < CantFilas - 1; i++) {
+            for (int j = -1; j < CantColumnas - 1; j++)
+                //PONGO NOMBRES A PRIMERA COLUMNA
+                if (j == -1 & i == -1) {
+                    data.add("");
+                } else if (j == -1 & i == 0) {
+                    data.add("0");
+                } else if (j == -1 & i == 1) {
+                    data.add("1");
+                } else if (j == -1 & i == 2) {
+                    data.add("2");
+                } else if (j == -1 & i == 3) {
+                    data.add("3");
+                } else if (j == -1 & i == 4) {
+                    data.add("4");
+                } else if (j == -1 & i == 5) {
+                    data.add("5");
+                } else if (j == -1 & i == 6) {
+                    data.add("6");
+                } else if (j == -1 & i == 7) {
+                    data.add("7");
+                } else if (j == -1 & i == 8) {
+                    data.add("8");
+                } else if (j == -1 & i == 9) {
+                    data.add("9");
+                } else if (j == -1 & i == 10) {
+                    data.add("10");
+                } else if (j == -1 & i == 11) {
+                    data.add("11");
+                } else if (j == -1 & i == 12) {
+                    data.add("12");
+                } else if (j == -1 & i == 13) {
+                    data.add("13");
+                } else if (j == -1 & i == 14) {
+                    data.add("14");
+                } else if (j == -1 & i == 15) {
+                    data.add("15");
+                } else if (j == -1 & i == 16) {
+                    data.add("16");
+                } else if (j == -1 & i == 17) {
+                    data.add("17");
+                } else if (j == -1 & i == 18) {
+                    data.add("18");
+                } else if (j == -1 & i == 19) {
+                    data.add("19");
+                } else if (j == -1 & i == 20) {
+                    data.add("20");
+                } else if (j == -1 & i == 21) {
+                    data.add("21");
+                } else if (j == -1 & i == 22) {
+                    data.add("22");
+                } else if (j == -1 & i == 23) {
+                    data.add("23");
+                } else if (j == -1 & i == 24) {
+                    data.add("24");
+                } else if (j == -1 & i == 25) {
+                    data.add("25");
+                }
+                //PONGO NOMBRES A PRIMERA FILA
+                else if (i == -1 & j == 0) {
+                    data.add("0");
+                } else if (i == -1 & j == 1) {
+                    data.add("1");
+                } else if (i == -1 & j == 2) {
+                    data.add("2");
+                } else if (i == -1 & j == 3) {
+                    data.add("3");
+                } else if (i == -1 & j == 4) {
+                    data.add("4");
+                } else if (i == -1 & j == 5) {
+                    data.add("5");
+                } else if (i == -1 & j == 6) {
+                    data.add("6");
+                } else if (i == -1 & j == 7) {
+                    data.add("7");
+                } else if (i == -1 & j == 8) {
+                    data.add("8");
+                } else if (i == -1 & j == 9) {
+                    data.add("9");
+                } else if (i == -1 & j == 10) {
+                    data.add("10");
+                } else if (i == -1 & j == 11) {
+                    data.add("11");
+                } else if (i == -1 & j == 12) {
+                    data.add("12");
+                } else if (i == -1 & j == 13) {
+                    data.add("13");
+                } else if (i == -1 & j == 14) {
+                    data.add("14");
+                } else if (i == -1 & j == 15) {
+                    data.add("15");
+                }
+                //EL RESTO DE LAS POSICIONES
+                else {
+                    data.add(j + "-" + i);
+                }
+        }
+        gridViewAdapter = new GridViewCustomAdapter(this, data);
     }
 
     @Override
@@ -420,7 +550,7 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
          Button botonOctavaMenos = (Button) findViewById(R.id.botonOctavaMenos);
          botonOctavaMenos.setOnClickListener(this);
          Button botonOctavaMas = (Button) findViewById(R.id.botonOctavaMas);
-         botonOctavaMas.setOnClickListener(this);**/
+         botonOctavaMas.setOnClickListener(this);
 
         Button botonPreset1 = (Button) findViewById(R.id.botonPreset1);
         botonPreset1.setOnClickListener(this);
@@ -442,7 +572,7 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         Button botonPreset9 = (Button) findViewById(R.id.botonPreset9);
         botonPreset9.setOnClickListener(this);
         Button botonPreset10 = (Button) findViewById(R.id.botonPreset10);
-        botonPreset10.setOnClickListener(this);
+        botonPreset10.setOnClickListener(this);**/
 
         //color a botones, primera vista
         solapa1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
@@ -629,40 +759,40 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
                 mostrarPiano();
                 //esconderSecuenciador();
                 esconderControles();
-                esconderPresets();
-                esconderMatriz();
+                //esconderPresets();
+                //esconderMatriz();
                 break;
 
             case R.id.solapa2:
-                esconderPiano();
+                //esconderPiano();
                 //mostrarSecuenciador();
                 esconderControles();
-                esconderPresets();
-                esconderMatriz();
+                //esconderPresets();
+                //esconderMatriz();
                 break;
 
             case R.id.solapa3:
-                esconderPiano();
+                //esconderPiano();
                 //esconderSecuenciador();
                 mostrarControles();
-                esconderPresets();
-                esconderMatriz();
+                //esconderPresets();
+                //esconderMatriz();
                 break;
 
             case R.id.solapa4:
-                esconderPiano();
+                //esconderPiano();
                 //esconderSecuenciador();
                 esconderControles();
                 mostrarPresets();
-                esconderMatriz();
+                //esconderMatriz();
                 break;
 
             case R.id.solapa5:
-                esconderPiano();
+                //esconderPiano();
                 //esconderSecuenciador();
                 esconderControles();
-                esconderPresets();
-                mostrarMatriz();
+                //esconderPresets();
+                //mostrarMatriz();
                 break;
 
             case R.id.solapa6:
@@ -1076,12 +1206,12 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
 
         //ANTES DE PRESENTACION COMENTADO METODO ESCONDER APERTURA ARCHIVOS, DE PD4
         //esconderControlesAperturaArchivos();
-        esconderMatriz();
+        //esconderMatriz();
         esconderControles();
-        esconderPresets();
+        //esconderPresets();
         //esconderLog();
 
-        setTamanioGrilla();
+        //setTamanioGrilla();
 
         //ACA COMIENZAN LOS CONTROLES FINALES
         //TODOS LOS SLIDERS VCO1
@@ -3155,7 +3285,7 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         });
         //FIN SEEKBAR SH1_1
     }
-    private void esconderMatriz() {
+ /**   private void esconderMatriz() {
 
         MyGridView grid_view = (MyGridView) findViewById(R.id.grid_view);
         grid_view.setVisibility(View.GONE);
@@ -3167,13 +3297,13 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         lineaNegraMatriz2.setVisibility(View.GONE);
         View espacioBlancoMatriz2 = findViewById(R.id.espacioBlancoMatriz2);
         espacioBlancoMatriz2.setVisibility(View.GONE);
-    }
-
+    }**/
+/**
     private void esconderPresets(){
         TableLayout tablaPresets = (TableLayout) findViewById(R.id.tablaPresets);
         tablaPresets.setVisibility(View.GONE);
     }
-
+**/
     private void esconderControles() {
         //ESCONDER TODOS LOS CONTROLES HASTA ABRIR ARCHIVO
         TableLayout tablaComponentes = (TableLayout) findViewById(R.id.tablaComponentes);
@@ -3202,16 +3332,16 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         tablaSH1.setVisibility(View.GONE);
 
     }
-
+/**
     private void esconderPiano() {
         Piano pianito = (Piano) findViewById(R.id.pianito);
         pianito.setVisibility(View.GONE);
         TextView log_box = (TextView) findViewById(R.id.log_box);
-        log_box.setVisibility(View.GONE);
+        log_box.setVisibility(View.GONE);**/
 
         /**TableLayout tablaBotonesOctavas = (TableLayout) findViewById(R.id.tablaBotonesOctavas);
          tablaBotonesOctavas.setVisibility(View.GONE);**/
-    }
+    //}
 
     private void mostrarPiano() {
         Button solapa1 = (Button) findViewById(R.id.solapa1);
@@ -3316,7 +3446,7 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         botonSH1.getBackground().setColorFilter(0x33999999, PorterDuff.Mode.MULTIPLY);
 
     }
-
+/**
     private void mostrarMatriz() {
         Button solapa1 = (Button) findViewById(R.id.solapa1);
         solapa1.getBackground().setColorFilter(0x33999999, PorterDuff.Mode.MULTIPLY);
@@ -3334,16 +3464,16 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         MyGridView grid_view = (MyGridView) findViewById(R.id.grid_view);
         grid_view.setVisibility(View.VISIBLE);
 
-    }
+    }**/
 
-
-    private void setTamanioGrilla() {
+/**
+    public void setTamanioGrilla() {
         int CantColumnas = 17; //SIN LOS TITULOS CANTIDAD ERA 12 (CON PD TEST5 ERA 13, ahora 17 porque piden 16)
         int CantFilas = 27; // SIN LOS TITULOS CANTIDAD ERA 23 (CON PD TEST5 ERA 24, ahora 27 porque piden 26)
         //int CantColumnas = 3;
         //int CantFilas = 5;
-        final MyGridView list;
-        ArrayList<String> data = new ArrayList<>();
+        //MyGridView list;
+        ArrayList<String> data = new ArrayList<>();**/
         //CON ESTE CODIGO LLENA TODA LA MATRIZ CON SU POSICION
         /*
         for (int i = 0; i < CantFilas; i++) {
@@ -3352,7 +3482,7 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
         }
         */
         //CON ESTE CODIGO PONE PRIMERA COLUMNA NOMBRES
-        for (int i = -1; i < CantFilas-1; i++) {
+     /**   for (int i = -1; i < CantFilas-1; i++) {
             for (int j = -1; j < CantColumnas-1; j++)
                 //PONGO NOMBRES A PRIMERA COLUMNA
                 if (j == -1 & i == -1){data.add("");}
@@ -3405,11 +3535,11 @@ public class MainActivity extends AppCompatActivity /**Activity**/ implements On
 
         GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         //agregado por tema de scroll
-        list = (MyGridView) findViewById(R.id.grid_view);
-        if (list != null) {
-            list.setNumColumns(CantColumnas);
-            list.setAdapter(adapter);
+        //list = (MyGridView) findViewById(R.id.grid_view);
+        if (matriz_modulos != null) {
+            matriz_modulos.setNumColumns(CantColumnas);
+            matriz_modulos.setAdapter(adapter);
         }
     }
-
+**/
 }

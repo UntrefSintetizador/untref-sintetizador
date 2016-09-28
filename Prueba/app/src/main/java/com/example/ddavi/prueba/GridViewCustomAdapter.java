@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class GridViewCustomAdapter extends BaseAdapter {
 
     ArrayList<String> items;
+    ArrayList<Integer> itemsPressed;
 
     static Activity mActivity;
 
@@ -29,6 +30,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
     public GridViewCustomAdapter(Activity activity, ArrayList<String> tempTitle) {
         mActivity = activity;
         items = tempTitle;
+        itemsPressed = new ArrayList<>();
 
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -75,7 +77,15 @@ public class GridViewCustomAdapter extends BaseAdapter {
 
         final Button tv = (Button) v.findViewById(R.id.button);
         tv.setText(items.get(position));
-        tv.setBackgroundColor(Color.parseColor("#607D8B"));
+
+        if (itemsPressed.contains(position)){
+            tv.setTextColor(Color.WHITE);
+            tv.setBackgroundColor(Color.parseColor("#FF9800"));
+        }else {
+            tv.setTextColor(Color.BLACK);
+            tv.setBackgroundColor(Color.parseColor("#607D8B"));
+        }
+
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,10 +94,11 @@ public class GridViewCustomAdapter extends BaseAdapter {
                 if (tv.getCurrentTextColor() == Color.BLACK) {
                     Float value = 1.0f;
                     PdBase.sendFloat(msg, value);
-                    tv.setBackgroundColor(Color.parseColor("#536DFE"));
+                    tv.setBackgroundColor(Color.parseColor("#FF9800"));
                     Log.i("MSJ A PD ", msg);
                     tv.setTextColor(Color.WHITE);
                     tv.setWidth(80);
+                    itemsPressed.add(position);
                     //SE NECESITA MANTENER APRETADO (ES LO MISMO QUE TOGGLE?)
                     //tv.setPressed(true);
                 } else {
@@ -97,6 +108,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
                     Log.i("MSJ A PD ", msg);
                     tv.setTextColor(Color.BLACK);
                     tv.setWidth(81);
+                    itemsPressed.remove(itemsPressed.indexOf(position));
                     //SE NECESITA MANTENER APRETADO (ES LO MISMO QUE TOGGLE?)
                     //tv.setPressed(false);
                 }

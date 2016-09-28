@@ -2,5 +2,9 @@
     {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\xml\\preferences.xml",
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\PdCore\\1.0.2-SNAPSHOT\\res\\xml\\preferences.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\xml\\preferences.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\PdCore\\1.0.1\\res\\xml\\preferences.xml"
     }
 ]

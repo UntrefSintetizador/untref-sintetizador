@@ -8,27 +8,27 @@ package com.noisepages.nettoyeur.midi;
 
 public final class R {
 	public static final class drawable {
-		public static int din5 = 0x7f020003;
+		public static int din5 = 0x7f02004e;
 	}
 	public static final class id {
-		public static int paired_devices = 0x7f0b0001;
-		public static int title_paired_devices = 0x7f0b0000;
+		public static int paired_devices = 0x7f0e0058;
+		public static int title_paired_devices = 0x7f0e0057;
 	}
 	public static final class layout {
-		public static int device_list = 0x7f030000;
-		public static int device_name = 0x7f030001;
+		public static int device_list = 0x7f03001b;
+		public static int device_name = 0x7f03001c;
 	}
 	public static final class string {
-		public static int none_paired = 0x7f090002;
-		public static int select_device = 0x7f090010;
-		public static int title_no_paired_devices = 0x7f090011;
-		public static int title_no_usb_devices_available = 0x7f090012;
-		public static int title_no_usb_midi_input_available = 0x7f090013;
-		public static int title_no_usb_midi_output_available = 0x7f090014;
-		public static int title_paired_devices = 0x7f090015;
-		public static int title_select_bluetooth_device = 0x7f090016;
-		public static int title_select_usb_midi_device = 0x7f090017;
-		public static int title_select_usb_midi_input = 0x7f090018;
-		public static int title_select_usb_midi_output = 0x7f090019;
+		public static int none_paired = 0x7f070016;
+		public static int select_device = 0x7f070024;
+		public static int title_no_paired_devices = 0x7f070025;
+		public static int title_no_usb_devices_available = 0x7f070026;
+		public static int title_no_usb_midi_input_available = 0x7f070027;
+		public static int title_no_usb_midi_output_available = 0x7f070028;
+		public static int title_paired_devices = 0x7f070029;
+		public static int title_select_bluetooth_device = 0x7f07002a;
+		public static int title_select_usb_midi_device = 0x7f07002b;
+		public static int title_select_usb_midi_input = 0x7f07002c;
+		public static int title_select_usb_midi_output = 0x7f07002d;
 	}
 }

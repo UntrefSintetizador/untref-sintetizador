@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\debug\\menu\\piano_demo.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\src\\main\\res\\menu\\piano_demo.xml"
+    },
+    {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\debug\\menu\\piano_demo.xml",
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\src\\main\\res\\menu\\piano_demo.xml"
     }

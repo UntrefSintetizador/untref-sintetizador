@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
 
+    <com.example.ddavi.prueba.MyGridView
+        android:id="@+id/grid_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnWidth="20dip"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:verticalSpacing="2dp"
+        android:stretchMode="columnWidth" />
+    <!--
     <TextView
     android:id="@+id/text"
     android:layout_width="match_parent"
@@ -12,5 +24,6 @@
     android:gravity="center_vertical|center_horizontal"
     android:text="La matriz"
     android:textAppearance="?android:attr/textAppearanceMedium" />
+    -->
 
-    </LinearLayout>
+    </ScrollView>
