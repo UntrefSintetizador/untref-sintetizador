@@ -1,4 +1,4 @@
-package com.example.ddavi.prueba;
+package com.example.ddavi.prueba.Tabs;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.evilduck.piano.music.Note;
 import com.evilduck.piano.views.instrument.PianoView;
+import com.example.ddavi.prueba.MainActivity;
+import com.example.ddavi.prueba.R;
+
 import org.puredata.core.PdBase;
 
 import java.util.Arrays;
@@ -35,7 +38,7 @@ public class TabPiano extends Fragment {
 
         //inicializo valores en teclas de piano
         pianoView = (PianoView) view.findViewById(R.id.pianito);
-        initializePiano();
+        //initializePiano();
 
         //inicializo valor de octava
 

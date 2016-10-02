@@ -1,29 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
-    <com.example.ddavi.prueba.MyGridView
-        android:id="@+id/grid_view"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="20dip"
-        android:gravity="center"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="2dp"
-        android:stretchMode="columnWidth" />
-    <!--
-    <TextView
-    android:id="@+id/text"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical|center_horizontal"
-    android:text="La matriz"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
-    -->
+        android:orientation="horizontal">
 
-    </ScrollView>
+        <Button android:id="@+id/botonVCO1" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCO1" />
+
+        <Button android:id="@+id/botonVCO2" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCO2" />
+
+        <Button android:id="@+id/botonVCO3" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCO3" />
+
+        <Button android:id="@+id/botonVCA1" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCA1" />
+
+        <Button android:id="@+id/botonVCA2" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCA2" />
+
+        <Button android:id="@+id/botonMIXER1" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="MIX" />
+
+        <Button android:id="@+id/botonVCF1" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCF1" />
+
+        <Button android:id="@+id/botonVCF2" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCF2" />
+
+        <Button android:id="@+id/botonEG1" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="EG1" />
+
+        <Button android:id="@+id/botonEG2" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="EG2" />
+
+        <Button android:id="@+id/botonSH1" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="1" android:text="S\u0026H" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <com.example.ddavi.prueba.MyGridView
+            android:id="@+id/grid_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnWidth="20dip"
+            android:gravity="center"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="2dp"
+            android:stretchMode="columnWidth" />
+        </ScrollView>
+
+</LinearLayout>
