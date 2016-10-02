@@ -1,19 +1,23 @@
 package com.example.ddavi.prueba.Tabs;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.ddavi.prueba.Listeners.VCOListener;
+import com.example.ddavi.prueba.ModulesPopupWindow.EGPopupWindow;
+import com.example.ddavi.prueba.ModulesPopupWindow.MIXPopupWindow;
+import com.example.ddavi.prueba.Listeners.ModuleListener;
+import com.example.ddavi.prueba.ModulesPopupWindow.SHPopupWindow;
+import com.example.ddavi.prueba.ModulesPopupWindow.VCAPopupWindow;
+import com.example.ddavi.prueba.ModulesPopupWindow.VCFPopupWindow;
+import com.example.ddavi.prueba.ModulesPopupWindow.VCOPopupWindow;
 import com.example.ddavi.prueba.MainActivity;
-import com.example.ddavi.prueba.MyGridView;
+import com.example.ddavi.prueba.ModulesPopupWindow.ModulePopupWindow;
+import com.example.ddavi.prueba.MyGridView.MyGridView;
 import com.example.ddavi.prueba.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by ddavi on 13/9/2016.
@@ -40,14 +44,63 @@ public class TabMatriz extends Fragment {
         matriz.setAdapter(activity.getGridViewAdapter());
         matriz.setNumColumns(17);
 
-        Button button_VC01 = (Button) view.findViewById(R.id.botonVCO1);
-        button_VC01.setOnClickListener(new VCOListener((MainActivity)this.getActivity(),button_VC01,R.layout.popup_vco,"VCO1"));
+        ModulePopupWindow popupwindow;
 
-        Button button_VC02 = (Button) view.findViewById(R.id.botonVCO2);
-        button_VC02.setOnClickListener(new VCOListener((MainActivity)this.getActivity(),button_VC02,R.layout.popup_vco,"VCO2"));
+        Button button_VCO1 = (Button) view.findViewById(R.id.botonVCO1);
+        popupwindow = activity.getVco1Window();
+        popupwindow.setButton(button_VCO1);
+        //new VCOPopupWindow((MainActivity)this.getActivity(),button_VCO1,R.layout.popup_vco,"VCO1");
+        button_VCO1.setOnClickListener(new ModuleListener(popupwindow));
 
-        Button button_VC03 = (Button) view.findViewById(R.id.botonVCO3);
-        button_VC03.setOnClickListener(new VCOListener((MainActivity)this.getActivity(),button_VC03,R.layout.popup_vco,"VCO3"));
+        Button button_VCO2 = (Button) view.findViewById(R.id.botonVCO2);
+        popupwindow = activity.getVco2Window();
+        popupwindow.setButton(button_VCO2);
+        button_VCO2.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button button_VCO3 = (Button) view.findViewById(R.id.botonVCO3);
+        popupwindow = activity.getVco3Window();
+        popupwindow.setButton(button_VCO3);
+        button_VCO3.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button button_VCA1 = (Button) view.findViewById(R.id.botonVCA1);
+        popupwindow = activity.getVca1Window();
+        popupwindow.setButton(button_VCA1);
+        button_VCA1.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button button_VCA2 = (Button) view.findViewById(R.id.botonVCA2);
+        popupwindow = activity.getVca2Window();
+        popupwindow.setButton(button_VCA2);
+        button_VCA2.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button botonMIXER1 = (Button) view.findViewById(R.id.botonMIXER1);
+        popupwindow = activity.getMixWindow();
+        popupwindow.setButton(botonMIXER1);
+        botonMIXER1.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button botonVCF1 = (Button) view.findViewById(R.id.botonVCF1);
+        popupwindow = activity.getVcf1Window();
+        popupwindow.setButton(botonVCF1);
+        botonVCF1.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button botonVCF2 = (Button) view.findViewById(R.id.botonVCF2);
+        popupwindow = activity.getVcf2Window();
+        popupwindow.setButton(botonVCF2);
+        botonVCF2.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button botonEG1 = (Button) view.findViewById(R.id.botonEG1);
+        popupwindow = activity.getEg1Window();
+        popupwindow.setButton(botonEG1);
+        botonEG1.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button botonEG2 = (Button) view.findViewById(R.id.botonEG2);
+        popupwindow = activity.getEg2Window();
+        popupwindow.setButton(botonEG2);
+        botonEG2.setOnClickListener(new ModuleListener(popupwindow));
+
+        Button botonSH1 = (Button) view.findViewById(R.id.botonSH1);
+        popupwindow = activity.getShWindow();
+        popupwindow.setButton(botonSH1);
+        botonSH1.setOnClickListener(new ModuleListener(popupwindow));
 
         return view;
     }

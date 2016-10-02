@@ -53,7 +53,7 @@
         android:orientation="vertical"
         android:background="@android:color/white">
 
-        <com.example.ddavi.prueba.MyGridView
+        <com.example.ddavi.prueba.MyGridView.MyGridView
             android:id="@+id/grid_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

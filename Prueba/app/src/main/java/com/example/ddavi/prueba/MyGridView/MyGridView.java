@@ -1,4 +1,4 @@
-package com.example.ddavi.prueba;
+package com.example.ddavi.prueba.MyGridView;
 
 /**
  * Created by Hernan Cortes on 02/06/2016.

@@ -1,12 +1,8 @@
-package com.example.ddavi.prueba.Listeners;
+package com.example.ddavi.prueba.ModulesPopupWindow;
 
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -17,85 +13,22 @@ import org.puredata.core.PdBase;
 
 import java.text.DecimalFormat;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-
 /**
  * Created by ddavi on 1/10/2016.
  */
 
-public class VCOListener implements View.OnClickListener {
-
-    private MainActivity activity;
-    private Button button_VCO;
-    private int id_layout;
-    private String title;
+public class VCOPopupWindow extends ModulePopupWindow {
 
 
-    public VCOListener(MainActivity container, Button view, int layout, String name){
-        activity = container;
-        button_VCO = view;
-        id_layout = layout;
-        title = name;
-
+    public VCOPopupWindow(MainActivity container, int layout, String name){
+        super(container,layout,name);
     }
 
     @Override
-    public void onClick(View arg0) {
-        LayoutInflater layoutInflater =(LayoutInflater)activity.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = layoutInflater.inflate(id_layout, null);
-        final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT,
-                RadioGroup.LayoutParams.WRAP_CONTENT);
-
-        initialieSlider_VC0(title,popupView);
-        button_VCO.setEnabled(false);
-
-        popupView.setOnTouchListener(new View.OnTouchListener(){
-            private int dx = 0;
-            private int dy = 0;
-
-            private int xp = 0;
-            private int yp = 0;
-
-            private int sides = 0;
-            private int topBot = 0;
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        dx = (int) motionEvent.getX();
-                        dy = (int) motionEvent.getY();
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        xp = (int) motionEvent.getRawX();
-                        yp = (int) motionEvent.getRawY();
-                        sides = (xp - dx);
-                        topBot = (yp - dy);
-                        popupWindow.update(sides, topBot, -1, -1, true);
-                        break;
-                }
-                return true;
-            }
-        });
-
-        final Button btn_Cerrar = (Button)popupView.findViewById(R.id.id_cerrar);
-        btn_Cerrar.setOnClickListener(new Button.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-                button_VCO.setEnabled(true);
-            }});
-
-        popupWindow.showAsDropDown(button_VCO, 150, -200);
-
-    }
-
-    private void initialieSlider_VC0(String title, View view){
-
+    public void initializeModule(String title, View view) {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
-                //ACA COMIENZAN LOS CONTROLES FINALES
+        //ACA COMIENZAN LOS CONTROLES FINALES
         //TODOS LOS SLIDERS VCO1
         //COMIENZO DE SEEKBAR VCO 1_1
         //1) MOSTRAR SEEKBAR

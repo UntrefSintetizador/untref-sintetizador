@@ -1,4 +1,4 @@
-package com.example.ddavi.prueba;
+package com.example.ddavi.prueba.MyGridView;
 
 /**
  * Created by Hernan Cortes on 04/06/2016.
@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+
+import com.example.ddavi.prueba.R;
 
 import org.puredata.core.PdBase;
 

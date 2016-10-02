@@ -38,7 +38,7 @@ public class TabPiano extends Fragment {
 
         //inicializo valores en teclas de piano
         pianoView = (PianoView) view.findViewById(R.id.pianito);
-        //initializePiano();
+        initializePiano();
 
         //inicializo valor de octava
 
