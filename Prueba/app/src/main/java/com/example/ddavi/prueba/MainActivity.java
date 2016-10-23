@@ -60,7 +60,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 //quitado cuando comence con controles finales
@@ -255,6 +258,9 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         actionBar.setIcon(R.drawable.icon);
     }
 
+    /*
+    *inicializo la ventanas de presets
+    */
     private void initializeModulesPopWindow(){
         vco1Window = new VCOPopupWindow(this,R.layout.popup_vco,"VCO1");
         vco2Window = new VCOPopupWindow(this,R.layout.popup_vco,"VCO2");
@@ -425,6 +431,9 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         return true;
     }
 
+    /*
+    * Presets en menu
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -543,81 +552,44 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         }
     }
 
+    private Map<String,Integer> getDictionaryFilesPD(){
+        Map<String,Integer> dictionary = new HashMap<String,Integer>();
+        dictionary.put("x_vco1.pd",R.raw.x_vco1);
+        dictionary.put("x_vco2.pd",R.raw.x_vco2);
+        dictionary.put("x_vco3.pd",R.raw.x_vco3);
+        dictionary.put("cell.pd",R.raw.cell);
+        dictionary.put("x_eg1.pd",R.raw.x_eg1);
+        dictionary.put("x_eg2.pd",R.raw.x_eg2);
+        dictionary.put("x_mix.pd",R.raw.x_mix);
+        dictionary.put("x_mtx.pd",R.raw.x_mtx);
+        dictionary.put("x_ng.pd",R.raw.x_ng);
+        dictionary.put("x_sh.pd",R.raw.x_sh);
+        dictionary.put("x_vca1.pd",R.raw.x_vca1);
+        dictionary.put("x_vca2.pd",R.raw.x_vca2);
+        dictionary.put("x_vcf1.pd",R.raw.x_vcf1);
+        dictionary.put("x_vcf2.pd",R.raw.x_vcf2);
+        dictionary.put("x_kb.pd",R.raw.x_kb);
+        dictionary.put("x_seq.pd",R.raw.x_seq);
+
+        return dictionary;
+    }
+
     private void initPd() {
         Resources res = getResources();
         File patchFile = null;
+        InputStream in;
+
         try {
             PdBase.setReceiver(receiver);
             PdBase.subscribe("android");
             //agregada apertura de todos los PD que SYNTH necesita
-
-            //24-07-16 PRUEBA DE HACER 1 UNICO INPUTSTREAM, TODOS SE LLAMARAN IN EN LUGAR DE IN1, IN2...
-            InputStream in = res.openRawResource(R.raw.x_vco1);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vco1 =
-            IoUtils.extractResource(in, "x_vco1.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vco1);
-            in = res.openRawResource(R.raw.x_vco2);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vco2 =
-            IoUtils.extractResource(in, "x_vco2.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vco2);
-            in = res.openRawResource(R.raw.x_vco3);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vco3 =
-            IoUtils.extractResource(in, "x_vco3.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vco3);
-            in = res.openRawResource(R.raw.cell);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_cell =
-            IoUtils.extractResource(in, "cell.pd", getCacheDir());
-
-
-            in = res.openRawResource(R.raw.x_eg1);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_eg1 =
-            IoUtils.extractResource(in, "x_eg1.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_eg1);
-            in = res.openRawResource(R.raw.x_eg2);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_eg2 =
-            IoUtils.extractResource(in, "x_eg2.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_eg2);
-            in = res.openRawResource(R.raw.x_mix);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_mix =
-            IoUtils.extractResource(in, "x_mix.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_mix);
-            in = res.openRawResource(R.raw.x_mtx);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_mtx =
-            IoUtils.extractResource(in, "x_mtx.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_mtx);
-            in = res.openRawResource(R.raw.x_ng);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_ng =
-            IoUtils.extractResource(in, "x_ng.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_ng);
-            in = res.openRawResource(R.raw.x_sh);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_sh =
-            IoUtils.extractResource(in, "x_sh.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_sh);
-            in = res.openRawResource(R.raw.x_vca1);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vca1 =
-            IoUtils.extractResource(in, "x_vca1.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vca1);
-            in = res.openRawResource(R.raw.x_vca2);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vca2 =
-            IoUtils.extractResource(in, "x_vca2.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vca2);
-            in = res.openRawResource(R.raw.x_vcf1);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vcf1 =
-            IoUtils.extractResource(in, "x_vcf1.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vcf1);
-            in = res.openRawResource(R.raw.x_vcf2);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_vcf2 =
-            IoUtils.extractResource(in, "x_vcf2.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_vcf2);
-            in = res.openRawResource(R.raw.x_kb);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_kb =
-            IoUtils.extractResource(in, "x_kb.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_kb);
-            in = res.openRawResource(R.raw.x_seq);
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: File patchFile_x_seq =
-            IoUtils.extractResource(in, "x_seq.pd", getCacheDir());
-            // 18-07-16 COMENTADA APERTURA POR RECURSOS: PdBase.openPatch(patchFile_x_seq);
-            /* */
+            Map<String,Integer> dictionary = getDictionaryFilesPD();
+            Iterator it = dictionary.keySet().iterator();
+            while(it.hasNext()) {
+                String key = (String)it.next();
+                in = res.openRawResource(dictionary.get(key));
+                IoUtils.extractResource(in, key, getCacheDir());
+            }
             in = res.openRawResource(R.raw.presets);
             File patchFile_presets =IoUtils.extractResource(in, "presets.pd", getCacheDir());
             PdBase.openPatch(patchFile_presets);

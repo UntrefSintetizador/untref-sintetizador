@@ -56,21 +56,6 @@ public class GridViewCustomAdapter extends BaseAdapter {
         return position;
     }
 
-    /*
-    ASI ESTABA FUNCIONANDO ORIGINALMENTE
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-
-            View v = null;
-
-            v = inflater.inflate(R.layout.item, null);
-
-            Button tv = (Button) v.findViewById(R.id.button);
-            tv.setText(items.get(position));
-
-            return v;
-        }
-    */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = null;

@@ -45,7 +45,7 @@
                     <TextView
                         android:id="@+id/labelEG1_1"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:text="attack"
                         />
@@ -66,7 +66,7 @@
                     <TextView
                         android:id="@+id/labelEG1_2"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:text="decay"
                         />
@@ -87,7 +87,7 @@
                     <TextView
                         android:id="@+id/labelEG1_3"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:text="sustain"
                         />
@@ -107,7 +107,7 @@
                     <TextView
                         android:id="@+id/labelEG1_4"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:text="release"
                         />
@@ -127,7 +127,7 @@
                     <TextView
                         android:id="@+id/labelEG1_5"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_weight="1"
                         android:text="gate"
                         />

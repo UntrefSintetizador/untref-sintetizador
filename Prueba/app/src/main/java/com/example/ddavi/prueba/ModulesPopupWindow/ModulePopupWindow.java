@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import com.example.ddavi.prueba.MainActivity;
 import com.example.ddavi.prueba.R;
 
 import org.puredata.core.PdBase;
+
+import java.text.DecimalFormat;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -111,125 +114,44 @@ public abstract class ModulePopupWindow extends PopupWindow {
         });
     }
 
+    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar,final String idetificador_modulo,final String name_modulo,float max_module,final float min_module,float multiplicador_modulo, final float multiplicador_seekBar, View view){
+        SeekBar seekBar = (SeekBar) view.findViewById(id_seekBar);
+        final TextView label_module = (TextView) view.findViewById(id_label_seekBar);
+        //final String indetificador = idetificador_modulo;
+        /*ESTABLECER MAXIMO PARA SEEKBAR
+         If you want values from 3 to 5 with a step of 0.1 (3, 3.1, 3.2, ..., 5)
+         this means that you have 21 possible values in the seekbar.
+        So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].*/
+
+        seekBar.setMax((int) ((max_module - min_module) / multiplicador_modulo));
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
+                //3) MANDAR PARAMETROS MSJ
+                String msj = "X_"+name_modulo+"_" + idetificador_modulo;
+                String label_moduel_text = idetificador_modulo;
+                float multiplicador = multiplicador_seekBar;
+                float valorInicial = min_module;
+                DecimalFormat decimales = new DecimalFormat("0.00");
+                float value = (float) (valorInicial + (progress * multiplicador));
+                //float value = (float) (valorInicial + progress * multiplicador);
+                Log.i("Mensaje seek"+name_modulo+"ER1_" + idetificador_modulo, msj);
+                Log.i("Valor   seek"+name_modulo+"ER1_" + idetificador_modulo, decimales.format(value));
+                PdBase.sendFloat(msj, value);
+                label_module.setText(label_moduel_text + ": " + decimales.format(value));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar1) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar1) {
+            }
+        });
+    }
+
     public abstract void initializeModule(String title, View view);
 
-/**
-    public void initializeModule(String title, View view) {
-
-        TextView label_title = (TextView) view.findViewById(R.id.title);
-        label_title.setText(title);
-        final String name = title;
-        //TODOS LOS SLIDERS VCA1
-        //COMIENZO DE SEEKBAR VCA 1_1
-        //1) MOSTRAR SEEKBAR
-        SeekBar seekBarVCA1_1 = (SeekBar) view.findViewById(R.id.seekBarVCA1_1);
-        final TextView labelVCA1_1 = (TextView) view.findViewById(R.id.labelVCA1_1);
-        //2) ESTABLECER MAXIMO PARA SEEKBAR
-        // If you want values from 3 to 5 with a step of 0.1 (3, 3.1, 3.2, ..., 5)
-        // this means that you have 21 possible values in the seekbar.
-        // So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].
-        float multiplicadorVCA1_1 = 0.01f;
-        float maxVCA1_1 = 1.0f;
-        float minVCA1_1 = 0.0f;
-        seekBarVCA1_1.setMax((int) ((maxVCA1_1 - minVCA1_1) / multiplicadorVCA1_1));
-        seekBarVCA1_1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
-                //3) MANDAR PARAMETROS MSJ
-                String msj = "X_"+name+"_att_control";
-                String labelVCA1_1text = "att_control";
-                float multiplicador = 0.01f;
-                float valorInicial = 0.0f;
-                float value = (float) (valorInicial + (progress * multiplicador));
-                //float value = (float) (valorInicial + progress * multiplicador);
-                Log.i("Mensaje seek"+name+"_1", msj);
-                Log.i("Valor   seek"+name+"_1", String.valueOf(value));
-                PdBase.sendFloat(msj, value);
-                labelVCA1_1.setText(labelVCA1_1text + ": " + value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar1) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar1) {
-            }
-        });
-        //FIN SEEKBAR VCA1_1
-        //COMIENZO DE SEEKBAR VCA 1_2
-        //1) MOSTRAR SEEKBAR
-        SeekBar seekBarVCA1_2 = (SeekBar) view.findViewById(R.id.seekBarVCA1_2);
-        final TextView labelVCA1_2 = (TextView) view.findViewById(R.id.labelVCA1_2);
-        //2) ESTABLECER MAXIMO PARA SEEKBAR
-        // If you want values from 3 to 5 with a step of 0.1 (3, 3.1, 3.2, ..., 5)
-        // this means that you have 21 possible values in the seekbar.
-        // So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].
-        float multiplicadorVCA1_2 = 0.01f;
-        float maxVCA1_2 = 1.0f;
-        float minVCA1_2 = 0.0f;
-        seekBarVCA1_2.setMax((int) ((maxVCA1_2 - minVCA1_2) / multiplicadorVCA1_2));
-        seekBarVCA1_2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
-                //3) MANDAR PARAMETROS MSJ
-                String msj = "X_"+name+"_base";
-                String labelVCA1_2text = "base";
-                float multiplicador = 0.01f;
-                float valorInicial = 0.0f;
-                float value = (float) (valorInicial + (progress * multiplicador));
-                //float value = (float) (valorInicial + progress * multiplicador);
-                Log.i("Mensaje seek"+name+"_2", msj);
-                Log.i("Valor   seek"+name+"_2", String.valueOf(value));
-                PdBase.sendFloat(msj, value);
-                labelVCA1_2.setText(labelVCA1_2text + ": " + value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar1) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar1) {
-            }
-        });
-        //FIN SEEKBAR VCA1_2
-        //COMIENZO DE SEEKBAR VCA 1_3
-        //1) MOSTRAR SEEKBAR
-        SeekBar seekBarVCA1_3 = (SeekBar) view.findViewById(R.id.seekBarVCA1_3);
-        final TextView labelVCA1_3 = (TextView) view.findViewById(R.id.labelVCA1_3);
-        //2) ESTABLECER MAXIMO PARA SEEKBAR
-        // If you want values from 3 to 5 with a step of 0.1 (3, 3.1, 3.2, ..., 5)
-        // this means that you have 21 possible values in the seekbar.
-        // So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].
-        float multiplicadorVCA1_3 = 1.0f;
-        float maxVCA1_3 = 1.0f;
-        float minVCA1_3 = 0.0f;
-        seekBarVCA1_3.setMax((int) ((maxVCA1_3 - minVCA1_3) / multiplicadorVCA1_3));
-        seekBarVCA1_3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
-                //3) MANDAR PARAMETROS MSJ
-                String msj = "X_"+name+"_clip";
-                String labelVCA1_3text = "clip";
-                float multiplicador = 1.0f;
-                float valorInicial = 0.0f;
-                float value = (float) (valorInicial + (progress * multiplicador));
-                //float value = (float) (valorInicial + progress * multiplicador);
-                Log.i("Mensaje seek"+name+"_3", msj);
-                Log.i("Valor   seek"+name+"_3", String.valueOf(value));
-                PdBase.sendFloat(msj, value);
-                labelVCA1_3.setText(labelVCA1_3text + ": " + value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar1) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar1) {
-            }
-        });
-        //FIN SEEKBAR VCA1_3
-    }**/
 }
