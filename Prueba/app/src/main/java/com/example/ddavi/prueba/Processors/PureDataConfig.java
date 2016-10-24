@@ -1,4 +1,4 @@
-package com.example.ddavi.prueba;
+package com.example.ddavi.prueba.Processors;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ddavi.prueba.MainActivity;
+import com.example.ddavi.prueba.R;
 
 import org.puredata.android.io.AudioParameters;
 import org.puredata.android.service.PdPreferences;
@@ -35,9 +38,10 @@ import static android.content.Context.BIND_AUTO_CREATE;
  * Created by ddavi on 23/10/2016.
  */
 
-public class PureDataConfig {
+public class PureDataConfig extends BaseConfig{
 
-    private PdService service = null;;
+    private PdService service = null;
+
     private MainActivity context;
     private TextView logs;
     private Toast toast = null;
@@ -57,9 +61,21 @@ public class PureDataConfig {
         }
     };
 
+    public PureDataConfig(){}
+
     public PureDataConfig(MainActivity activity){
         context = activity;
         this.initializePureData();
+    }
+
+    public void setContext(MainActivity activity) {
+        this.context = activity;
+        this.initializePureData();
+    }
+
+    @Override
+    public boolean isServiceRunning(){
+        return this.getService().isRunning();
     }
 
     public PdService getService(){
@@ -80,7 +96,7 @@ public class PureDataConfig {
 
     private Map<String,Integer> getDictionaryFilesPD(){
         Map<String,Integer> dictionary = new HashMap<String,Integer>();
-        dictionary.put("x_vco1.pd",R.raw.x_vco1);
+        dictionary.put("x_vco1.pd", R.raw.x_vco1);
         dictionary.put("x_vco2.pd",R.raw.x_vco2);
         dictionary.put("x_vco3.pd",R.raw.x_vco3);
         dictionary.put("cell.pd",R.raw.cell);
@@ -222,6 +238,15 @@ public class PureDataConfig {
         }
     }
 
+    public void resetPresets(){
+        PdBase.sendFloat("reset_presets",1);
+    }
+
+    public void setPreset(String name){
+        PdBase.sendFloat(name,1);
+    }
+
+    @Override
     public void evaluateMessage(String s) {
         String dest = "test", symbol = null;
         boolean isAny = s.length() > 0 && s.charAt(0) == ';';
