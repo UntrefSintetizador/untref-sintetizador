@@ -36,17 +36,17 @@ public class VCOPopupWindow extends ModulePopupWindow {
         createSeekBarShape(title,view);
         createSeekBarComponent(R.id.seekBar_freq,R.id.label_freq,"freq",title,20000.0f,0.0f,20.0f,20.0f,view);
         createSeekBarComponent(R.id.seekBar_offset,R.id.label_offset,"offset",title,63.0f,-64.0f,1.0f,1.0f,view);
-        createSeekBarComponent(R.id.seekBar_pw,R.id.label_pw,"pw (%)",title,100.0f,0.0f,1.0f,1.0f,view);
+        createSeekBarComponent(R.id.seekBar_pw,R.id.label_pw,"pw",title,100.0f,0.0f,1.0f,1.0f,view);
     }
 
     private void createSeekBarShape(final String name, View view){
-        SeekBar seekBarVCO1_3 = (SeekBar) view.findViewById(R.id.seekBar_waveform);
-        final TextView labelVCO1_3 = (TextView) view.findViewById(R.id.label_waveform);
-        float multiplicadorVCO1_3 = 1.0f;
-        float maxVCO1_3 = 4.0f;
-        float minVCO1_3 = 0.0f;
-        seekBarVCO1_3.setMax((int) ((maxVCO1_3 - minVCO1_3) / multiplicadorVCO1_3));
-        seekBarVCO1_3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        SeekBar seekBarVCO = (SeekBar) view.findViewById(R.id.seekBar_waveform);
+        final TextView labelVCO = (TextView) view.findViewById(R.id.label_waveform);
+        float multiplicadorVCO = 1.0f;
+        float maxVCO = 4.0f;
+        float minVCO = 0.0f;
+        seekBarVCO.setMax((int) ((maxVCO - minVCO) / multiplicadorVCO));
+        seekBarVCO.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
                 //3) MANDAR PARAMETROS MSJ
@@ -76,7 +76,7 @@ public class VCOPopupWindow extends ModulePopupWindow {
                 if (value == 4.0) {
                     tipoDeOnda = "pulse";
                 }
-                labelVCO1_3.setText(labelVCO1_3text + ": " + tipoDeOnda);
+                labelVCO.setText(labelVCO1_3text + ": " + tipoDeOnda);
             }
 
             @Override

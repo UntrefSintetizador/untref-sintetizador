@@ -42,13 +42,13 @@ public class VCFPopupWindow extends ModulePopupWindow {
         label_title.setText(title);
         final String name = title;
 
-        SeekBar seekBarVCF1_3 = (SeekBar) view.findViewById(R.id.seekBarVCF1_3);
-        final TextView labelVCF1_3 = (TextView) view.findViewById(R.id.labelVCF1_3);
-        float multiplicadorVCF1_3 = 1.0f;
+        SeekBar seekBarVCF = (SeekBar) view.findViewById(R.id.seekBarVCF1_3);
+        final TextView labelVCF = (TextView) view.findViewById(R.id.labelVCF1_3);
+        float multiplicadorVCF = 1.0f;
         float maxVCF1_3 = 2.0f;
         float minVCF1_3 = 0.0f;
-        seekBarVCF1_3.setMax((int) ((maxVCF1_3 - minVCF1_3) / multiplicadorVCF1_3));
-        seekBarVCF1_3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBarVCF.setMax((int) ((maxVCF1_3 - minVCF1_3) / multiplicadorVCF));
+        seekBarVCF.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
                 //3) MANDAR PARAMETROS MSJ
@@ -70,7 +70,7 @@ public class VCFPopupWindow extends ModulePopupWindow {
                 if (value == 2.0) {
                     tipoDeModo = "highpass";
                 }
-                labelVCF1_3.setText(labelVCF1_3text + ": " + tipoDeModo);
+                labelVCF.setText(labelVCF1_3text + ": " + tipoDeModo);
             }
 
             @Override

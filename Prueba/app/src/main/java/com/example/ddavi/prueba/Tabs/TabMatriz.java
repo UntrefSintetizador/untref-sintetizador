@@ -6,14 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import com.example.ddavi.prueba.ModulesPopupWindow.EGPopupWindow;
-import com.example.ddavi.prueba.ModulesPopupWindow.MIXPopupWindow;
 import com.example.ddavi.prueba.Listeners.ModuleListener;
-import com.example.ddavi.prueba.ModulesPopupWindow.SHPopupWindow;
-import com.example.ddavi.prueba.ModulesPopupWindow.VCAPopupWindow;
-import com.example.ddavi.prueba.ModulesPopupWindow.VCFPopupWindow;
-import com.example.ddavi.prueba.ModulesPopupWindow.VCOPopupWindow;
 import com.example.ddavi.prueba.MainActivity;
 import com.example.ddavi.prueba.ModulesPopupWindow.ModulePopupWindow;
 import com.example.ddavi.prueba.MyGridView.MyGridView;

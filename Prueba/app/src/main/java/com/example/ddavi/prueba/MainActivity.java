@@ -10,19 +10,12 @@
  */
 package com.example.ddavi.prueba;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -33,8 +26,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
-
 import android.support.v4.app.FragmentTabHost;
 
 import com.evilduck.piano.views.instrument.PianoView;
@@ -48,33 +39,14 @@ import com.example.ddavi.prueba.MyGridView.GridViewCustomAdapter;
 import com.example.ddavi.prueba.Tabs.TabMatriz;
 import com.example.ddavi.prueba.Tabs.TabPiano;
 
-import org.puredata.android.io.AudioParameters;
-import org.puredata.android.service.PdPreferences;
-import org.puredata.android.service.PdService;
 import org.puredata.core.PdBase;
-import org.puredata.core.PdReceiver;
-import org.puredata.core.utils.IoUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
-//quitado cuando comence con controles finales
-//import android.support.v7.widget.ListPopupWindow;
 
 public class MainActivity extends AppCompatActivity implements OnEditorActionListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private FragmentTabHost tabHost;
 
-    //esto es de test
-    private static final String TAG = "XUL";
     private static final int MIN_OCTIVE = 5;
     private static final int MAX_OCTIVE = 8;
 
@@ -94,9 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     SHPopupWindow shWindow;
 
     private EditText msg;
-    private TextView logs;
-    private PdService pdService = null;
-    private Toast toast = null;
+    PureDataConfig pdConfig;
     private int octava;
 
     public int getOctava(){
@@ -130,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     public EGPopupWindow getEg1Window(){
         return eg1Window;
     }
-
     public EGPopupWindow getEg2Window(){
         return eg2Window;
     }
@@ -141,77 +110,6 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     public void setOctava(int valor){
         this.octava = valor;
     }
-    private void toast(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (toast == null) {
-                    toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
-                }
-                toast.setText(TAG + ": " + msg);
-                toast.show();
-            }
-        });
-    }
-
-    private void post(final String s) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                logs.append(s + ((s.endsWith("\n")) ? "" : "\n"));
-            }
-        });
-    }
-
-    private PdReceiver receiver = new PdReceiver() {
-
-        private void pdPost(String msg) {
-            toast("Pure Data says, \"" + msg + "\"");
-        }
-
-        @Override
-        public void print(String s) {
-            post(s);
-        }
-
-        @Override
-        public void receiveBang(String source) {
-            pdPost("bang");
-        }
-
-        @Override
-        public void receiveFloat(String source, float x) {
-            pdPost("float: " + x);
-        }
-
-        @Override
-        public void receiveList(String source, Object... args) {
-            pdPost("list: " + Arrays.toString(args));
-        }
-
-        @Override
-        public void receiveMessage(String source, String symbol, Object... args) {
-            pdPost("message: " + Arrays.toString(args));
-        }
-
-        @Override
-        public void receiveSymbol(String source, String symbol) {
-            pdPost("symbol: " + symbol);
-        }
-    };
-
-    private final ServiceConnection pdConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            pdService = ((PdService.PdBinder)service).getService();
-            initPd();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            // this method will never be called
-        }
-    };
 
     private void createTabs(){
 
@@ -228,19 +126,6 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
             tabHost.getTabWidget().getChildAt(i).getLayoutParams().height = 60;
             tabHost.getTabWidget().setBackgroundColor(Color.WHITE);
         }
-
-    }
-
-    private void initializePureData(){
-
-        AudioParameters.init(this);
-        PdPreferences.initPreferences(getApplicationContext());
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).registerOnSharedPreferenceChangeListener(this);
-
-        logs = (TextView) findViewById(R.id.log_box);
-        logs.setMovementMethod(new ScrollingMovementMethod());
-
-        bindService(new Intent(this, PdService.class), pdConnection, BIND_AUTO_CREATE);
     }
 
     private void initialConfigurationWindow(){
@@ -299,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         initialConfigurationWindow();
         setContentView(R.layout.tabs_view);
         initializeActionBar();
-        initializePureData();
+        pdConfig = new PureDataConfig(this);
         initializeGridViewAdapter();
         initializeModulesPopWindow();
         createTabs();
@@ -313,113 +198,22 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     private void initializeGridViewAdapter() {
         int CantColumnas = 17; //SIN LOS TITULOS CANTIDAD ERA 12 (CON PD TEST5 ERA 13, ahora 17 porque piden 16)
         int CantFilas = 27; // SIN LOS TITULOS CANTIDAD ERA 23 (CON PD TEST5 ERA 24, ahora 27 porque piden 26)
-        //int CantColumnas = 3;
-        //int CantFilas = 5;
         ArrayList<String> data = new ArrayList<>();
-        //CON ESTE CODIGO LLENA TODA LA MATRIZ CON SU POSICION
-        /*
-        for (int i = 0; i < CantFilas; i++) {
-            for (int j = 0; j < CantColumnas; j++)
-                data.add(j + "-" + i);
-        }
-        */
-        //CON ESTE CODIGO PONE PRIMERA COLUMNA NOMBRES
+
         for (int i = -1; i < CantFilas - 1; i++) {
-            for (int j = -1; j < CantColumnas - 1; j++)
+            for (int j = -1; j < CantColumnas - 1; j++) {
                 //PONGO NOMBRES A PRIMERA COLUMNA
                 if (j == -1 & i == -1) {
                     data.add("");
-                } else if (j == -1 & i == 0) {
-                    data.add("0");
-                } else if (j == -1 & i == 1) {
-                    data.add("1");
-                } else if (j == -1 & i == 2) {
-                    data.add("2");
-                } else if (j == -1 & i == 3) {
-                    data.add("3");
-                } else if (j == -1 & i == 4) {
-                    data.add("4");
-                } else if (j == -1 & i == 5) {
-                    data.add("5");
-                } else if (j == -1 & i == 6) {
-                    data.add("6");
-                } else if (j == -1 & i == 7) {
-                    data.add("7");
-                } else if (j == -1 & i == 8) {
-                    data.add("8");
-                } else if (j == -1 & i == 9) {
-                    data.add("9");
-                } else if (j == -1 & i == 10) {
-                    data.add("10");
-                } else if (j == -1 & i == 11) {
-                    data.add("11");
-                } else if (j == -1 & i == 12) {
-                    data.add("12");
-                } else if (j == -1 & i == 13) {
-                    data.add("13");
-                } else if (j == -1 & i == 14) {
-                    data.add("14");
-                } else if (j == -1 & i == 15) {
-                    data.add("15");
-                } else if (j == -1 & i == 16) {
-                    data.add("16");
-                } else if (j == -1 & i == 17) {
-                    data.add("17");
-                } else if (j == -1 & i == 18) {
-                    data.add("18");
-                } else if (j == -1 & i == 19) {
-                    data.add("19");
-                } else if (j == -1 & i == 20) {
-                    data.add("20");
-                } else if (j == -1 & i == 21) {
-                    data.add("21");
-                } else if (j == -1 & i == 22) {
-                    data.add("22");
-                } else if (j == -1 & i == 23) {
-                    data.add("23");
-                } else if (j == -1 & i == 24) {
-                    data.add("24");
-                } else if (j == -1 & i == 25) {
-                    data.add("25");
-                }
-                //PONGO NOMBRES A PRIMERA FILA
-                else if (i == -1 & j == 0) {
-                    data.add("0");
-                } else if (i == -1 & j == 1) {
-                    data.add("1");
-                } else if (i == -1 & j == 2) {
-                    data.add("2");
-                } else if (i == -1 & j == 3) {
-                    data.add("3");
-                } else if (i == -1 & j == 4) {
-                    data.add("4");
-                } else if (i == -1 & j == 5) {
-                    data.add("5");
-                } else if (i == -1 & j == 6) {
-                    data.add("6");
-                } else if (i == -1 & j == 7) {
-                    data.add("7");
-                } else if (i == -1 & j == 8) {
-                    data.add("8");
-                } else if (i == -1 & j == 9) {
-                    data.add("9");
-                } else if (i == -1 & j == 10) {
-                    data.add("10");
-                } else if (i == -1 & j == 11) {
-                    data.add("11");
-                } else if (i == -1 & j == 12) {
-                    data.add("12");
-                } else if (i == -1 & j == 13) {
-                    data.add("13");
-                } else if (i == -1 & j == 14) {
-                    data.add("14");
-                } else if (i == -1 & j == 15) {
-                    data.add("15");
-                }
-                //EL RESTO DE LAS POSICIONES
-                else {
+                } else if (j == -1)
+                    /*Pongo nombres a filas*/
+                    data.add(String.valueOf(i));
+                else if (i == -1)
+                    /*Pongo nombre a columnas*/
+                    data.add(String.valueOf(j));
+                else
                     data.add(j + "-" + i);
-                }
+            }
         }
         gridViewAdapter = new GridViewCustomAdapter(this, data);
     }
@@ -439,8 +233,8 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
 
         switch (item.getItemId()) {
             case R.id.action_exit:
-                stopAudio();
-                cleanup();
+                pdConfig.stopAudio();
+                pdConfig.cleanup();
                 finish();
                 break;
             case R.id.action_clear:
@@ -541,154 +335,21 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        cleanup();
+        pdConfig.cleanup();
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-        if (pdService.isRunning()) {
-            startAudio();
-        }
-    }
-
-    private Map<String,Integer> getDictionaryFilesPD(){
-        Map<String,Integer> dictionary = new HashMap<String,Integer>();
-        dictionary.put("x_vco1.pd",R.raw.x_vco1);
-        dictionary.put("x_vco2.pd",R.raw.x_vco2);
-        dictionary.put("x_vco3.pd",R.raw.x_vco3);
-        dictionary.put("cell.pd",R.raw.cell);
-        dictionary.put("x_eg1.pd",R.raw.x_eg1);
-        dictionary.put("x_eg2.pd",R.raw.x_eg2);
-        dictionary.put("x_mix.pd",R.raw.x_mix);
-        dictionary.put("x_mtx.pd",R.raw.x_mtx);
-        dictionary.put("x_ng.pd",R.raw.x_ng);
-        dictionary.put("x_sh.pd",R.raw.x_sh);
-        dictionary.put("x_vca1.pd",R.raw.x_vca1);
-        dictionary.put("x_vca2.pd",R.raw.x_vca2);
-        dictionary.put("x_vcf1.pd",R.raw.x_vcf1);
-        dictionary.put("x_vcf2.pd",R.raw.x_vcf2);
-        dictionary.put("x_kb.pd",R.raw.x_kb);
-        dictionary.put("x_seq.pd",R.raw.x_seq);
-
-        return dictionary;
-    }
-
-    private void initPd() {
-        Resources res = getResources();
-        File patchFile = null;
-        InputStream in;
-
-        try {
-            PdBase.setReceiver(receiver);
-            PdBase.subscribe("android");
-            //agregada apertura de todos los PD que SYNTH necesita
-            Map<String,Integer> dictionary = getDictionaryFilesPD();
-            Iterator it = dictionary.keySet().iterator();
-            while(it.hasNext()) {
-                String key = (String)it.next();
-                in = res.openRawResource(dictionary.get(key));
-                IoUtils.extractResource(in, key, getCacheDir());
-            }
-            in = res.openRawResource(R.raw.presets);
-            File patchFile_presets =IoUtils.extractResource(in, "presets.pd", getCacheDir());
-            PdBase.openPatch(patchFile_presets);
-            //apertura original de 1 PD
-            in = res.openRawResource(R.raw.synth);
-            patchFile = IoUtils.extractResource(in, "synth.pd", getCacheDir());
-            PdBase.openPatch(patchFile);
-
-            //ESTO INICIA EL SONIDO, ANTES ESTABA AL PRESIONAR PLAY
-            if (pdService.isRunning()) {
-                stopAudio();
-            } else {
-                startAudio();
-                //PUSE MEJOR UN PRESET QUE NO QUEDE SONANDO
-                PdBase.sendFloat("sq_bass1",1);
-            }
-
-        } catch (IOException e) {
-            Log.e(TAG, e.toString());
-            finish();
-        } finally {
-            if (patchFile != null) patchFile.delete();
-        }
-    }
-
-    private void startAudio() {
-        String name = getResources().getString(R.string.app_name);
-        try {
-            pdService.initAudio(-1, -1, -1, -1);   // negative values will be replaced with defaults/preferences
-            pdService.startAudio(new Intent(this, MainActivity.class), R.drawable.icon, name, "Return to " + name + ".");
-        } catch (IOException e) {
-            toast(e.toString());
-        }
-    }
-
-    private void stopAudio() {
-        pdService.stopAudio();
-    }
-
-    private void cleanup() {
-        try {
-            unbindService(pdConnection);
-        } catch (IllegalArgumentException e) {
-            // already unbound
-            pdService = null;
+        if (pdConfig.getService().isRunning()) {
+            pdConfig.startAudio();
         }
     }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        evaluateMessage(msg.getText().toString());
+        pdConfig.evaluateMessage(msg.getText().toString());
         return true;
-    }
-
-    private void evaluateMessage(String s) {
-        String dest = "test", symbol = null;
-        boolean isAny = s.length() > 0 && s.charAt(0) == ';';
-        Scanner sc = new Scanner(isAny ? s.substring(1) : s);
-        if (isAny) {
-            if (sc.hasNext()) dest = sc.next();
-            else {
-                toast("Message not sent (empty recipient)");
-                return;
-            }
-            if (sc.hasNext()) symbol = sc.next();
-            else {
-                toast("Message not sent (empty symbol)");
-            }
-        }
-        List<Object> list = new ArrayList<Object>();
-        while (sc.hasNext()) {
-            if (sc.hasNextInt()) {
-                list.add(Float.valueOf(sc.nextInt()));
-            } else if (sc.hasNextFloat()) {
-                list.add(sc.nextFloat());
-            } else {
-                list.add(sc.next());
-            }
-        }
-        if (isAny) {
-            PdBase.sendMessage(dest, symbol, list.toArray());
-        } else {
-            switch (list.size()) {
-                case 0:
-                    PdBase.sendBang(dest);
-                    break;
-                case 1:
-                    Object x = list.get(0);
-                    if (x instanceof String) {
-                        PdBase.sendSymbol(dest, (String) x);
-                    } else {
-                        PdBase.sendFloat(dest, (Float) x);
-                    }
-                    break;
-                default:
-                    PdBase.sendList(dest, list.toArray());
-                    break;
-            }
-        }
     }
 
 }

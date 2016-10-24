@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -44,22 +43,6 @@ public abstract class ModulePopupWindow extends PopupWindow {
         initializePopupView();
 
         this.setContentView(popupView);
-    }
-
-    public ModulePopupWindow(MainActivity container, Button view, int layout, String name){
-
-        super(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-
-        activity = container;
-        button = view;
-        id_layout = layout;
-        title = name;
-
-        layoutInflater =(LayoutInflater)activity.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        initializePopupView();
-
-        this.setContentView(popupView);
-
     }
 
     public Button getButton(){
