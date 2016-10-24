@@ -97,10 +97,10 @@ public abstract class ModulePopupWindow extends PopupWindow {
         });
     }
 
-    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar,final String idetificador_modulo,final String name_modulo,float max_module,final float min_module,float multiplicador_modulo, final float multiplicador_seekBar, View view){
+    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar,final String identificador_modulo,final String name_modulo,float max_module,final float min_module,float multiplicador_modulo, final float multiplicador_seekBar, View view){
         SeekBar seekBar = (SeekBar) view.findViewById(id_seekBar);
         final TextView label_module = (TextView) view.findViewById(id_label_seekBar);
-        //final String indetificador = idetificador_modulo;
+        //final String indetificador = identificador_modulo;
         /*ESTABLECER MAXIMO PARA SEEKBAR
          If you want values from 3 to 5 with a step of 0.1 (3, 3.1, 3.2, ..., 5)
          this means that you have 21 possible values in the seekbar.
@@ -112,15 +112,15 @@ public abstract class ModulePopupWindow extends PopupWindow {
             @Override
             public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
                 //3) MANDAR PARAMETROS MSJ
-                String msj = "X_"+name_modulo+"_" + idetificador_modulo;
-                String label_moduel_text = idetificador_modulo;
+                String msj = "X_"+name_modulo+"_" + identificador_modulo;
+                String label_moduel_text = identificador_modulo;
                 float multiplicador = multiplicador_seekBar;
                 float valorInicial = min_module;
                 DecimalFormat decimales = new DecimalFormat("0.00");
                 float value = (float) (valorInicial + (progress * multiplicador));
                 //float value = (float) (valorInicial + progress * multiplicador);
-                Log.i("Mensaje seek"+name_modulo+"ER1_" + idetificador_modulo, msj);
-                Log.i("Valor   seek"+name_modulo+"ER1_" + idetificador_modulo, decimales.format(value));
+                Log.i("Mensaje seek"+name_modulo+"ER1_" + identificador_modulo, msj);
+                Log.i("Valor   seek"+name_modulo+"ER1_" + identificador_modulo, decimales.format(value));
                 PdBase.sendFloat(msj, value);
                 label_module.setText(label_moduel_text + ": " + decimales.format(value));
             }

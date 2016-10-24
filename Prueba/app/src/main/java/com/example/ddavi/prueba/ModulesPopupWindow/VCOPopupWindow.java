@@ -60,23 +60,9 @@ public class VCOPopupWindow extends ModulePopupWindow {
                 Log.i("Mensaje seek"+name+"_3", msj);
                 Log.i("Valor   seek"+name+"_3", decimales.format(value));
                 PdBase.sendFloat(msj, value);
-                String tipoDeOnda = "sine";
-                if (value == 0.0) {
-                    tipoDeOnda = "sine";
-                }
-                if (value == 1.0) {
-                    tipoDeOnda = "ramp";
-                }
-                if (value == 2.0) {
-                    tipoDeOnda = "saw";
-                }
-                if (value == 3.0) {
-                    tipoDeOnda = "trig";
-                }
-                if (value == 4.0) {
-                    tipoDeOnda = "pulse";
-                }
-                labelVCO.setText(labelVCO1_3text + ": " + tipoDeOnda);
+                String tipo_onda[] = {"sine","ramp","saw","trig","pulse"};
+
+                labelVCO.setText(labelVCO1_3text + ": " + tipo_onda[(int)value]);
             }
 
             @Override
