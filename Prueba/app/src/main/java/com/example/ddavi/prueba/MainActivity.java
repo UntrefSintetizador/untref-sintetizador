@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,7 +27,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.support.v4.app.FragmentTabHost;
 
 import com.evilduck.piano.views.instrument.PianoView;
 import com.example.ddavi.prueba.ModulesPopupWindow.EGPopupWindow;
@@ -42,6 +42,8 @@ import com.example.ddavi.prueba.Tabs.TabPiano;
 import org.puredata.core.PdBase;
 
 import java.util.ArrayList;
+
+//Import Sinte Adapter
 
 public class MainActivity extends AppCompatActivity implements OnEditorActionListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -66,7 +68,11 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     SHPopupWindow shWindow;
 
     private EditText msg;
-    PureDataConfig pdConfig;
+    //PureDataConfig pdConfig;
+
+    MasterConfig masterConfig;
+    private String processor = "Pd"; //Asca se cambiaria por el tipo de processor utilizado
+
     private int octava;
 
     public int getOctava(){
@@ -181,10 +187,17 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         initialConfigurationWindow();
         setContentView(R.layout.tabs_view);
         initializeActionBar();
-        pdConfig = new PureDataConfig(this);
+
+        //Consultar por el literal Pd se podria hacer algo en un metodo anterior
+        masterConfig = new MasterConfig(this.processor);
+        masterConfig.setProcessorActivity(this);
+
+        //pdConfig = new PureDataConfig(this);
+
         initializeGridViewAdapter();
         initializeModulesPopWindow();
         createTabs();
@@ -233,8 +246,12 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
 
         switch (item.getItemId()) {
             case R.id.action_exit:
-                pdConfig.stopAudio();
-                pdConfig.cleanup();
+
+                masterConfig.config.stopAudio();
+                masterConfig.config.cleanup();
+
+                //pdConfig.stopAudio();
+                //pdConfig.cleanup();
                 finish();
                 break;
             case R.id.action_clear:
@@ -242,61 +259,82 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
                 piano.clear();
                 break;
             case R.id.action_chordPad:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("chord_pad",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("chord_pad");
+
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("chord_pad",1);
                 Log.i("Preset Elegido", "Preset 1 (Chord Pad)");
                 break;
 
             case R.id.action_filterTone:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("filter_tone",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("filter_tone");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("filter_tone",1);
                 Log.i("Preset Elegido", "Preset 2 (Filter Tone)");
                 break;
 
             case R.id.action_herbie:
+                masterConfig.resetPresets();
+                masterConfig.setPreset("herbie");
                 PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("herbie",1);
+                //PdBase.sendFloat("herbie",1);
                 Log.i("Preset Elegido", "Preset 3 (Herbie)");
                 break;
 
             case R.id.action_extasis:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("extasis",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("extasis");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("extasis",1);
                 Log.i("Preset Elegido", "Preset 4 (Extasis)");
                 break;
 
             case R.id.action_reset:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("sq_bass1",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("sq_bass1");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("sq_bass1",1);
                 Log.i("Preset Elegido", "Preset 9 (Sq Bass1)");
                 break;
 
             case R.id.action_sawSeq:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("saw_seq",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("saw_seq");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("saw_seq",1);
                 Log.i("Preset Elegido", "Preset 6 (Saw Seq)");
                 break;
 
             case R.id.action_bell:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("bell",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("bell");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("bell",1);
                 Log.i("Preset Elegido", "Preset 7 (Bell)");
                 break;
 
             case R.id.action_sqBass:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("sq_bass",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("sq_bass");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("sq_bass",1);
                 Log.i("Preset Elegido", "Preset 8 (Sq Bass)");
                 break;
 
             case R.id.action_sqBass1:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("sq_bass1",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("sq_bass1");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("sq_bass1",1);
                 Log.i("Preset Elegido", "Preset 9 (Sq Bass1)");
                 break;
             case R.id.action_fm:
-                PdBase.sendFloat("reset_presets",1);
-                PdBase.sendFloat("fm",1);
+                masterConfig.resetPresets();
+                masterConfig.setPreset("fm");
+                //PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("fm",1);
                 Log.i("Preset Elegido", "Preset 10 (Fm)");
                 break;
             default:
@@ -335,20 +373,24 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        pdConfig.cleanup();
+        masterConfig.config.cleanup();
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
+        if (masterConfig.config.isServiceRunning()) {
+            masterConfig.config.startAudio();
+        }
+        /*
         if (pdConfig.getService().isRunning()) {
             pdConfig.startAudio();
-        }
+        }*/
     }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        pdConfig.evaluateMessage(msg.getText().toString());
+        masterConfig.config.evaluateMessage(msg.getText().toString());
         return true;
     }
 
