@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_ic_star_black_16dp.png",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxxhdpi-v4\\abc_ic_star_black_16dp.png"
-    },
-    {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_ic_star_black_16dp.png",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-xxxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",

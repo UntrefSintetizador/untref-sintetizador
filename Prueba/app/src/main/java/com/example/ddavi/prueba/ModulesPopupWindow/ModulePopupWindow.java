@@ -9,21 +9,17 @@ import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.example.ddavi.prueba.MainActivity;
 import com.example.ddavi.prueba.R;
-
 import org.puredata.core.PdBase;
-
 import java.text.DecimalFormat;
-
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by ddavi on 2/10/2016.
  */
 
-public abstract class ModulePopupWindow extends PopupWindow {
+public abstract class ModulePopupWindow extends PopupWindow{
 
     private MainActivity activity;
     private Button button;

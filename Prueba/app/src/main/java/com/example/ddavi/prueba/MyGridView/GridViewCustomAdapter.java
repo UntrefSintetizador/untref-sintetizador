@@ -14,21 +14,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import com.example.ddavi.prueba.Listeners.ModuleListener;
+import com.example.ddavi.prueba.MainActivity;
+import com.example.ddavi.prueba.ModulesPopupWindow.VCOPopupWindow;
 import com.example.ddavi.prueba.R;
 
 import org.puredata.core.PdBase;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class GridViewCustomAdapter extends BaseAdapter {
 
-    ArrayList<String> items;
-    ArrayList<Integer> itemsPressed;
+    //ArrayList<String> items;
+    ArrayList<Button> itemsPressed;
+    Map<String,Button> items;
 
     static Activity mActivity;
 
     private static LayoutInflater inflater = null;
 
+    /**
     public GridViewCustomAdapter(Activity activity, ArrayList<String> tempTitle) {
         mActivity = activity;
         items = tempTitle;
@@ -36,6 +44,19 @@ public class GridViewCustomAdapter extends BaseAdapter {
 
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }**/
+
+    public GridViewCustomAdapter(Activity activity, Map<String,Button> tempTitle) {
+        mActivity = activity;
+        items = tempTitle;
+        itemsPressed = new ArrayList<>();
+
+        inflater = (LayoutInflater) activity
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public ArrayList<Button> getItemsPressed(){
+        return itemsPressed;
     }
 
     @Override
@@ -57,51 +78,18 @@ public class GridViewCustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        View v = null;
+    public View getView(int position, View convertView, ViewGroup parent) {
+        List<Button> buttons = new ArrayList<Button>(items.values() );
 
-        v = inflater.inflate(R.layout.item, null);
+        Button tv = buttons.get(position);
 
-        final Button tv = (Button) v.findViewById(R.id.button);
-        tv.setText(items.get(position));
-
-        if (itemsPressed.contains(position)){
+        if (itemsPressed.contains(tv)){
             tv.setTextColor(Color.WHITE);
             tv.setBackgroundColor(Color.parseColor("#FF9800"));
         }else {
             tv.setTextColor(Color.BLACK);
             tv.setBackgroundColor(Color.parseColor("#607D8B"));
         }
-
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String msg = "connect-" + tv.getText();
-                if (tv.getCurrentTextColor() == Color.BLACK) {
-                    Float value = 1.0f;
-                    PdBase.sendFloat(msg, value);
-                    tv.setBackgroundColor(Color.parseColor("#FF9800"));
-                    Log.i("MSJ A PD ", msg);
-                    tv.setTextColor(Color.WHITE);
-                    tv.setWidth(80);
-                    itemsPressed.add(position);
-                    //SE NECESITA MANTENER APRETADO (ES LO MISMO QUE TOGGLE?)
-                    //tv.setPressed(true);
-                } else {
-                    Float value = 0.0f;
-                    PdBase.sendFloat(msg, value);
-                    tv.setBackgroundColor(Color.parseColor("#607D8B"));
-                    Log.i("MSJ A PD ", msg);
-                    tv.setTextColor(Color.BLACK);
-                    tv.setWidth(81);
-                    itemsPressed.remove(itemsPressed.indexOf(position));
-                    //SE NECESITA MANTENER APRETADO (ES LO MISMO QUE TOGGLE?)
-                    //tv.setPressed(false);
-                }
-
-            }
-        });
-        return v;
+        return tv;
     }
 }

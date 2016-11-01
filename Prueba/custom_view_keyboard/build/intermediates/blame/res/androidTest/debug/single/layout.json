@@ -12,12 +12,12 @@
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\device_name.xml",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\layout\\device_name.xml"
-    },
-    {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\device_name.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\layout\\device_name.xml"
     },
     {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_select_dialog_material.xml",

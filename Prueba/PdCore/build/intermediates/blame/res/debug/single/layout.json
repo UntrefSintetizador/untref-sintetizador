@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_media_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",

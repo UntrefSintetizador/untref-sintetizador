@@ -2,61 +2,25 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_matriz"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button android:id="@+id/botonVCO1" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCO1" />
-
-        <Button android:id="@+id/botonVCO2" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCO2" />
-
-        <Button android:id="@+id/botonVCO3" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCO3" />
-
-        <Button android:id="@+id/botonVCA1" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCA1" />
-
-        <Button android:id="@+id/botonVCA2" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCA2" />
-
-        <Button android:id="@+id/botonMIXER1" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="MIX" />
-
-        <Button android:id="@+id/botonVCF1" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCF1" />
-
-        <Button android:id="@+id/botonVCF2" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="VCF2" />
-
-        <Button android:id="@+id/botonEG1" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="EG1" />
-
-        <Button android:id="@+id/botonEG2" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="EG2" />
-
-        <Button android:id="@+id/botonSH1" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_weight="1" android:text="S\u0026H" />
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@android:color/white">
+        android:layout_gravity="center"
+        android:background="@android:color/black">
 
         <com.example.ddavi.prueba.MyGridView.MyGridView
             android:id="@+id/grid_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="15dp"
             android:columnWidth="20dip"
             android:gravity="center"
             android:horizontalSpacing="2dp"

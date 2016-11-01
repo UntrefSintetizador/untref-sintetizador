@@ -11,26 +11,37 @@
 package com.example.ddavi.prueba;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.evilduck.piano.views.instrument.PianoView;
+import com.example.ddavi.prueba.Listeners.ModuleListener;
 import com.example.ddavi.prueba.ModulesPopupWindow.EGPopupWindow;
 import com.example.ddavi.prueba.ModulesPopupWindow.MIXPopupWindow;
+import com.example.ddavi.prueba.ModulesPopupWindow.ModulePopupWindow;
 import com.example.ddavi.prueba.ModulesPopupWindow.SHPopupWindow;
 import com.example.ddavi.prueba.ModulesPopupWindow.VCAPopupWindow;
 import com.example.ddavi.prueba.ModulesPopupWindow.VCFPopupWindow;
@@ -42,6 +53,10 @@ import com.example.ddavi.prueba.Tabs.TabPiano;
 import org.puredata.core.PdBase;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 //Import Sinte Adapter
 
@@ -53,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     private static final int MAX_OCTIVE = 8;
 
     GridViewCustomAdapter gridViewAdapter;
+    private static LayoutInflater inflater = null;
+    Map<String,Button> modulos_matriz;
 
     //Defino ventanas de sliders
     VCOPopupWindow vco1Window;
@@ -187,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         initialConfigurationWindow();
         setContentView(R.layout.tabs_view);
         initializeActionBar();
@@ -198,9 +214,15 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
 
         //pdConfig = new PureDataConfig(this);
 
-        initializeGridViewAdapter();
-        initializeModulesPopWindow();
+        //initializeGridViewAdapter();
+        inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        modulos_matriz = new HashMap<>();
+        gridViewAdapter = new GridViewCustomAdapter(this, modulos_matriz);
+
+        //initializeModulesPopWindow();
         createTabs();
+
         setOctava(5);
     }
 
@@ -228,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
                     data.add(j + "-" + i);
             }
         }
-        gridViewAdapter = new GridViewCustomAdapter(this, data);
+        //gridViewAdapter = new GridViewCustomAdapter(this, data);
     }
 
     @Override
@@ -368,6 +390,168 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
             TextView label = (TextView) findViewById(R.id.labelOctava);
             label.setText(String.valueOf(octava));
         }
+    }
+
+    private Button createButtonBasic(ModulePopupWindow popup, String name_module) {
+        View view = null;
+        view = inflater.inflate(R.layout.item, null);
+        Button tv = (Button) view.findViewById(R.id.button);
+        tv.setText(name_module);
+        popup.setButton(tv);
+        tv.setOnClickListener(new ModuleListener(popup,gridViewAdapter));
+        return tv;
+    }
+
+    private Button createbtnVCO(String name){
+        VCOPopupWindow popup =  new VCOPopupWindow(this, R.layout.popup_vco,name);
+        return createButtonBasic(popup,name);
+    }
+
+    private Button createbtnVCA(String name){
+        VCAPopupWindow popup =  new VCAPopupWindow(this, R.layout.popup_vca,name);
+        return createButtonBasic(popup,name);
+    }
+
+    private Button createbtnVCF(String name){
+        VCFPopupWindow popup =  new VCFPopupWindow(this, R.layout.popup_vcf,name);
+        return createButtonBasic(popup,name);
+    }
+
+    private Button createbtnEG(String name){
+        EGPopupWindow popup =  new EGPopupWindow(this, R.layout.popup_eg,name);
+        return createButtonBasic(popup,name);
+    }
+
+    private Button createbtnSH(String name){
+        SHPopupWindow popup =  new SHPopupWindow(this, R.layout.popup_sh,name);
+        return createButtonBasic(popup,name);
+    }
+
+    private Button createbtnMIX(String name){
+        MIXPopupWindow popup =  new MIXPopupWindow(this, R.layout.popup_mix,name);
+        return createButtonBasic(popup,name);
+    }
+
+    private Button createButtonOut(String name_button,final String id_msg){
+        View view = null;
+        view = inflater.inflate(R.layout.item, null);
+        final Button tv = (Button) view.findViewById(R.id.button);
+        tv.setText(name_button);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = "connect-"+ id_msg;
+                if (tv.getCurrentTextColor() == Color.BLACK) {
+                    Float value = 1.0f;
+                    PdBase.sendFloat(msg, value);
+                    tv.setBackgroundColor(Color.parseColor("#FF9800"));
+                    Log.i("MSJ A PD ", msg);
+                    tv.setTextColor(Color.WHITE);
+                    tv.setWidth(80);
+                    gridViewAdapter.getItemsPressed().add(tv);
+
+                } else {
+                    Float value = 0.0f;
+                    PdBase.sendFloat(msg, value);
+                    tv.setBackgroundColor(Color.parseColor("#607D8B"));
+                    Log.i("MSJ A PD ", msg);
+                    tv.setTextColor(Color.BLACK);
+                    tv.setWidth(81);
+                    gridViewAdapter.getItemsPressed().remove(gridViewAdapter.getItemsPressed().indexOf(tv));
+                }
+            }
+        });
+
+        return tv;
+    }
+
+    private Button createButtonModule(String name, String name_button, String id_msg){
+        Button button = null;
+
+        switch (name) {
+            case "VCO": button = createbtnVCO(name_button); break;
+            case "VCA": button = createbtnVCA(name_button); break;
+            case "VCF": button = createbtnVCF(name_button); break;
+            case "EG":  button = createbtnEG(name_button); break;
+            case "SH":  button = createbtnSH(name_button); break;
+            case "MIX": button = createbtnMIX(name_button); break;
+            case "out": button = createButtonOut(name_button, id_msg); break;
+        }
+
+        return button;
+    }
+
+    private void actionToCheckBoxModule(int id_check, int id_cant_modulos, String name_module){
+        CheckBox c_button = (CheckBox) findViewById(id_check);
+        EditText cant_module = (EditText) findViewById(id_cant_modulos);
+        String c_cant = cant_module.getText().toString();
+        int cant = (c_cant.isEmpty())?0:Integer.parseInt(c_cant);
+        int i;
+        String name,id_msg;
+
+        if (c_button.isChecked() && cant > 0) {
+            for (i=0; i< cant; i++) {
+                name = name_module +"_"+ String.valueOf(i);
+                id_msg = "0_"+ String.valueOf(i);
+                modulos_matriz.put(name, createButtonModule(name_module,name,id_msg));
+            }
+
+        }else if(!modulos_matriz.isEmpty()) {
+            for (i=0; i< cant; i++) {
+                name = name_module + String.valueOf(i+1);
+                modulos_matriz.remove(name);
+            }
+        }
+    }
+
+    public void onClickRadioButtonVCO(View v) {
+        String name = "VCO";
+        actionToCheckBoxModule(R.id.option_VCO, R.id.cant_modulos_VCO, name);
+    }
+
+    public void onClickRadioButtonVCA(View v) {
+        String name = "VCA";
+        actionToCheckBoxModule(R.id.option_VCA, R.id.cant_modulos_VCA, name);
+    }
+
+    public void onClickRadioButtonVCF(View v) {
+        String name = "VCF";
+        actionToCheckBoxModule(R.id.option_VCF, R.id.cant_modulos_VCF, name);
+    }
+
+    public void onClickRadioButtonSH(View v) {
+        String name = "SH";
+        actionToCheckBoxModule(R.id.option_SH, R.id.cant_modulos_SH, name);
+    }
+
+    public void onClickRadioButtonEG(View v) {
+        String name = "EG";
+        actionToCheckBoxModule(R.id.option_EG, R.id.cant_modulos_EG, name);
+    }
+
+    public void onClickRadioButtonMIX(View v) {
+        String name = "MIX";
+        actionToCheckBoxModule(R.id.option_MIX, R.id.cant_modulos_MIX, name);
+    }
+
+    public void onClickAccept(View v){
+        tabHost.getCurrentTabTag();
+        TabMatriz tab = ((TabMatriz)getSupportFragmentManager().findFragmentByTag("tab2"));
+
+        modulos_matriz.put("out0",createButtonModule("out","out0","0-25"));
+        modulos_matriz.put("out1",createButtonModule("out","out1","1-25"));
+        modulos_matriz.put("out2",createButtonModule("out","out2","2-25"));
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(tab);
+        ft.attach(tab);
+        ft.commit();
+    }
+
+
+
+    public Map<String,Button> getButtonsModulesMatriz(){
+        return modulos_matriz;
     }
 
     @Override

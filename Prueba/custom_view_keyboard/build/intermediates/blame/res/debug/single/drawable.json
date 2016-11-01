@@ -24,12 +24,12 @@
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\drawable\\din5.png"
     },
     {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\white_key_selector.xml",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\src\\main\\res\\drawable\\white_key_selector.xml"
-    },
-    {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
         "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\white_key_selector.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\src\\main\\res\\drawable\\white_key_selector.xml"
     },
     {
         "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
