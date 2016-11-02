@@ -48,8 +48,8 @@ public class TabPiano extends Fragment {
         pianoView.setOnKeyTouchListener(new PianoView.OnKeyTouchListener() {
 
             public void addNote(int midiCode){
-                Note note = Note.fromCode(midiCode);
-                pianoView.addNotes(Arrays.asList(note));
+                //Note note = Note.fromCode(midiCode);
+                //pianoView.addNotes(Arrays.asList(note));
             }
 
             @Override

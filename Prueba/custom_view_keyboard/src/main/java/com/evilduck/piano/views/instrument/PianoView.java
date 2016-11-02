@@ -73,7 +73,7 @@ public class PianoView extends View {
 
     private float scaleX = 1.0f;
 
-    private ArrayList<Note> notesToDraw = new ArrayList<Note>();
+    //private ArrayList<Note> notesToDraw = new ArrayList<Note>();
 
     private boolean measurementChanged = false;
 
@@ -126,7 +126,7 @@ public class PianoView extends View {
 
 	keyboard = new Keyboard(getContext(), asBitmaps, circleColor, circleRadius, circleTextSize);
     }
-
+/*
     public void addNotes(List<Note> notes) {
 	notesToDraw.addAll(notes);
 
@@ -143,7 +143,7 @@ public class PianoView extends View {
 	notesToDraw.clear();
 
 	invalidate();
-    }
+    }*/
 
     private void init() {
 		//Por defecto al octava se inicializa en 5
@@ -315,11 +315,11 @@ public class PianoView extends View {
 
 	keyboard.updateBounds(localXOffset, canvasWidth + localXOffset);
 	keyboard.draw(canvas);
-
+/*
 	if (!notesToDraw.isEmpty()) {
 	    keyboard.drawOverlays(notesToDraw, canvas);
 	}
-
+*/
 	canvas.restore();
     }
 
@@ -379,7 +379,7 @@ public class PianoView extends View {
 				PdBase.sendFloat("X_KB_gate", 1);
 
 				Note note = Note.fromCode(keyboard.getPressedKey().midiCode);
-				addNotes(Arrays.asList(note));
+				//addNotes(Arrays.asList(note));
 
 				resetTouchFeedback();
 			}

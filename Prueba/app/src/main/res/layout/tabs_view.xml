@@ -9,7 +9,6 @@
     tools:context="com.example.ddavi.prueba.MainActivity"
     android:background="@android:color/black">
 
-
     <android.support.v4.app.FragmentTabHost
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@android:id/tabhost"

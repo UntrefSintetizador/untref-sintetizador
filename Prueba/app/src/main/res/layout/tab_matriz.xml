@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tab_matriz"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:background="@android:color/black">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:background="@android:color/black">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <com.example.ddavi.prueba.MyGridView.MyGridView
             android:id="@+id/grid_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:padding="15dp"
             android:columnWidth="20dip"
-            android:gravity="center"
             android:horizontalSpacing="2dp"
             android:verticalSpacing="2dp"
             android:stretchMode="columnWidth" />
-        </ScrollView>
+    </ScrollView>
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/addModules"
+        app:backgroundTint="?attr/colorPrimaryDark"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+</RelativeLayout>

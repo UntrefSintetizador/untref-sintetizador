@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:id="@+id/tabla_modulos"
         android:background="@android:color/white">
 
         <TableRow
@@ -54,8 +55,7 @@
                 android:text="VCO"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:onClick="onClickRadioButtonVCO"/>
+                android:textColor="@color/colorPrimaryDark"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -65,7 +65,8 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:hint="cantidad"/>
+                android:hint="cantidad"
+                android:onClick="onClickEditCant"/>
 
         </TableRow>
 
@@ -82,8 +83,7 @@
                 android:text="VCA"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                android:onClick="onClickRadioButtonVCA"/>
+                android:textSize="12sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -93,7 +93,8 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:hint="cantidad"/>
+                android:hint="cantidad"
+                android:onClick="onClickEditCant"/>
 
         </TableRow>
 
@@ -110,8 +111,7 @@
                 android:text="VCF"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                android:onClick="onClickRadioButtonVCF"/>
+                android:textSize="12sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -121,7 +121,8 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:hint="cantidad"/>
+                android:hint="cantidad"
+                android:onClick="onClickEditCant"/>
 
         </TableRow>
 
@@ -138,8 +139,7 @@
                 android:text="SH"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                android:onClick="onClickRadioButtonSH"/>
+                android:textSize="12sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -149,7 +149,8 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:hint="cantidad"/>
+                android:hint="cantidad"
+                android:onClick="onClickEditCant"/>
 
         </TableRow>
 
@@ -166,8 +167,7 @@
                 android:text="EG"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                android:onClick="onClickRadioButtonEG"/>
+                android:textSize="12sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -177,7 +177,8 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:hint="cantidad"/>
+                android:hint="cantidad"
+                android:onClick="onClickEditCant"/>
 
         </TableRow>
 
@@ -194,8 +195,7 @@
                 android:text="MIX"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                android:onClick="onClickRadioButtonMIX"/>
+                android:textSize="12sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -205,7 +205,8 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="12sp"
-                android:hint="cantidad"/>
+                android:hint="cantidad"
+                android:onClick="onClickEditCant"/>
 
         </TableRow>
 

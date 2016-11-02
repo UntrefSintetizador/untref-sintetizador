@@ -59,10 +59,4 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_clear"
-        android:icon="@drawable/ic_action_clear"
-        android:title="Limpiar"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom" />
-
 </menu>

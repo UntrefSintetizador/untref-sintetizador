@@ -37,8 +37,8 @@ public class ModuleListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Button button = popupWindow.getButton();
+        String msg = "connect-"+ button.getText();
 
-        String msg = "connect-0-0"; //+ button.getText();
         if (button.getCurrentTextColor() == Color.BLACK) {
             Float value = 1.0f;
             PdBase.sendFloat(msg, value);
@@ -48,7 +48,7 @@ public class ModuleListener implements View.OnClickListener {
             button.setWidth(80);
             gridViewAdapter.getItemsPressed().add(button);
             v.setEnabled(false);
-            popupWindow.showAsDropDown(popupWindow.getButton(), 150,-150);
+            popupWindow.showAsDropDown(popupWindow.getButton(), 150,-200);
 
         } else {
             Float value = 0.0f;
