@@ -11,222 +11,198 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scrollbars="vertical">
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/tabla_modulos"
-        android:background="@android:color/white">
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
+        <TableLayout
             android:layout_width="wrap_content"
-            android:background="@color/colorPrimary">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:textColor="@android:color/white"
-                android:text="Módulo" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:paddingRight="10dp"
-                android:textColor="@android:color/white"
-                android:text="Cantidad" />
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/info_modulo_VCO">
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/tabla_modulos"
+            android:background="@android:color/white">
 
-            <CheckBox android:id="@+id/option_VCO"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="50dp"
-                android:text="VCO"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cant_modulos_VCO"
-                android:inputType="number"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:hint="cantidad"
-                android:onClick="onClickEditCant"/>
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/info_modulo_VCA">
-
-            <CheckBox android:id="@+id/option_VCA"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="50dp"
-                android:text="VCA"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cant_modulos_VCA"
-                android:inputType="number"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:hint="cantidad"
-                android:onClick="onClickEditCant"/>
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/info_modulo_VCF">
-
-            <CheckBox android:id="@+id/option_VCF"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="50dp"
-                android:text="VCF"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cant_modulos_VCF"
-                android:inputType="number"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:hint="cantidad"
-                android:onClick="onClickEditCant"/>
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/info_modulo_SH">
-
-            <CheckBox android:id="@+id/option_SH"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="50dp"
-                android:text="SH"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cant_modulos_SH"
-                android:inputType="number"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:hint="cantidad"
-                android:onClick="onClickEditCant"/>
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/info_modulo_EG">
-
-            <CheckBox android:id="@+id/option_EG"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="50dp"
-                android:text="EG"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cant_modulos_EG"
-                android:inputType="number"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:hint="cantidad"
-                android:onClick="onClickEditCant"/>
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/info_modulo_MIX">
-
-            <CheckBox android:id="@+id/option_MIX"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="50dp"
-                android:text="MIX"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cant_modulos_MIX"
-                android:inputType="number"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:hint="cantidad"
-                android:onClick="onClickEditCant"/>
-
-        </TableRow>
-
-        <TableRow
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
-
-            <Button android:id="@+id/buttonAccept"
-                android:layout_width="wrap_content"
+            <TableRow
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_gravity="center"
-                android:layout_span="2"
-                android:text="Aceptar"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
-                android:onClick="onClickAccept"/>
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary">
 
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:layout_span="2"
+                    android:textColor="@android:color/white"
+                    android:text="Módulo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:paddingRight="10dp"
+                    android:layout_span="2"
+                    android:textColor="@android:color/white"
+                    android:text="Cantidad" />
+            </TableRow>
+
+            <TableRow
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/info_modulo_VCO">
+
+                <CheckBox android:id="@+id/option_VCO"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:text="VCO"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cant_modulos_VCO"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:hint="cantidad"
+                    android:onClick="onClickEditCantFirstColumn"/>
+
+                <CheckBox android:id="@+id/option_VCA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:text="VCA"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cant_modulos_VCA"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:hint="cantidad"
+                    android:onClick="onClickEditCantSecondColumn"/>
+
+            </TableRow>
+
+            <TableRow
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/info_modulo_VCF">
+
+                <CheckBox android:id="@+id/option_VCF"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:text="VCF"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cant_modulos_VCF"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:hint="cantidad"
+                    android:onClick="onClickEditCantFirstColumn"/>
+
+                <CheckBox android:id="@+id/option_SH"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:text="SH"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cant_modulos_SH"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:hint="cantidad"
+                    android:onClick="onClickEditCantSecondColumn"/>
+
+            </TableRow>
+
+            <TableRow
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/info_modulo_EG">
+
+                <CheckBox android:id="@+id/option_EG"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:text="EG"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cant_modulos_EG"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:hint="cantidad"
+                    android:onClick="onClickEditCantFirstColumn"/>
+
+                <CheckBox android:id="@+id/option_MIX"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:text="MIX"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cant_modulos_MIX"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:hint="cantidad"
+                    android:onClick="onClickEditCantSecondColumn"/>
+            </TableRow>
+
+            <TableRow
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <Button android:id="@+id/buttonAccept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:layout_span="4"
+                    android:text="Aceptar"
+                    android:textColor="@android:color/white"
+                    android:background="@color/colorPrimary"
+                    android:onClick="onClickAccept"/>
+            </TableRow>
+
+        </TableLayout>
     </ScrollView>
 </LinearLayout>

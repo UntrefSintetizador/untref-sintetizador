@@ -399,32 +399,47 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         }
     }
 
-    public void onClickEditCant(View v){
+    private void markCheckBox(View v,int posInRow){
         TableRow row = (TableRow)v.getParent();
-        CheckBox chk = (CheckBox) row.getChildAt(0);
+        CheckBox chk = (CheckBox) row.getChildAt(posInRow);
         chk.setChecked(true);
+
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    public void onClickEditCantFirstColumn(View v){
+        markCheckBox(v,0);
+    }
+
+    public void onClickEditCantSecondColumn(View v){
+        markCheckBox(v,2);
+    }
+
+    private void chargeModules(TableRow row, int pos_check, int pos_edit){
+        int cant;
+        String c_cant;
+        CheckBox chk;
+        EditText text;
+
+        chk = (CheckBox) row.getChildAt(pos_check);
+        text = (EditText) row.getChildAt(pos_edit);
+        c_cant = text.getText().toString();
+        cant = (c_cant.isEmpty())?0:Integer.parseInt(c_cant);
+        if (cant > 0)
+            actionToCheckBoxModule(chk, cant, chk.getText().toString());
     }
 
     public void onClickAccept(View v){
         TabMatriz tab = ((TabMatriz)getSupportFragmentManager().findFragmentByTag("tab2"));
         TableLayout table = (TableLayout) findViewById(R.id.tabla_modulos);
-
-        int i,cant;
-        String c_cant;
         TableRow row;
-        CheckBox chk;
-        EditText text;
+        int i;
+
         for (i=1; i< table.getChildCount()-1; i++){
             row = (TableRow) table.getChildAt(i);
-            chk = (CheckBox) row.getChildAt(0);
-            text = (EditText) row.getChildAt(1);
-
-            c_cant = text.getText().toString();
-            cant = (c_cant.isEmpty())?0:Integer.parseInt(c_cant);
-            if (cant > 0)
-                actionToCheckBoxModule(chk, cant, chk.getText().toString());
+            chargeModules(row,0,1);
+            chargeModules(row,2,3);
         }
 
         if (!modulos_matriz.isEmpty()) {
