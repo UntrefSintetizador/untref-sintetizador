@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w360dp-v13\\values-w360dp-v13.xml",
+        "outputFile": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-w360dp-v13/values-w360dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 105
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-w360dp-v13\\values-w360dp-v13.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-w360dp-v13/values-w360dp-v13.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

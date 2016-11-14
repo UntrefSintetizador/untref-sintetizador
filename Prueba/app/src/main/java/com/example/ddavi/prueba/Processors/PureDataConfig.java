@@ -243,7 +243,11 @@ public class PureDataConfig extends BaseConfig{
     }
 
     public void setPreset(String name){
-        PdBase.sendFloat(name,1);
+        sendValue(name ,(float)1);
+    }
+
+    public void sendValue(String name , Float value){
+        PdBase.sendFloat(name , value);
     }
 
     @Override

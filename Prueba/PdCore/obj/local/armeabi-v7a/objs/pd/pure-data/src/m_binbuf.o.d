@@ -1,8 +1,11 @@
-C:/Users/ddavi/Documents/GitHub/XUL5/PdCore/obj/local/armeabi-v7a/objs/pd/pure-data/src/m_binbuf.o: \
- C:/Users/ddavi/Documents/GitHub/XUL5/PdCore/jni/libpd/pure-data/src/m_binbuf.c \
- C:/Users/ddavi/Documents/GitHub/XUL5/PdCore/jni/libpd/pure-data/src/m_pd.h \
- C:/Users/ddavi/Documents/GitHub/XUL5/PdCore/jni/libpd/pure-data/src/s_stuff.h
+/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/obj/local/armeabi-v7a/objs/pd/pure-data/src/m_binbuf.o: \
+  /home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/m_binbuf.c \
+  /home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/m_pd.h \
+  /home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/s_stuff.h \
+  /home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/g_canvas.h
 
-C:/Users/ddavi/Documents/GitHub/XUL5/PdCore/jni/libpd/pure-data/src/m_pd.h:
+/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/m_pd.h:
 
-C:/Users/ddavi/Documents/GitHub/XUL5/PdCore/jni/libpd/pure-data/src/s_stuff.h:
+/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/s_stuff.h:
+
+/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/jni/libpd/pure-data/src/g_canvas.h:

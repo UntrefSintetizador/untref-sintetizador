@@ -19,9 +19,11 @@ import java.text.DecimalFormat;
 
 public class VCOPopupWindow extends ModulePopupWindow {
 
+    MainActivity container;
 
     public VCOPopupWindow(MainActivity container, int layout, String name){
         super(container,layout,name);
+        this.container = container;
     }
 
     @Override
@@ -59,7 +61,8 @@ public class VCOPopupWindow extends ModulePopupWindow {
                 float value = (float) (valorInicial + (progress * multiplicador));
                 Log.i("Mensaje seek"+name+"_3", msj);
                 Log.i("Valor   seek"+name+"_3", decimales.format(value));
-                PdBase.sendFloat(msj, value);
+
+                container.masterConfig.sendValue(msj , value);
                 String tipo_onda[] = {"sine","ramp","saw","trig","pulse"};
 
                 labelVCO.setText(labelVCO1_3text + ": " + tipo_onda[(int)value]);

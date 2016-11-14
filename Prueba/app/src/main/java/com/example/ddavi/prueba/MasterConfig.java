@@ -1,20 +1,30 @@
 package com.example.ddavi.prueba;
 
+import android.util.Log;
+
 import com.example.ddavi.prueba.Processors.BaseConfig;
+import com.example.ddavi.prueba.Processors.BaseProcessor;
 import com.example.ddavi.prueba.Processors.PureDataConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Constructor;
 
 /**
  * Created by oargueyo on 23/10/16.
  */
 
 
-class MasterConfig {
+public class MasterConfig {
 
     //Processors Adapter
     //PureDataConfig pdConfig;
     //FaustConfig faustConfig;
     //Creamos una clase abstracta padre que maneja la funcionalidades comunes de las hijas
-    BaseConfig config;
+    public BaseProcessor config;
+
+    JSONObject processor_list;
 
     String procesador;
 
@@ -27,46 +37,40 @@ class MasterConfig {
     }
 
     public void setProcessorActivity(MainActivity context){
-        switch (this.getProcesador()){
-            case "Pd" :
-                this.config.setContext(context);
-                break;
-            case "Faust" :
-                break;
-        }
+        this.config.setContext(context);
     }
 
     public MasterConfig(String processor){
         this.setProcesador(processor);
-        switch (this.getProcesador()){
-            case "Pd" :
-                this.config = new PureDataConfig();
-                break;
-            case "Faust" :
-                break;
+    }
+
+
+    public MasterConfig(JSONObject configFile){
+        try {
+            this.procesador = configFile.getString("processor");
+            String nameClassProcessor = configFile.getJSONObject("processors").getString(this.procesador);
+            Class<?> clase = Class.forName(nameClassProcessor);
+            Constructor constructor = clase.getConstructor();
+            this.config = (BaseProcessor) constructor.newInstance();
+            String msg = "";
+            Log.i(String.format("P seleccionado es%s", nameClassProcessor), msg);
+
         }
+        catch(Exception a){
+            a.printStackTrace();
+        }
+
     }
 
     public void resetPresets(){
         config.resetPresets();
-        /*
-        switch (this.getProcesador()){
-            case "Pd":
-                //((PureDataConfig) config).resetPresets();
-                config.resetPresets();
-        }
-        */
-
     }
 
     public void setPreset(String name){
-        config.setPreset(name);
-        /*switch (this.getProcesador()){
-            case "Pd":
-                //Con esto tiro la herencia a la mierda, pero sino
-                //necesito agregar una firma mas
-                //((PureDataConfig) config).setPreset(name);
+        config.setPreset(name , (float)1);
+    }
 
-        }*/
+    public void sendValue(String name , Float val){
+        config.sendValue(name , val);
     }
 }

@@ -13,6 +13,7 @@ package com.example.ddavi.prueba;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,9 +55,14 @@ import com.example.ddavi.prueba.MyGridView.GridViewCustomAdapter;
 import com.example.ddavi.prueba.Tabs.TabMatriz;
 import com.example.ddavi.prueba.Tabs.TabPiano;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.puredata.core.PdBase;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -79,9 +85,10 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     private EditText msg;
     //PureDataConfig pdConfig;
 
-    MasterConfig masterConfig;
-    private String processor = "Pd"; //Asca se cambiaria por el tipo de processor utilizado
-
+    public MasterConfig masterConfig;
+    private String processor; //Aca se cambiaria por el tipo de processor utilizado
+    private JSONObject configJson;
+    private JSONArray processor_list;
     private int octava;
 
     public int getOctava(){
@@ -133,7 +140,15 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         initializeActionBar();
 
         //Consultar por el literal Pd se podria hacer algo en un metodo anterior
-        masterConfig = new MasterConfig(this.processor);
+        try {
+            this.configJson = new JSONObject(this.loadConfigFile());
+            //this.processor_list = this.configJson.getJSONArray("processors");
+            this.processor = this.configJson.getString("processor");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        masterConfig = new MasterConfig(this.configJson);
         masterConfig.setProcessorActivity(this);
 
         //pdConfig = new PureDataConfig(this);
@@ -194,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
             case R.id.action_herbie:
                 masterConfig.resetPresets();
                 masterConfig.setPreset("herbie");
-                PdBase.sendFloat("reset_presets",1);
+                //PdBase.sendFloat("reset_presets",1);
                 //PdBase.sendFloat("herbie",1);
                 Log.i("Preset Elegido", "Preset 3 (Herbie)");
                 break;
@@ -342,7 +357,8 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
                 String msg = "connect-"+ tv.getText().toString();
                 if (tv.getCurrentTextColor() == Color.BLACK) {
                     Float value = 1.0f;
-                    PdBase.sendFloat(msg, value);
+                    masterConfig.sendValue(msg , value);
+                    //PdBase.sendFloat(msg, value);
                     tv.setBackgroundColor(Color.parseColor("#FF9800"));
                     Log.i("MSJ A PD ", msg);
                     tv.setTextColor(Color.WHITE);
@@ -351,7 +367,8 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
 
                 } else {
                     Float value = 0.0f;
-                    PdBase.sendFloat(msg, value);
+                    masterConfig.sendValue(msg , value);
+                    //PdBase.sendFloat(msg, value);
                     tv.setBackgroundColor(Color.parseColor("#607D8B"));
                     Log.i("MSJ A PD ", msg);
                     tv.setTextColor(Color.BLACK);
@@ -484,6 +501,23 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         masterConfig.config.evaluateMessage(msg.getText().toString());
         return true;
+    }
+
+    public String loadConfigFile(){
+        String json = null;
+        AssetManager manager = getAssets();
+        try {
+            InputStream is = manager.open("app.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
 }

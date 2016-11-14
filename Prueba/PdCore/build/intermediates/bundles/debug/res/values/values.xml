@@ -44,8 +44,6 @@
 		<item>44100</item>
 		<item>48000</item>
 	</string-array>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <string name="pref_key_inchannels">INPUT_CHANNELS</string>
     <string name="pref_key_outchannels">OUTPUT_CHANNELS</string>
     <string name="pref_key_srate">SAMPLE_RATE</string>

@@ -19,8 +19,10 @@ import java.text.DecimalFormat;
 
 public class VCFPopupWindow extends ModulePopupWindow {
 
+    MainActivity container;
     public VCFPopupWindow(MainActivity container, int layout, String name){
         super(container,layout,name);
+        this.container = container;
     }
 
     @Override
@@ -59,7 +61,8 @@ public class VCFPopupWindow extends ModulePopupWindow {
                 float value = (float) (valorInicial + (progress * multiplicador));
                 Log.i("Mensaje seek"+name+"_3", msj);
                 Log.i("Valor   seek"+name+"_3", String.valueOf(value));
-                PdBase.sendFloat(msj, value);
+                container.masterConfig.sendValue(msj , value);
+                //PdBase.sendFloat(msj, value);
                 String tipoDeModo = "bandpass";
                 if (value == 0.0) {
                     tipoDeModo = "bandpass";

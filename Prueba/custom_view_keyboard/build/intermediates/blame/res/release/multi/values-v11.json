@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v11\\values-v11.xml",
+        "outputFile": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v11/values-v11.xml",
         "map": [
             {
                 "to": {
@@ -12,40 +12,14 @@
                     "endOffset": 187
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Prueba\\custom_view_keyboard\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/src/main/res/values-v11/styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 183,
+                        "startOffset": 177,
                         "endLine": 8,
                         "endColumn": 12,
-                        "endOffset": 317
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v11\\values-v11.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endLine": 4,
-                    "endColumn": 12,
-                    "endOffset": 187
-                },
-                "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\src\\main\\res\\values-v11\\styles.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 183,
-                        "endLine": 8,
-                        "endColumn": 12,
-                        "endOffset": 317
+                        "endOffset": 309
                     }
                 }
             },
@@ -59,7 +33,7 @@
                     "endOffset": 606
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -80,7 +54,7 @@
                     "endOffset": 1031
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -101,7 +75,7 @@
                     "endOffset": 1459
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -122,7 +96,7 @@
                     "endOffset": 1885
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -143,7 +117,7 @@
                     "endOffset": 2312
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
@@ -164,7 +138,7 @@
                     "endOffset": 2737
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 32,
                         "startColumn": 4,
@@ -184,7 +158,7 @@
                     "endOffset": 2826
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 4,
@@ -203,7 +177,7 @@
                     "endOffset": 2927
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 4,
@@ -223,7 +197,7 @@
                     "endOffset": 3335
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 4,
@@ -244,7 +218,7 @@
                     "endOffset": 3755
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 45,
                         "startColumn": 4,
@@ -265,7 +239,7 @@
                     "endOffset": 3862
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 50,
                         "startColumn": 4,
@@ -286,7 +260,7 @@
                     "endOffset": 3991
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 52,
                         "startColumn": 4,
@@ -306,7 +280,7 @@
                     "endOffset": 4062
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 54,
                         "startColumn": 4,
@@ -325,7 +299,7 @@
                     "endOffset": 4145
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 55,
                         "startColumn": 4,
@@ -345,7 +319,7 @@
                     "endOffset": 7853
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 56,
                         "startColumn": 4,
@@ -366,7 +340,7 @@
                     "endOffset": 11701
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 107,
                         "startColumn": 4,
@@ -386,7 +360,7 @@
                     "endOffset": 11792
                 },
                 "from": {
-                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-v11\\values-v11.xml",
+                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-v11/values-v11.xml",
                     "position": {
                         "startLine": 159,
                         "startColumn": 4,

@@ -11,7 +11,10 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import com.example.ddavi.prueba.MainActivity;
+import com.example.ddavi.prueba.MasterConfig;
 import com.example.ddavi.prueba.R;
+
+import org.json.JSONObject;
 import org.puredata.core.PdBase;
 import java.text.DecimalFormat;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -118,7 +121,10 @@ public abstract class ModulePopupWindow extends PopupWindow{
                 //float value = (float) (valorInicial + progress * multiplicador);
                 Log.i("Mensaje seek"+name_modulo+"ER1_" + identificador_modulo, msj);
                 Log.i("Valor   seek"+name_modulo+"ER1_" + identificador_modulo, decimales.format(value));
-                PdBase.sendFloat(msj, value);
+
+                activity.masterConfig.config.sendValue(msj , value);
+
+                //PdBase.sendFloat(msj, value);
                 label_module.setText(label_moduel_text + ": " + decimales.format(value));
             }
 

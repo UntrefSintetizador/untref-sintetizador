@@ -3,7 +3,7 @@
     package="com.evilduck.piano.test" >
 
     <uses-sdk
-        android:minSdkVersion="17"
+        android:minSdkVersion="16"
         android:targetSdkVersion="18" />
 
     <instrumentation
@@ -15,8 +15,6 @@
 
     <application>
         <uses-library android:name="android.test.runner" />
-
-        <activity android:name="org.puredata.android.service.MainActivity" />
     </application>
 
 </manifest>

@@ -1,18 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\build\\intermediates\\res\\merged\\debug\\raw\\silence.wav",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\res\\raw\\silence.wav"
+        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/build/intermediates/res/merged/debug/raw/silence.wav",
+        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/res/raw/silence.wav"
     },
     {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\res\\merged\\debug\\raw\\silence.wav",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\res\\raw\\silence.wav"
-    },
-    {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\res\\merged\\debug\\raw\\extra_abs.zip",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\res\\raw\\extra_abs.zip"
-    },
-    {
-        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\build\\intermediates\\res\\merged\\debug\\raw\\extra_abs.zip",
-        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\res\\raw\\extra_abs.zip"
+        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/build/intermediates/res/merged/debug/raw/extra_abs.zip",
+        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/res/raw/extra_abs.zip"
     }
 ]
