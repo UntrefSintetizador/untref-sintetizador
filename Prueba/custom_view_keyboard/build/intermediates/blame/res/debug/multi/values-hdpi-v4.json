@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
+        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,33 @@
                     "endOffset": 327
                 },
                 "from": {
-                    "file": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 6,
+                        "endColumn": 13,
+                        "endOffset": 327
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 13,
+                    "endOffset": 327
+                },
+                "from": {
+                    "file": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

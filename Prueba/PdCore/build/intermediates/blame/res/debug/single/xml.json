@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/build/intermediates/res/merged/debug/xml/preferences.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/PdCore/res/xml/preferences.xml"
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\XUL5\\PdCore\\res\\xml\\preferences.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\PdCore\\res\\xml\\preferences.xml"
     }
 ]

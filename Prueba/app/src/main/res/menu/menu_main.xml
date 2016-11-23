@@ -3,57 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item android:id="@+id/action_chordPad"
-        android:title="@string/action_chordPad"
-        android:orderInCategory="1"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_filterTone"
-        android:title="@string/action_filterTone"
-        android:orderInCategory="2"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_herbie"
-        android:title="@string/action_herbie"
-        android:orderInCategory="3"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_extasis"
-        android:title="@string/action_extasis"
-        android:orderInCategory="4"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_reset"
-        android:title="@string/action_reset"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_sawSeq"
-        android:title="@string/action_sawSeq"
-        android:orderInCategory="6"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_bell"
-        android:title="@string/action_bell"
-        android:orderInCategory="7"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_sqBass"
-        android:title="@string/action_sqBass"
-        android:orderInCategory="8"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_sqBass1"
-        android:title="@string/action_sqBass1"
-        android:orderInCategory="9"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_fm"
-        android:title="@string/action_fm"
-        android:orderInCategory="10"
-        app:showAsAction="never" />
-
-
     <item android:id="@+id/action_exit"
         android:title="@string/action_salir"
         android:orderInCategory="100"

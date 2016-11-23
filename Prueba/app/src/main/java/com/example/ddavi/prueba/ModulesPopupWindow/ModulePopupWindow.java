@@ -26,7 +26,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public abstract class ModulePopupWindow extends PopupWindow{
 
     private MainActivity activity;
-    private Button button;
+    private View button;
     private int id_layout;
     private String title;
     private LayoutInflater layoutInflater;
@@ -45,10 +45,10 @@ public abstract class ModulePopupWindow extends PopupWindow{
         this.setContentView(popupView);
     }
 
-    public Button getButton(){
+    public View getButton(){
         return this.button;
     }
-    public void setButton(Button boton){
+    public void setButton(View boton){
         this.button = boton;
     }
 
@@ -64,7 +64,6 @@ public abstract class ModulePopupWindow extends PopupWindow{
             @Override
             public void onClick(View v) {
                 dismiss();
-                button.setEnabled(true);
             }});
 
         popupView.setOnTouchListener(new View.OnTouchListener(){
@@ -122,7 +121,7 @@ public abstract class ModulePopupWindow extends PopupWindow{
                 Log.i("Mensaje seek"+name_modulo+"ER1_" + identificador_modulo, msj);
                 Log.i("Valor   seek"+name_modulo+"ER1_" + identificador_modulo, decimales.format(value));
 
-                activity.masterConfig.config.sendValue(msj , value);
+                activity.masterConfig.config.sendValue(msj.replace(" ","") , value);
 
                 //PdBase.sendFloat(msj, value);
                 label_module.setText(label_moduel_text + ": " + decimales.format(value));

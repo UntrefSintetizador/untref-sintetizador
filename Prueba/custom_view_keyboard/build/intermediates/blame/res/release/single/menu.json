@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/build/intermediates/res/merged/release/menu/piano_demo.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/custom_view_keyboard/src/main/res/menu/piano_demo.xml"
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\menu\\piano_demo.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\custom_view_keyboard\\src\\main\\res\\menu\\piano_demo.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\build\\intermediates\\res\\merged\\release\\menu\\piano_demo.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\custom_view_keyboard\\src\\main\\res\\menu\\piano_demo.xml"
     }
 ]

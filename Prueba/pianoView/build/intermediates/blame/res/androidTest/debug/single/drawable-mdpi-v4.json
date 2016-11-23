@@ -1,30 +1,58 @@
 [
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/key_black_depressed.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/key_black_depressed.xml"
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_white.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_white.xml"
     },
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/key_black.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/key_black.xml"
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
     },
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/key_white_depressed.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/key_white_depressed.xml"
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_black_depressed.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_black_depressed.xml"
     },
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/key_white_pressed.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/key_white_pressed.xml"
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_black_pressed.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_black_pressed.xml"
     },
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/key_white.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/key_white.xml"
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_black_depressed.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_black_depressed.xml"
     },
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/key_black_pressed.xml",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/key_black_pressed.xml"
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_white_depressed.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_white_depressed.xml"
     },
     {
-        "merged": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/ic_launcher.png",
-        "source": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/bundles/debug/res/drawable-mdpi-v4/ic_launcher.png"
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_white_pressed.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_white_pressed.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_white.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_white.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_white_depressed.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_white_depressed.xml"
+    },
+    {
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_black.xml",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_black.xml"
+    },
+    {
+        "merged": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_white_pressed.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_white_pressed.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_black_pressed.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_black_pressed.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\key_black.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\key_black.xml"
     }
 ]

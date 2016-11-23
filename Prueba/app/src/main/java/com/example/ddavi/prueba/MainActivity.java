@@ -11,18 +11,14 @@
 package com.example.ddavi.prueba;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,11 +28,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -59,19 +58,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.puredata.core.PdBase;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-//Import Sinte Adapter
-
-public class MainActivity extends AppCompatActivity implements OnEditorActionListener, SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity implements ActionBar.OnNavigationListener, OnEditorActionListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private FragmentTabHost tabHost;
 
@@ -81,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     GridViewCustomAdapter gridViewAdapter;
     private static LayoutInflater inflater = null;
     Map<String,Button> modulos_matriz;
+    Map<String,ModulePopupWindow> sliders;
 
     private EditText msg;
     //PureDataConfig pdConfig;
@@ -97,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
 
     public void setOctava(int valor){
         this.octava = valor;
+    }
+
+    public Map<String,ModulePopupWindow> getSliders(){
+        return sliders;
     }
 
     private void createTabs(){
@@ -124,12 +126,98 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+    /*****************************************************************************************************************
+     *
+     * Configuracion de Action Bar
+     *
+     *****************************************************************************************************************/
     private void initializeActionBar(){
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.icon);
+        actionBar.setDisplayShowTitleEnabled(false);
+        //actionBar.setIcon(R.drawable.icon);
+
+        //crear el spinner
+        SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.Presets, R.layout.item_spinner);
+        actionBar.setListNavigationCallbacks(adapter, this);
+
+        //mostrar el spinner
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
     }
 
+    @Override
+    public boolean onNavigationItemSelected(int i, long l) {
+        masterConfig.resetPresets();
+        switch (i) {
+            case 0:
+                masterConfig.setPreset("sq_bass1");
+                Log.i("Preset Elegido", "Preset 9 (Sq Bass1)");
+                break;
+
+            case 1:
+                masterConfig.setPreset("filter_tone");
+                Log.i("Preset Elegido", "Preset 2 (Filter Tone)");
+                break;
+
+            case 2:
+                masterConfig.setPreset("herbie");
+                Log.i("Preset Elegido", "Preset 3 (Herbie)");
+                break;
+
+            case 3:
+                masterConfig.setPreset("extasis");
+                Log.i("Preset Elegido", "Preset 4 (Extasis)");
+                break;
+
+            case 4:
+                masterConfig.setPreset("fm");
+                Log.i("Preset Elegido", "Preset 9 (Sq Bass1)");
+                break;
+
+            case 5:
+                masterConfig.setPreset("saw_seq");
+                Log.i("Preset Elegido", "Preset 6 (Saw Seq)");
+                break;
+
+            case 6:
+                masterConfig.setPreset("bell");
+                Log.i("Preset Elegido", "Preset 7 (Bell)");
+                break;
+
+            case 7:
+                masterConfig.setPreset("sq_bass");
+                Log.i("Preset Elegido", "Preset 8 (Sq Bass)");
+                break;
+
+            case 8:
+                masterConfig.setPreset("chord_pad");
+                Log.i("Preset Elegido", "Preset 1 (Chord Pad)");
+                break;
+
+            default:
+                masterConfig.setPreset("sq_bass1");
+                Log.i("Preset Elegido", "Preset 1 (Chord Pad)");
+                break;
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_exit:
+                masterConfig.config.stopAudio();
+                masterConfig.config.cleanup();
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+/***********************************************************************************************************/
 
     @Override
     protected void onCreate(android.os.Bundle savedInstanceState) {
@@ -151,13 +239,14 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         masterConfig = new MasterConfig(this.configJson);
         masterConfig.setProcessorActivity(this);
 
-        //pdConfig = new PureDataConfig(this);
-
         inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         modulos_matriz = new HashMap<>();
         gridViewAdapter = new GridViewCustomAdapter(this, modulos_matriz);
         createTabs();
+
+        sliders = new HashMap<>();
+        createPopUpSliders();
 
         setOctava(5);
     }
@@ -169,111 +258,9 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return true;
     }
 
-    /*
-    * Presets en menu
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_exit:
-
-                masterConfig.config.stopAudio();
-                masterConfig.config.cleanup();
-
-                //pdConfig.stopAudio();
-                //pdConfig.cleanup();
-                finish();
-                break;
-            case R.id.action_chordPad:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("chord_pad");
-
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("chord_pad",1);
-                Log.i("Preset Elegido", "Preset 1 (Chord Pad)");
-                break;
-
-            case R.id.action_filterTone:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("filter_tone");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("filter_tone",1);
-                Log.i("Preset Elegido", "Preset 2 (Filter Tone)");
-                break;
-
-            case R.id.action_herbie:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("herbie");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("herbie",1);
-                Log.i("Preset Elegido", "Preset 3 (Herbie)");
-                break;
-
-            case R.id.action_extasis:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("extasis");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("extasis",1);
-                Log.i("Preset Elegido", "Preset 4 (Extasis)");
-                break;
-
-            case R.id.action_reset:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("sq_bass1");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("sq_bass1",1);
-                Log.i("Preset Elegido", "Preset 9 (Sq Bass1)");
-                break;
-
-            case R.id.action_sawSeq:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("saw_seq");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("saw_seq",1);
-                Log.i("Preset Elegido", "Preset 6 (Saw Seq)");
-                break;
-
-            case R.id.action_bell:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("bell");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("bell",1);
-                Log.i("Preset Elegido", "Preset 7 (Bell)");
-                break;
-
-            case R.id.action_sqBass:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("sq_bass");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("sq_bass",1);
-                Log.i("Preset Elegido", "Preset 8 (Sq Bass)");
-                break;
-
-            case R.id.action_sqBass1:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("sq_bass1");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("sq_bass1",1);
-                Log.i("Preset Elegido", "Preset 9 (Sq Bass1)");
-                break;
-            case R.id.action_fm:
-                masterConfig.resetPresets();
-                masterConfig.setPreset("fm");
-                //PdBase.sendFloat("reset_presets",1);
-                //PdBase.sendFloat("fm",1);
-                Log.i("Preset Elegido", "Preset 10 (Fm)");
-                break;
-            default:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public void onClickMenosOctava(View v) {
 
@@ -300,50 +287,72 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
             label.setText(String.valueOf(octava));
         }
     }
+    /***********************************************************************************************
+     *
+     * Construccion de popSliders
+     *
+     **********************************************************************************************/
+    private ModulePopupWindow createPopUpWindow(String name, String name_popUp){
+        ModulePopupWindow popupWindow = null;
 
-    /*************************************************************************************************
+        switch (name) {
+            case "VCO": popupWindow = new VCOPopupWindow(this, R.layout.popup_vco,name_popUp); break;
+            case "VCA": popupWindow = new VCAPopupWindow(this, R.layout.popup_vca,name_popUp); break;
+            case "VCF": popupWindow = new VCFPopupWindow(this, R.layout.popup_vcf,name_popUp); break;
+            case "EG":  popupWindow = new EGPopupWindow(this, R.layout.popup_eg,name_popUp); break;
+            case "SH":  popupWindow = new SHPopupWindow(this, R.layout.popup_sh,name_popUp); break;
+            case "MIX": popupWindow = new MIXPopupWindow(this, R.layout.popup_mix,name_popUp); break;
+        }
+
+        sliders.put(name_popUp,popupWindow);
+        return popupWindow;
+    }
+
+    private void createPopUpSliders(){
+        String[] VCOSliders = {"VCO1","VCO2","VCO3"};
+        String[] VCASliders = {"VCA1","VCA2"};
+        String[] MIXSliders = {"MIX"};
+        String[] VCFSliders = {"VCF1","VCF2"};
+        String[] EGSliders = {"EG1","EG2"};
+        String[] SHSliders = {"S&H"};
+
+        Map<String,String[]> sliders = new HashMap<>();
+        sliders.put("VCO",VCOSliders);
+        sliders.put("VCA",VCASliders);
+        sliders.put("VCF",VCFSliders);
+        sliders.put("MIX",MIXSliders);
+        sliders.put("EG",EGSliders);
+        sliders.put("SH",SHSliders);
+
+        int i, j;
+        String[] names = {};
+        ArrayList<String> sl = new ArrayList<String>(sliders.keySet());
+        Collections.sort(sl, new Comparator<String>() {
+            @Override
+            public int compare(String b2, String b1) {
+                return (b2.compareTo(b1));
+            }
+        });
+
+        for (i = 0; i < sl.size(); i++) {
+            names = sliders.get(sl.get(i));
+            for (j = 0; j < names.length; j++)
+                createPopUpWindow(sl.get(i), names[j]);
+        }
+    }
+
+    /***********************************************************************************************
      *
      * Construccion de modulos de la matriz
      *
      **********************************************************************************************/
-    private Button createButtonBasic(ModulePopupWindow popup, String name_module) {
+    private Button createButtonBasic(String name_module) {
         View view = null;
         view = inflater.inflate(R.layout.item, null);
         Button tv = (Button) view.findViewById(R.id.button);
         tv.setText(name_module);
-        popup.setButton(tv);
-        tv.setOnClickListener(new ModuleListener(popup,gridViewAdapter));
+        tv.setOnClickListener(new ModuleListener(gridViewAdapter));
         return tv;
-    }
-
-    private Button createbtnVCO(String name){
-        VCOPopupWindow popup =  new VCOPopupWindow(this, R.layout.popup_vco,name);
-        return createButtonBasic(popup,name);
-    }
-
-    private Button createbtnVCA(String name){
-        VCAPopupWindow popup =  new VCAPopupWindow(this, R.layout.popup_vca,name);
-        return createButtonBasic(popup,name);
-    }
-
-    private Button createbtnVCF(String name){
-        VCFPopupWindow popup =  new VCFPopupWindow(this, R.layout.popup_vcf,name);
-        return createButtonBasic(popup,name);
-    }
-
-    private Button createbtnEG(String name){
-        EGPopupWindow popup =  new EGPopupWindow(this, R.layout.popup_eg,name);
-        return createButtonBasic(popup,name);
-    }
-
-    private Button createbtnSH(String name){
-        SHPopupWindow popup =  new SHPopupWindow(this, R.layout.popup_sh,name);
-        return createButtonBasic(popup,name);
-    }
-
-    private Button createbtnMIX(String name){
-        MIXPopupWindow popup =  new MIXPopupWindow(this, R.layout.popup_mix,name);
-        return createButtonBasic(popup,name);
     }
 
     private Button createButtonOut(String name_button){
@@ -385,33 +394,32 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         Button button = null;
 
         switch (name) {
-            case "VCO": button = createbtnVCO(name_button); break;
-            case "VCA": button = createbtnVCA(name_button); break;
-            case "VCF": button = createbtnVCF(name_button); break;
-            case "EG":  button = createbtnEG(name_button); break;
-            case "SH":  button = createbtnSH(name_button); break;
-            case "MIX": button = createbtnMIX(name_button); break;
-            case "out": button = createButtonOut(name_button); break;
+            case "VCO": button = createButtonBasic(name_button); break;
+            case "VCA": button = createButtonBasic(name_button); break;
+            case "VCF": button = createButtonBasic(name_button); break;
+            case "EG":  button = createButtonBasic(name_button); break;
+            case "SH":  button = createButtonBasic(name_button); break;
+            case "MIX": button = createButtonBasic(name_button); break;
+            case "out": button = createButtonBasic(name_button); break;
         }
 
         return button;
     }
 
     private void actionToCheckBoxModule(CheckBox check, int cant_modulos, String name_module){
-
         int i;
-        String name;
+        String name_button;
 
         if (check.isChecked()) {
             for (i=0; i< cant_modulos; i++) {
-                name = name_module + String.valueOf(i+1);
-                modulos_matriz.put(name, createButtonModule(name_module,name));
+                name_button = name_module + String.valueOf(i+1);
+                modulos_matriz.put(name_button, createButtonModule(name_module,name_button));
             }
 
         }else if(!modulos_matriz.isEmpty()) {
             for (i=0; i< cant_modulos; i++) {
-                name = name_module + String.valueOf(i+1);
-                modulos_matriz.remove(name);
+                name_button = name_module + String.valueOf(i+1);
+                modulos_matriz.remove(name_button);
             }
         }
     }
@@ -458,12 +466,27 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
             chargeModules(row,0,1);
             chargeModules(row,2,3);
         }
+/*
+        //Esto carga todos los elementos como la matriz en la primera version del aplicativo
+        int CantColumnas = 17; //SIN LOS TITULOS CANTIDAD ERA 12 (CON PD TEST5 ERA 13, ahora 17 porque piden 16)
+        int CantFilas = 27; // SIN LOS TITULOS CANTIDAD ERA 23 (CON PD TEST5 ERA 24, ahora 27 porque piden 26)
+        String name;
+        for (i = 0; i < CantFilas-1; i++) {
+            for (int j = 0; j < CantColumnas-1; j++){
+                name = String.valueOf(j) + "-" + String.valueOf(i);
+                modulos_matriz.put(name, createButtonOut(name));
+            }
+        }*/
 
-        if (!modulos_matriz.isEmpty()) {
-            modulos_matriz.put("out0", createButtonModule("out", "0-25"));
-            modulos_matriz.put("out1", createButtonModule("out", "1-25"));
-            modulos_matriz.put("out2", createButtonModule("out", "2-25"));
-        }
+        //Ejemplo de carga de matriz, con esto no necesita cargar ningun modulo. Es para probar la conexiones de modulos
+        //if (!modulos_matriz.isEmpty()) {
+            modulos_matriz.put("VCO1", createButtonOut("0-0"));
+            modulos_matriz.put("VCO2", createButtonOut("0-1"));
+            modulos_matriz.put("VCO3", createButtonOut("0-2"));
+            modulos_matriz.put("out0", createButtonOut("0-25"));
+            modulos_matriz.put("out1", createButtonOut("1-25"));
+            modulos_matriz.put("out2", createButtonOut("2-25"));
+        //}
 
         tab.setAddModules(false);
 
@@ -472,7 +495,6 @@ public class MainActivity extends AppCompatActivity implements OnEditorActionLis
         ft.attach(tab);
         ft.commit();
     }
-
 /****************************************************************************************************/
 
     public Map<String,Button> getButtonsModulesMatriz(){

@@ -1,18 +1,31 @@
 <resources>
 
-    <string name="app_name">XUL</string>
-    <string name="action_settings">Settings</string>
     <string name="action_salir">Salir</string>
-    <string name="action_sqBass">Sq Bass</string>
-    <string name="action_sqBass1">Sq Bass 1</string>
-    <string name="action_filterTone">Filter Tone</string>
-    <string name="action_chordPad">Chord Pad</string>
-    <string name="action_herbie">Herbie</string>
-    <string name="action_extasis">Extasis</string>
-    <string name="action_reset">Reset</string>
-    <string name="action_sawSeq">Saw Seq</string>
-    <string name="action_bell">Bell</string>
-    <string name="action_fm">Fm</string>
+    <string-array name="Presets">
+        <item > sq_bass1 </item>
+        <item > filter_tone </item>
+        <item > herbie </item>
+        <item > extasis </item>
+        <item > fm </item>
+        <item > saw_seq </item>
+        <item > bell </item>
+        <item > sq_bass </item>
+        <item > chord_pad </item>
+    </string-array>
+
+    <string-array name="Sliders">
+        <item > VCO 1 </item>
+        <item > VCO 2 </item>
+        <item > VCO 3 </item>
+        <item > VCA 1 </item>
+        <item > VCA 2 </item>
+        <item > VCF 1 </item>
+        <item > VCF 2 </item>
+        <item > MIX </item>
+        <item > SH </item>
+        <item > EG 1 </item>
+        <item > EG 2 </item>
+    </string-array>
 
     <string name="left_label">Sine wave in left channel</string>
     <string name="right_label">Sine wave in right channel</string>
@@ -20,6 +33,7 @@
     <string name="default_msg">Enter message to Pure Data</string>
     <string name="pref_button_text">Preferences</string>
     <string name="about_title">About Pure Data</string>
+    <string name= "app_name">U3F Synth</string>
     <string name="about_msg">Pure Data is a real-time graphical programming
     environment for audio, video, and graphical processing, originally
     developed by Miller Puckette and company at IRCAM. Android port by

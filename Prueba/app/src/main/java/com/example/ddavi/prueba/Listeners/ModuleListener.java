@@ -17,26 +17,20 @@ import org.puredata.core.PdBase;
 
 public class ModuleListener implements View.OnClickListener {
 
-    private ModulePopupWindow popupWindow;
     private GridViewCustomAdapter gridViewAdapter;
 
     public ModuleListener(){
-    }
-
-    public ModuleListener(ModulePopupWindow popup){
-        popupWindow = popup;
         gridViewAdapter = null;
 
     }
 
-    public ModuleListener(ModulePopupWindow popup, GridViewCustomAdapter adapter){
-        popupWindow = popup;
+    public ModuleListener(GridViewCustomAdapter adapter){
         gridViewAdapter = adapter;
     }
 
     @Override
     public void onClick(View v) {
-        Button button = popupWindow.getButton();
+        Button button = (Button)v;
         String msg = "connect-"+ button.getText();
 
         if (button.getCurrentTextColor() == Color.BLACK) {
@@ -47,8 +41,8 @@ public class ModuleListener implements View.OnClickListener {
             button.setTextColor(Color.WHITE);
             button.setWidth(80);
             gridViewAdapter.getItemsPressed().add(button);
-            v.setEnabled(false);
-            popupWindow.showAsDropDown(popupWindow.getButton(), 150,-200);
+            //v.setEnabled(false);
+            //popupWindow.showAsDropDown(popupWindow.getButton(), 150,-200);
 
         } else {
             Float value = 0.0f;

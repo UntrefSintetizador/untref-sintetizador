@@ -219,7 +219,7 @@ public class PureDataConfig extends BaseConfig{
         String name = context.getResources().getString(R.string.app_name);
         try {
             service.initAudio(-1, -1, -1, -1);   // negative values will be replaced with defaults/preferences
-            service.startAudio(new Intent(context, MainActivity.class), R.drawable.icon, name, "Return to " + name + ".");
+            service.startAudio(new Intent(context, MainActivity.class), R.drawable.icon_synth, name, "Return to " + name + ".");
         } catch (IOException e) {
             toast(e.toString());
         }

@@ -8,4 +8,8 @@
         android:minSdkVersion="10"
         android:targetSdkVersion="23" />
 
+    <application>
+        <activity android:name="org.puredata.android.service.MainActivity" />
+    </application>
+
 </manifest>

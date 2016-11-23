@@ -9,9 +9,29 @@
     tools:context=".MainActivity"
     android:background="@android:color/black">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/marco_spinner"
+        android:paddingTop="10sp"
+        android:gravity="center">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/spinner_sliders"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:entries="@array/Sliders"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/matriz"
+        android:layout_below="@id/marco_spinner">
 
         <com.example.ddavi.prueba.MyGridView.MyGridView
             android:id="@+id/grid_view"

@@ -1,6 +1,10 @@
 [
     {
-        "outputFile": "/home/oargueyo/Desarrollo/untref-sintetizador/Prueba/pianoView/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": []
+    },
+    {
+        "outputFile": "C:\\home\\oargueyo\\Desarrollo\\untref-sintetizador\\Prueba\\pianoView\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": []
     }
 ]
