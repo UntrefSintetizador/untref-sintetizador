@@ -354,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
         tv.setOnClickListener(new ModuleListener(gridViewAdapter));
         return tv;
     }
-
+/*
     private Button createButtonOut(String name_button){
         View view = null;
         view = inflater.inflate(R.layout.item, null);
@@ -389,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
 
         return tv;
     }
-
+*/
     private Button createButtonModule(String name, String name_button){
         Button button = null;
 
@@ -480,12 +480,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
 
         //Ejemplo de carga de matriz, con esto no necesita cargar ningun modulo. Es para probar la conexiones de modulos
         //if (!modulos_matriz.isEmpty()) {
-            modulos_matriz.put("VCO1", createButtonOut("0-0"));
-            modulos_matriz.put("VCO2", createButtonOut("0-1"));
-            modulos_matriz.put("VCO3", createButtonOut("0-2"));
-            modulos_matriz.put("out0", createButtonOut("0-25"));
-            modulos_matriz.put("out1", createButtonOut("1-25"));
-            modulos_matriz.put("out2", createButtonOut("2-25"));
+            modulos_matriz.put("VCO1", createButtonBasic("0-0"));
+            modulos_matriz.put("VCO2", createButtonBasic("0-1"));
+            modulos_matriz.put("VCO3", createButtonBasic("0-2"));
+            modulos_matriz.put("out0", createButtonBasic("0-25"));
+            modulos_matriz.put("out1", createButtonBasic("1-25"));
+            modulos_matriz.put("out2", createButtonBasic("2-25"));
         //}
 
         tab.setAddModules(false);
