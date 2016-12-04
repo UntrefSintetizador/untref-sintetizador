@@ -68,7 +68,7 @@ public class TabMatriz extends Fragment {
 
             int cant_elements = activity.getButtonsModulesMatriz().size();
             int cant_columns = (cant_elements/4 > 15)? 15: (int)cant_elements/4;
-            matriz.setNumColumns(15);
+            matriz.setNumColumns(cant_columns);
 
             initializeAddModules(activity,view);
         }
@@ -93,13 +93,19 @@ public class TabMatriz extends Fragment {
     }
 
     private void initializeSpinnerSilders(View view,final MainActivity activity){
-        Spinner spSliders = (Spinner) view.findViewById(R.id.spinner_sliders);
+        final Spinner spSliders = (Spinner) view.findViewById(R.id.spinner_sliders);
         ArrayList<String> sliders = getNameSliders(activity);
+        spSliders.setSelection(1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,R.layout.item_spinner, sliders);
         adapter.setDropDownViewResource(R.layout.item_spinner);
         spSliders.setAdapter(adapter);
-
+        spSliders.post(new Runnable() {
+            @Override
+            public void run() {
+                spSliders.setSelection(0);
+            }
+        });
         spSliders.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapter, View v,
