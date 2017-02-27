@@ -1,0 +1,54 @@
+#N canvas 346 104 616 646 10;
+#X obj 26 555 vline~;
+#X obj 51 182 vsl 15 128 1 5000 1 1 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 76 182 vsl 15 128 1 5000 1 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 101 182 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 26 419 pack 1 f f f, f 13;
+#X obj 170 417 pack 0 f;
+#X obj 126 182 vsl 15 128 1 5000 1 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 26 598 outlet~;
+#X obj 382 245 inlet~;
+#X msg 26 453 \$1 \$2 \, \$4 \$3 \$2;
+#X obj 237 245 sel 1, f 11;
+#X msg 300 276 bang;
+#X obj 382 303 s \$0_on;
+#X obj 523 304 s \$0_off;
+#X obj 237 304 s \$0_on;
+#X obj 300 304 s \$0_off;
+#X obj 26 384 r \$0_on;
+#X obj 170 383 r \$0_off;
+#X obj 156 179 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 382 277 threshold~ 0.5 10 0.5 10;
+#X obj 51 24 r X_EG2_attack;
+#X obj 76 48 r X_EG2_decay;
+#X obj 101 72 r X_EG2_sustain;
+#X obj 126 96 r X_EG2_release;
+#X obj 156 122 r X_EG2_gate;
+#X connect 0 0 7 0;
+#X connect 1 0 4 1;
+#X connect 2 0 4 2;
+#X connect 3 0 4 3;
+#X connect 4 0 9 0;
+#X connect 5 0 0 0;
+#X connect 6 0 5 1;
+#X connect 8 0 19 0;
+#X connect 9 0 0 0;
+#X connect 10 0 14 0;
+#X connect 10 1 11 0;
+#X connect 11 0 15 0;
+#X connect 16 0 4 0;
+#X connect 17 0 5 0;
+#X connect 18 0 10 0;
+#X connect 19 0 12 0;
+#X connect 19 1 13 0;
+#X connect 20 0 1 0;
+#X connect 21 0 2 0;
+#X connect 22 0 3 0;
+#X connect 23 0 6 0;
+#X connect 24 0 18 0;
+#X coords 0 -1 1 1 140 160 1 40 160;

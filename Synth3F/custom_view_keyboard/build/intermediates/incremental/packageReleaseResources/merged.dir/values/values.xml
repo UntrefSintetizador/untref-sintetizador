@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PianoView"><attr format="color" name="overlay_color"/><attr format="boolean" name="overlay_bitmaps"/><attr format="dimension" name="overlay_circle_radius"/><attr format="dimension" name="overlay_circle_text_size"/></declare-styleable>
+    <declare-styleable name="View"><attr name="android:fadeScrollbars"/><attr name="android:scrollbarAlwaysDrawHorizontalTrack"/><attr name="android:scrollbarAlwaysDrawVerticalTrack"/><attr name="android:scrollbarDefaultDelayBeforeFade"/><attr name="android:scrollbarFadeDuration"/><attr name="android:scrollbarSize"/><attr name="android:scrollbarStyle"/><attr name="android:scrollbarThumbHorizontal"/><attr name="android:scrollbarThumbVertical"/><attr name="android:scrollbarTrackHorizontal"/><attr name="android:scrollbarTrackVertical"/><attr name="android:scrollbars"/></declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">Piano Showcase</string>
+    <string name="remove">Remove</string>
+    <string name="scale">Scale</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

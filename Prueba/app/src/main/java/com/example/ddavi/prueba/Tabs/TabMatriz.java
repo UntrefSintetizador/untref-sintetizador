@@ -68,7 +68,7 @@ public class TabMatriz extends Fragment {
 
             int cant_elements = activity.getButtonsModulesMatriz().size();
             int cant_columns = (cant_elements/4 > 15)? 15: (int)cant_elements/4;
-            matriz.setNumColumns(cant_columns);
+            matriz.setNumColumns(3);
 
             initializeAddModules(activity,view);
         }

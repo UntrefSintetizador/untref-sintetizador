@@ -348,7 +348,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
      **********************************************************************************************/
     private Button createButtonBasic(String name_module) {
         View view = null;
-        view = inflater.inflate(R.layout.item, null);
         Button tv = (Button) view.findViewById(R.id.button);
         tv.setText(name_module);
         tv.setOnClickListener(new ModuleListener(gridViewAdapter));

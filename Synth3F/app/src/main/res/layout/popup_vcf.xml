@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:layout_marginTop="0dp"
+        >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@id/title"
+                android:gravity="center"
+                android:background="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textSize="40px"/>
+
+            <TableLayout
+                android:id="@+id/tablaVCF1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tableRowVCF1_1"
+                    android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
+                    <TextView
+                        android:id="@+id/labelVCF1_1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text="att_signal"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarVCF1_1"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <!--COMIENZO DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tableRowVCF1_2"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/labelVCF1_2"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text="att_freq"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarVCF1_2"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <!--COMIENZO DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tableRowVCF1_3"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/labelVCF1_3"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text="mode"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarVCF1_3"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <!--COMIENZO DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tableRowVCF1_4"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/labelVCF1_4"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text="freq"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarVCF1_4"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <!--COMIENZO DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tableRowVCF1_5"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/labelVCF1_5"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text="q"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarVCF1_5"
+                        android:layout_weight="5" />
+                    <!--FIN DE PARAMETRO-->
+                </TableRow>
+            </TableLayout>
+
+            <Button
+                android:id="@+id/id_cerrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Cerrar" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

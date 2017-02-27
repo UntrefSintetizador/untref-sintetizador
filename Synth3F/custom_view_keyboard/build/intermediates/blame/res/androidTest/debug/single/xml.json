@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\xml\\preferences.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\xml\\preferences.xml"
+    },
+    {
+        "merged": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\xml\\preferences.xml"
+    }
+]

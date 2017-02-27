@@ -33,7 +33,7 @@
     <string name="default_msg">Enter message to Pure Data</string>
     <string name="pref_button_text">Preferences</string>
     <string name="about_title">About Pure Data</string>
-    <string name= "app_name">U3F Synth</string>
+    <string name= "app_name">Synth3F</string>
     <string name="about_msg">Pure Data is a real-time graphical programming
     environment for audio, video, and graphical processing, originally
     developed by Miller Puckette and company at IRCAM. Android port by

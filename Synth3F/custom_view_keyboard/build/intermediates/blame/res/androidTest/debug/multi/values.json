@@ -1,0 +1,2180 @@
+[
+    {
+        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 16,
+                    "endOffset": 173
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 6,
+                        "endColumn": 16,
+                        "endOffset": 173
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 178,
+                    "endLine": 11,
+                    "endColumn": 16,
+                    "endOffset": 285
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 178,
+                        "endLine": 11,
+                        "endColumn": 16,
+                        "endOffset": 285
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 290,
+                    "endLine": 19,
+                    "endColumn": 16,
+                    "endOffset": 493
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 290,
+                        "endLine": 19,
+                        "endColumn": 16,
+                        "endOffset": 493
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 498,
+                    "endLine": 27,
+                    "endColumn": 16,
+                    "endOffset": 657
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 498,
+                        "endLine": 27,
+                        "endColumn": 16,
+                        "endOffset": 657
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 662,
+                    "endLine": 36,
+                    "endColumn": 16,
+                    "endOffset": 873
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 662,
+                        "endLine": 36,
+                        "endColumn": 16,
+                        "endOffset": 873
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 878,
+                    "endLine": 45,
+                    "endColumn": 16,
+                    "endOffset": 1075
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 4,
+                        "startOffset": 878,
+                        "endLine": 45,
+                        "endColumn": 16,
+                        "endOffset": 1075
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 1937,
+                    "endColumn": 57,
+                    "endOffset": 1990
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 912,
+                        "endColumn": 57,
+                        "endOffset": 965
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 1995,
+                    "endColumn": 55,
+                    "endOffset": 2046
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 970,
+                        "endColumn": 55,
+                        "endOffset": 1021
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 2051,
+                    "endColumn": 52,
+                    "endOffset": 2099
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 1026,
+                        "endColumn": 52,
+                        "endOffset": 1074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 2104,
+                    "endColumn": 51,
+                    "endOffset": 2151
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 1079,
+                        "endColumn": 51,
+                        "endOffset": 1126
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 2156,
+                    "endColumn": 57,
+                    "endOffset": 2209
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 57,
+                        "endOffset": 108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 2214,
+                    "endColumn": 62,
+                    "endOffset": 2272
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 4,
+                        "startOffset": 1080,
+                        "endColumn": 62,
+                        "endOffset": 1138
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 2277,
+                    "endColumn": 64,
+                    "endOffset": 2337
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 1143,
+                        "endColumn": 64,
+                        "endOffset": 1203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 2342,
+                    "endColumn": 54,
+                    "endOffset": 2392
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 4,
+                        "startOffset": 1208,
+                        "endColumn": 54,
+                        "endOffset": 1258
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 2397,
+                    "endColumn": 58,
+                    "endOffset": 2451
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 4,
+                        "startOffset": 1263,
+                        "endColumn": 58,
+                        "endOffset": 1317
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 2456,
+                    "endColumn": 72,
+                    "endOffset": 2524
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 1322,
+                        "endColumn": 72,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 2529,
+                    "endColumn": 74,
+                    "endOffset": 2599
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 74,
+                        "endOffset": 1465
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 2604,
+                    "endColumn": 68,
+                    "endOffset": 2668
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 4,
+                        "startOffset": 1470,
+                        "endColumn": 68,
+                        "endOffset": 1534
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 2673,
+                    "endColumn": 60,
+                    "endOffset": 2729
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 4,
+                        "startOffset": 1539,
+                        "endColumn": 60,
+                        "endOffset": 1595
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 2734,
+                    "endColumn": 64,
+                    "endOffset": 2794
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 1600,
+                        "endColumn": 64,
+                        "endOffset": 1660
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 2799,
+                    "endColumn": 66,
+                    "endOffset": 2861
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 1665,
+                        "endColumn": 66,
+                        "endOffset": 1727
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 2866,
+                    "endColumn": 56,
+                    "endOffset": 2918
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 1732,
+                        "endColumn": 56,
+                        "endOffset": 1784
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 2923,
+                    "endColumn": 41,
+                    "endOffset": 2960
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 1131,
+                        "endColumn": 41,
+                        "endOffset": 1168
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 2965,
+                    "endColumn": 39,
+                    "endOffset": 3000
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1173,
+                        "endColumn": 39,
+                        "endOffset": 1208
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 3005,
+                    "endColumn": 71,
+                    "endOffset": 3072
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 113,
+                        "endColumn": 71,
+                        "endOffset": 180
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 3077,
+                    "endColumn": 89,
+                    "endOffset": 3162
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 185,
+                        "endColumn": 89,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 3167,
+                    "endColumn": 83,
+                    "endOffset": 3246
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 83,
+                        "endOffset": 354
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 3251,
+                    "endColumn": 89,
+                    "endOffset": 3336
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 359,
+                        "endColumn": 89,
+                        "endOffset": 444
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 3341,
+                    "endColumn": 91,
+                    "endOffset": 3428
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 449,
+                        "endColumn": 91,
+                        "endOffset": 536
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 3433,
+                    "endColumn": 73,
+                    "endOffset": 3502
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 541,
+                        "endColumn": 73,
+                        "endOffset": 610
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 3507,
+                    "endColumn": 81,
+                    "endOffset": 3584
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 615,
+                        "endColumn": 81,
+                        "endOffset": 692
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 3589,
+                    "endColumn": 79,
+                    "endOffset": 3664
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 697,
+                        "endColumn": 79,
+                        "endOffset": 772
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 3669,
+                    "endColumn": 77,
+                    "endOffset": 3742
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 777,
+                        "endColumn": 77,
+                        "endOffset": 850
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 3747,
+                    "endColumn": 79,
+                    "endOffset": 3822
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 855,
+                        "endColumn": 79,
+                        "endOffset": 930
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 3827,
+                    "endLine": 82,
+                    "endColumn": 12,
+                    "endOffset": 4113
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1213,
+                        "endLine": 16,
+                        "endColumn": 12,
+                        "endOffset": 1499
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 4118,
+                    "endLine": 85,
+                    "endColumn": 12,
+                    "endOffset": 4273
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1504,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "endOffset": 1659
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 4278,
+                    "endLine": 88,
+                    "endColumn": 12,
+                    "endOffset": 4387
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 4,
+                        "startOffset": 1789,
+                        "endLine": 59,
+                        "endColumn": 12,
+                        "endOffset": 1898
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 16,
+                    "endOffset": 173
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 6,
+                        "endColumn": 16,
+                        "endOffset": 173
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 178,
+                    "endLine": 11,
+                    "endColumn": 16,
+                    "endOffset": 285
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 178,
+                        "endLine": 11,
+                        "endColumn": 16,
+                        "endOffset": 285
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 290,
+                    "endLine": 19,
+                    "endColumn": 16,
+                    "endOffset": 493
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 290,
+                        "endLine": 19,
+                        "endColumn": 16,
+                        "endOffset": 493
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 498,
+                    "endLine": 27,
+                    "endColumn": 16,
+                    "endOffset": 657
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 498,
+                        "endLine": 27,
+                        "endColumn": 16,
+                        "endOffset": 657
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 662,
+                    "endLine": 36,
+                    "endColumn": 16,
+                    "endOffset": 873
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 662,
+                        "endLine": 36,
+                        "endColumn": 16,
+                        "endOffset": 873
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 878,
+                    "endLine": 45,
+                    "endColumn": 16,
+                    "endOffset": 1075
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 4,
+                        "startOffset": 878,
+                        "endLine": 45,
+                        "endColumn": 16,
+                        "endOffset": 1075
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 1937,
+                    "endColumn": 57,
+                    "endOffset": 1990
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 912,
+                        "endColumn": 57,
+                        "endOffset": 965
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 1995,
+                    "endColumn": 55,
+                    "endOffset": 2046
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 970,
+                        "endColumn": 55,
+                        "endOffset": 1021
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 2051,
+                    "endColumn": 52,
+                    "endOffset": 2099
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 1026,
+                        "endColumn": 52,
+                        "endOffset": 1074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 2104,
+                    "endColumn": 51,
+                    "endOffset": 2151
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 1079,
+                        "endColumn": 51,
+                        "endOffset": 1126
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 2156,
+                    "endColumn": 57,
+                    "endOffset": 2209
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 57,
+                        "endOffset": 108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 2214,
+                    "endColumn": 62,
+                    "endOffset": 2272
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 4,
+                        "startOffset": 1080,
+                        "endColumn": 62,
+                        "endOffset": 1138
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 2277,
+                    "endColumn": 64,
+                    "endOffset": 2337
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 1143,
+                        "endColumn": 64,
+                        "endOffset": 1203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 2342,
+                    "endColumn": 54,
+                    "endOffset": 2392
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 4,
+                        "startOffset": 1208,
+                        "endColumn": 54,
+                        "endOffset": 1258
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 2397,
+                    "endColumn": 58,
+                    "endOffset": 2451
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 4,
+                        "startOffset": 1263,
+                        "endColumn": 58,
+                        "endOffset": 1317
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 2456,
+                    "endColumn": 72,
+                    "endOffset": 2524
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 1322,
+                        "endColumn": 72,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 2529,
+                    "endColumn": 74,
+                    "endOffset": 2599
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 74,
+                        "endOffset": 1465
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 2604,
+                    "endColumn": 68,
+                    "endOffset": 2668
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 4,
+                        "startOffset": 1470,
+                        "endColumn": 68,
+                        "endOffset": 1534
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 2673,
+                    "endColumn": 60,
+                    "endOffset": 2729
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 4,
+                        "startOffset": 1539,
+                        "endColumn": 60,
+                        "endOffset": 1595
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 2734,
+                    "endColumn": 64,
+                    "endOffset": 2794
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 1600,
+                        "endColumn": 64,
+                        "endOffset": 1660
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 2799,
+                    "endColumn": 66,
+                    "endOffset": 2861
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 1665,
+                        "endColumn": 66,
+                        "endOffset": 1727
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 2866,
+                    "endColumn": 56,
+                    "endOffset": 2918
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 1732,
+                        "endColumn": 56,
+                        "endOffset": 1784
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 2923,
+                    "endColumn": 41,
+                    "endOffset": 2960
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 1131,
+                        "endColumn": 41,
+                        "endOffset": 1168
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 2965,
+                    "endColumn": 39,
+                    "endOffset": 3000
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1173,
+                        "endColumn": 39,
+                        "endOffset": 1208
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 3005,
+                    "endColumn": 71,
+                    "endOffset": 3072
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 113,
+                        "endColumn": 71,
+                        "endOffset": 180
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 3077,
+                    "endColumn": 89,
+                    "endOffset": 3162
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 185,
+                        "endColumn": 89,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 3167,
+                    "endColumn": 83,
+                    "endOffset": 3246
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 83,
+                        "endOffset": 354
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 3251,
+                    "endColumn": 89,
+                    "endOffset": 3336
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 359,
+                        "endColumn": 89,
+                        "endOffset": 444
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 3341,
+                    "endColumn": 91,
+                    "endOffset": 3428
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 449,
+                        "endColumn": 91,
+                        "endOffset": 536
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 3433,
+                    "endColumn": 73,
+                    "endOffset": 3502
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 541,
+                        "endColumn": 73,
+                        "endOffset": 610
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 3507,
+                    "endColumn": 81,
+                    "endOffset": 3584
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 615,
+                        "endColumn": 81,
+                        "endOffset": 692
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 3589,
+                    "endColumn": 79,
+                    "endOffset": 3664
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 697,
+                        "endColumn": 79,
+                        "endOffset": 772
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 3669,
+                    "endColumn": 77,
+                    "endOffset": 3742
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 777,
+                        "endColumn": 77,
+                        "endOffset": 850
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 3747,
+                    "endColumn": 79,
+                    "endOffset": 3822
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 855,
+                        "endColumn": 79,
+                        "endOffset": 930
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 3827,
+                    "endLine": 82,
+                    "endColumn": 12,
+                    "endOffset": 4113
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1213,
+                        "endLine": 16,
+                        "endColumn": 12,
+                        "endOffset": 1499
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 4118,
+                    "endLine": 85,
+                    "endColumn": 12,
+                    "endOffset": 4273
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1504,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "endOffset": 1659
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 4278,
+                    "endLine": 88,
+                    "endColumn": 12,
+                    "endOffset": 4387
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\untref-sintetizador\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 4,
+                        "startOffset": 1789,
+                        "endLine": 59,
+                        "endColumn": 12,
+                        "endOffset": 1898
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 16,
+                    "endOffset": 173
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 6,
+                        "endColumn": 16,
+                        "endOffset": 173
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 178,
+                    "endLine": 11,
+                    "endColumn": 16,
+                    "endOffset": 285
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 178,
+                        "endLine": 11,
+                        "endColumn": 16,
+                        "endOffset": 285
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 290,
+                    "endLine": 19,
+                    "endColumn": 16,
+                    "endOffset": 493
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 290,
+                        "endLine": 19,
+                        "endColumn": 16,
+                        "endOffset": 493
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 498,
+                    "endLine": 27,
+                    "endColumn": 16,
+                    "endOffset": 657
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 498,
+                        "endLine": 27,
+                        "endColumn": 16,
+                        "endOffset": 657
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 662,
+                    "endLine": 36,
+                    "endColumn": 16,
+                    "endOffset": 873
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 662,
+                        "endLine": 36,
+                        "endColumn": 16,
+                        "endOffset": 873
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 878,
+                    "endLine": 45,
+                    "endColumn": 16,
+                    "endOffset": 1075
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 4,
+                        "startOffset": 878,
+                        "endLine": 45,
+                        "endColumn": 16,
+                        "endOffset": 1075
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 1937,
+                    "endColumn": 57,
+                    "endOffset": 1990
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 912,
+                        "endColumn": 57,
+                        "endOffset": 965
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 1995,
+                    "endColumn": 55,
+                    "endOffset": 2046
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 970,
+                        "endColumn": 55,
+                        "endOffset": 1021
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 2051,
+                    "endColumn": 52,
+                    "endOffset": 2099
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 1026,
+                        "endColumn": 52,
+                        "endOffset": 1074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 2104,
+                    "endColumn": 51,
+                    "endOffset": 2151
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 1079,
+                        "endColumn": 51,
+                        "endOffset": 1126
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 2156,
+                    "endColumn": 57,
+                    "endOffset": 2209
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 57,
+                        "endOffset": 108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 2214,
+                    "endColumn": 62,
+                    "endOffset": 2272
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 4,
+                        "startOffset": 1080,
+                        "endColumn": 62,
+                        "endOffset": 1138
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 2277,
+                    "endColumn": 64,
+                    "endOffset": 2337
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 1143,
+                        "endColumn": 64,
+                        "endOffset": 1203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 2342,
+                    "endColumn": 54,
+                    "endOffset": 2392
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 4,
+                        "startOffset": 1208,
+                        "endColumn": 54,
+                        "endOffset": 1258
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 2397,
+                    "endColumn": 58,
+                    "endOffset": 2451
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 4,
+                        "startOffset": 1263,
+                        "endColumn": 58,
+                        "endOffset": 1317
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 2456,
+                    "endColumn": 72,
+                    "endOffset": 2524
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 1322,
+                        "endColumn": 72,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 2529,
+                    "endColumn": 74,
+                    "endOffset": 2599
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 74,
+                        "endOffset": 1465
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 2604,
+                    "endColumn": 68,
+                    "endOffset": 2668
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 4,
+                        "startOffset": 1470,
+                        "endColumn": 68,
+                        "endOffset": 1534
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 2673,
+                    "endColumn": 60,
+                    "endOffset": 2729
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 4,
+                        "startOffset": 1539,
+                        "endColumn": 60,
+                        "endOffset": 1595
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 2734,
+                    "endColumn": 64,
+                    "endOffset": 2794
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 1600,
+                        "endColumn": 64,
+                        "endOffset": 1660
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 2799,
+                    "endColumn": 66,
+                    "endOffset": 2861
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 1665,
+                        "endColumn": 66,
+                        "endOffset": 1727
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 2866,
+                    "endColumn": 56,
+                    "endOffset": 2918
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 1732,
+                        "endColumn": 56,
+                        "endOffset": 1784
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 2923,
+                    "endColumn": 41,
+                    "endOffset": 2960
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 1131,
+                        "endColumn": 41,
+                        "endOffset": 1168
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 2965,
+                    "endColumn": 39,
+                    "endOffset": 3000
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1173,
+                        "endColumn": 39,
+                        "endOffset": 1208
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 3005,
+                    "endColumn": 71,
+                    "endOffset": 3072
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 113,
+                        "endColumn": 71,
+                        "endOffset": 180
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 3077,
+                    "endColumn": 89,
+                    "endOffset": 3162
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 185,
+                        "endColumn": 89,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 3167,
+                    "endColumn": 83,
+                    "endOffset": 3246
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 83,
+                        "endOffset": 354
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 3251,
+                    "endColumn": 89,
+                    "endOffset": 3336
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 359,
+                        "endColumn": 89,
+                        "endOffset": 444
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 3341,
+                    "endColumn": 91,
+                    "endOffset": 3428
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 449,
+                        "endColumn": 91,
+                        "endOffset": 536
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 3433,
+                    "endColumn": 73,
+                    "endOffset": 3502
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 541,
+                        "endColumn": 73,
+                        "endOffset": 610
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 3507,
+                    "endColumn": 81,
+                    "endOffset": 3584
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 615,
+                        "endColumn": 81,
+                        "endOffset": 692
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 3589,
+                    "endColumn": 79,
+                    "endOffset": 3664
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 697,
+                        "endColumn": 79,
+                        "endOffset": 772
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 3669,
+                    "endColumn": 77,
+                    "endOffset": 3742
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 777,
+                        "endColumn": 77,
+                        "endOffset": 850
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 3747,
+                    "endColumn": 79,
+                    "endOffset": 3822
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\com.noisepages.nettoyeur\\midi\\1.0.0-rc1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 855,
+                        "endColumn": 79,
+                        "endOffset": 930
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 3827,
+                    "endLine": 82,
+                    "endColumn": 12,
+                    "endOffset": 4113
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1213,
+                        "endLine": 16,
+                        "endColumn": 12,
+                        "endOffset": 1499
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 4118,
+                    "endLine": 85,
+                    "endColumn": 12,
+                    "endOffset": 4273
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1504,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "endOffset": 1659
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 4278,
+                    "endLine": 88,
+                    "endColumn": 12,
+                    "endOffset": 4387
+                },
+                "from": {
+                    "file": "C:\\Users\\ddavi\\Documents\\GitHub\\escueladeaventuras\\Synth3F\\custom_view_keyboard\\build\\intermediates\\exploded-aar\\org.puredata.android\\pd-core\\1.0.1\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 4,
+                        "startOffset": 1789,
+                        "endLine": 59,
+                        "endColumn": 12,
+                        "endOffset": 1898
+                    }
+                }
+            }
+        ]
+    }
+]

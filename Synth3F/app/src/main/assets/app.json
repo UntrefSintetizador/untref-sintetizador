@@ -1,0 +1,10 @@
+{
+  /*Configuracion por default para el processor*/
+  "processors" :
+  {
+    "pd":"com.example.ddavi.synth3f.helpers.PureDataProcessor",
+    "faust":"com.example.ddavi.synth3f.Processors.helpers.FaustProcessor"
+  },
+
+  "processor": "pd"
+}
