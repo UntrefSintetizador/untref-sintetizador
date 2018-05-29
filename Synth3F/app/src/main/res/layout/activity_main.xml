@@ -16,12 +16,15 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.ddavi.synth3f.activity.MainActivity">
+        tools:context="com.untref.synth3f.presentation_layer.activity.MainActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/container_matriz">
+            android:id="@+id/container_matriz"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="40dp">
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -35,7 +38,14 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-        <android.support.design.widget.NavigationView
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.NavigationView
             android:id="@+id/navview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,6 +55,8 @@
             app:itemTextAppearance="@color/background_title_menu"
             app:itemBackground="@color/background_title_menu"
             app:headerLayout="@layout/header_navview"
-            app:menu="@menu/menu_navview" />
+            app:menu="@menu/menu_navview" >
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

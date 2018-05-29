@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/matriz">
 
-        <com.example.ddavi.synth3f.View.MyGridView
+        <com.untref.synth3f.presentation_layer.View.MyGridView
             android:id="@+id/grid_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

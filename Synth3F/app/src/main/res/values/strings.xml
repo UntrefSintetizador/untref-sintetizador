@@ -27,5 +27,6 @@
     <string name="sh">SH</string>
     <string name="eg1">EG 1</string>
     <string name="eg2">EG 2</string>
+    <string name="sequencer">Sequencer</string>
 
 </resources>
