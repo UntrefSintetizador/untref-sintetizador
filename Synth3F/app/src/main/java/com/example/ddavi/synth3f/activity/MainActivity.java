@@ -3,6 +3,8 @@ package com.example.ddavi.synth3f.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.media.midi.MidiManager;
+import android.media.midi.MidiReceiver;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -13,16 +15,146 @@ import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ScrollView;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.ddavi.synth3f.R;
 import com.example.ddavi.synth3f.fragment.FragmentMatriz;
 import com.example.ddavi.synth3f.fragment.FragmentOrgano;
+import com.example.ddavi.synth3f.midi.LoggingReceiver;
+import com.example.ddavi.synth3f.midi.MidiPrinter;
+import com.example.ddavi.synth3f.midi.MidiScope;
+import com.example.ddavi.synth3f.midi.ScopeLogger;
 import com.example.ddavi.synth3f.presenters.MainActivityPresenter;
+import com.mobileer.miditools.MidiFramer;
+import com.mobileer.miditools.MidiOutputPortSelector;
+import com.mobileer.miditools.MidiPortWrapper;
 
-public class MainActivity extends AppCompatActivity implements ActionBar.OnNavigationListener, SharedPreferences.OnSharedPreferenceChangeListener {
+import java.io.IOException;
+import java.util.LinkedList;
+
+import org.puredata.core.PdBase;
+
+public class MainActivity extends AppCompatActivity implements ActionBar.OnNavigationListener, SharedPreferences.OnSharedPreferenceChangeListener, ScopeLogger {
 
     private MainActivityPresenter presenter;
+
+    // MIDI :: START
+    private TextView mLog;
+    private ScrollView mScroller;
+    private LinkedList<String> logLines = new LinkedList<String>();
+    private static final int MAX_LINES = 100;
+    private MidiOutputPortSelector mLogSenderSelector;
+    private MidiManager mMidiManager;
+    private MidiReceiver mLoggingReceiver;
+    private MidiFramer mConnectFramer;
+    private MyDirectReceiver mDirectReceiver;
+    private boolean mShowRaw;
+
+    class MyDirectReceiver extends MidiReceiver {
+        @Override
+        public void onSend(byte[] data, int offset, int count,
+                           long timestamp) throws IOException {
+            if (mShowRaw) {
+                String prefix = String.format("0x%08X, ", timestamp);
+                logByteArray(prefix, data, offset, count);
+            }
+            // Send raw data to be parsed into discrete messages.
+            mConnectFramer.send(data, offset, count, timestamp);
+        }
+    }
+
+    private void logByteArray(String prefix, byte[] value, int offset, int count) {
+        StringBuilder builder = new StringBuilder(prefix);
+        for (int i = 0; i < count; i++) {
+            builder.append(String.format("0x%02X", value[offset + i]));
+            if (i != count - 1) {
+                builder.append(", ");
+            }
+        }
+        log(builder.toString());
+    }
+
+    @Override
+    public void log(final String string) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                logFromUiThread(string);
+            }
+        });
+    }
+
+    // Log a message to our TextView.
+    // Must run on UI thread.
+    private void logFromUiThread(String s) {
+        logLines.add(s);
+        if (logLines.size() > MAX_LINES) {
+            logLines.removeFirst();
+        }
+        // Render line buffer to one String.
+        StringBuilder sb = new StringBuilder();
+        for (String line : logLines) {
+            sb.append(line).append('\n');
+        }
+        mLog.setText(sb.toString());
+        mScroller.fullScroll(View.FOCUS_DOWN);
+        if (s.contains("NoteOn")) {
+            String[] split = s.split(",");
+            if (split.length > 1) {
+                String velocityString = split[2].trim();
+                velocityString = velocityString.substring(0,velocityString.length() - 1);
+                int velocity = Integer.parseInt(velocityString);
+                int midi = Integer.parseInt(split[1].trim());
+//                Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+                if (velocity != 0) {
+                    PdBase.sendFloat("X_KB_midi_note", midi);
+                    PdBase.sendFloat("X_KB_gate", 1);
+                } else {
+                    PdBase.sendFloat("X_KB_gate", 0);
+                }
+            }
+        }
+//            PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+    }
+
+    private void setupMIDI() {
+        mLog = (TextView) findViewById(R.id.log);
+        mScroller = (ScrollView) findViewById(R.id.scroll);
+
+        // Setup MIDI
+        mMidiManager = (MidiManager) getSystemService(MIDI_SERVICE);
+
+        // Receiver that prints the messages.
+        mLoggingReceiver = new LoggingReceiver(this);
+
+        // Receivers that parses raw data into complete messages.
+        mConnectFramer = new MidiFramer(mLoggingReceiver);
+
+        // Setup a menu to select an input source.
+        mLogSenderSelector = new MidiOutputPortSelector(mMidiManager, this,
+                R.id.spinner_senders) {
+
+            @Override
+            public void onPortSelected(final MidiPortWrapper wrapper) {
+                super.onPortSelected(wrapper);
+                if (wrapper != null) {
+                    log(MidiPrinter.formatDeviceInfo(wrapper.getDeviceInfo()));
+                }
+            }
+        };
+
+        mDirectReceiver = new MyDirectReceiver();
+        mLogSenderSelector.getSender().connect(mDirectReceiver);
+
+        // Tell the virtual device to log its messages here..
+        MidiScope.setScopeLogger(this);
+    }
+    // MIDI :: END
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
         this.presenter.initializeMasterConfig();
         this.initializeNavegationDrawer();
 
+        this.setupMIDI();
     }
 
     private void initializeNavegationDrawer(){

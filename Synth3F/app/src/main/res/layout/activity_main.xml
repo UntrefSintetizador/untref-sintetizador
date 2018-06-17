@@ -22,6 +22,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/container_matriz">
+
+            <Spinner
+                android:id="@+id/spinner_senders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/senders"
+                />
+
+            <ScrollView android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+                <TextView android:id="@+id/log"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    />
+            </ScrollView>
+
         </RelativeLayout>
 
         <RelativeLayout
