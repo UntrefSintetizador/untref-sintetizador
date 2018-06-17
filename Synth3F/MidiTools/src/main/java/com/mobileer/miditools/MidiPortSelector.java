@@ -109,6 +109,7 @@ public abstract class MidiPortSelector extends DeviceCallback {
             mAdapter.add(wrapper);
             Log.i(MidiConstants.TAG, wrapper + " was added to " + this);
             mAdapter.notifyDataSetChanged();
+            mSpinner.setSelection(1);
         }
     }
 
