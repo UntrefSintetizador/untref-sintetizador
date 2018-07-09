@@ -39,6 +39,26 @@
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
+                    android:id="@+id/tableRowEG1_0"
+                    android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
+                    <TextView
+                        android:id="@+id/labelEG1_0"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_weight="1"
+                        android:text="attack"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarEG1_0"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
                     android:id="@+id/tableRowEG1_1"
                     android:gravity="center_vertical">
                     <!--COMIENZO DE PARAMETRO-->

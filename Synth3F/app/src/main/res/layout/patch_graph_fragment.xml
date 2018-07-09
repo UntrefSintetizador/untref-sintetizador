@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.untref.synth3f.presentation_layer.View.MapView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mapView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/map">
+    android:layout_height="fill_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_soft">
+
+    </android.support.constraint.ConstraintLayout>
 
     <Button
         android:id="@+id/menuButtonOpenDragMenu"
@@ -82,10 +90,10 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/menu_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+</com.untref.synth3f.presentation_layer.View.MapView>

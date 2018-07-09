@@ -14,6 +14,7 @@ import android.view.ViewManager;
 import android.widget.LinearLayout;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
@@ -37,9 +38,9 @@ public abstract class PatchView extends LinearLayout {
 
     protected int patchId;
 
-    public PatchView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter) {
+    public PatchView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(context);
-        patchPresenter = createPresenter(patchGraphPresenter);
+        patchPresenter = createPresenter(patchGraphPresenter, patch);
         patchGraphFragment = patchGraphPresenter.getPatchGraphFragment();
         initialize();
         drawPatch(context);
@@ -72,7 +73,7 @@ public abstract class PatchView extends LinearLayout {
         return Math.max(Math.max(this.inputs.length, this.outputs.length), 2);
     }
 
-    protected abstract PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter);
+    protected abstract PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch);
 
     protected abstract void initialize();
 
@@ -168,8 +169,7 @@ public abstract class PatchView extends LinearLayout {
 
             @Override
             public boolean onDoubleTap(MotionEvent motionEvent) {
-                PatchMenuView patchMenuView = patchPresenter.createMenuView(
-                        (MainActivity) patchGraphFragment.getActivity());
+                PatchMenuView patchMenuView = patchPresenter.createMenuView((MainActivity) patchGraphFragment.getActivity());
                 patchMenuView.showAsDropDown(nodeImage, 150, -500);
                 patchMenuView.setButton(nodeImage);
                 return false;
@@ -197,8 +197,8 @@ public abstract class PatchView extends LinearLayout {
                             return true;
                         }
 
-                        final int x = (int) event.getRawX();
-                        final int y = (int) event.getRawY();
+                        int x = (int) patchGraphFragment.getMapView().convertScreenToLayoutX(event.getRawX());
+                        int y = (int) patchGraphFragment.getMapView().convertScreenToLayoutY(event.getRawY());
 
                         ConstraintLayout.LayoutParams layoutParams;
 
@@ -212,12 +212,14 @@ public abstract class PatchView extends LinearLayout {
 
                             case MotionEvent.ACTION_MOVE:
                                 layoutParams = (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
-                                layoutParams.leftMargin = x - xDelta;
-                                layoutParams.topMargin = y - yDelta;
+                                layoutParams.leftMargin = Math.min(x - xDelta,
+                                        ((View) PatchView.this.getParent()).getWidth() - PatchView.this.getWidth());
+                                layoutParams.topMargin = Math.min(y - yDelta,
+                                        ((View) PatchView.this.getParent()).getHeight() - PatchView.this.getHeight());
                                 layoutParams.rightMargin = 0;
                                 layoutParams.bottomMargin = 0;
                                 PatchView.this.setLayoutParams(layoutParams);
-                                wireDrawer.invalidate();
+                                wireDrawer.movePatch(patchId, x, y);
                                 break;
                             case MotionEvent.ACTION_UP:
                                 View delete = patchGraphFragment.getActivity().findViewById(R.id.menuDelete);
@@ -225,10 +227,10 @@ public abstract class PatchView extends LinearLayout {
                                 int[] location = new int[2];
                                 delete.getLocationOnScreen(location);
                                 delete.getHitRect(bounds);
-                                if (bounds.contains(x - location[0] + bounds.left, y - location[1] + bounds.top)) {
+                                if (bounds.contains((int) event.getRawX() - location[0] + bounds.left,
+                                        (int) event.getRawY() - location[1] + bounds.top)) {
                                     patchPresenter.delete(patchId);
-                                    wireDrawer.invalidate();
-                                    ((ViewManager)PatchView.this.getParent()).removeView(PatchView.this);
+                                    ((ViewManager) PatchView.this.getParent()).removeView(PatchView.this);
                                 }
                             default:
                                 break;
@@ -252,7 +254,7 @@ public abstract class PatchView extends LinearLayout {
                         switch (event.getAction() & MotionEvent.ACTION_MASK) {
 
                             case MotionEvent.ACTION_DOWN:
-                                patchPresenter.setDragOn(PatchView.this.patchId, (int) view.getTag());
+                                patchPresenter.setDragOn(PatchView.this.getPatchId(), view);
                                 wireDrawer.startDraw(view, PatchView.this.getColor());
                                 break;
                             case MotionEvent.ACTION_MOVE:

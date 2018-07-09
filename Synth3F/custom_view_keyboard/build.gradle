@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         //applicationId "com.evilduck.piano"
@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.+'
-    compile 'org.puredata.android:pd-core:1.0.1'
+    implementation 'com.android.support:support-v4:23.+'
+    implementation 'org.puredata.android:pd-core:1.0.1'
 }

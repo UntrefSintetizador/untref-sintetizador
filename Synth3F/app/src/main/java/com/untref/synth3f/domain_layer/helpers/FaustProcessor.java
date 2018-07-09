@@ -1,6 +1,8 @@
 package com.untref.synth3f.domain_layer.helpers;
 
 
+import com.untref.synth3f.entities.Connection;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 /**
@@ -60,12 +62,12 @@ public class FaustProcessor extends BaseProcessor {
     }
 
     @Override
-    public void connect(Integer origin, Integer outlet, Integer destine, Integer inlet) {
+    public void connect(Connection connection) {
 
     }
 
     @Override
-    public void delete(Integer patchId, String name) {
+    public void delete(Patch patch, String name) {
 
     }
 }

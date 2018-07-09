@@ -11,9 +11,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -26,13 +28,15 @@ public abstract class PatchMenuView extends PopupWindow {
     private LayoutInflater layoutInflater;
     private View popupView;
     protected PatchPresenter patchPresenter;
+    protected Patch patch;
 
-    public PatchMenuView(MainActivity context, int layout, String name, PatchPresenter patchPresenter) {
+    public PatchMenuView(MainActivity context, int layout, String name, PatchPresenter patchPresenter, Patch patch) {
         super(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
 
         this.id_layout = layout;
         this.title = name;
         this.patchPresenter = patchPresenter;
+        this.patch = patch;
 
         layoutInflater = (LayoutInflater) context.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         initializePopupView();
@@ -94,7 +98,7 @@ public abstract class PatchMenuView extends PopupWindow {
         });
     }
 
-    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar, final String identificador_modulo, final String name_modulo, float max_module, final float min_module, float multiplicador_modulo, final float multiplicador_seekBar, View view) {
+    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar, final String identificador_modulo, final String name_modulo, float max_module, final float min_module, float multiplicador_modulo, final float multiplicador_seekBar, View view, float value) {
         SeekBar seekBar = (SeekBar) view.findViewById(id_seekBar);
         final TextView label_module = (TextView) view.findViewById(id_label_seekBar);
         //final String indetificador = identificador_modulo;
@@ -104,6 +108,9 @@ public abstract class PatchMenuView extends PopupWindow {
         So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].*/
 
         seekBar.setMax((int) ((max_module - min_module) / multiplicador_modulo));
+        seekBar.setProgress((int) ((value - min_module) / multiplicador_seekBar));
+        DecimalFormat decimales = new DecimalFormat("0.00");
+        label_module.setText(identificador_modulo + ": " + decimales.format(value));
         seekBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
 
@@ -121,6 +128,17 @@ public abstract class PatchMenuView extends PopupWindow {
 //                        Log.i("Valor   seek" + name_modulo + "ER1_" + identificador_modulo, decimales.format(value));
 
                         //context.masterConfig.config.sendValue(msj.replace(" ","") , value);
+
+                        try {
+                            Class<?> c = patch.getClass();
+                            Field f = c.getDeclaredField(identificador_modulo.replace("-", "_"));
+                            f.setAccessible(true);
+                            f.setFloat(patch, value);
+                        } catch (NoSuchFieldException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
 
                         patchPresenter.setValue(msj, value);
                         label_module.setText(label_moduel_text + ": " + decimales.format(value));

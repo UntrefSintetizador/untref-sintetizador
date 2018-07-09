@@ -1,0 +1,58 @@
+#N canvas 306 199 679 580 10;
+#X obj 60 416 t f b, f 17;
+#X obj 228 416 t f b, f 16;
+#X obj 378 416 t f b, f 16;
+#X obj 528 416 t f b, f 16;
+#X obj 300 162 vsl 15 128 -1 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 300 130 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 300 115 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 300 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 363 115 s \$3_step_\$2_bus0;
+#X obj 363 130 s \$3_step_\$2_bus1;
+#X obj 363 145 s \$3_step_\$2_bus2;
+#X obj 363 293 s \$3_step_\$2;
+#X obj 60 376 r \$3_step_\$2;
+#X obj 228 376 r \$3_step_\$2_bus0;
+#X obj 378 376 r \$3_step_\$2_bus1;
+#X obj 528 376 r \$3_step_\$2_bus2;
+#X obj 60 496 tabwrite \$3_steps;
+#X obj 228 496 tabwrite \$3_bus0;
+#X obj 378 496 tabwrite \$3_bus1;
+#X obj 528 496 tabwrite \$3_bus2;
+#X obj 159 456 f \$2;
+#X obj 321 456 f \$2;
+#X obj 471 456 f \$2;
+#X obj 621 456 f \$2;
+#X obj 22 83 param \$1 step_\$2_bus0 \$3 0;
+#X obj 22 98 param \$1 step_\$2_bus1 \$3 0;
+#X obj 22 113 param \$1 step_\$2_bus2 \$3 0;
+#X obj 22 143 param \$1 step_\$2 \$3 0;
+#X connect 0 0 16 0;
+#X connect 0 1 20 0;
+#X connect 1 0 17 0;
+#X connect 1 1 21 0;
+#X connect 2 0 18 0;
+#X connect 2 1 22 0;
+#X connect 3 0 19 0;
+#X connect 3 1 23 0;
+#X connect 4 0 11 0;
+#X connect 5 0 10 0;
+#X connect 6 0 9 0;
+#X connect 7 0 8 0;
+#X connect 12 0 0 0;
+#X connect 13 0 1 0;
+#X connect 14 0 2 0;
+#X connect 15 0 3 0;
+#X connect 20 0 16 1;
+#X connect 21 0 17 1;
+#X connect 22 0 18 1;
+#X connect 23 0 19 1;
+#X connect 24 0 7 0;
+#X connect 25 0 6 0;
+#X connect 26 0 5 0;
+#X connect 27 0 4 0;
+#X coords 0 -1 1 1 15 194 2 300 100;

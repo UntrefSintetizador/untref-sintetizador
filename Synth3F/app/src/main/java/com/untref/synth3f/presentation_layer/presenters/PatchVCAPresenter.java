@@ -1,6 +1,7 @@
 package com.untref.synth3f.presentation_layer.presenters;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchVCAMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchVCOMenuView;
@@ -9,8 +10,8 @@ import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 public class PatchVCAPresenter extends PatchPresenter {
 
-    public PatchVCAPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter) {
-        super(patchView, patchGraphPresenter);
+    public PatchVCAPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+        super(patchView, patchGraphPresenter, patch);
         numberOfInputs = 4;
         numberOfOutputs = 2;
         name = "vca_";
@@ -18,6 +19,6 @@ public class PatchVCAPresenter extends PatchPresenter {
 
     @Override
     public PatchMenuView createMenuView(MainActivity context) {
-        return new PatchVCAMenuView(context, R.layout.popup_vca, name + Integer.toString(patchView.getPatchId()), this);
+        return new PatchVCAMenuView(context, R.layout.popup_vca, name + Integer.toString(patchView.getPatchId()), this, patch);
     }
 }

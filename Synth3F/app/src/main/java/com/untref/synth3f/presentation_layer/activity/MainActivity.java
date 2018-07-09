@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
 
         FragmentManager fmanager = getFragmentManager();
         FragmentTransaction transaction = fmanager.beginTransaction();
-        transaction.add(R.id.container_matriz, new FragmentMatriz());
-        transaction.add(R.id.container_piano, new FragmentOrgano());
+        //transaction.add(R.id.container_matriz, new FragmentMatriz());
+        //transaction.add(R.id.container_piano, new FragmentOrgano());
         PatchGraphFragment patchGraphFragment = new PatchGraphFragment();
         transaction.add(R.id.graph, patchGraphFragment);
         transaction.commit();

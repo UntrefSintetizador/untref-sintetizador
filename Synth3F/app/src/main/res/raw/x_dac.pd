@@ -1,7 +1,10 @@
-#N canvas 65 81 1280 752 10;
+#N canvas 65 85 1280 752 10;
 #X obj 463 111 inlet~;
 #X obj 406 110 inlet~;
 #X obj 442 177 dac~;
+#X obj 18 47 switch~;
+#X obj 18 17 param \$1 on-off \$0 0;
 #X connect 0 0 2 1;
 #X connect 1 0 2 0;
+#X connect 4 0 3 0;
 #X coords 0 -1 1 1 120 120 1 400 100;

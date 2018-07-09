@@ -1,9 +1,14 @@
 package com.untref.synth3f.presentation_layer.presenters;
 
+import android.view.View;
+
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
+
+import java.lang.reflect.Field;
 
 public abstract class PatchPresenter {
 
@@ -15,8 +20,11 @@ public abstract class PatchPresenter {
     protected int numberOfOutputs;
     protected String name;
 
-    public PatchPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter) {
+    protected Patch patch;
+
+    public PatchPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         this.patchView = patchView;
+        this.patch = patch;
         this.patchGraphPresenter = patchGraphPresenter;
         this.processor = patchGraphPresenter.getProcessor();
     }
@@ -29,8 +37,8 @@ public abstract class PatchPresenter {
         return numberOfOutputs;
     }
 
-    public void setDragOn(int patchId, int outputId) {
-        patchGraphPresenter.setDragOn(patchId, outputId);
+    public void setDragOn(int patchId, View output) {
+        patchGraphPresenter.setDragOn(patchId, output);
     }
 
     public void setDragUp(int x, int y) {
@@ -43,8 +51,8 @@ public abstract class PatchPresenter {
         processor.sendValue(name, value);
     }
 
-    public void delete(int patchId){
+    public void delete(int patchId) {
         patchGraphPresenter.delete(patchId);
-        processor.delete(patchId,name + Integer.toString(patchId));
+        processor.delete(patch, name + Integer.toString(patchId));
     }
 }

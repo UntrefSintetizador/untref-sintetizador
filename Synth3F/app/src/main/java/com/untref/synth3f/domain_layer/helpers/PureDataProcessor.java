@@ -4,13 +4,17 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Connection;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 import org.puredata.android.io.AudioParameters;
@@ -38,19 +42,19 @@ import static android.content.Context.BIND_AUTO_CREATE;
  */
 
 public class PureDataProcessor extends BaseProcessor {
-
     private String mainPatchName = "pd-empty.pd";
     private HashMap<Integer, Integer> PDids;
-
     private PdService service = null;
-
     private MainActivity context;
     private TextView logs;
     private Toast toast = null;
-
     private static final String TAG = "XUL";
+    private final Handler handler = new Handler();
+    private List<Pair<String,Integer>> toDelete = new ArrayList<>();
+    private final PatchCollector patchCollector = new PatchCollector();
 
     private ServiceConnection pdConnection = new ServiceConnection() {
+
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             PureDataProcessor.this.service = ((PdService.PdBinder)service).getService();
@@ -73,14 +77,16 @@ public class PureDataProcessor extends BaseProcessor {
     public void setContext(MainActivity activity) {
         this.context = activity;
         this.initializePureData();
-
     }
 
     public PdService getService(){
         return service;
     }
+
     public void toast(final String msg) {
+
         context.runOnUiThread(new Runnable() {
+
             @Override
             public void run() {
                 if (toast == null) {
@@ -107,12 +113,16 @@ public class PureDataProcessor extends BaseProcessor {
         dictionary.put("x_kb_.pd", R.raw.x_kb_);
         dictionary.put("x_seq.pd", R.raw.x_seq);
         dictionary.put("x_dac.pd", R.raw.x_dac);
+        dictionary.put("param.pd", R.raw.param);
+        dictionary.put("x_fade.pd", R.raw.x_fade);
 
         return dictionary;
     }
 
     private void post(final String s) {
+
         context.runOnUiThread(new Runnable() {
+
             @Override
             public void run() {
                 //logs.append(s + ((s.endsWith("\n")) ? "" : "\n"));
@@ -158,7 +168,6 @@ public class PureDataProcessor extends BaseProcessor {
     };
 
     private void initializePureData(){
-
         AudioParameters.init(context);
         PdPreferences.initPreferences(context.getApplicationContext());
         PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext()).registerOnSharedPreferenceChangeListener(context);
@@ -180,11 +189,13 @@ public class PureDataProcessor extends BaseProcessor {
             //agregada apertura de todos los PD que SYNTH necesita
             Map<String,Integer> dictionary = getDictionaryFilesPD();
             Iterator it = dictionary.keySet().iterator();
-            while(it.hasNext()) {
+
+            while (it.hasNext()) {
                 String key = (String)it.next();
                 in = res.openRawResource(dictionary.get(key));
                 IoUtils.extractResource(in, key, context.getCacheDir());
             }
+
             in = res.openRawResource(R.raw.presets);
             File patchFile_presets = IoUtils.extractResource(in, "presets.pd", context.getCacheDir());
             PdBase.openPatch(patchFile_presets);
@@ -199,6 +210,7 @@ public class PureDataProcessor extends BaseProcessor {
             //ESTO INICIA EL SONIDO, ANTES ESTABA AL PRESIONAR PLAY
             if (service.isRunning()) {
                 stopAudio();
+
             } else {
                 startAudio();
                 //PUSE MEJOR UN PRESET QUE NO QUEDE SONANDO
@@ -208,14 +220,19 @@ public class PureDataProcessor extends BaseProcessor {
         } catch (IOException e) {
             Log.e(TAG, e.toString());
             context.finish();
+
         } finally {
-            if (patchFile != null) patchFile.delete();
+
+            if (patchFile != null) {
+                patchFile.delete();
+            }
         }
     }
 
     @Override
     public void startAudio() {
         String name = context.getResources().getString(R.string.app_name);
+
         try {
             service.initAudio(-1, -1, -1, -1);   // negative values will be replaced with defaults/preferences
             service.startAudio(new Intent(context, MainActivity.class), R.drawable.icon_synth, name, "Return to " + name + ".");
@@ -231,8 +248,10 @@ public class PureDataProcessor extends BaseProcessor {
 
     @Override
     public void cleanup() {
+
         try {
             context.unbindService(pdConnection);
+
         } catch (IllegalArgumentException e) {
             // already unbound
             service = null;
@@ -241,55 +260,64 @@ public class PureDataProcessor extends BaseProcessor {
 
     @Override
     public void resetPresets(){
-        PdBase.sendFloat("reset_presets",(float)1);
+        PdBase.sendFloat("reset_presets", (float) 1);
     }
 
     @Override
-    public void setPreset(String name , Float f){
-        this.sendValue(name , f);
+    public void setPreset(String name, Float f){
+        this.sendValue(name, f);
     }
 
     @Override
-    public void sendValue(String name , Float value){
+    public void sendValue(String name, Float value){
         Log.i(name, Float.toString(value));
-        PdBase.sendFloat(name , value);
+        PdBase.sendFloat(name, value);
     }
 
     @Override
     public void createPatch(String type, int patchId){
         int newId = PDids.size();
+        String name = type + "_" + Integer.toString(patchId);
         PDids.put(patchId, newId);
-        Object[] array = {10, 10, type, type + "_" + Integer.toString(patchId)};
-        Log.i("Create", mainPatchName + " " + "obj" + " 10 10 " + type + " " + type + "_" + Integer.toString(patchId));
-        PdBase.sendMessage( mainPatchName, "obj", array);
+        Object[] array = {10, 10, type, name};
+        Log.i("Create", mainPatchName + " " + "obj" + " 10 10 " + type + " " + name);
+        PdBase.sendMessage(mainPatchName, "obj", array);
+        PdBase.sendBang(name + "_load");
+        PdBase.sendFloat(name + "_on-off", 1);
     }
 
     @Override
-    public void connect(Integer origin, Integer outlet, Integer destine, Integer inlet){
-        int originPatch = PDids.get(origin);
-        int destinePatch = PDids.get(destine);
-        Object[] array = {originPatch, outlet, destinePatch, inlet};
-        Log.i("Connect",Integer.toString(originPatch) + "-"
-                + Integer.toString(outlet) + "-"
-                + Integer.toString(destinePatch) + "-"
-                + Integer.toString(inlet));
-        PdBase.sendMessage( mainPatchName, "connect", array);
+    public void connect(Connection connection){
+        int newId = PDids.size();
+        int sourcePatch = PDids.get(connection.getSourcePatch());
+        int targetPatch = PDids.get(connection.getTargetPatch());
+        String fadeName = "x_fade_" + Integer.toString(connection.getId());
+        Object[] array = {10, 10, "x_fade", fadeName};
+        PDids.put(connection.getId(), newId);
+        PdBase.sendMessage(mainPatchName, "obj", array);
+        Log.i("Create Fade", mainPatchName + " " + "obj" + " 10 10 x_fade " + fadeName);
+        array = new Object[] {sourcePatch, connection.getSourceOutlet(), newId, 0};
+        PdBase.sendMessage(mainPatchName, "connect", array);
+        Log.i("Connect", mainPatchName + " " + "connect " + sourcePatch + " " + connection.getSourceOutlet() + " " + newId + " 0");
+        array = new Object[] {newId, 0, targetPatch, connection.getTargetInlet()};
+        PdBase.sendMessage(mainPatchName, "connect", array);
+        Log.i("Connect", mainPatchName + " " + "connect " + newId + " 0 " + targetPatch + " " + connection.getTargetInlet());
+        PdBase.sendFloat(fadeName, 1);
     }
 
     @Override
-    public void delete(Integer patchId, String name){
-        Object[] array = {"x_" + name, 1};
-        Log.i("Delete","x_" + name);
-        Integer position = PDids.get(patchId);
-        PDids.remove(patchId);
-        for(Integer key : PDids.keySet()){
-            Integer value = PDids.get(key);
-            if(value > position){
-                PDids.put(key, value - 1);
-            }
+    public void delete(Patch patch, String name) {
+
+        for (Connection connection : patch.getOutputConnections()){
+            PdBase.sendFloat("x_fade_" + Integer.toString(connection.getId()), 0);
         }
-        PdBase.sendMessage( mainPatchName, "find", array);
-        PdBase.sendMessage( mainPatchName, "cut", array);
+
+        for (Connection connection : patch.getInputConnections()){
+            PdBase.sendFloat("x_fade_" + Integer.toString(connection.getId()), 0);
+        }
+
+        toDelete.add(new Pair<>("x_" + name, patch.getId()));
+        handler.postDelayed(patchCollector, 100);
     }
 
     @Override
@@ -297,42 +325,63 @@ public class PureDataProcessor extends BaseProcessor {
         String dest = "test", symbol = null;
         boolean isAny = s.length() > 0 && s.charAt(0) == ';';
         Scanner sc = new Scanner(isAny ? s.substring(1) : s);
+
         if (isAny) {
-            if (sc.hasNext()) dest = sc.next();
-            else {
+
+            if (sc.hasNext()) {
+                dest = sc.next();
+
+            } else {
                 toast("Message not sent (empty recipient)");
                 return;
             }
-            if (sc.hasNext()) symbol = sc.next();
-            else {
+
+            if (sc.hasNext()) {
+                symbol = sc.next();
+
+            } else {
                 toast("Message not sent (empty symbol)");
             }
         }
+
         List<Object> list = new ArrayList<Object>();
+
         while (sc.hasNext()) {
+
             if (sc.hasNextInt()) {
                 list.add(Float.valueOf(sc.nextInt()));
+
             } else if (sc.hasNextFloat()) {
                 list.add(sc.nextFloat());
+
             } else {
                 list.add(sc.next());
             }
         }
+
         if (isAny) {
             PdBase.sendMessage(dest, symbol, list.toArray());
+
         } else {
+
             switch (list.size()) {
+
                 case 0:
                     PdBase.sendBang(dest);
                     break;
+
                 case 1:
                     Object x = list.get(0);
+
                     if (x instanceof String) {
                         PdBase.sendSymbol(dest, (String) x);
+
                     } else {
                         PdBase.sendFloat(dest, (Float) x);
                     }
+
                     break;
+
                 default:
                     PdBase.sendList(dest, list.toArray());
                     break;
@@ -340,5 +389,29 @@ public class PureDataProcessor extends BaseProcessor {
         }
     }
 
+    private class PatchCollector implements Runnable {
 
+        @Override
+        public void run() {
+            Object [] array = {"", 1};
+
+            for (Pair<String, Integer> patch : toDelete) {
+                Integer position = PDids.remove(patch.second);
+
+                for (Integer key : PDids.keySet()) {
+                    Integer value = PDids.get(key);
+
+                    if (value > position) {
+                        PDids.put(key, value - 1);
+                    }
+                }
+
+                array[0] = patch.first;
+                PdBase.sendMessage( mainPatchName, "find", array);
+                PdBase.sendMessage( mainPatchName, "cut", array);
+            }
+
+            toDelete.clear();
+        }
+    }
 }

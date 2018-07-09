@@ -1,5 +1,8 @@
 #N canvas 595 173 485 391 10;
 #X obj 66 320 outlet~;
 #X obj 66 215 noise~;
+#X obj 18 49 switch~;
+#X obj 18 19 param \$1 on-off \$0 0;
 #X connect 1 0 0 0;
+#X connect 3 0 2 0;
 #X coords 0 -1 1 1 120 120 1 200 100;

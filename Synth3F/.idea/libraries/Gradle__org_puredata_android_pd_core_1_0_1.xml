@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.puredata.android:pd-core-1.0.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/pd-core-1.0.1.aar/6bf940e55561f0f28b14ab510f923a93/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/pd-core-1.0.1.aar/6bf940e55561f0f28b14ab510f923a93/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.puredata.android/pd-core/1.0.1/5acea5614230c0e283154781107101fc6fd609ae/pd-core-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

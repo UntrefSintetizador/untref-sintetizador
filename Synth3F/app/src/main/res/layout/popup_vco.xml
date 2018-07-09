@@ -39,6 +39,27 @@
                 <TableRow
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:id="@+id/tableRowVCO1_0"
+                    android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
+                    <!-- Defenir el ancho de este TextView define el ancho de toda la columna -->
+                    <TextView
+                        android:id="@+id/label_VCO0"
+                        android:layout_height="wrap_content"
+                        android:layout_width="75dp"
+                        android:layout_weight="1"
+                        android:text="att_freq0"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar_VCO0"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:id="@+id/tableRowVCO1_1"
                     android:gravity="center_vertical">
                     <!--COMIENZO DE PARAMETRO-->

@@ -3,6 +3,7 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.graphics.Color;
 
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.ModulesPopupWindow.VCOPopupWindow;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
@@ -13,8 +14,8 @@ import com.untref.synth3f.R;
 public class PatchVCOView extends PatchView {
 
 
-    public PatchVCOView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter) {
-        super(context, wireDrawer, patchGraphPresenter);
+    public PatchVCOView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+        super(context, wireDrawer, patchGraphPresenter, patch);
     }
 
     @Override
@@ -22,11 +23,11 @@ public class PatchVCOView extends PatchView {
         centerImage = R.drawable.map_node_vco;
         topImage = R.drawable.map_node_in_vco;
         bottomImage = R.drawable.map_node_out_vco;
-        color = Color.rgb(253,62,129);
+        color = Color.rgb(253, 62, 129);
     }
 
     @Override
-    protected PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter) {
-        return new PatchVCOPresenter(this, patchGraphPresenter);
+    protected PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch) {
+        return new PatchVCOPresenter(this, patchGraphPresenter, patch);
     }
 }

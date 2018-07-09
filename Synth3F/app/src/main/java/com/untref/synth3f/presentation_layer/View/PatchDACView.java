@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.presenters.PatchDACPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
@@ -12,8 +13,8 @@ import com.untref.synth3f.presentation_layer.presenters.PatchVCOPresenter;
 public class PatchDACView extends PatchView {
 
 
-    public PatchDACView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter) {
-        super(context, wireDrawer, patchGraphPresenter);
+    public PatchDACView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+        super(context, wireDrawer, patchGraphPresenter, patch);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class PatchDACView extends PatchView {
     }
 
     @Override
-    protected PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter) {
-        return new PatchDACPresenter(this, patchGraphPresenter);
+    protected PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch) {
+        return new PatchDACPresenter(this, patchGraphPresenter, patch);
     }
 }
