@@ -26,14 +26,14 @@ public class PatchVCOMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBar_VCO0, R.id.label_VCO0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, vcoPatch.on_off);
-        createSeekBarComponent(R.id.seekBar_att_freq0, R.id.label_att_freq0, "att_freq0", title, 1.0f, 0.0f, 0.01f, 0.01f, view, vcoPatch.att_freq0);
-        createSeekBarComponent(R.id.seekBar_att_freq1, R.id.label_att_freq1, "att_freq1", title, 1.0f, 0.0f, 0.01f, 0.01f, view, vcoPatch.att_freq1);
-        createSeekBarComponent(R.id.seekBar_att_pw, R.id.label_att_pw, "att_pw", title, 1.0f, 0.0f, 0.01f, 0.01f, view, vcoPatch.att_pw);
+        createSeekBarComponent(R.id.seekBar_VCO0, R.id.label_VCO0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, vcoPatch.on_off, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBar_att_freq0, R.id.label_att_freq0, "att_freq0", title, 100.0f, -100.0f, 0.01f, 0.01f, view, vcoPatch.att_freq0, MenuScale.exponential_center);
+        createSeekBarComponent(R.id.seekBar_att_freq1, R.id.label_att_freq1, "att_freq1", title, 100.0f, -100.0f, 0.01f, 0.01f, view, vcoPatch.att_freq1, MenuScale.exponential_center);
+        createSeekBarComponent(R.id.seekBar_att_pw, R.id.label_att_pw, "att_pw", title, 100.0f, -100.0f, 1.0f, 1.0f, view, vcoPatch.att_pw, MenuScale.exponential_center);
         createSeekBarShape(title, view, vcoPatch.shape);
-        createSeekBarComponent(R.id.seekBar_freq, R.id.label_freq, "freq", title, 20000.0f, 0.0f, 20.0f, 20.0f, view, vcoPatch.freq);
-        createSeekBarComponent(R.id.seekBar_offset, R.id.label_offset, "offset", title, 63.0f, -64.0f, 1.0f, 1.0f, view, vcoPatch.offset);
-        createSeekBarComponent(R.id.seekBar_pw, R.id.label_pw, "pw", title, 100.0f, 0.0f, 1.0f, 1.0f, view, vcoPatch.pw);
+        createSeekBarComponent(R.id.seekBar_freq, R.id.label_freq, "freq", title, 20000.0f, 0.0f, 20.0f, 20.0f, view, vcoPatch.freq, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBar_offset, R.id.label_offset, "offset", title, 63.0f, -64.0f, 1.0f, 1.0f, view, vcoPatch.offset, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBar_pw, R.id.label_pw, "pw", title, 100.0f, 0.0f, 1.0f, 1.0f, view, vcoPatch.pw, MenuScale.linear);
     }
 
     private void createSeekBarShape(final String name, View view, float value) {

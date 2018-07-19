@@ -27,7 +27,7 @@ public class PatchDACMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBar_DAC0, R.id.label_DAC0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, dacPatch.on_off);
+        createSeekBarComponent(R.id.seekBar_DAC0, R.id.label_DAC0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, dacPatch.on_off, MenuScale.linear);
     }
 
 }

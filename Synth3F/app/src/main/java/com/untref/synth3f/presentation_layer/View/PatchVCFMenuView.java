@@ -28,12 +28,12 @@ public class PatchVCFMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBarVCF1_0, R.id.labelVCF1_0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, vcfPatch.on_off);
-        createSeekBarComponent(R.id.seekBarVCF1_1, R.id.labelVCF1_1, "att_signal", title, 1000.0f, 0.0f, 0.01f, 0.01f, view, vcfPatch.att_signal);
-        createSeekBarComponent(R.id.seekBarVCF1_2, R.id.labelVCF1_2, "att_freq", title, 1000.0f, 0.0f, 0.01f, 0.01f, view, vcfPatch.att_freq);
+        createSeekBarComponent(R.id.seekBarVCF1_0, R.id.labelVCF1_0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, vcfPatch.on_off, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBarVCF1_1, R.id.labelVCF1_1, "att_signal", title, 1000.0f, 0.0f, 0.01f, 0.01f, view, vcfPatch.att_signal, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBarVCF1_2, R.id.labelVCF1_2, "att_freq", title, 1000.0f, 0.0f, 0.01f, 0.01f, view, vcfPatch.att_freq, MenuScale.exponential_left);
         createSeekBarMode(title, view, vcfPatch.mode);
-        createSeekBarComponent(R.id.seekBarVCF1_4, R.id.labelVCF1_4, "freq", title, 15000.0f, 0.0f, 15.0f, 15.0f, view, vcfPatch.freq);
-        createSeekBarComponent(R.id.seekBarVCF1_5, R.id.labelVCF1_5, "q", title, 100.0f, 0.0f, 1.0f, 1.0f, view, vcfPatch.q);
+        createSeekBarComponent(R.id.seekBarVCF1_4, R.id.labelVCF1_4, "freq", title, 15000.0f, 0.0f, 15.0f, 15.0f, view, vcfPatch.freq, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBarVCF1_5, R.id.labelVCF1_5, "q", title, 100.0f, 0.0f, 1.0f, 1.0f, view, vcfPatch.q, MenuScale.linear);
     }
 
     private void createSeekBarMode(String title, View view, float value) {

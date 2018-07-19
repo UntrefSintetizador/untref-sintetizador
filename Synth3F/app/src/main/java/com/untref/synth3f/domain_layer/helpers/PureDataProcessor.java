@@ -115,6 +115,7 @@ public class PureDataProcessor extends BaseProcessor {
         dictionary.put("x_dac.pd", R.raw.x_dac);
         dictionary.put("param.pd", R.raw.param);
         dictionary.put("x_fade.pd", R.raw.x_fade);
+        dictionary.put("attenuator.pd", R.raw.attenuator);
 
         return dictionary;
     }

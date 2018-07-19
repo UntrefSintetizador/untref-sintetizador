@@ -5,7 +5,7 @@ import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 public class VCAPatch extends Patch {
     public float on_off = 1f;
     public float att_control = 1f;
-    public float base = 0f;
+    public float base = 1f;
     public float clip = 0f;
 
     @Override

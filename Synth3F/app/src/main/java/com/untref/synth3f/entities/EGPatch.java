@@ -8,7 +8,7 @@ public class EGPatch extends Patch {
     public float decay = 1f;
     public float sustain = 1f;
     public float release = 0f;
-    public float gate = 261.626f;
+    public float gate = 1f;
 
     @Override
     public void initialize(BaseProcessor processor) {

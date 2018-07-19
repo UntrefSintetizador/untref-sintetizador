@@ -27,12 +27,12 @@ public class PatchEGMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBarEG1_0,R.id.labelEG1_0,"on-off",title,1.0f,0.0f,1.0f,1.0f,view, egPatch.on_off);
-        createSeekBarComponent(R.id.seekBarEG1_1,R.id.labelEG1_1,"attack",title,5000.0f,0.0f,1.0f,1.0f,view, egPatch.attack);
-        createSeekBarComponent(R.id.seekBarEG1_2,R.id.labelEG1_2,"decay",title,5000.0f,0.0f,1.0f,1.0f,view, egPatch.decay);
-        createSeekBarComponent(R.id.seekBarEG1_3,R.id.labelEG1_3,"sustain",title,1.0f,0.0f,0.01f,0.01f,view, egPatch.sustain);
-        createSeekBarComponent(R.id.seekBarEG1_4,R.id.labelEG1_4,"release",title,5000.0f,0.0f,1.0f,1.0f,view, egPatch.release);
-        createSeekBarComponent(R.id.seekBarEG1_5,R.id.labelEG1_5,"gate",title,1.0f,0.0f,1.0f,1.0f,view, egPatch.gate);
+        createSeekBarComponent(R.id.seekBarEG1_0,R.id.labelEG1_0,"on-off",title,1.0f,0.0f,1.0f,1.0f,view, egPatch.on_off, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBarEG1_1,R.id.labelEG1_1,"attack",title,5000.0f,0.0f,1.0f,1.0f,view, egPatch.attack, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBarEG1_2,R.id.labelEG1_2,"decay",title,5000.0f,0.0f,1.0f,1.0f,view, egPatch.decay, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBarEG1_3,R.id.labelEG1_3,"sustain",title,1.0f,0.0f,0.01f,0.01f,view, egPatch.sustain, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBarEG1_4,R.id.labelEG1_4,"release",title,5000.0f,0.0f,1.0f,1.0f,view, egPatch.release, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBarEG1_5,R.id.labelEG1_5,"gate",title,1.0f,0.0f,1.0f,1.0f,view, egPatch.gate, MenuScale.linear);
     }
 
 }

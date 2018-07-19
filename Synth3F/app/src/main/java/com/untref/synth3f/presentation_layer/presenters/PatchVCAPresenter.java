@@ -12,8 +12,8 @@ public class PatchVCAPresenter extends PatchPresenter {
 
     public PatchVCAPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(patchView, patchGraphPresenter, patch);
-        numberOfInputs = 4;
-        numberOfOutputs = 2;
+        numberOfInputs = 2;
+        numberOfOutputs = 1;
         name = "vca_";
     }
 

@@ -13,7 +13,7 @@ public class PatchEGPresenter extends PatchPresenter {
     public PatchEGPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(patchView, patchGraphPresenter, patch);
         numberOfInputs = 1;
-        numberOfOutputs = 2;
+        numberOfOutputs = 1;
         name = "eg_";
     }
 

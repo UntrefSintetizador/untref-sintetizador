@@ -98,7 +98,7 @@ public abstract class PatchMenuView extends PopupWindow {
         });
     }
 
-    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar, final String identificador_modulo, final String name_modulo, float max_module, final float min_module, float multiplicador_modulo, final float multiplicador_seekBar, View view, float value) {
+    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar, final String identificador_modulo, final String name_modulo, final float max_module, final float min_module, float multiplicador_modulo, final float multiplicador_seekBar, View view, float value, final MenuScale scale) {
         SeekBar seekBar = (SeekBar) view.findViewById(id_seekBar);
         final TextView label_module = (TextView) view.findViewById(id_label_seekBar);
         //final String indetificador = identificador_modulo;
@@ -108,7 +108,21 @@ public abstract class PatchMenuView extends PopupWindow {
         So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].*/
 
         seekBar.setMax((int) ((max_module - min_module) / multiplicador_modulo));
-        seekBar.setProgress((int) ((value - min_module) / multiplicador_seekBar));
+        final float maxValue = max_module - min_module;
+        final float steps = (max_module - min_module) / multiplicador_modulo;
+        if (scale == MenuScale.linear) {
+            seekBar.setProgress((int) ((value - min_module) / multiplicador_seekBar));
+        } else if (scale == MenuScale.exponential_left) {
+            seekBar.setProgress((int) (steps * Math.log(value- min_module - 1) / Math.log(maxValue + 1)));
+        } else if (scale == MenuScale.exponential_center) {
+            double aux = 0;
+            if(value > 0){
+                aux = Math.log(value + 1) / Math.log(max_module + 1);
+            } else {
+                aux = -Math.log(-value + 1) / Math.log(-min_module + 1);
+            }
+            seekBar.setProgress((int) ((aux + 1) * steps / 2));
+        }
         DecimalFormat decimales = new DecimalFormat("0.00");
         label_module.setText(identificador_modulo + ": " + decimales.format(value));
         seekBar.setOnSeekBarChangeListener(
@@ -122,7 +136,19 @@ public abstract class PatchMenuView extends PopupWindow {
                         float multiplicador = multiplicador_seekBar;
                         float valorInicial = min_module;
                         DecimalFormat decimales = new DecimalFormat("0.00");
-                        float value = (float) (valorInicial + (progress * multiplicador));
+                        float value = 0;
+                        if (scale == MenuScale.linear) {
+                            value = (float) (valorInicial + (progress * multiplicador));
+                        } else if (scale == MenuScale.exponential_left) {
+                            value = (float) (valorInicial + Math.pow(maxValue + 1, progress / steps) - 1);
+                        } else if (scale == MenuScale.exponential_center) {
+                            double aux = Math.abs((progress - steps / 2) * 2 / steps);
+                            if (progress > steps / 2) {
+                                value = (float) Math.pow(max_module + 1, aux) - 1;
+                            } else {
+                                value = (float) -Math.pow(-min_module + 1, aux) + 1;
+                            }
+                        }
                         //float value = (float) (valorInicial + progress * multiplicador);
 //                        Log.i("Mensaje seek" + name_modulo + "ER1_" + identificador_modulo, msj);
 //                        Log.i("Valor   seek" + name_modulo + "ER1_" + identificador_modulo, decimales.format(value));
@@ -156,5 +182,9 @@ public abstract class PatchMenuView extends PopupWindow {
     }
 
     public abstract void initializeModule(String title, View view);
+
+    protected enum MenuScale {
+        linear, exponential_left, exponential_center
+    }
 
 }
