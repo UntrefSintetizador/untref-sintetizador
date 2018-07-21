@@ -14,8 +14,8 @@ import java.text.DecimalFormat;
 
 public class PatchVCOMenuView extends PatchMenuView {
 
-    public PatchVCOMenuView(MainActivity container, int layout, String name, PatchPresenter patchPresenter, Patch patch) {
-        super(container, layout, name, patchPresenter, patch);
+    public PatchVCOMenuView(MainActivity container, int layout, PatchPresenter patchPresenter, Patch patch) {
+        super(container, layout, patchPresenter, patch);
     }
 
     @Override

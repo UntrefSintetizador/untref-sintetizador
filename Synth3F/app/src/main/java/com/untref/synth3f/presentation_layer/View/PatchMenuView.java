@@ -1,6 +1,5 @@
 package com.untref.synth3f.presentation_layer.View;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,11 +29,11 @@ public abstract class PatchMenuView extends PopupWindow {
     protected PatchPresenter patchPresenter;
     protected Patch patch;
 
-    public PatchMenuView(MainActivity context, int layout, String name, PatchPresenter patchPresenter, Patch patch) {
+    public PatchMenuView(MainActivity context, int layout, PatchPresenter patchPresenter, Patch patch) {
         super(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
 
         this.id_layout = layout;
-        this.title = name;
+        this.title = patch.getTypeName() + "_" + patch.getId();
         this.patchPresenter = patchPresenter;
         this.patch = patch;
 
@@ -113,10 +112,10 @@ public abstract class PatchMenuView extends PopupWindow {
         if (scale == MenuScale.linear) {
             seekBar.setProgress((int) ((value - min_module) / multiplicador_seekBar));
         } else if (scale == MenuScale.exponential_left) {
-            seekBar.setProgress((int) (steps * Math.log(value- min_module - 1) / Math.log(maxValue + 1)));
+            seekBar.setProgress((int) (steps * Math.log(value - min_module - 1) / Math.log(maxValue + 1)));
         } else if (scale == MenuScale.exponential_center) {
             double aux = 0;
-            if(value > 0){
+            if (value > 0) {
                 aux = Math.log(value + 1) / Math.log(max_module + 1);
             } else {
                 aux = -Math.log(-value + 1) / Math.log(-min_module + 1);

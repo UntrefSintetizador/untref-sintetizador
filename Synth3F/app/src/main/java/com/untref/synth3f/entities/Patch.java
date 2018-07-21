@@ -10,6 +10,8 @@ public abstract class Patch {
     private int id;
     private List<Connection> outputConnections;
     private List<Connection> inputConnections;
+    private float posX;
+    private float posY;
 
     public Patch() {
         outputConnections = new ArrayList<>(0);
@@ -48,5 +50,27 @@ public abstract class Patch {
         return outputConnections.remove(connection);
     }
 
+    public void setPosX(float posX) {
+        this.posX = posX;
+    }
+
+    public float getPosX() {
+        return this.posX;
+    }
+
+    public void setPosY(float posY) {
+        this.posY = posY;
+    }
+
+    public float getPosY() {
+        return this.posY;
+    }
+
     public abstract void initialize(BaseProcessor processor);
+
+    public abstract String getTypeName();
+
+    public abstract int getNumberOfInputs();
+
+    public abstract int getNumberOfOutputs();
 }

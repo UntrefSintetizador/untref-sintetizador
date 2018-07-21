@@ -67,7 +67,12 @@ public class FaustProcessor extends BaseProcessor {
     }
 
     @Override
-    public void delete(Patch patch, String name) {
+    public void delete(Patch patch) {
+
+    }
+
+    @Override
+    public void clear(Patch[] patches) {
 
     }
 }

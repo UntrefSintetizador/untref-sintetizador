@@ -9,14 +9,10 @@ import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
-/**
- * Created by ddavi on 1/10/2016.
- */
-
 public class PatchDACMenuView extends PatchMenuView {
 
-    public PatchDACMenuView(MainActivity container, int layout, String name, PatchPresenter patchPresenter, Patch patch) {
-        super(container, layout, name, patchPresenter, patch);
+    public PatchDACMenuView(MainActivity container, int layout, PatchPresenter patchPresenter, Patch patch) {
+        super(container, layout, patchPresenter, patch);
     }
 
     @Override

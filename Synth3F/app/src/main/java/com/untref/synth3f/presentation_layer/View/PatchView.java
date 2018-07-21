@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -36,12 +37,13 @@ public abstract class PatchView extends LinearLayout {
     protected int bottomImage;
     protected int color;
 
-    protected int patchId;
+    private Patch patch;
 
     public PatchView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(context);
         patchPresenter = createPresenter(patchGraphPresenter, patch);
         patchGraphFragment = patchGraphPresenter.getPatchGraphFragment();
+        this.patch = patch;
         initialize();
         drawPatch(context);
         this.wireDrawer = wireDrawer;
@@ -61,16 +63,44 @@ public abstract class PatchView extends LinearLayout {
         return outputs;
     }
 
-    public void setPatchId(int patchId) {
-        this.patchId = patchId;
+    public int getPatchId() {
+        return patch.getId();
     }
 
-    public int getPatchId() {
-        return patchId;
+    public Patch getPatch() {
+        return patch;
     }
 
     public int widthRatio() {
         return Math.max(Math.max(this.inputs.length, this.outputs.length), 2);
+    }
+
+    public void movePatch(int x, int y, int xDelta, int yDelta) {
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
+        layoutParams.leftMargin = Math.min(x - xDelta,
+                ((View) PatchView.this.getParent()).getWidth() - PatchView.this.getWidth());
+        layoutParams.topMargin = Math.min(y - yDelta,
+                ((View) PatchView.this.getParent()).getHeight() - PatchView.this.getHeight());
+        layoutParams.rightMargin = 0;
+        layoutParams.bottomMargin = 0;
+        PatchView.this.setLayoutParams(layoutParams);
+        wireDrawer.movePatch(patch, x, y);
+    }
+
+    public void endMovePatch(float x, float y, MotionEvent event) {
+        View delete = patchGraphFragment.getActivity().findViewById(R.id.menuDelete);
+        Rect bounds = new Rect();
+        int[] location = new int[2];
+        delete.getLocationOnScreen(location);
+        delete.getHitRect(bounds);
+        DisplayMetrics displayMetrics = patchGraphFragment.getResources().getDisplayMetrics();
+        patch.setPosX(x / displayMetrics.widthPixels);
+        patch.setPosY(y / displayMetrics.heightPixels);
+        if (bounds.contains((int) event.getRawX() - location[0] + bounds.left,
+                (int) event.getRawY() - location[1] + bounds.top)) {
+            patchPresenter.delete(patch.getId());
+            ((ViewManager) PatchView.this.getParent()).removeView(PatchView.this);
+        }
     }
 
     protected abstract PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch);
@@ -93,8 +123,8 @@ public abstract class PatchView extends LinearLayout {
         layoutParams.height = 0;
         layoutParams.weight = 13;
 
-        inputs = new AppCompatImageView[patchPresenter.getNumberOfInputs()];
-        outputs = new AppCompatImageView[patchPresenter.getNumberOfOutputs()];
+        inputs = new AppCompatImageView[patch.getNumberOfInputs()];
+        outputs = new AppCompatImageView[patch.getNumberOfOutputs()];
         populateConnectors(context, inputsLinearLayout, topImage, inputs);
         populateConnectors(context, outputsLinearLayout, bottomImage, outputs);
     }
@@ -211,27 +241,10 @@ public abstract class PatchView extends LinearLayout {
                                 break;
 
                             case MotionEvent.ACTION_MOVE:
-                                layoutParams = (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
-                                layoutParams.leftMargin = Math.min(x - xDelta,
-                                        ((View) PatchView.this.getParent()).getWidth() - PatchView.this.getWidth());
-                                layoutParams.topMargin = Math.min(y - yDelta,
-                                        ((View) PatchView.this.getParent()).getHeight() - PatchView.this.getHeight());
-                                layoutParams.rightMargin = 0;
-                                layoutParams.bottomMargin = 0;
-                                PatchView.this.setLayoutParams(layoutParams);
-                                wireDrawer.movePatch(patchId, x, y);
+                                movePatch(x, y, xDelta, yDelta);
                                 break;
                             case MotionEvent.ACTION_UP:
-                                View delete = patchGraphFragment.getActivity().findViewById(R.id.menuDelete);
-                                Rect bounds = new Rect();
-                                int[] location = new int[2];
-                                delete.getLocationOnScreen(location);
-                                delete.getHitRect(bounds);
-                                if (bounds.contains((int) event.getRawX() - location[0] + bounds.left,
-                                        (int) event.getRawY() - location[1] + bounds.top)) {
-                                    patchPresenter.delete(patchId);
-                                    ((ViewManager) PatchView.this.getParent()).removeView(PatchView.this);
-                                }
+                                endMovePatch(x, y, event);
                             default:
                                 break;
                         }

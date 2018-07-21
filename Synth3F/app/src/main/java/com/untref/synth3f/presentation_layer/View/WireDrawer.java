@@ -1,20 +1,17 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +19,6 @@ import java.util.Map;
 public class WireDrawer extends View {
 
     private Paint mPaint;
-    private PatchGraphPresenter patchGraphPresenter;
     private MapView mapView;
     private Map<Integer, Line> lines;
     Path path;
@@ -34,14 +30,13 @@ public class WireDrawer extends View {
     private int endX;
     private int endY;
 
-    public WireDrawer(Context context, PatchGraphPresenter patchGraphPresenter, MapView mapView) {
+    public WireDrawer(Context context, MapView mapView) {
         super(context);
         this.mapView = mapView;
         this.mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         this.mPaint.setStyle(Paint.Style.STROKE);
         this.mPaint.setColor(Color.RED);
         this.mPaint.setStrokeWidth(10.0f / MapView.MAX_ZOOM);
-        this.patchGraphPresenter = patchGraphPresenter;
         this.lines = new HashMap<>();
         this.path = new Path();
     }
@@ -75,10 +70,9 @@ public class WireDrawer extends View {
         invalidate();
     }
 
-    public void movePatch(int patchId, int x, int y) {
+    public void movePatch(Patch patch, int x, int y) {
         this.endX = x;
         this.endY = y;
-        Patch patch = patchGraphPresenter.getPatch(patchId);
         Line line;
         int[] location;
         for (Connection connection : patch.getOutputConnections()) {
@@ -127,6 +121,16 @@ public class WireDrawer extends View {
         invalidate();
     }
 
+    public void clear() {
+        this.lines = new HashMap<>();
+    }
+
+    public void reload(PatchView[] patchViews, int width, int height) {
+        Handler handler = new Handler();
+        WireReset wireReset = new WireReset(patchViews, width, height);
+        handler.postDelayed(wireReset, 100);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -168,5 +172,26 @@ public class WireDrawer extends View {
         int midY;
         int endX;
         int endY;
+    }
+
+    private class WireReset implements Runnable {
+
+        private PatchView[] patchViews;
+        private int width;
+        private int height;
+
+        WireReset(PatchView[] patchViews, int width, int height) {
+            this.patchViews = patchViews;
+            this.width = width;
+            this.height = height;
+        }
+
+        @Override
+        public void run() {
+            for (PatchView patchView : this.patchViews) {
+                Patch patch = patchView.getPatch();
+                movePatch(patch, (int) (patch.getPosX() * this.width), (int) (patch.getPosY() * this.height));
+            }
+        }
     }
 }

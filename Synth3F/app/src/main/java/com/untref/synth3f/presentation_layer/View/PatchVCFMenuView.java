@@ -1,6 +1,5 @@
 package com.untref.synth3f.presentation_layer.View;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -11,13 +10,10 @@ import com.untref.synth3f.entities.VCFPatch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
-import org.puredata.core.PdBase;
-
-
 public class PatchVCFMenuView extends PatchMenuView {
 
-    public PatchVCFMenuView(MainActivity container, int layout, String name, PatchPresenter patchPresenter, Patch patch) {
-        super(container, layout, name, patchPresenter, patch);
+    public PatchVCFMenuView(MainActivity container, int layout, PatchPresenter patchPresenter, Patch patch) {
+        super(container, layout, patchPresenter, patch);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.untref.synth3f.entities;
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 
 public class VCOPatch extends Patch {
+
     public float on_off = 1f;
     public float att_freq0 = 1f;
     public float att_freq1 = 1f;
@@ -14,7 +15,8 @@ public class VCOPatch extends Patch {
 
     @Override
     public void initialize(BaseProcessor processor) {
-        String name = "x_vco_" + Integer.toString(getId()) + "_";
+        String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
+        processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "att_freq0", att_freq0);
         processor.sendValue(name + "att_freq1", att_freq1);
         processor.sendValue(name + "att_pw", att_pw);
@@ -22,5 +24,20 @@ public class VCOPatch extends Patch {
         processor.sendValue(name + "freq", freq);
         processor.sendValue(name + "offset", offset);
         processor.sendValue(name + "pw", pw);
+    }
+
+    @Override
+    public String getTypeName() {
+        return "vco";
+    }
+
+    @Override
+    public int getNumberOfInputs() {
+        return 3;
+    }
+
+    @Override
+    public int getNumberOfOutputs() {
+        return 1;
     }
 }

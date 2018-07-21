@@ -11,13 +11,10 @@ public class PatchVCOPresenter extends PatchPresenter {
 
     public PatchVCOPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(patchView, patchGraphPresenter, patch);
-        numberOfInputs = 3;
-        numberOfOutputs = 1;
-        name = "vco_";
     }
 
     @Override
     public PatchMenuView createMenuView(MainActivity context) {
-        return new PatchVCOMenuView(context, R.layout.popup_vco, name + Integer.toString(patchView.getPatchId()), this, patch);
+        return new PatchVCOMenuView(context, R.layout.popup_vco, this, patch);
     }
 }

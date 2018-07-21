@@ -28,11 +28,11 @@ public class PatchGraphManager {
 
     public Patch removePatch(int patchId) {
         Patch patch = patchMap.remove(patchId);
-        for (Connection connection : patch.getInputConnections()){
+        for (Connection connection : patch.getInputConnections()) {
             connectionMap.remove(connection.getId());
             patchMap.get(connection.getSourcePatch()).removeOutputConnection(connection);
         }
-        for (Connection connection : patch.getOutputConnections()){
+        for (Connection connection : patch.getOutputConnections()) {
             connectionMap.remove(connection.getId());
             patchMap.get(connection.getTargetPatch()).removeInputConnection(connection);
         }
@@ -68,11 +68,12 @@ public class PatchGraphManager {
         return connectionMap.get(connectionId);
     }
 
-    public Collection<Patch> getPatches(){
+    public Collection<Patch> getPatches() {
         return patchMap.values();
     }
 
-    public Collection<Connection> getConnections(){
+    public Collection<Connection> getConnections() {
         return connectionMap.values();
     }
+
 }

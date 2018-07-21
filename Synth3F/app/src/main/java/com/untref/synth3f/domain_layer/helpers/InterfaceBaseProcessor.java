@@ -32,5 +32,7 @@ public interface InterfaceBaseProcessor {
 
     void connect(Connection connection);
 
-    void delete(Patch patch, String name);
+    void delete(Patch patch);
+
+    void clear(Patch[] patches);
 }

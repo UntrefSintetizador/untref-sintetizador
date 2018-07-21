@@ -3,6 +3,7 @@ package com.untref.synth3f.entities;
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 
 public class EGPatch extends Patch {
+
     public float on_off = 1f;
     public float attack = 1f;
     public float decay = 1f;
@@ -12,11 +13,27 @@ public class EGPatch extends Patch {
 
     @Override
     public void initialize(BaseProcessor processor) {
-        String name = "x_eg_" + Integer.toString(getId()) + "_";
+        String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
+        processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "attack", attack);
         processor.sendValue(name + "decay", decay);
         processor.sendValue(name + "sustain", sustain);
         processor.sendValue(name + "release", release);
         processor.sendValue(name + "gate", gate);
+    }
+
+    @Override
+    public String getTypeName() {
+        return "eg";
+    }
+
+    @Override
+    public int getNumberOfInputs() {
+        return 1;
+    }
+
+    @Override
+    public int getNumberOfOutputs() {
+        return 1;
     }
 }

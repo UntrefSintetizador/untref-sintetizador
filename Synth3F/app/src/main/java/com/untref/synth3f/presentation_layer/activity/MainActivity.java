@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.OnNavig
         this.presenter.initializeMasterConfig();
         this.initializeNavigationDrawer();
         patchGraphFragment.setProcessor(this.presenter.getProcessor());
+        patchGraphFragment.setContext(this);
     }
 
     private void initializeNavigationDrawer() {

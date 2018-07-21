@@ -8,18 +8,11 @@ import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
-import java.lang.reflect.Field;
-
 public abstract class PatchPresenter {
 
     protected PatchView patchView;
     protected PatchGraphPresenter patchGraphPresenter;
     protected BaseProcessor processor;
-
-    protected int numberOfInputs;
-    protected int numberOfOutputs;
-    protected String name;
-
     protected Patch patch;
 
     public PatchPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
@@ -27,14 +20,6 @@ public abstract class PatchPresenter {
         this.patch = patch;
         this.patchGraphPresenter = patchGraphPresenter;
         this.processor = patchGraphPresenter.getProcessor();
-    }
-
-    public int getNumberOfInputs() {
-        return numberOfInputs;
-    }
-
-    public int getNumberOfOutputs() {
-        return numberOfOutputs;
     }
 
     public void setDragOn(int patchId, View output) {
@@ -53,6 +38,6 @@ public abstract class PatchPresenter {
 
     public void delete(int patchId) {
         patchGraphPresenter.delete(patchId);
-        processor.delete(patch, name + Integer.toString(patchId));
+        processor.delete(patch);
     }
 }
