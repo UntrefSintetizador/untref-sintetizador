@@ -11,7 +11,7 @@ class GraphManager
 {
 public:
 
-    void Init(int channels, int buffer_size, int sample_rate);
+    void virtual Init(int channels, int buffer_size, int sample_rate);
 
     void AddPatch(std::string code, int id);
 
@@ -25,9 +25,9 @@ public:
 
     void Process(float* data, int channels);
 
-    void Free();
+    void virtual Free();
 
-private:
+protected:
 
     faust::PatchFactory patch_factory_;
     faust::Patch **patches_;

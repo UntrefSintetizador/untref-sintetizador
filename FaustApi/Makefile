@@ -7,9 +7,12 @@ CSHARP_LDFLAGS = $(MINGW_LDFLAGS) -Wl,--output-def=libs/FaustApi.def \
 FAUSTAPI = libs/FaustApi.$(SOLIB_EXT)
 CXX=g++
 
-SRC := src
-SOURCES := $(wildcard $(SRC)/*.hpp) $(wildcard $(SRC)/*.cpp) $(wildcard $(SRC)/patchs/*.hpp) $(wildcard $(SRC)/patchs/*.cpp)
-
+SOURCES := $(wildcard src/*.hpp) \
+    $(wildcard src/patchs/*.hpp) \
+    $(wildcard csharp/*.hpp) \
+    $(wildcard src/*.cpp) \
+    $(wildcard src/patchs/*.cpp) \
+    $(wildcard csharp/*.cpp)
 		
 csharplib: $(FAUSTCSHARP)
 

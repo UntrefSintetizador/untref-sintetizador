@@ -1,7 +1,7 @@
-#ifndef FAUSTAPI_FAUST_API_H_
-#define FAUSTAPI_FAUST_API_H_
+#ifndef CSHARP_FAUST_API_H_
+#define CSHARP_FAUST_API_H_
 
-#include "graph_manager.hpp"
+#include "../src/graph_manager.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,4 +27,4 @@ extern __declspec(dllexport) void ProcessFaustApi(faust::GraphManager* graph_man
 }
 #endif
 
-#endif // FAUSTAPI_FAUST_API_H_
+#endif // CSHARP_FAUST_API_H_
