@@ -31,8 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="src/android/faust_api.cpp" />
-		<Unit filename="src/android/faust_api.hpp" />
+		<Unit filename="csharp/faust_api.cpp" />
+		<Unit filename="csharp/faust_api.hpp" />
+		<Unit filename="jni/DspFaust.cpp" />
+		<Unit filename="jni/DspFaust.hpp" />
+		<Unit filename="jni/android_graph_adapter.cpp" />
+		<Unit filename="jni/android_graph_adapter.hpp" />
+		<Unit filename="jni/faust_api.cpp" />
+		<Unit filename="jni/faust_api.hpp" />
 		<Unit filename="src/graph_manager.cpp" />
 		<Unit filename="src/graph_manager.hpp" />
 		<Unit filename="src/patch.cpp" />
