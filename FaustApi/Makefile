@@ -7,29 +7,15 @@ CSHARP_LDFLAGS = $(MINGW_LDFLAGS) -Wl,--output-def=libs/FaustApi.def \
 FAUSTAPI = libs/FaustApi.$(SOLIB_EXT)
 CXX=g++
 
-FAUST_FILES = \
-    src/faust_api.cpp \
-    src/faust_api.hpp \
-    src/graph_manager.cpp \
-    src/graph_manager.hpp \
-    src/patch.cpp \
-    src/patch.hpp \
-    src/patch_factory.cpp \
-    src/patch_factory.hpp \
-    src/patchs/dac.cpp \
-    src/patchs/dac.hpp \
-    src/patchs/dummy.cpp \
-    src/patchs/dummy.hpp \
-    src/patchs/eg.cpp \
-    src/patchs/eg.hpp \
-    src/patchs/vco.cpp \
-    src/patchs/vco.hpp
+SRC := src
+SOURCES := $(wildcard $(SRC)/*.hpp) $(wildcard $(SRC)/*.cpp) $(wildcard $(SRC)/patchs/*.hpp) $(wildcard $(SRC)/patchs/*.cpp)
+
 		
 csharplib: $(FAUSTCSHARP)
 
-$(FAUSTCSHARP): ${FAUST_FILES:.c=.o}
+$(FAUSTCSHARP): ${SOURCES:.c=.o}
 	$(CXX) -o $(FAUSTCSHARP) $^ $(CSHARP_LDFLAGS) -lm -lpthread
 
 clobber: 
-	rm -f $(FAUSTAPI) ${FAUSTAPI:.$(SOLIB_EXT)=.lib} ${LIBPD:.$(SOLIB_EXT)=.def}
+	rm -f $(FAUSTAPI) ${FAUSTAPI:.$(SOLIB_EXT)=.lib}
 	rm -f $(FAUSTCSHARP) ${FAUSTCSHARP:.$(SOLIB_EXT)=.lib} ${FAUSTCSHARP:.$(SOLIB_EXT)=.def}

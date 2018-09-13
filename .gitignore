@@ -15,5 +15,7 @@ hs_err_pid*
 /FaustApi/bin
 /FaustApi/libs
 /FaustApi/obj
+/FaustApi/jni/libs
+/FaustApi/jni/obj
 *.depend
 *.layout

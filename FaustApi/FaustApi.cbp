@@ -31,11 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="src/faust_api.cpp" />
-		<Unit filename="src/faust_api.hpp" />
+		<Unit filename="src/android/faust_api.cpp" />
+		<Unit filename="src/android/faust_api.hpp" />
 		<Unit filename="src/graph_manager.cpp" />
 		<Unit filename="src/graph_manager.hpp" />
-		<Unit filename="src/main.cpp" />
 		<Unit filename="src/patch.cpp" />
 		<Unit filename="src/patch.hpp" />
 		<Unit filename="src/patch_factory.cpp" />
