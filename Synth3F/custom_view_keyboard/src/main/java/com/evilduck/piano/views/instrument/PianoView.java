@@ -38,7 +38,7 @@ import android.widget.OverScroller;
 import com.evilduck.piano.R;
 import com.evilduck.piano.music.Note;
 
-import org.puredata.core.PdBase;
+//import org.puredata.core.PdBase;
 
 
 public class PianoView extends View {
@@ -369,8 +369,9 @@ public class PianoView extends View {
 		if (action == MotionEvent.ACTION_MOVE) {
 			for(int i = 0; i < event.getPointerCount(); i++){
 				keyboard.touchItem(event.getX() / scaleX + xOffset, event.getY());
-				PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
-				PdBase.sendFloat("X_KB_gate", 1);
+				sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+				//PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+				//PdBase.sendFloat("X_KB_gate", 1);
 
 				Note note = Note.fromCode(keyboard.getPressedKey().midiCode);
 				//addNotes(Arrays.asList(note));
@@ -441,8 +442,9 @@ public class PianoView extends View {
 			releaseEdgeEffects();
 			scroller.forceFinished(true);
 			if (keyboard.touchItem(e.getX() / scaleX + xOffset, e.getY())) {
-				PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
-				PdBase.sendFloat("X_KB_gate", 1);
+				sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+				//PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+				//PdBase.sendFloat("X_KB_gate", 1);
 				invalidate();
 			}
 
@@ -470,7 +472,8 @@ public class PianoView extends View {
 
 	private void resetTouchFeedback() {
 		if (keyboard.releaseTouch()) {
-			PdBase.sendFloat("X_KB_gate", 0);
+			releaseNote();
+			//PdBase.sendFloat("X_KB_gate", 0);
 			invalidate();
 		}
 	};
@@ -485,5 +488,9 @@ public class PianoView extends View {
 		}
 		return localxOffset;
 	}
+	
+	protected void sendNote(int note){}
+	
+	protected void releaseNote(){}
 
 }

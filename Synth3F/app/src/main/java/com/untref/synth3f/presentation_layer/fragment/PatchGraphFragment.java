@@ -232,6 +232,7 @@ public class PatchGraphFragment extends Fragment {
         PatchGraphView.findViewById(R.id.menuButtonDragVCF).setOnTouchListener(listener);
         PatchGraphView.findViewById(R.id.menuButtonDragEG).setOnTouchListener(listener);
         PatchGraphView.findViewById(R.id.menuButtonDragDAC).setOnTouchListener(listener);
+        PatchGraphView.findViewById(R.id.menuButtonDragKB).setOnTouchListener(listener);
     }
 
     private void createSaveLoadEvent() {

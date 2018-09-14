@@ -13,12 +13,14 @@ import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 import com.untref.synth3f.entities.DACPatch;
 import com.untref.synth3f.entities.EGPatch;
+import com.untref.synth3f.entities.KBPatch;
 import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.entities.VCAPatch;
 import com.untref.synth3f.entities.VCFPatch;
 import com.untref.synth3f.entities.VCOPatch;
 import com.untref.synth3f.presentation_layer.View.PatchDACView;
 import com.untref.synth3f.presentation_layer.View.PatchEGView;
+import com.untref.synth3f.presentation_layer.View.PatchKBView;
 import com.untref.synth3f.presentation_layer.View.PatchVCAView;
 import com.untref.synth3f.presentation_layer.View.PatchVCFView;
 import com.untref.synth3f.presentation_layer.View.PatchVCOView;
@@ -71,6 +73,10 @@ public class PatchGraphPresenter {
             case "dac":
                 patch = new DACPatch();
                 patchView = new PatchDACView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "kb":
+                patch = new KBPatch();
+                patchView = new PatchKBView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             default:
                 patch = new VCOPatch();

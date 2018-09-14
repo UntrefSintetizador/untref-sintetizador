@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/black">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:layout_marginTop="0dp"
+        >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@id/title"
+                android:gravity="center"
+                android:background="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textSize="40px"/>
+
+            <TableLayout
+                android:id="@+id/tablaKB1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/tableRowKB1_0"
+                    android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
+                    <!-- Defenir el ancho de este TextView define el ancho de toda la columna -->
+                    <TextView
+                        android:id="@+id/label_KB0"
+                        android:layout_height="wrap_content"
+                        android:layout_width="75dp"
+                        android:layout_weight="1"
+                        android:text="att_freq0"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar_KB0"
+                        android:layout_weight="5" />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:piano="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
+                    android:gravity="center"
+                    android:id="@+id/header"
+                    android:textColor="@android:color/white"
+                    android:padding="10sp"
+                    android:textStyle="bold"
+                    android:text="@string/piano"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.untref.synth3f.presentation_layer.View.PianoView
+                        android:id="@+id/pianito"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        piano:overlay_bitmaps="true"
+                        piano:overlay_circle_radius="18dip"
+                        piano:overlay_circle_text_size="18sp"
+                        piano:overlay_color="#00FF00"
+                        android:layout_weight="0.1"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/tablaBotonesOctavas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="0"
+                        xmlns:android="http://schemas.android.com/apk/res/android">
+
+                        <Button android:id="@+id/botonOctavaMas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Octava +"/>
+
+                        <TextView
+                            android:id="@+id/labelOctava"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="20dp"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            />
+
+                        <Button android:id="@+id/botonOctavaMenos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Octava -"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/id_cerrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Cerrar" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
