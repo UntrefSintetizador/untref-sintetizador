@@ -18,10 +18,10 @@ public class PatchKBView extends PatchView {
 
     @Override
     protected void initialize() {
-        centerImage = R.drawable.map_node_vco;
-        topImage = R.drawable.map_node_in_vco;
-        bottomImage = R.drawable.map_node_out_vco;
-        color = Color.rgb(253, 62, 129);
+        centerImage = R.drawable.map_node_kb;
+        topImage = R.drawable.map_node_out_kb;
+        bottomImage = R.drawable.map_node_out_kb;
+        color = Color.rgb(178, 0, 255);
     }
 
     @Override

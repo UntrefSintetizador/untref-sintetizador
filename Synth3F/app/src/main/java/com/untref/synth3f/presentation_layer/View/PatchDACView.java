@@ -8,7 +8,6 @@ import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.presenters.PatchDACPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
-import com.untref.synth3f.presentation_layer.presenters.PatchVCOPresenter;
 
 public class PatchDACView extends PatchView {
 
@@ -20,9 +19,9 @@ public class PatchDACView extends PatchView {
     @Override
     protected void initialize() {
         centerImage = R.drawable.drag_dac;
-        topImage = R.drawable.map_node_in_vco;
-        bottomImage = R.drawable.map_node_out_vco;
-        color = Color.MAGENTA;
+        topImage = R.drawable.map_node_in_dac;
+        bottomImage = R.drawable.map_node_in_dac;
+        color = Color.GREEN;
     }
 
     @Override

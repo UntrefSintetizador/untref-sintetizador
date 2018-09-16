@@ -2,6 +2,7 @@ package com.untref.synth3f.presentation_layer.View;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class PatchKBMenuView extends PatchMenuView {
 
     public PatchKBMenuView(MainActivity container, int layout, PatchPresenter patchPresenter, Patch patch) {
         super(container, layout, patchPresenter, patch);
+        setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
     }
 
     @Override
