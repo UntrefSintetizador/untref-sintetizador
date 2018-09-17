@@ -1,7 +1,14 @@
 #include "faust_api.hpp"
 #include "android_graph_adapter.hpp"
+#include <android/log.h>
 
-JNIEXPORT jlong JNICALL java_com_untref_synth3f_data_1layer_FaustApi_InitFaustApi(JNIEnv *env, jclass cls, jint channels, jint buffer_size, jint sample_rate)
+jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+    __android_log_print(ANDROID_LOG_INFO, "Synth 3F JNI", "Loaded!!!\n");
+
+    return JNI_VERSION_1_2;
+}
+
+JNIEXPORT jlong JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_initFaustApi(jint channels, jint buffer_size, jint sample_rate)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = new faust::AndroidGraphAdapter();
     android_graph_adapter->Init(channels, buffer_size, sample_rate);
@@ -10,7 +17,7 @@ JNIEXPORT jlong JNICALL java_com_untref_synth3f_data_1layer_FaustApi_InitFaustAp
     return android_graph_adapter_pointer;
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_DisposeFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_disposeFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
     if(android_graph_adapter != NULL)
@@ -21,7 +28,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_DisposeFaust
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_AddPatchFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jstring jcode, jint id)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_addPatchFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jstring jcode, jint id)
 {
     const char* code = (char *) env->GetStringUTFChars(jcode, NULL);
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
@@ -32,7 +39,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_AddPatchFaus
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_RemovePatchFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jint id)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_removePatchFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jint id)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
     if(android_graph_adapter != NULL)
@@ -41,7 +48,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_RemovePatchF
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_SetValueFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jstring jname, jfloat value)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_setValueFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jstring jname, jfloat value)
 {
     const char* name = (char *) env->GetStringUTFChars(jname, NULL);
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
@@ -52,7 +59,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_SetValueFaus
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_ConnectFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jint source, jint outlet, jint target, jint inlet)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_connectFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jint source, jint outlet, jint target, jint inlet)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
     if(android_graph_adapter != NULL)
@@ -61,7 +68,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_ConnectFaust
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_DisconnectFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jint source, jint outlet, jint target, jint inlet)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_disconnectFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jint source, jint outlet, jint target, jint inlet)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
     if(android_graph_adapter != NULL)
@@ -70,7 +77,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_DisconnectFa
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_ProcessFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jfloatArray jdata, jint channels)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_processFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer, jfloatArray jdata, jint channels)
 {
     float *data = env->GetFloatArrayElements(jdata, NULL);
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
@@ -80,7 +87,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_ProcessFaust
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_StartAudioFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_startAudioFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
     if(android_graph_adapter != NULL)
@@ -89,7 +96,7 @@ JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_StartAudioFa
     }
 }
 
-JNIEXPORT void JNICALL java_com_untref_synth3f_data_1layer_FaustApi_StopAudioFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer)
+JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_stopAudioFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = (faust::AndroidGraphAdapter*)android_graph_adapter_pointer;
     if(android_graph_adapter != NULL)

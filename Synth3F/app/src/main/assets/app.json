@@ -3,7 +3,7 @@
   "processors" :
   {
     "pd":"com.untref.synth3f.domain_layer.helpers.PureDataProcessor",
-    "faust":"com.untref.synth3f.domain_layer.Processors.helpers.FaustProcessor"
+    "faust":"com.untref.synth3f.domain_layer.helpers.FaustProcessor"
   },
 
   "processor": "pd"
