@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-JNIEXPORT jlong JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_initFaustApi(jint channels, jint buffer_size, jint sample_rate);
+JNIEXPORT jlong JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_initFaustApi(JNIEnv* env, jclass cls, jint channels, jint buffer_size, jint sample_rate);
 
 JNIEXPORT void JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_disposeFaustApi(JNIEnv *env, jclass cls, jlong android_graph_adapter_pointer);
 

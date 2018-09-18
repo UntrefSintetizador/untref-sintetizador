@@ -8,7 +8,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     return JNI_VERSION_1_2;
 }
 
-JNIEXPORT jlong JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_initFaustApi(jint channels, jint buffer_size, jint sample_rate)
+JNIEXPORT jlong JNICALL Java_com_untref_synth3f_data_1layer_FaustApi_initFaustApi(JNIEnv* env, jclass cls, jint channels, jint buffer_size, jint sample_rate)
 {
     faust::AndroidGraphAdapter* android_graph_adapter = new faust::AndroidGraphAdapter();
     android_graph_adapter->Init(channels, buffer_size, sample_rate);
