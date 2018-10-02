@@ -32,132 +32,150 @@
                 android:textSize="40px"/>
 
             <TableLayout
-                android:id="@+id/tablaMIX1"
+                android:id="@+id/tablaLFO1"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 xmlns:android="http://schemas.android.com/apk/res/android">
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tableRowMIX0"
+                    android:id="@+id/tableRowLFO1_1"
                     android:gravity="center_vertical">
                     <!--COMIENZO DE PARAMETRO-->
                     <TextView
-                        android:id="@+id/labelMIX1_0"
+                        android:id="@+id/labelLFO1_1"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_weight="1"
                         android:text="on-off"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBarMIX1_0"
+                        android:id="@+id/seekBarLFO1_1"
                         android:layout_weight="5" />
                 </TableRow>
                 <!--FIN DE PARAMETRO-->
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tableRowMIX1"
+                    android:id="@+id/tableRowLFO1_2"
                     android:gravity="center_vertical">
                     <!--COMIENZO DE PARAMETRO-->
                     <TextView
-                        android:id="@+id/labelMIX1_1"
+                        android:id="@+id/labelLFO1_2"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="ch1"
+                        android:text="att_freq0"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBarMIX1_1"
+                        android:id="@+id/seekBarLFO1_2"
                         android:layout_weight="5" />
                 </TableRow>
                 <!--FIN DE PARAMETRO-->
-                <!--COMIENZO DE PARAMETRO-->
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tableRowMIX1_2"
+                    android:id="@+id/tableRowLFO1_3"
                     android:gravity="center_vertical">
-
+                    <!--COMIENZO DE PARAMETRO-->
                     <TextView
-                        android:id="@+id/labelMIX1_2"
+                        android:id="@+id/labelLFO1_3"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="ch2"
+                        android:text="att_pw"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBarMIX1_2"
+                        android:id="@+id/seekBarLFO1_3"
                         android:layout_weight="5" />
                 </TableRow>
                 <!--FIN DE PARAMETRO-->
-                <!--COMIENZO DE PARAMETRO-->
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tableRowMIX1_3"
+                    android:id="@+id/tableRowLFO1_4"
                     android:gravity="center_vertical">
-
+                    <!--COMIENZO DE PARAMETRO-->
                     <TextView
-                        android:id="@+id/labelMIX1_3"
+                        android:id="@+id/labelLFO1_4"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="ch3"
+                        android:text="shape"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBarMIX1_3"
+                        android:id="@+id/seekBarLFO1_4"
                         android:layout_weight="5" />
                 </TableRow>
                 <!--FIN DE PARAMETRO-->
-                <!--COMIENZO DE PARAMETRO-->
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tableRowMIX1_4"
+                    android:id="@+id/tableRowLFO1_5"
                     android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
                     <TextView
-                        android:id="@+id/labelMIX1_4"
+                        android:id="@+id/labelLFO1_5"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="ch4"
+                        android:text="freq"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBarMIX1_4"
+                        android:id="@+id/seekBarLFO1_5"
                         android:layout_weight="5" />
                 </TableRow>
                 <!--FIN DE PARAMETRO-->
-                <!--COMIENZO DE PARAMETRO-->
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
-                    android:id="@+id/tableRowMIX1_5"
+                    android:id="@+id/tableRowLFO1_6"
                     android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
                     <TextView
-                        android:id="@+id/labelMIX1_5"
+                        android:id="@+id/labelLFO1_6"
                         android:layout_height="wrap_content"
-                        android:layout_width="0dp"
+                        android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="master"
+                        android:text="BPM"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/seekBarMIX1_5"
+                        android:id="@+id/seekBarLFO1_6"
                         android:layout_weight="5" />
-                    <!--FIN DE PARAMETRO-->
                 </TableRow>
+                <!--FIN DE PARAMETRO-->
+                <TableRow
+                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tableRowLFO1_7"
+                    android:gravity="center_vertical">
+                    <!--COMIENZO DE PARAMETRO-->
+                    <TextView
+                        android:id="@+id/labelLFO1_7"
+                        android:layout_height="wrap_content"
+                        android:layout_width="75dp"
+                        android:layout_weight="1"
+                        android:text="pw"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBarLFO1_7"
+                        android:layout_weight="5" />
+                </TableRow>
+                <!--FIN DE PARAMETRO-->
             </TableLayout>
 
             <Button
