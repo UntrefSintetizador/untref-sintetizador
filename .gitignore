@@ -13,6 +13,7 @@ hs_err_pid*
 
 #Synth3F build files
 /Synth3F/.gradle
+/Synth3F/.idea/caches
 /Synth3F/.idea/libraries
 /Synth3F/.idea/tasks.xml
 /Synth3F/.idea/vcs.xml
