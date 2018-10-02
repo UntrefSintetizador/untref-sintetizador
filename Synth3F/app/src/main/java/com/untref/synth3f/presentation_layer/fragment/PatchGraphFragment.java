@@ -233,6 +233,10 @@ public class PatchGraphFragment extends Fragment {
         PatchGraphView.findViewById(R.id.menuButtonDragEG).setOnTouchListener(listener);
         PatchGraphView.findViewById(R.id.menuButtonDragDAC).setOnTouchListener(listener);
         PatchGraphView.findViewById(R.id.menuButtonDragKB).setOnTouchListener(listener);
+        PatchGraphView.findViewById(R.id.menuButtonDragLFO).setOnTouchListener(listener);
+        PatchGraphView.findViewById(R.id.menuButtonDragMIX).setOnTouchListener(listener);
+        PatchGraphView.findViewById(R.id.menuButtonDragNG).setOnTouchListener(listener);
+        PatchGraphView.findViewById(R.id.menuButtonDragSH).setOnTouchListener(listener);
     }
 
     private void createSaveLoadEvent() {

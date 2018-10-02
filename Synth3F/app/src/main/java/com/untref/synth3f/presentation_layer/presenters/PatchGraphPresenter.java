@@ -14,13 +14,21 @@ import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 import com.untref.synth3f.entities.DACPatch;
 import com.untref.synth3f.entities.EGPatch;
 import com.untref.synth3f.entities.KBPatch;
+import com.untref.synth3f.entities.LFOPatch;
+import com.untref.synth3f.entities.MIXPatch;
+import com.untref.synth3f.entities.NGPatch;
 import com.untref.synth3f.entities.Patch;
+import com.untref.synth3f.entities.SHPatch;
 import com.untref.synth3f.entities.VCAPatch;
 import com.untref.synth3f.entities.VCFPatch;
 import com.untref.synth3f.entities.VCOPatch;
 import com.untref.synth3f.presentation_layer.View.PatchDACView;
 import com.untref.synth3f.presentation_layer.View.PatchEGView;
 import com.untref.synth3f.presentation_layer.View.PatchKBView;
+import com.untref.synth3f.presentation_layer.View.PatchLFOView;
+import com.untref.synth3f.presentation_layer.View.PatchMIXView;
+import com.untref.synth3f.presentation_layer.View.PatchNGView;
+import com.untref.synth3f.presentation_layer.View.PatchSHView;
 import com.untref.synth3f.presentation_layer.View.PatchVCAView;
 import com.untref.synth3f.presentation_layer.View.PatchVCFView;
 import com.untref.synth3f.presentation_layer.View.PatchVCOView;
@@ -77,6 +85,22 @@ public class PatchGraphPresenter {
             case "kb":
                 patch = new KBPatch();
                 patchView = new PatchKBView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "lfo":
+                patch = new LFOPatch();
+                patchView = new PatchLFOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "mix":
+                patch = new MIXPatch();
+                patchView = new PatchMIXView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "ng":
+                patch = new NGPatch();
+                patchView = new PatchNGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "sh":
+                patch = new SHPatch();
+                patchView = new PatchSHView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             default:
                 patch = new VCOPatch();

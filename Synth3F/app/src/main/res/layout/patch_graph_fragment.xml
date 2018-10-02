@@ -98,6 +98,54 @@
         app:layout_constraintStart_toEndOf="@+id/menuButtonDragDAC" />
 
     <Button
+        android:id="@+id/menuButtonDragLFO"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/drag_lfo"
+        android:tag="lfo"
+        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCO"
+        app:layout_constraintStart_toEndOf="@+id/menuButtonOpenDragMenu" />
+
+    <Button
+        android:id="@+id/menuButtonDragMIX"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/drag_mix"
+        android:tag="mix"
+        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCF"
+        app:layout_constraintStart_toEndOf="@+id/menuButtonDragLFO" />
+
+    <Button
+        android:id="@+id/menuButtonDragNG"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/drag_ng"
+        android:tag="ng"
+        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragEG"
+        app:layout_constraintStart_toEndOf="@+id/menuButtonDragMIX" />
+
+    <Button
+        android:id="@+id/menuButtonDragSH"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/drag_sh"
+        android:tag="sh"
+        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCA"
+        app:layout_constraintStart_toEndOf="@+id/menuButtonDragNG" />
+
+    <Button
         android:id="@+id/menuDelete"
         android:layout_width="64dp"
         android:layout_height="64dp"

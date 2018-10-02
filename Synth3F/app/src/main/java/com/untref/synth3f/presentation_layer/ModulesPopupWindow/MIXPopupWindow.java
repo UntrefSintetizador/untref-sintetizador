@@ -22,10 +22,10 @@ public class MIXPopupWindow extends ModulePopupWindow {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBarMIXER1_1,R.id.labelMIXER1_1,"ch1",title,1.0f,0.0f,0.01f,0.01f,view);
-        createSeekBarComponent(R.id.seekBarMIXER1_2,R.id.labelMIXER1_2,"ch2",title,1.0f,0.0f,0.01f,0.01f,view);
-        createSeekBarComponent(R.id.seekBarMIXER1_3,R.id.labelMIXER1_3,"ch3",title,1.0f,0.0f,0.01f,0.01f,view);
-        createSeekBarComponent(R.id.seekBarMIXER1_4,R.id.labelMIXER1_4,"ch4",title,1.0f,0.0f,0.01f,0.01f,view);
-        createSeekBarComponent(R.id.seekBarMIXER1_5,R.id.labelMIXER1_5,"master",title,1.0f,0.0f,0.1f,0.1f,view);
+        createSeekBarComponent(R.id.seekBarMIX1_1,R.id.labelMIX1_1,"ch1",title,1.0f,0.0f,0.01f,0.01f,view);
+        createSeekBarComponent(R.id.seekBarMIX1_2,R.id.labelMIX1_2,"ch2",title,1.0f,0.0f,0.01f,0.01f,view);
+        createSeekBarComponent(R.id.seekBarMIX1_3,R.id.labelMIX1_3,"ch3",title,1.0f,0.0f,0.01f,0.01f,view);
+        createSeekBarComponent(R.id.seekBarMIX1_4,R.id.labelMIX1_4,"ch4",title,1.0f,0.0f,0.01f,0.01f,view);
+        createSeekBarComponent(R.id.seekBarMIX1_5,R.id.labelMIX1_5,"master",title,1.0f,0.0f,0.1f,0.1f,view);
     }
 }
