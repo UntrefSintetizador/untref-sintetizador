@@ -36,6 +36,7 @@ public class PatchKBMenuView extends PatchMenuView {
         pianoView.setPatchId(patch.getId());
 
         createSeekBarComponent(R.id.seekBar_KB0, R.id.label_KB0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, kbPatch.on_off, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBar_KB1, R.id.label_KB1, "glide", title, 5000.0f, 0.0f, 1.0f, 1.0f, view, kbPatch.glide, MenuScale.exponential_left);
 
     }
 }

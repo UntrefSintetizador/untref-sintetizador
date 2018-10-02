@@ -48,12 +48,24 @@
                         android:layout_height="wrap_content"
                         android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="att_freq0"
+                        android:text="on-off"
                         />
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/seekBar_KB0"
+                        android:layout_weight="5" />
+                    <TextView
+                        android:id="@+id/label_KB1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="75dp"
+                        android:layout_weight="1"
+                        android:text="glide"
+                        />
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seekBar_KB1"
                         android:layout_weight="5" />
                 </TableRow>
             </TableLayout>
