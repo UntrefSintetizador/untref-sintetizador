@@ -11,7 +11,19 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# c project
+#Synth3F build files
+/Synth3F/.gradle
+/Synth3F/.idea/libraries
+/Synth3F/.idea/tasks.xml
+/Synth3F/.idea/vcs.xml
+/Synth3F/.idea/workspace.xml
+/Synth3F/app/build
+/Synth3F/app/release
+/Synth3F/build
+/Synth3F/custom_view_keyboard/build
+/Synth3F/local.properties
+
+#C project
 /FaustApi/bin
 /FaustApi/libs
 /FaustApi/obj

@@ -1,5 +1,0 @@
-libs
-src/*.o
-xcode/pdtest.app
-xcode/*/project.xcworkspace
-
