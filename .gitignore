@@ -23,6 +23,7 @@ hs_err_pid*
 /Synth3F/build
 /Synth3F/custom_view_keyboard/build
 /Synth3F/local.properties
+*.iml
 
 #C project
 /FaustApi/bin
