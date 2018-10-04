@@ -5,10 +5,16 @@ import android.view.View;
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
+import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
+import java.lang.reflect.Field;
+
 public abstract class PatchPresenter {
+
+    protected static final int FLOAT_PRECISION = 5;
+    protected static final int INTEGER_PRECISION = 0;
 
     protected PatchView patchView;
     protected PatchGraphPresenter patchGraphPresenter;
@@ -32,8 +38,20 @@ public abstract class PatchPresenter {
 
     public abstract PatchMenuView createMenuView(MainActivity context);
 
+    public abstract void initMenuView(PatchMenuView2 patchMenuView2);
+
     public void setValue(String name, float value) {
-        processor.sendValue(name, value);
+        try {
+            Class<?> c = patch.getClass();
+            Field f = c.getDeclaredField(name.replace("-", "_"));
+            f.setAccessible(true);
+            f.setFloat(patch, value);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        processor.sendValue("x_" + patch.getTypeName() + "_" + Integer.toString(patch.getId()) + "_" + name, value);
     }
 
     public void delete(int patchId) {

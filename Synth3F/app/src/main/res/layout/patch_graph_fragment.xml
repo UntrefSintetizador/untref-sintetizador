@@ -149,12 +149,12 @@
         android:id="@+id/menuDelete"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/menu_delete"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/menuSave"
@@ -177,5 +177,43 @@
         android:background="@drawable/menu_load"
         app:layout_constraintEnd_toStartOf="@+id/menuSave"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.untref.synth3f.presentation_layer.View.PatchMenuView2
+        android:id="@+id/patch_menu_view"
+        android:layout_width="600px"
+        android:layout_height="600px"
+        android:columnCount="5"
+        android:rowCount="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/patch_menu_view_close"
+                android:background="@drawable/menu_view_close" />
+
+            <TextView android:id="@+id/patch_menu_view_parameter_name" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/patch_menu_view_parameter_value"
+                android:hint="0"
+                android:inputType="numberDecimal" />
+        </TableRow>
+
+    </com.untref.synth3f.presentation_layer.View.PatchMenuView2>
+
+    <com.untref.synth3f.presentation_layer.View.OptionList
+        android:id="@+id/patch_menu_view_option_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/patch_menu_view"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.untref.synth3f.presentation_layer.View.OptionList>
 
 </com.untref.synth3f.presentation_layer.View.MapView>

@@ -2,7 +2,9 @@ package com.untref.synth3f.presentation_layer.presenters;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
+import com.untref.synth3f.entities.VCAPatch;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
+import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
 import com.untref.synth3f.presentation_layer.View.PatchVCAMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
@@ -16,5 +18,13 @@ public class PatchVCAPresenter extends PatchPresenter {
     @Override
     public PatchMenuView createMenuView(MainActivity context) {
         return new PatchVCAMenuView(context, R.layout.popup_vca, this, patch);
+    }
+
+    @Override
+    public void initMenuView(PatchMenuView2 patchMenuView2) {
+        patchMenuView2.createKnob("on-off", 1.0f, 0.0f, INTEGER_PRECISION, ((VCAPatch) patch).on_off, PatchMenuView.MenuScale.linear);
+        patchMenuView2.createKnob("att_control", 100.0f, -100.0f, FLOAT_PRECISION, ((VCAPatch) patch).att_control, PatchMenuView.MenuScale.exponential_center);
+        patchMenuView2.createKnob("base", 1.0f, 0.0f, FLOAT_PRECISION, ((VCAPatch) patch).base, PatchMenuView.MenuScale.linear);
+        patchMenuView2.createKnob("clip", 1.0f, 0.0f, INTEGER_PRECISION, ((VCAPatch) patch).clip, PatchMenuView.MenuScale.linear);
     }
 }

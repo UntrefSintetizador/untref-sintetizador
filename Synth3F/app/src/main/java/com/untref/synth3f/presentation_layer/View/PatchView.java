@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
@@ -199,9 +198,10 @@ public abstract class PatchView extends LinearLayout {
 
             @Override
             public boolean onDoubleTap(MotionEvent motionEvent) {
-                PatchMenuView patchMenuView = patchPresenter.createMenuView((MainActivity) patchGraphFragment.getActivity());
-                patchMenuView.showAsDropDown(nodeImage, 150, -500);
-                patchMenuView.setButton(nodeImage);
+                PatchMenuView2 patchMenuView2 = patchGraphFragment.getPatchMenuView2();
+                patchMenuView2.close();
+                patchPresenter.initMenuView(patchMenuView2);
+                patchMenuView2.open(patchPresenter);
                 return false;
             }
 

@@ -182,7 +182,7 @@ public abstract class PatchMenuView extends PopupWindow {
 
     public abstract void initializeModule(String title, View view);
 
-    protected enum MenuScale {
+    public enum MenuScale {
         linear, exponential_left, exponential_center
     }
 

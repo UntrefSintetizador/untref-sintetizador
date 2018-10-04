@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
+import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.activity.StorageActivity;
@@ -33,6 +34,7 @@ public class PatchGraphFragment extends Fragment {
     private BaseProcessor processor;
     private MapView mapView;
     private Context context;
+    private PatchMenuView2 patchMenuView2;
 
     public static final int RESULT_CANCEL = 0;
     public static final int RESULT_OK = 1;
@@ -53,6 +55,8 @@ public class PatchGraphFragment extends Fragment {
         createDragAndDropEvent();
         createSaveLoadEvent();
         createWireDrawer(PatchGraphView);
+        patchMenuView2 = (PatchMenuView2) PatchGraphView.findViewById(R.id.patch_menu_view);
+        patchMenuView2.setPatchGraphFragment(this);
         return PatchGraphView;
     }
 
@@ -137,6 +141,10 @@ public class PatchGraphFragment extends Fragment {
                 wireDrawer.release();
             }
         }
+    }
+
+    public PatchMenuView2 getPatchMenuView2() {
+        return patchMenuView2;
     }
 
     public int findUnusedId() {
