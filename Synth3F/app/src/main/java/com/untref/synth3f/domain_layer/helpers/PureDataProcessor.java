@@ -100,22 +100,21 @@ public class PureDataProcessor extends BaseProcessor {
 
     private Map<String, Integer> getDictionaryFilesPD() {
         Map<String, Integer> dictionary = new HashMap<String, Integer>();
-        dictionary.put("x_vco.pd", R.raw.x_vco);
+        dictionary.put("attenuator.pd", R.raw.attenuator);
         dictionary.put("cell.pd", R.raw.cell);
+        dictionary.put("param.pd", R.raw.param);
+        dictionary.put("x_dac.pd", R.raw.x_dac);
         dictionary.put("x_eg.pd", R.raw.x_eg);
+        dictionary.put("x_fade.pd", R.raw.x_fade);
+        dictionary.put("x_kb.pd", R.raw.x_kb);
+        dictionary.put("x_lfo.pd", R.raw.x_lfo);
         dictionary.put("x_mix.pd", R.raw.x_mix);
-        dictionary.put("x_mtx.pd", R.raw.x_mtx);
         dictionary.put("x_ng.pd", R.raw.x_ng);
+        dictionary.put("x_seq.pd", R.raw.x_seq);
         dictionary.put("x_sh.pd", R.raw.x_sh);
         dictionary.put("x_vca.pd", R.raw.x_vca);
         dictionary.put("x_vcf.pd", R.raw.x_vcf);
-        dictionary.put("x_kb.pd", R.raw.x_kb);
-        dictionary.put("x_kb_.pd", R.raw.x_kb_);
-        dictionary.put("x_seq.pd", R.raw.x_seq);
-        dictionary.put("x_dac.pd", R.raw.x_dac);
-        dictionary.put("param.pd", R.raw.param);
-        dictionary.put("x_fade.pd", R.raw.x_fade);
-        dictionary.put("attenuator.pd", R.raw.attenuator);
+        dictionary.put("x_vco.pd", R.raw.x_vco);
 
         return dictionary;
     }

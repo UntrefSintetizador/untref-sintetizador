@@ -95,20 +95,20 @@ public class PureDataConfig extends BaseConfig{
 
     private Map<String,Integer> getDictionaryFilesPD(){
         Map<String,Integer> dictionary = new HashMap<String,Integer>();
-        dictionary.put("x_vco1.pd", R.raw.x_vco1);
-        dictionary.put("x_vco2.pd",R.raw.x_vco2);
-        dictionary.put("x_vco3.pd",R.raw.x_vco3);
+//        dictionary.put("x_vco1.pd", R.raw.x_vco1);
+//        dictionary.put("x_vco2.pd",R.raw.x_vco2);
+//        dictionary.put("x_vco3.pd",R.raw.x_vco3);
         dictionary.put("cell.pd",R.raw.cell);
-        dictionary.put("x_eg1.pd",R.raw.x_eg1);
-        dictionary.put("x_eg2.pd",R.raw.x_eg2);
+//        dictionary.put("x_eg1.pd",R.raw.x_eg1);
+//        dictionary.put("x_eg2.pd",R.raw.x_eg2);
         dictionary.put("x_mix.pd",R.raw.x_mix);
-        dictionary.put("x_mtx.pd",R.raw.x_mtx);
+//        dictionary.put("x_mtx.pd",R.raw.x_mtx);
         dictionary.put("x_ng.pd",R.raw.x_ng);
         dictionary.put("x_sh.pd",R.raw.x_sh);
-        dictionary.put("x_vca1.pd",R.raw.x_vca1);
-        dictionary.put("x_vca2.pd",R.raw.x_vca2);
-        dictionary.put("x_vcf1.pd",R.raw.x_vcf1);
-        dictionary.put("x_vcf2.pd",R.raw.x_vcf2);
+//        dictionary.put("x_vca1.pd",R.raw.x_vca1);
+//        dictionary.put("x_vca2.pd",R.raw.x_vca2);
+//        dictionary.put("x_vcf1.pd",R.raw.x_vcf1);
+//        dictionary.put("x_vcf2.pd",R.raw.x_vcf2);
         dictionary.put("x_kb.pd",R.raw.x_kb);
         dictionary.put("x_seq.pd",R.raw.x_seq);
 
