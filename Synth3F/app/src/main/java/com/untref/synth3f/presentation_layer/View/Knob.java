@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatImageView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -43,7 +42,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         this.precision = precision;
         this.value = value;
         this.scale = scale;
-        this.init(colorStateList);
+        init(colorStateList);
     }
 
     public String getName() {
@@ -85,11 +84,17 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
                 value = (float) -Math.pow(-minValue + 1, -(percentage - 0.5) * 2) + 1;
             }
         }
-        BigDecimal bigDecimal = BigDecimal.valueOf(value);
-        bigDecimal = bigDecimal.setScale(precision, BigDecimal.ROUND_HALF_UP);
-        value = bigDecimal.floatValue();
-        Log.i("rotation", Integer.toString(rotation));
+        normalizeValue();
         setRotation(calculateRotation());
+    }
+
+    public float setValue(String strValue) {
+        value = Float.parseFloat(strValue);
+        value = Math.max(minValue, Math.min(maxValue, value));
+        normalizeValue();
+        rotation = calculateRotation();
+        setRotation(rotation);
+        return value;
     }
 
     @Override
@@ -122,13 +127,19 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     }
 
     private void init(ColorStateList colorStateList) {
-        this.rotation = calculateRotation();
+        rotation = calculateRotation();
         setRotation(rotation);
-        this.setClickable(true);
-        this.setOnTouchListener(this);
-        this.setBackgroundResource(R.drawable.knob);
-        this.setScaleType(AppCompatImageView.ScaleType.CENTER_INSIDE);
-        this.setSupportBackgroundTintList(colorStateList);
-        this.setSupportBackgroundTintMode(PorterDuff.Mode.MULTIPLY);
+        setClickable(true);
+        setOnTouchListener(this);
+        setBackgroundResource(R.drawable.knob);
+        setScaleType(AppCompatImageView.ScaleType.CENTER_INSIDE);
+        setSupportBackgroundTintList(colorStateList);
+        setSupportBackgroundTintMode(PorterDuff.Mode.MULTIPLY);
+    }
+
+    private void normalizeValue() {
+        BigDecimal bigDecimal = BigDecimal.valueOf(value);
+        bigDecimal = bigDecimal.setScale(precision, BigDecimal.ROUND_HALF_UP);
+        value = bigDecimal.floatValue();
     }
 }

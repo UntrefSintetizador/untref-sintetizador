@@ -63,6 +63,7 @@ public class OptionList extends LinearLayout {
                 ((OptionItem) getChildAt(i)).setColor(inactiveColor);
             }
         }
+        patchMenuView2.setParameterToEdit(parameterName, id);
         patchMenuView2.setValue(parameterName, id);
     }
 
