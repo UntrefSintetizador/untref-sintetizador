@@ -22,4 +22,4 @@ before_script:
 notifications:
   email: false
 
-script: ./Synth3F/gradlew connectedAndroidTest
+script: Synth3F/gradlew connectedAndroidTest
