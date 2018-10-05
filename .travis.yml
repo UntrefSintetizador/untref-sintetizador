@@ -1,3 +1,5 @@
+install: gradle wrapper --gradle-version 4.2
+
 language: android
 jdk: oraclejdk8
 sudo: false
