@@ -5,9 +5,9 @@ import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 public class VCOPatch extends Patch {
 
     public float on_off = 1f;
-    public float att_freq0 = 1f;
-    public float att_freq1 = 1f;
-    public float att_pw = 1f;
+    public float att_freq0 = 100f;
+    public float att_freq1 = 100f;
+    public float att_pw = 100f;
     public float shape = 0f;
     public float freq = 261.626f;
     public float offset = 0f;
