@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,7 +22,9 @@ import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PatchMenuView2 extends TableLayout {
 
@@ -34,6 +35,7 @@ public class PatchMenuView2 extends TableLayout {
     private PatchPresenter patchPresenter;
     private ColorStateList colorStateList;
     private List<Knob> knobList;
+    private Map<String, Knob> knobMap;
     private int knobSize;
     private int knobsPerRow;
 
@@ -48,6 +50,7 @@ public class PatchMenuView2 extends TableLayout {
     public void setPatchGraphFragment(PatchGraphFragment patchGraphFragment) {
         this.patchGraphFragment = patchGraphFragment;
         this.knobList = new ArrayList<>();
+        this.knobMap = new HashMap<>();
         this.parameterNameView = (TextView) findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = (EditText) findViewById(R.id.patch_menu_view_parameter_value);
         this.optionList = (OptionList) ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
@@ -118,12 +121,24 @@ public class PatchMenuView2 extends TableLayout {
 
     public void createKnob(String parameterName, float maxValue, float minValue,
                            int precision, float value, PatchMenuView.MenuScale scale) {
-        knobList.add(new Knob(getContext(), this, parameterName, maxValue, minValue,
-                precision, value, scale, colorStateList));
+
+        Knob newKnob = new Knob(getContext(), this, parameterName, maxValue,
+                minValue, precision, value, scale, colorStateList);
+
+        knobList.add(newKnob);
+        knobMap.put(parameterName, newKnob);
     }
 
     public void createOptionList(String parameterName, int[] imageIds, int selectedValue) {
         optionList.setValues(parameterName, imageIds, selectedValue);
+    }
+
+    public void linkKnobs(String parameterName1, String parameterName2) {
+        Knob firstKnob = knobMap.get(parameterName1);
+        Knob secondKnob = knobMap.get(parameterName2);
+
+        firstKnob.link(secondKnob, parameterName2);
+        secondKnob.link(firstKnob, parameterName1);
     }
 
     public void open(PatchPresenter patchPresenter) {

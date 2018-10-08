@@ -30,6 +30,7 @@ public class PatchVCOPresenter extends PatchPresenter {
         patchMenuView2.createOptionList("shape", imageIds, (int) ((VCOPatch) patch).shape);
         patchMenuView2.createKnob("freq", 20000.0f, 0.0f, FLOAT_PRECISION, ((VCOPatch) patch).freq, PatchMenuView.MenuScale.exponential_left);
         patchMenuView2.createKnob("offset", 63.0f, -64.0f, FLOAT_PRECISION, ((VCOPatch) patch).offset, PatchMenuView.MenuScale.linear);
+        patchMenuView2.linkKnobs("freq", "offset");
         patchMenuView2.createKnob("pw", 100.0f, 0.0f, FLOAT_PRECISION, ((VCOPatch) patch).pw, PatchMenuView.MenuScale.linear);
     }
 }

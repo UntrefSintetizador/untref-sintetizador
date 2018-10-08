@@ -26,6 +26,8 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
     private int rotation;
     private int initialTouch;
+    private Knob linkedKnob;
+    private String linkedKnobParameterName;
 
     public Knob(Context context) {
         super(context);
@@ -116,6 +118,12 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
                 int clampedRotation = Math.max(-MAX_ROTATION, Math.min(MAX_ROTATION, rotation + y - initialTouch));
                 changeValue(-clampedRotation);
                 patchMenuView2.setValue(parameterName, value);
+
+                if (linkedKnob != null) {
+                    linkedKnob.changeValue(-clampedRotation);
+                    patchMenuView2.setValue(linkedKnobParameterName, value);
+                }
+
                 break;
             case MotionEvent.ACTION_UP:
                 rotation = Math.max(-MAX_ROTATION, Math.min(MAX_ROTATION, rotation + y - initialTouch));
@@ -141,5 +149,10 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         BigDecimal bigDecimal = BigDecimal.valueOf(value);
         bigDecimal = bigDecimal.setScale(precision, BigDecimal.ROUND_HALF_UP);
         value = bigDecimal.floatValue();
+    }
+
+    public void link(Knob knob, String parameterName) {
+        linkedKnob = knob;
+        linkedKnobParameterName = parameterName;
     }
 }

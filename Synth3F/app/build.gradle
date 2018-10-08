@@ -29,7 +29,7 @@ dependencies {
     implementation 'com.android.support:design:24.2.1'
     implementation project(':custom_view_keyboard')
     implementation 'org.puredata.android:pd-core:1.0.1'
-    androidTestImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.google.code.gson:gson:2.8.2'
 }
