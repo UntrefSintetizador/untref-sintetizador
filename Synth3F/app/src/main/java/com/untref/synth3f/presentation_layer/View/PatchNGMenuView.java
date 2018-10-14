@@ -23,7 +23,7 @@ public class PatchNGMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBar_NG0, R.id.label_NG0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, ngPatch.on_off, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBar_NG0, R.id.label_NG0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, ngPatch.on_off, MenuScale.LINEAR);
     }
 
 }

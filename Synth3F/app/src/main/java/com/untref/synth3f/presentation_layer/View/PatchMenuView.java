@@ -109,11 +109,11 @@ public abstract class PatchMenuView extends PopupWindow {
         seekBar.setMax((int) ((max_module - min_module) / multiplicador_modulo));
         final float maxValue = max_module - min_module;
         final float steps = (max_module - min_module) / multiplicador_modulo;
-        if (scale == MenuScale.linear) {
+        if (scale == MenuScale.LINEAR) {
             seekBar.setProgress((int) ((value - min_module) / multiplicador_seekBar));
-        } else if (scale == MenuScale.exponential_left) {
+        } else if (scale == MenuScale.EXPONENTIAL_LEFT) {
             seekBar.setProgress((int) (steps * Math.log(value - min_module - 1) / Math.log(maxValue + 1)));
-        } else if (scale == MenuScale.exponential_center) {
+        } else if (scale == MenuScale.EXPONENTIAL_CENTER) {
             double aux = 0;
             if (value > 0) {
                 aux = Math.log(value + 1) / Math.log(max_module + 1);
@@ -136,11 +136,11 @@ public abstract class PatchMenuView extends PopupWindow {
                         float valorInicial = min_module;
                         DecimalFormat decimales = new DecimalFormat("0.00");
                         float value = 0;
-                        if (scale == MenuScale.linear) {
+                        if (scale == MenuScale.LINEAR) {
                             value = (float) (valorInicial + (progress * multiplicador));
-                        } else if (scale == MenuScale.exponential_left) {
+                        } else if (scale == MenuScale.EXPONENTIAL_LEFT) {
                             value = (float) (valorInicial + Math.pow(maxValue + 1, progress / steps) - 1);
-                        } else if (scale == MenuScale.exponential_center) {
+                        } else if (scale == MenuScale.EXPONENTIAL_CENTER) {
                             double aux = Math.abs((progress - steps / 2) * 2 / steps);
                             if (progress > steps / 2) {
                                 value = (float) Math.pow(max_module + 1, aux) - 1;
@@ -183,7 +183,6 @@ public abstract class PatchMenuView extends PopupWindow {
     public abstract void initializeModule(String title, View view);
 
     public enum MenuScale {
-        linear, exponential_left, exponential_center
+		LINEAR, EXPONENTIAL_LEFT, EXPONENTIAL_CENTER
     }
-
 }

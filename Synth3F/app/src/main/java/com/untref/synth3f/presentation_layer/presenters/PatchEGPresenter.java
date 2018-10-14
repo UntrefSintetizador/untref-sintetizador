@@ -22,11 +22,11 @@ public class PatchEGPresenter extends PatchPresenter {
 
     @Override
     public void initMenuView(PatchMenuView2 patchMenuView2) {
-        patchMenuView2.createKnob("on-off", 1.0f, 0.0f, INTEGER_PRECISION, ((EGPatch) patch).on_off, PatchMenuView.MenuScale.linear);
-        patchMenuView2.createKnob("attack", 5000.0f, 0.0f, FLOAT_PRECISION, ((EGPatch) patch).attack, PatchMenuView.MenuScale.exponential_left);
-        patchMenuView2.createKnob("decay", 5000.0f, 0.0f, FLOAT_PRECISION, ((EGPatch) patch).decay, PatchMenuView.MenuScale.exponential_left);
-        patchMenuView2.createKnob("sustain", 1.0f, 0.0f, FLOAT_PRECISION, ((EGPatch) patch).sustain, PatchMenuView.MenuScale.linear);
-        patchMenuView2.createKnob("release", 5000.0f, 0.0f, FLOAT_PRECISION, ((EGPatch) patch).release, PatchMenuView.MenuScale.exponential_left);
-        patchMenuView2.createKnob("gate", 1.0f, 0.0f, INTEGER_PRECISION, ((EGPatch) patch).gate, PatchMenuView.MenuScale.linear);
+        patchMenuView2.createKnob("on-off", INTEGER_PRECISION, ((EGPatch) patch).on_off, new LinearFunction(0f, 1f));
+        patchMenuView2.createKnob("attack", FLOAT_PRECISION, ((EGPatch) patch).attack, new ExponentialLeftFunction(0f, 5000f));
+        patchMenuView2.createKnob("decay", FLOAT_PRECISION, ((EGPatch) patch).decay, new ExponentialLeftFunction(0f, 5000f));
+        patchMenuView2.createKnob("sustain", FLOAT_PRECISION, ((EGPatch) patch).sustain, new LinearFunction(0f, 1f));
+        patchMenuView2.createKnob("release", FLOAT_PRECISION, ((EGPatch) patch).release, new ExponentialLeftFunction(0f, 5000f));
+        patchMenuView2.createKnob("gate", INTEGER_PRECISION, ((EGPatch) patch).gate, new LinearFunction(0f, 1f));
     }
 }
