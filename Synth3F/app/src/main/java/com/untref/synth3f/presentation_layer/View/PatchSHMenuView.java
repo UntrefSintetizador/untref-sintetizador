@@ -23,9 +23,9 @@ public class PatchSHMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBarSH1_1, R.id.labelSH1_1, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, shPatch.on_off, MenuScale.linear);
-        createSeekBarComponent(R.id.seekBarSH1_2, R.id.labelSH1_2, "att_signal", title, 100.0f, -100.0f, 1.0f, 1.0f, view, shPatch.att_signal, MenuScale.exponential_center);
-        createSeekBarComponent(R.id.seekBarSH1_3, R.id.labelSH1_3, "glide", title, 5000.0f, 0.0f, 0.01f, 0.01f, view, shPatch.glide, MenuScale.exponential_left);
+        createSeekBarComponent(R.id.seekBarSH1_1, R.id.labelSH1_1, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, shPatch.on_off, MenuScale.LINEAR);
+        createSeekBarComponent(R.id.seekBarSH1_2, R.id.labelSH1_2, "att_signal", title, 100.0f, -100.0f, 1.0f, 1.0f, view, shPatch.att_signal, MenuScale.EXPONENTIAL_CENTER);
+        createSeekBarComponent(R.id.seekBarSH1_3, R.id.labelSH1_3, "glide", title, 5000.0f, 0.0f, 0.01f, 0.01f, view, shPatch.glide, MenuScale.EXPONENTIAL_LEFT);
     }
 
 }

@@ -26,13 +26,13 @@ public class PatchLFOMenuView extends PatchMenuView {
         TextView label_title = (TextView) view.findViewById(R.id.title);
         label_title.setText(title);
 
-        createSeekBarComponent(R.id.seekBarLFO1_1, R.id.labelLFO1_1, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, lfoPatch.on_off, MenuScale.linear);
-        createSeekBarComponent(R.id.seekBarLFO1_2, R.id.labelLFO1_2, "att_freq0", title, 100.0f, -100.0f, 1.0f, 1.0f, view, lfoPatch.att_freq0, MenuScale.exponential_center);
-        createSeekBarComponent(R.id.seekBarLFO1_3, R.id.labelLFO1_3, "att_pw", title, 100.0f, -100.0f, 1.0f, 1.0f, view, lfoPatch.att_pw, MenuScale.exponential_center);
+        createSeekBarComponent(R.id.seekBarLFO1_1, R.id.labelLFO1_1, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, lfoPatch.on_off, MenuScale.LINEAR);
+        createSeekBarComponent(R.id.seekBarLFO1_2, R.id.labelLFO1_2, "att_freq0", title, 100.0f, -100.0f, 1.0f, 1.0f, view, lfoPatch.att_freq0, MenuScale.EXPONENTIAL_CENTER);
+        createSeekBarComponent(R.id.seekBarLFO1_3, R.id.labelLFO1_3, "att_pw", title, 100.0f, -100.0f, 1.0f, 1.0f, view, lfoPatch.att_pw, MenuScale.EXPONENTIAL_CENTER);
         createSeekBarShape(title, view, lfoPatch.shape);
-        createSeekBarComponent(R.id.seekBarLFO1_5, R.id.labelLFO1_5, "freq", title, 100.0f, 0.0f, 1.00f, 1.00f, view, lfoPatch.freq, MenuScale.exponential_left);
-        createSeekBarComponent(R.id.seekBarLFO1_6, R.id.labelLFO1_6, "BPM", title, 6000.0f, 0.0f, 1.00f, 1.00f, view, lfoPatch.BPM, MenuScale.exponential_left);
-        createSeekBarComponent(R.id.seekBarLFO1_7, R.id.labelLFO1_7, "pw", title, 100.0f, 0.0f, 1.0f, 1.0f, view, lfoPatch.pw, MenuScale.linear);
+        createSeekBarComponent(R.id.seekBarLFO1_5, R.id.labelLFO1_5, "freq", title, 100.0f, 0.0f, 1.00f, 1.00f, view, lfoPatch.freq, MenuScale.EXPONENTIAL_LEFT);
+        createSeekBarComponent(R.id.seekBarLFO1_6, R.id.labelLFO1_6, "BPM", title, 6000.0f, 0.0f, 1.00f, 1.00f, view, lfoPatch.BPM, MenuScale.EXPONENTIAL_LEFT);
+        createSeekBarComponent(R.id.seekBarLFO1_7, R.id.labelLFO1_7, "pw", title, 100.0f, 0.0f, 1.0f, 1.0f, view, lfoPatch.pw, MenuScale.LINEAR);
     }
 
     private void createSeekBarShape(final String name, View view, float value) {

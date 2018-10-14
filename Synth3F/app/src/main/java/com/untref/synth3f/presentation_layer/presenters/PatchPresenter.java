@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 import com.untref.synth3f.entities.Patch;
+import com.untref.synth3f.presentation_layer.View.Knob;
+import com.untref.synth3f.presentation_layer.View.MenuScaleFunction;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
 import com.untref.synth3f.presentation_layer.View.PatchView;
@@ -57,5 +59,74 @@ public abstract class PatchPresenter {
     public void delete(int patchId) {
         patchGraphPresenter.delete(patchId);
         processor.delete(patch);
+    }
+
+    protected class LinearFunction extends MenuScaleFunction {
+
+        public LinearFunction(float minValue, float maxValue) {
+            super(minValue, maxValue);
+        }
+
+        @Override
+        public float calculate(float x) {
+            return getMinValue() + (x * (getMaxValue() - getMinValue()));
+        }
+
+        @Override
+        public float calculateInverse(float x) {
+            return (x - getMinValue()) / (getMaxValue() - getMinValue());
+        }
+    }
+
+    protected class ExponentialLeftFunction extends MenuScaleFunction {
+
+        public ExponentialLeftFunction(float minValue, float maxValue) {
+            super(minValue, maxValue);
+        }
+
+        @Override
+        public float calculate(float x) {
+            return (float) (getMinValue() + Math.pow(getMaxValue() + 1, x) - 1);
+        }
+
+        @Override
+        public float calculateInverse(float x) {
+            return (float) (Math.log(x - getMinValue() + 1) / Math.log(getMaxValue() + 1));
+        }
+    }
+
+    protected class ExponentialCenterFunction extends MenuScaleFunction {
+
+        public ExponentialCenterFunction(float minValue, float maxValue) {
+            super(minValue, maxValue);
+        }
+
+        @Override
+        public float calculate(float x) {
+            float result;
+
+            if (x > 0.5) {
+                result = (float) Math.pow(getMaxValue() + 1, (x - 0.5) * 2) - 1;
+
+            } else {
+                result = (float) -Math.pow(-getMinValue() + 1, -(x - 0.5) * 2) + 1;
+            }
+
+            return result;
+        }
+
+        @Override
+        public float calculateInverse(float x) {
+            double aux;
+
+            if (x > 0) {
+                aux = Math.log(x + 1) / Math.log(getMaxValue() + 1);
+
+            } else {
+                aux = -Math.log(-x + 1) / Math.log(-getMinValue() + 1);
+            }
+
+            return (float) (aux + 1) / 2;
+        }
     }
 }

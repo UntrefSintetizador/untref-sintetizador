@@ -22,9 +22,7 @@ import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PatchMenuView2 extends TableLayout {
 
@@ -35,7 +33,6 @@ public class PatchMenuView2 extends TableLayout {
     private PatchPresenter patchPresenter;
     private ColorStateList colorStateList;
     private List<Knob> knobList;
-    private Map<String, Knob> knobMap;
     private int knobSize;
     private int knobsPerRow;
 
@@ -50,7 +47,6 @@ public class PatchMenuView2 extends TableLayout {
     public void setPatchGraphFragment(PatchGraphFragment patchGraphFragment) {
         this.patchGraphFragment = patchGraphFragment;
         this.knobList = new ArrayList<>();
-        this.knobMap = new HashMap<>();
         this.parameterNameView = (TextView) findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = (EditText) findViewById(R.id.patch_menu_view_parameter_value);
         this.optionList = (OptionList) ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
@@ -119,26 +115,38 @@ public class PatchMenuView2 extends TableLayout {
         return patchGraphFragment;
     }
 
-    public void createKnob(String parameterName, float maxValue, float minValue,
-                           int precision, float value, PatchMenuView.MenuScale scale) {
+    public void createKnob(String parameterName, int precision, float value,
+                           MenuScaleFunction scale) {
 
-        Knob newKnob = new Knob(getContext(), this, parameterName, maxValue,
-                minValue, precision, value, scale, colorStateList);
+        Knob newKnob = new Knob(getContext(), this, parameterName,
+                scale.getMinValue(), scale.getMaxValue(), precision, value, scale, colorStateList);
 
         knobList.add(newKnob);
-        knobMap.put(parameterName, newKnob);
     }
 
     public void createOptionList(String parameterName, int[] imageIds, int selectedValue) {
         optionList.setValues(parameterName, imageIds, selectedValue);
     }
 
-    public void linkKnobs(String parameterName1, String parameterName2) {
-        Knob firstKnob = knobMap.get(parameterName1);
-        Knob secondKnob = knobMap.get(parameterName2);
+    public void linkKnobs(String parameterName1, String parameterName2, LinkingFunction normalFunction, LinkingFunction inverseFunction) {
+        Knob firstKnob = null;
+        Knob secondKnob = null;
 
-        firstKnob.link(secondKnob, parameterName2);
-        secondKnob.link(firstKnob, parameterName1);
+        for (Knob knob : knobList) {
+            String knobName = knob.getName();
+
+            if (knobName.contentEquals(parameterName1)) {
+                firstKnob = knob;
+
+            } else if (knobName.contentEquals(parameterName2)) {
+                secondKnob = knob;
+            }
+        }
+
+        if (firstKnob != null && secondKnob != null) {
+            firstKnob.link(secondKnob, parameterName2, inverseFunction);
+            secondKnob.link(firstKnob, parameterName1, normalFunction);
+        }
     }
 
     public void open(PatchPresenter patchPresenter) {
@@ -197,19 +205,24 @@ public class PatchMenuView2 extends TableLayout {
     public void changeValue(Editable editable) {
         Knob knob = null;
         float value;
-        for (int i = 0; i < knobList.size(); i++) {
-            if (knobList.get(i).getName().contentEquals(parameterNameView.getText())) {
-                knob = knobList.get(i);
+
+        for (Knob currentKnob : knobList) {
+
+            if (currentKnob.getName().contentEquals(parameterNameView.getText())) {
+                knob = currentKnob;
             }
         }
-        if(knob != null){
-            value = knob.setValue(editable.toString());
-            patchPresenter.setValue(knob.getName(), value);
+
+        if (knob != null) {
+            value = Float.parseFloat(editable.toString());
+            knob.setValue(value);
+
         } else {
             value = Float.parseFloat(editable.toString());
             value = Math.max(0, Math.min(optionList.getChildCount() - 1, Math.round(value)));
             optionList.selectValue((int) value);
         }
+
         DecimalFormat decimalFormat = new DecimalFormat("#.#######");
         editable.clear();
         editable.append(decimalFormat.format(value).replace(",", "."));
