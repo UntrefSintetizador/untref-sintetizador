@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
+import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
@@ -31,7 +31,7 @@ public class PatchGraphFragment extends Fragment {
     private PatchGraphPresenter patchGraphPresenter;
     private View PatchGraphView;
     private WireDrawer wireDrawer;
-    private BaseProcessor processor;
+    private IProcessor processor;
     private MapView mapView;
     private Context context;
     private PatchMenuView2 patchMenuView2;
@@ -60,7 +60,7 @@ public class PatchGraphFragment extends Fragment {
         return PatchGraphView;
     }
 
-    public void setProcessor(BaseProcessor processor) {
+    public void setProcessor(IProcessor processor) {
         this.processor = processor;
     }
 
@@ -252,9 +252,7 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), StorageActivity.class);
-                        intent.putExtra("mode", REQUEST_SAVE);
-                        startActivityForResult(intent, REQUEST_SAVE);
+                        requestSave();
                     }
                 }
         );
@@ -268,5 +266,32 @@ public class PatchGraphFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private void createEngineEvent() {
+
+        PatchGraphView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        requestSave();
+                        /*
+                        JSONObject appJson = new JSONObject(loadConfigFile()); //loadConfigFile esta en MainActivityPresenter...
+                        [...]
+                        */
+                        Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                    }
+                }
+        );
+    }
+
+    private void requestSave() {
+        Intent intent = new Intent(getActivity(), StorageActivity.class);
+        intent.putExtra("mode", REQUEST_SAVE);
+        startActivityForResult(intent, REQUEST_SAVE);
     }
 }

@@ -1,67 +1,17 @@
 package com.untref.synth3f.domain_layer.helpers;
 
-import android.content.Context;
-
 import com.untref.synth3f.data_layer.FaustApi;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.activity.MainActivity;
-
-import org.puredata.android.io.AudioParameters;
 
 import java.util.List;
 
-/**
- * Created by oargueyo on 31/10/16.
- */
+public class FaustProcessor implements IProcessor {
 
-public class FaustProcessor extends BaseProcessor {
-    private long graphPointer;
-    private Context context;
+    private final long graphPointer;
 
-    @Override
-    public void stopAudio() {
-        FaustApi.stopAudioFaustApi(graphPointer);
-    }
-
-    @Override
-    public void startAudio() {
-        FaustApi.startAudioFaustApi(graphPointer);
-    }
-
-    @Override
-    public void cleanup() {
-        FaustApi.disposeFaustApi(graphPointer);
-    }
-
-    @Override
-    public void setContext(MainActivity c) {
-        context = c;
-        AudioParameters.init(context);
-        int channels = AudioParameters.suggestOutputChannels();
-        int sample_rate = AudioParameters.suggestSampleRate();
-        int buffer_size = AudioParameters.suggestOutputBufferSize(sample_rate);
-        graphPointer = FaustApi.initFaustApi(channels, buffer_size, sample_rate);
-    }
-
-    @Override
-    public boolean isServiceRunning() {
-        return true;
-    }
-
-    @Override
-    public void evaluateMessage(String s) {
-
-    }
-
-    @Override
-    public void resetPresets() {
-
-    }
-
-    @Override
-    public void setPreset(String name, Float val) {
-
+    public FaustProcessor(long graphPointer) {
+        this.graphPointer = graphPointer;
     }
 
     @Override
