@@ -17,22 +17,22 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
         super(context, attrs);
     }
 
-    public void setPresenter(PatchKBPresenter presenter){
+    public void setPresenter(PatchKBPresenter presenter) {
         this.presenter = presenter;
     }
 
-    public void setPatchId(int patchId){
+    public void setPatchId(int patchId) {
         this.patchId = patchId;
     }
 
     @Override
-    protected void sendNote(int note){
+    protected void sendNote(int note) {
         presenter.setValue("x_kb_" + patchId + "_midi_note", note);
         presenter.setValue("x_kb_" + patchId + "_gate", 1);
     }
 
     @Override
-    protected void releaseNote(){
+    protected void releaseNote() {
         presenter.setValue("x_kb_" + patchId + "_gate", 0);
     }
 }

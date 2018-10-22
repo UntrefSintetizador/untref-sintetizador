@@ -23,25 +23,18 @@ import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    //private MainActivityPresenter presenter;
     private IConfig config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //presenter = new MainActivityPresenter(this);
-
         FragmentManager fmanager = getFragmentManager();
         FragmentTransaction transaction = fmanager.beginTransaction();
-        //transaction.add(R.id.container_matriz, new FragmentMatriz());
-        //transaction.add(R.id.container_piano, new FragmentOrgano());
         PatchGraphFragment patchGraphFragment = new PatchGraphFragment();
         transaction.add(R.id.graph, patchGraphFragment);
         transaction.commit();
-
-        config = ConfigFactory.create("PureData"); //this.presenter.initializeMasterConfig();
+        config = ConfigFactory.create("PureData");
         config.setContext(this);
         patchGraphFragment.setProcessor(config.getProcessor());
         patchGraphFragment.setContext(this);
@@ -51,12 +44,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
         if (config.isServiceRunning()) {
-            config.startAudio(); //presenter.startService();
+            config.startAudio();
         }
-        /*
-        if (pdConfig.getService().isRunning()) {
-            pdConfig.startAudio();
-        }*/
     }
 
     @Override

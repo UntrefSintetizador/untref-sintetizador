@@ -33,7 +33,7 @@ public class FragmentOrgano extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_piano, container, false);
+        View view = inflater.inflate(R.layout.fragment_piano, container, false);
 
         //inicializo valores en teclas de piano
         piano = (PianoView) view.findViewById(R.id.pianito);
@@ -66,7 +66,7 @@ public class FragmentOrgano extends Fragment {
         return view;
     }
 
-    private void updateLabelOctava(){
+    private void updateLabelOctava() {
         piano.setINITIAL_OCTIVE(presenter.getOctava());
         label_octava.setText(String.valueOf(presenter.getOctava()));
     }

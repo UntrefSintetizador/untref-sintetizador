@@ -9,7 +9,8 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(MainMenuActivity.this, MainActivity.class);;
+        Intent intent = new Intent(MainMenuActivity.this, MainActivity.class);
+        ;
         startActivity(intent);
     }
 
