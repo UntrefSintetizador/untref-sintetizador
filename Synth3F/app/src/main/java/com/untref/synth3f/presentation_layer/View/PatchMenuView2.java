@@ -70,7 +70,7 @@ public class PatchMenuView2 extends TableLayout {
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
 
         int defaultButtonSize = 150;
-        optionList.init(this, (int) (relationOfHeight * defaultButtonSize), R.color.colorPrimary, R.color.colorPrimaryDark);
+        optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
 
         int defaultCloseButtonSize = 50;
         Button button = (Button) findViewById(R.id.patch_menu_view_close);
@@ -124,8 +124,8 @@ public class PatchMenuView2 extends TableLayout {
         knobList.add(newKnob);
     }
 
-    public void createOptionList(String parameterName, int[] imageIds, int selectedValue) {
-        optionList.setValues(parameterName, imageIds, selectedValue);
+    public void createOptionList(String parameterName, int[] imageIds, int selectedValue, int color) {
+        optionList.setValues(parameterName, imageIds, selectedValue, color);
     }
 
     public void linkKnobs(String parameterName1, String parameterName2, LinkingFunction normalFunction, LinkingFunction inverseFunction) {

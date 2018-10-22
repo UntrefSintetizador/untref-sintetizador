@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
@@ -9,16 +8,16 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.untref.synth3f.R;
-
 public class OptionList extends LinearLayout {
 
     private PatchMenuView2 patchMenuView2;
     private String parameterName;
+    private OptionItem[] options;
 
+    private int selectedValue;
     private int buttonSize;
-    private ColorStateList activeColor;
-    private ColorStateList inactiveColor;
+    private int activeColor;
+    private int inactiveColor;
 
     public OptionList(Context context) {
         super(context);
@@ -32,39 +31,47 @@ public class OptionList extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void init(PatchMenuView2 patchMenuView2, int buttonSize, int activeColor, int inactiveColor) {
+    public void init(PatchMenuView2 patchMenuView2, int buttonSize) {
         this.patchMenuView2 = patchMenuView2;
         this.buttonSize = buttonSize;
-        this.activeColor = getContext().getResources().getColorStateList(activeColor);
-        this.inactiveColor = getContext().getResources().getColorStateList(inactiveColor);
     }
 
-    public void setValues(String parameterName, int[] imagesIds, int selectedValue) {
+    public void setValues(String parameterName, int[] imagesIds, int selectedValue, int color) {
+        this.activeColor = color;
+        this.inactiveColor = darken(color);
         this.parameterName = parameterName;
+        this.selectedValue = selectedValue;
+        options = new OptionItem[imagesIds.length];
         OptionItem optionItem;
         for (int i = 0; i < imagesIds.length; i++) {
             optionItem = new OptionItem(getContext(), i);
             addView(optionItem);
-            optionItem.init(imagesIds[i], buttonSize);
-            ((OptionItem) getChildAt(i)).setColor(inactiveColor);
+            options[i] = optionItem;
+            optionItem.init(imagesIds[i], buttonSize, inactiveColor);
         }
-        ((OptionItem) getChildAt(selectedValue)).setColor(activeColor);
+        options[selectedValue].setColor(activeColor);
     }
 
     public void clear() {
+        parameterName = null;
+        options = null;
         removeAllViews();
     }
 
-    public void selectValue(int id) {
-        for (int i = 0; i < getChildCount(); i++) {
-            if (i == id) {
-                ((OptionItem) getChildAt(i)).setColor(activeColor);
-            } else {
-                ((OptionItem) getChildAt(i)).setColor(inactiveColor);
-            }
-        }
-        patchMenuView2.setParameterToEdit(parameterName, id);
-        patchMenuView2.setValue(parameterName, id);
+    public void selectValue(int selectedValue) {
+        options[this.selectedValue].setColor(inactiveColor);
+        this.selectedValue = selectedValue;
+        options[selectedValue].setColor(activeColor);
+        patchMenuView2.setParameterToEdit(parameterName, selectedValue);
+        patchMenuView2.setValue(parameterName, selectedValue);
+    }
+
+    private int darken(int color) {
+        //El color esta representado como hecadecimal ARGB
+        //al realizar un shift hacia la derecha se dividen todos los valores por dos
+        //el and con 0x007F7F7F evita que se pase el resto de un valor a otro
+        //el or con (color & 0xFF000000) devuelve la opacidad a su estado anterior
+        return ((color >> 1) & 0x007F7F7F) | (color & 0xFF000000);
     }
 
     private class OptionItem extends AppCompatButton implements View.OnClickListener {
@@ -76,18 +83,17 @@ public class OptionList extends LinearLayout {
             this.id = id;
         }
 
-        public void init(int imageId, int size) {
+        public void init(int imageId, int size, int color) {
             getLayoutParams().width = size;
             getLayoutParams().height = size;
             setBackgroundResource(imageId);
-            setSupportBackgroundTintMode(PorterDuff.Mode.MULTIPLY);
-            setSupportBackgroundTintList(getContext().getResources().getColorStateList(R.color.colorPrimaryDark));
+            this.setColor(color);
             this.setClickable(true);
             this.setOnClickListener(this);
         }
 
-        public void setColor(ColorStateList color) {
-            this.setSupportBackgroundTintList(color);
+        public void setColor(int color) {
+            getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
         }
 
         @Override
