@@ -3,13 +3,11 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.graphics.Color;
 
+import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.ModulesPopupWindow.VCOPopupWindow;
-import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchVCOPresenter;
-import com.untref.synth3f.R;
 
 public class PatchVCOView extends PatchView {
 
