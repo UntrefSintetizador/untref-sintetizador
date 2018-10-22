@@ -21,9 +21,10 @@ public class PatchSHPresenter extends PatchPresenter {
     }
 
     @Override
-    public void initMenuView(PatchMenuView2 patchMenuView2) {
+    public boolean initMenuView(PatchMenuView2 patchMenuView2) {
         patchMenuView2.createKnob("on-off", INTEGER_PRECISION, ((SHPatch) patch).on_off, new LinearFunction(0f, 1f));
         patchMenuView2.createKnob("att_signal", FLOAT_PRECISION, ((SHPatch) patch).att_signal, new ExponentialCenterFunction(-100f, 100f));
         patchMenuView2.createKnob("glide", FLOAT_PRECISION, ((SHPatch) patch).glide, new ExponentialLeftFunction(0f, 5000f));
+        return true;
     }
 }

@@ -21,7 +21,7 @@ public class PatchSHView extends PatchView {
         centerImage = R.drawable.map_node_sh;
         topImage = R.drawable.map_node_in_sh;
         bottomImage = R.drawable.map_node_out_sh;
-        color = Color.rgb(6, 214, 160);
+        color = Color.rgb(253, 180, 0);
     }
 
     @Override

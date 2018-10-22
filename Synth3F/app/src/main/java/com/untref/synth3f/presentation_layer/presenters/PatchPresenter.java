@@ -40,7 +40,7 @@ public abstract class PatchPresenter {
 
     public abstract PatchMenuView createMenuView(MainActivity context);
 
-    public abstract void initMenuView(PatchMenuView2 patchMenuView2);
+    public abstract boolean initMenuView(PatchMenuView2 patchMenuView2);
 
     public void setValue(String name, float value) {
         try {

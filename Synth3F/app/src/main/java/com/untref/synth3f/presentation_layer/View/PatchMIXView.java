@@ -21,7 +21,7 @@ public class PatchMIXView extends PatchView {
         centerImage = R.drawable.map_node_mix;
         topImage = R.drawable.map_node_in_mix;
         bottomImage = R.drawable.map_node_out_mix;
-        color = Color.rgb(6, 214, 160);
+        color = Color.rgb(253, 180, 0);
     }
 
     @Override

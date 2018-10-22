@@ -21,7 +21,8 @@ public class PatchDACPresenter extends PatchPresenter {
     }
 
     @Override
-    public void initMenuView(PatchMenuView2 patchMenuView2) {
+    public boolean initMenuView(PatchMenuView2 patchMenuView2) {
         patchMenuView2.createKnob("on-off", INTEGER_PRECISION, ((DACPatch) patch).on_off, new LinearFunction(0f, 1f));
+        return true;
     }
 }

@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.text.Editable;
 import android.util.AttributeSet;
@@ -31,10 +30,10 @@ public class PatchMenuView2 extends TableLayout {
     private EditText parameterValueView;
     private OptionList optionList;
     private PatchPresenter patchPresenter;
-    private ColorStateList colorStateList;
     private List<Knob> knobList;
     private int knobSize;
     private int knobsPerRow;
+    private int color;
 
     public PatchMenuView2(Context context) {
         super(context);
@@ -106,9 +105,10 @@ public class PatchMenuView2 extends TableLayout {
                     }
                 }
         );
+    }
 
-        //test
-        this.colorStateList = getContext().getResources().getColorStateList(R.color.blue_soft);
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public PatchGraphFragment getPatchGraphFragment() {
@@ -119,12 +119,12 @@ public class PatchMenuView2 extends TableLayout {
                            MenuScaleFunction scale) {
 
         Knob newKnob = new Knob(getContext(), this, parameterName,
-                scale.getMinValue(), scale.getMaxValue(), precision, value, scale, colorStateList);
+                scale.getMinValue(), scale.getMaxValue(), precision, value, scale, color);
 
         knobList.add(newKnob);
     }
 
-    public void createOptionList(String parameterName, int[] imageIds, int selectedValue, int color) {
+    public void createOptionList(String parameterName, int[] imageIds, int selectedValue) {
         optionList.setValues(parameterName, imageIds, selectedValue, color);
     }
 

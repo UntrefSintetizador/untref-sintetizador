@@ -22,7 +22,7 @@ public class PatchMIXPresenter extends PatchPresenter {
     }
 
     @Override
-    public void initMenuView(PatchMenuView2 patchMenuView2) {
+    public boolean initMenuView(PatchMenuView2 patchMenuView2) {
         MenuScaleFunction linearFunction = new LinearFunction(0f, 1f);
         patchMenuView2.createKnob("on-off", INTEGER_PRECISION, ((MIXPatch) patch).on_off, linearFunction);
         patchMenuView2.createKnob("ch1", FLOAT_PRECISION, ((MIXPatch) patch).ch1, linearFunction);
@@ -30,5 +30,6 @@ public class PatchMIXPresenter extends PatchPresenter {
         patchMenuView2.createKnob("ch3", FLOAT_PRECISION, ((MIXPatch) patch).ch3, linearFunction);
         patchMenuView2.createKnob("ch4", FLOAT_PRECISION, ((MIXPatch) patch).ch4, linearFunction);
         patchMenuView2.createKnob("master", FLOAT_PRECISION, ((MIXPatch) patch).master, linearFunction);
+        return true;
     }
 }

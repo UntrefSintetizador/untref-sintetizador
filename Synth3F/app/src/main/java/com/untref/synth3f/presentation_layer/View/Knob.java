@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.MotionEvent;
@@ -36,7 +35,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
     public Knob(Context context, PatchMenuView2 patchMenuView2, String parameterName,
                 float minValue, float maxValue, int precision, float value,
-                MenuScaleFunction scaleFunction, ColorStateList colorStateList) {
+                MenuScaleFunction scaleFunction, int color) {
         super(context);
         this.patchMenuView2 = patchMenuView2;
         this.parameterName = parameterName;
@@ -45,7 +44,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         this.precision = precision;
         this.value = value;
         this.scaleFunction = scaleFunction;
-        init(colorStateList);
+        init(color);
     }
 
     public String getName() {
@@ -101,15 +100,14 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         return true;
     }
 
-    private void init(ColorStateList colorStateList) {
+    private void init(int color) {
         rotationWhileNotMoving = calculateRotation();
         setRotation(rotationWhileNotMoving);
         setClickable(true);
         setOnTouchListener(this);
         setBackgroundResource(R.drawable.knob);
         setScaleType(AppCompatImageView.ScaleType.CENTER_INSIDE);
-        setSupportBackgroundTintList(colorStateList);
-        setSupportBackgroundTintMode(PorterDuff.Mode.MULTIPLY);
+        getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
     }
 
     private void setValueCheckingLinks(float value, boolean checksLink) {

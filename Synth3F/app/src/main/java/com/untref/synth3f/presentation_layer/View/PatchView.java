@@ -200,8 +200,10 @@ public abstract class PatchView extends LinearLayout {
             public boolean onDoubleTap(MotionEvent motionEvent) {
                 PatchMenuView2 patchMenuView2 = patchGraphFragment.getPatchMenuView2();
                 patchMenuView2.close();
-                patchPresenter.initMenuView(patchMenuView2);
-                patchMenuView2.open(patchPresenter);
+                patchMenuView2.setColor(getColor());
+                if (patchPresenter.initMenuView(patchMenuView2)) {
+                    patchMenuView2.open(patchPresenter);
+                }
                 return false;
             }
 

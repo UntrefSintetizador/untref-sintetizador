@@ -22,11 +22,12 @@ public class PatchVCAPresenter extends PatchPresenter {
     }
 
     @Override
-    public void initMenuView(PatchMenuView2 patchMenuView2) {
+    public boolean initMenuView(PatchMenuView2 patchMenuView2) {
         MenuScaleFunction linearFunction = new LinearFunction(0f, 1f);
         patchMenuView2.createKnob("on-off", INTEGER_PRECISION, ((VCAPatch) patch).on_off, linearFunction);
         patchMenuView2.createKnob("att_control", FLOAT_PRECISION, ((VCAPatch) patch).att_control, new ExponentialCenterFunction(-100f, 100f));
         patchMenuView2.createKnob("base", FLOAT_PRECISION, ((VCAPatch) patch).base, linearFunction);
         patchMenuView2.createKnob("clip", INTEGER_PRECISION, ((VCAPatch) patch).clip, linearFunction);
+        return true;
     }
 }

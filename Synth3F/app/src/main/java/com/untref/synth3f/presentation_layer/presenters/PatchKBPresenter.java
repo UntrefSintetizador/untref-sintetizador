@@ -20,9 +20,10 @@ public class PatchKBPresenter extends PatchPresenter {
     }
 
     @Override
-    public void initMenuView(PatchMenuView2 patchMenuView2) {
+    public boolean initMenuView(PatchMenuView2 patchMenuView2) {
         PatchMenuView patchMenuView = createMenuView((MainActivity) patchMenuView2.getPatchGraphFragment().getActivity());
         patchMenuView.showAsDropDown(patchView, 150, -500);
         patchMenuView.setButton(patchView);
+        return false;
     }
 }

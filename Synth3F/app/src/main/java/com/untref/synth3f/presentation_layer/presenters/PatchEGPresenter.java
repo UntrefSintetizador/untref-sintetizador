@@ -21,12 +21,13 @@ public class PatchEGPresenter extends PatchPresenter {
     }
 
     @Override
-    public void initMenuView(PatchMenuView2 patchMenuView2) {
+    public boolean initMenuView(PatchMenuView2 patchMenuView2) {
         patchMenuView2.createKnob("on-off", INTEGER_PRECISION, ((EGPatch) patch).on_off, new LinearFunction(0f, 1f));
         patchMenuView2.createKnob("attack", FLOAT_PRECISION, ((EGPatch) patch).attack, new ExponentialLeftFunction(0f, 5000f));
         patchMenuView2.createKnob("decay", FLOAT_PRECISION, ((EGPatch) patch).decay, new ExponentialLeftFunction(0f, 5000f));
         patchMenuView2.createKnob("sustain", FLOAT_PRECISION, ((EGPatch) patch).sustain, new LinearFunction(0f, 1f));
         patchMenuView2.createKnob("release", FLOAT_PRECISION, ((EGPatch) patch).release, new ExponentialLeftFunction(0f, 5000f));
         patchMenuView2.createKnob("gate", INTEGER_PRECISION, ((EGPatch) patch).gate, new LinearFunction(0f, 1f));
+        return true;
     }
 }

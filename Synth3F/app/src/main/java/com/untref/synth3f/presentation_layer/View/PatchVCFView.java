@@ -21,7 +21,7 @@ public class PatchVCFView extends PatchView {
         centerImage = R.drawable.map_node_vcf;
         topImage = R.drawable.map_node_in_vcf;
         bottomImage = R.drawable.map_node_out_vcf;
-        color = Color.rgb(253,180 ,0);
+        color = Color.rgb(253, 180, 0);
     }
 
     @Override
