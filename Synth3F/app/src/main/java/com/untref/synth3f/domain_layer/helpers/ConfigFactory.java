@@ -17,17 +17,17 @@ public class ConfigFactory {
     }
 
     public static IConfig create(String engineName) {
-        IConfig resultado = null;
+        IConfig result = null;
 
         try {
             Class<?> configClass = Class.forName(engines.get(engineName));
             Constructor constructor = configClass.getConstructor();
-            resultado = (IConfig) constructor.newInstance();
+            result = (IConfig) constructor.newInstance();
 
         } catch (Exception a) {
             a.printStackTrace();
         }
 
-        return resultado;
+        return result;
     }
 }
