@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class PatchGraphFragment extends Fragment {
 
     private PatchGraphPresenter patchGraphPresenter;
-    private View PatchGraphView;
+    private View patchGraphView;
     private WireDrawer wireDrawer;
     private IProcessor processor;
     private MapView mapView;
@@ -50,14 +50,14 @@ public class PatchGraphFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        PatchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
-        mapView = (MapView) PatchGraphView.findViewById(R.id.mapView);
+        patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
+        mapView = (MapView) patchGraphView.findViewById(R.id.mapView);
         createDragAndDropEvent();
         createSaveLoadEvent();
-        createWireDrawer(PatchGraphView);
-        patchMenuView2 = (PatchMenuView2) PatchGraphView.findViewById(R.id.patch_menu_view);
+        createWireDrawer(patchGraphView);
+        patchMenuView2 = (PatchMenuView2) patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView2.setPatchGraphFragment(this);
-        return PatchGraphView;
+        return patchGraphView;
     }
 
     public void setProcessor(IProcessor processor) {
@@ -235,20 +235,20 @@ public class PatchGraphFragment extends Fragment {
                         return true;
                     }
                 };
-        PatchGraphView.findViewById(R.id.menuButtonDragVCO).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragVCA).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragVCF).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragEG).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragDAC).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragKB).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragLFO).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragMIX).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragNG).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragSH).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragVCO).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragVCA).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragVCF).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragEG).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragDAC).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragKB).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragLFO).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragMIX).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragNG).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragSH).setOnTouchListener(listener);
     }
 
     private void createSaveLoadEvent() {
-        PatchGraphView.findViewById(R.id.menuSave).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuSave).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -256,7 +256,7 @@ public class PatchGraphFragment extends Fragment {
                     }
                 }
         );
-        PatchGraphView.findViewById(R.id.menuLoad).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuLoad).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -270,7 +270,7 @@ public class PatchGraphFragment extends Fragment {
 
     private void createEngineEvent() {
 
-        PatchGraphView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
 
                 new View.OnClickListener() {
 
