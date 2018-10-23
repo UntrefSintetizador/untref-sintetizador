@@ -1,7 +1,5 @@
 package com.untref.synth3f.domain_layer.helpers;
 
-import android.util.Log;
-
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
