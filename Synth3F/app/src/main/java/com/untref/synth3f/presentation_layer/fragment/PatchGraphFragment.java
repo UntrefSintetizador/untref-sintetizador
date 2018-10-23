@@ -1,6 +1,7 @@
 package com.untref.synth3f.presentation_layer.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
@@ -34,6 +36,7 @@ public class PatchGraphFragment extends Fragment {
     private MapView mapView;
     private Context context;
     private PatchMenuView patchMenuView;
+    private boolean activityWillReset;
 
     public static final int RESULT_CANCEL = 0;
     public static final int RESULT_OK = 1;
@@ -53,6 +56,7 @@ public class PatchGraphFragment extends Fragment {
         mapView = (MapView) patchGraphView.findViewById(R.id.mapView);
         createDragAndDropEvent();
         createSaveLoadEvent();
+        createEngineEvent();
         createWireDrawer(patchGraphView);
         patchMenuView = (PatchMenuView) patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
@@ -85,6 +89,14 @@ public class PatchGraphFragment extends Fragment {
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
                 patchGraphPresenter.save(context, data.getStringExtra("filename"));
+            }
+
+            if (activityWillReset) {
+                Activity activity = (Activity) context; //Cast or change type?
+                Intent activityIntent = activity.getIntent();
+                ConfigFactory.changeEngine();
+                activity.finish();
+                startActivity(activityIntent);
             }
         }
 
@@ -276,13 +288,7 @@ public class PatchGraphFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         requestSave();
-                        /*
-                        JSONObject appJson = new JSONObject(loadConfigFile()); //loadConfigFile esta en MainActivityPresenter...
-                        [...]
-                        */
-                        Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
+                        activityWillReset = true;
                     }
                 }
         );
