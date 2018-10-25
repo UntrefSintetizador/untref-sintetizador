@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector;
@@ -213,7 +212,7 @@ public abstract class PatchView extends LinearLayout {
             }
         };
 
-        final GestureDetectorCompat mDetector = new GestureDetectorCompat(patchGraphFragment.getActivity(), onGestureListener);
+        final GestureDetector mDetector = new GestureDetector(patchGraphFragment.getActivity(), onGestureListener);
         mDetector.setOnDoubleTapListener(onDoubleTapListener);
 
         nodeImage.setOnTouchListener(

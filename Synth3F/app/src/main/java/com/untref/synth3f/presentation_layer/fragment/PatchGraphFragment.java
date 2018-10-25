@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -105,7 +104,7 @@ public class PatchGraphFragment extends Fragment {
                 for (int i = 0; i < patchViews.length; i++) {
                     patchView = patchViews[i];
                     patchView.setId(findUnusedId());
-                    DrawerLayout.LayoutParams drawerLayoutParams = new DrawerLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
+                    ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
                     mapLayout.addView(patchView, drawerLayoutParams);
 
                     ConstraintSet constraintSet = new ConstraintSet();
@@ -202,7 +201,7 @@ public class PatchGraphFragment extends Fragment {
                                 if (patchView == null) {
                                     return false;
                                 }
-                                DrawerLayout.LayoutParams drawerLayoutParams = new DrawerLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
+                                ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
 
                                 ConstraintLayout mapLayout = (ConstraintLayout) getActivity().findViewById(R.id.map);
                                 mapLayout.addView(patchView, drawerLayoutParams);

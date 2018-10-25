@@ -22,8 +22,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.EdgeEffectCompat;
+//import android.support.v7.view.ViewCompat;
+//import android.support.v7.widget.EdgeEffectCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -43,83 +43,127 @@ import com.evilduck.piano.music.Note;
 
 public class PianoView extends View {
 
-	private int xOffset = 0;
+    private int xOffset = 0;
 
-	private int INITIAL_OCTIVE;
+    private int INITIAL_OCTIVE;
 
-	private OverScroller scroller;
+    private OverScroller scroller;
 
-	private GestureDetector gestureDetector;
+    private GestureDetector gestureDetector;
 
-	private ScaleGestureDetector scaleGestureDetector;
+    private ScaleGestureDetector scaleGestureDetector;
 
-	private int canvasWidth;
+    private int canvasWidth;
 
-	private int instrumentWidth;
+    private int instrumentWidth;
 
-	private Keyboard keyboard;
+    private Keyboard keyboard;
 
-	private OnKeyTouchListener onTouchListener;
+    private OnKeyTouchListener onTouchListener;
 
-	private EdgeEffectCompat leftEdgeEffect;
+    //private EdgeEffectCompat leftEdgeEffect;
 
-	private EdgeEffectCompat rightEdgeEffect;
+    //private EdgeEffectCompat rightEdgeEffect;
 
-	private float scaleX = 1.0f;
+    private float scaleX = 1.0f;
 
-	//private ArrayList<Note> notesToDraw = new ArrayList<Note>();
+    //private ArrayList<Note> notesToDraw = new ArrayList<Note>();
 
-	private boolean measurementChanged = false;
+    private boolean measurementChanged = false;
 
-	private int scrollDirection;
+    private int scrollDirection;
 
-	private boolean leftEdgeEffectActive = false;
+    private boolean leftEdgeEffectActive = false;
 
-	private boolean rightEdgeEffectActive = false;
+    private boolean rightEdgeEffectActive = false;
+    private OnScaleGestureListener scaleGestureListener = new OnScaleGestureListener() {
 
-	public Keyboard getKeyboard(){
-		return keyboard;
-	}
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+        }
 
-	public void setINITIAL_OCTIVE(int octive){
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            return true;
+        }
 
-		this.INITIAL_OCTIVE = octive;
-	}
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            return true;
+        }
+    };
+    private OnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
 
-	public PianoView(Context context, AttributeSet attrs) {
+        public boolean onDown(MotionEvent e) {
+            releaseEdgeEffects();
+            scroller.forceFinished(true);
+            if (keyboard.touchItem(e.getX() / scaleX + xOffset, e.getY())) {
+                sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+                //PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+                //PdBase.sendFloat("X_KB_gate", 1);
+                invalidate();
+            }
 
-		super(context, attrs);
-		init();
+            return true;
+        }
 
-		leftEdgeEffect = new EdgeEffectCompat(getContext());
-		rightEdgeEffect = new EdgeEffectCompat(getContext());
+        public boolean onSingleTapUp(MotionEvent e) {
+            fireTouchListeners(keyboard.getTouchedCode());
+            resetTouchFeedback();
+            return super.onSingleTapUp(e);
+        }
 
-		setVerticalScrollBarEnabled(false);
-		setHorizontalScrollBarEnabled(false);
+        public void onLongPress(MotionEvent e) {
+            fireLongTouchListeners(keyboard.getTouchedCode());
+            resetTouchFeedback();
+            super.onLongPress(e);
+        }
 
-		TypedArray a = context.obtainStyledAttributes(R.styleable.View);
-		//initializeScrollbars(a);
-		a.recycle();
+        ;
 
-		TypedArray pianoAttrs = context.obtainStyledAttributes(attrs, R.styleable.PianoView);
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            resetTouchFeedback();
+            return super.onDoubleTapEvent(e);
+        }
 
-		boolean asBitmaps;
-		int circleColor;
-		float circleRadius;
-		float circleTextSize;
-		try {
-			asBitmaps = pianoAttrs.getBoolean(R.styleable.PianoView_overlay_bitmaps, true);
-			circleColor = pianoAttrs.getColor(R.styleable.PianoView_overlay_color, Color.GREEN);
-			circleRadius = pianoAttrs.getDimension(R.styleable.PianoView_overlay_circle_radius, TypedValue
-					.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, context.getResources().getDisplayMetrics()));
-			circleTextSize = pianoAttrs.getDimension(R.styleable.PianoView_overlay_circle_text_size, TypedValue
-					.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics()));
-		} finally {
-			pianoAttrs.recycle();
-		}
+        ;
 
-		keyboard = new Keyboard(getContext(), asBitmaps, circleColor, circleRadius, circleTextSize);
-	}
+    };
+
+    public PianoView(Context context, AttributeSet attrs) {
+
+        super(context, attrs);
+        init();
+
+        //leftEdgeEffect = new EdgeEffectCompat(getContext());
+        //rightEdgeEffect = new EdgeEffectCompat(getContext());
+
+        setVerticalScrollBarEnabled(false);
+        setHorizontalScrollBarEnabled(false);
+
+        TypedArray a = context.obtainStyledAttributes(R.styleable.View);
+        //initializeScrollbars(a);
+        a.recycle();
+
+        TypedArray pianoAttrs = context.obtainStyledAttributes(attrs, R.styleable.PianoView);
+
+        boolean asBitmaps;
+        int circleColor;
+        float circleRadius;
+        float circleTextSize;
+        try {
+            asBitmaps = pianoAttrs.getBoolean(R.styleable.PianoView_overlay_bitmaps, true);
+            circleColor = pianoAttrs.getColor(R.styleable.PianoView_overlay_color, Color.GREEN);
+            circleRadius = pianoAttrs.getDimension(R.styleable.PianoView_overlay_circle_radius, TypedValue
+                    .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, context.getResources().getDisplayMetrics()));
+            circleTextSize = pianoAttrs.getDimension(R.styleable.PianoView_overlay_circle_text_size, TypedValue
+                    .applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics()));
+        } finally {
+            pianoAttrs.recycle();
+        }
+
+        keyboard = new Keyboard(getContext(), asBitmaps, circleColor, circleRadius, circleTextSize);
+    }
 /*
     public void addNotes(List<Note> notes) {
 	notesToDraw.addAll(notes);
@@ -139,358 +183,321 @@ public class PianoView extends View {
 	invalidate();
     }*/
 
-	private void init() {
-		//Por defecto al octava se inicializa en 5
-		this.INITIAL_OCTIVE = 5;
+    public Keyboard getKeyboard() {
+        return keyboard;
+    }
 
-		if (!isInEditMode()) {
-			scroller = new OverScroller(getContext());
-			gestureDetector = new GestureDetector(getContext(), gestureListener);
-			scaleGestureDetector = new ScaleGestureDetector(getContext(), scaleGestureListener);
-		}
-	}
+    public void setINITIAL_OCTIVE(int octive) {
 
-	public void smoothScrollXTo(int x) {
-		scroller.startScroll(xOffset, 0, x - xOffset, 0);
-	}
+        this.INITIAL_OCTIVE = octive;
+    }
 
-	// ========== preserving scroll position during screen rotations
+    // ========== preserving scroll position during screen rotations
 
-	@Override
-	protected Parcelable onSaveInstanceState() {
-		SavedState st = new SavedState(super.onSaveInstanceState());
+    private void init() {
+        //Por defecto al octava se inicializa en 5
+        this.INITIAL_OCTIVE = 5;
 
-		st.xOffset = xOffset;
-		st.instrumentWidth = instrumentWidth;
-		return st;
-	}
+        if (!isInEditMode()) {
+            scroller = new OverScroller(getContext());
+            gestureDetector = new GestureDetector(getContext(), gestureListener);
+            scaleGestureDetector = new ScaleGestureDetector(getContext(), scaleGestureListener);
+        }
+    }
 
-	protected void onRestoreInstanceState(Parcelable state) {
-		if (!(state instanceof SavedState)) {
-			super.onRestoreInstanceState(state);
-			return;
-		}
+    public void smoothScrollXTo(int x) {
+        scroller.startScroll(xOffset, 0, x - xOffset, 0);
+    }
 
-		SavedState ss = (SavedState) state;
-		super.onRestoreInstanceState(ss.getSuperState());
+    ;
 
-		xOffset = ss.xOffset;
-		instrumentWidth = ss.instrumentWidth;
-	};
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        SavedState st = new SavedState(super.onSaveInstanceState());
 
-	public static class SavedState extends BaseSavedState {
+        st.xOffset = xOffset;
+        st.instrumentWidth = instrumentWidth;
+        return st;
+    }
 
-		int xOffset;
-		int instrumentWidth;
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
 
-		SavedState(Parcelable superState) {
-			super(superState);
-		}
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
 
-		@Override
-		public void writeToParcel(Parcel out, int flags) {
-			super.writeToParcel(out, flags);
-			out.writeInt(xOffset);
-			out.writeInt(instrumentWidth);
-		}
+        xOffset = ss.xOffset;
+        instrumentWidth = ss.instrumentWidth;
+    }
 
-		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-			public SavedState createFromParcel(Parcel in) {
-				return new SavedState(in);
-			}
+    // ==========
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
 
-			public SavedState[] newArray(int size) {
-				return new SavedState[size];
-			}
-		};
+        boolean needsInvalidate = false;
+        if (scroller.computeScrollOffset()) {
+            xOffset = scroller.getCurrX();
 
-		private SavedState(Parcel in) {
-			super(in);
-			xOffset = in.readInt();
-			instrumentWidth = in.readInt();
-		}
+            if (scroller.isOverScrolled()) {
+                if (xOffset > 0 && scrollDirection > 0 && !leftEdgeEffectActive) {
+                    //leftEdgeEffect.onAbsorb(getCurrentVelocity());
+                    leftEdgeEffectActive = true;
+                    needsInvalidate = true;
+                } else if (xOffset < instrumentWidth - getMeasuredWidth() && scrollDirection < 0
+                        && !rightEdgeEffectActive) {
+                    //rightEdgeEffect.onAbsorb(getCurrentVelocity());
+                    needsInvalidate = true;
+                }
+            }
+        }
 
-	}
+        if (!scroller.isFinished()) {
+            needsInvalidate = true;
+        }
 
-	// ==========
-	@Override
-	public void computeScroll() {
-		super.computeScroll();
+        if (needsInvalidate) {
+            //ViewCompat.postInvalidateOnAnimation(this);
+        }
+    }
 
-		boolean needsInvalidate = false;
-		if (scroller.computeScrollOffset()) {
-			xOffset = scroller.getCurrX();
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        boolean needsInvalidate = false;
 
-			if (scroller.isOverScrolled()) {
-				if (xOffset > 0 && scrollDirection > 0 && !leftEdgeEffectActive) {
-					leftEdgeEffect.onAbsorb(getCurrentVelocity());
-					leftEdgeEffectActive = true;
-					needsInvalidate = true;
-				} else if (xOffset < instrumentWidth - getMeasuredWidth() && scrollDirection < 0
-						&& !rightEdgeEffectActive) {
-					rightEdgeEffect.onAbsorb(getCurrentVelocity());
-					needsInvalidate = true;
-				}
-			}
-		}
+        //final int overScrollMode = ViewCompat.getOverScrollMode(this);
+//		if (overScrollMode == ViewCompat.OVER_SCROLL_ALWAYS
+//				|| (overScrollMode == ViewCompat.OVER_SCROLL_IF_CONTENT_SCROLLS)) {
+//			if (!leftEdgeEffect.isFinished()) {
+//				final int restoreCount = canvas.save();
+//				final int height = getHeight() - getPaddingTop() - getPaddingBottom();
+//				final int width = getWidth();
+//
+//				canvas.rotate(270);
+//				canvas.translate(-height + getPaddingTop(), 0);
+//				leftEdgeEffect.setSize(height, width);
+//				needsInvalidate |= leftEdgeEffect.draw(canvas);
+//				canvas.restoreToCount(restoreCount);
+//			}
+//			if (!rightEdgeEffect.isFinished()) {
+//				final int restoreCount = canvas.save();
+//				final int width = getWidth();
+//				final int height = getHeight() - getPaddingTop() - getPaddingBottom();
+//
+//				canvas.rotate(90);
+//				canvas.translate(-getPaddingTop(), -width);
+//				rightEdgeEffect.setSize(height, width);
+//				needsInvalidate |= rightEdgeEffect.draw(canvas);
+//				canvas.restoreToCount(restoreCount);
+//			}
+//		} else {
+//			leftEdgeEffect.finish();
+//			rightEdgeEffect.finish();
+//		}
+//
+//		if (needsInvalidate) {
+//			ViewCompat.postInvalidateOnAnimation(this);
+//		}
+    }
 
-		if (!scroller.isFinished()) {
-			needsInvalidate = true;
-		}
+    @Override
+    protected void onDraw(Canvas canvas) {
+        if (isInEditMode()) {
+            canvas.drawColor(Color.GRAY);
+            return;
+        }
 
-		if (needsInvalidate) {
-			ViewCompat.postInvalidateOnAnimation(this);
-		}
-	}
+        if (measurementChanged) {
+            measurementChanged = false;
+            keyboard.initializeInstrument(getMeasuredHeight(), getContext());
 
-	@Override
-	public void draw(Canvas canvas) {
-		super.draw(canvas);
-		boolean needsInvalidate = false;
+            float oldInstrumentWidth = instrumentWidth;
+            instrumentWidth = keyboard.getWidth();
 
-		final int overScrollMode = ViewCompat.getOverScrollMode(this);
-		if (overScrollMode == ViewCompat.OVER_SCROLL_ALWAYS
-				|| (overScrollMode == ViewCompat.OVER_SCROLL_IF_CONTENT_SCROLLS)) {
-			if (!leftEdgeEffect.isFinished()) {
-				final int restoreCount = canvas.save();
-				final int height = getHeight() - getPaddingTop() - getPaddingBottom();
-				final int width = getWidth();
+            float ratio = (float) instrumentWidth / oldInstrumentWidth;
+            xOffset = (int) (xOffset * ratio);
+        }
 
-				canvas.rotate(270);
-				canvas.translate(-height + getPaddingTop(), 0);
-				leftEdgeEffect.setSize(height, width);
-				needsInvalidate |= leftEdgeEffect.draw(canvas);
-				canvas.restoreToCount(restoreCount);
-			}
-			if (!rightEdgeEffect.isFinished()) {
-				final int restoreCount = canvas.save();
-				final int width = getWidth();
-				final int height = getHeight() - getPaddingTop() - getPaddingBottom();
+        int localXOffset = getOffsetInsideOfBounds();
 
-				canvas.rotate(90);
-				canvas.translate(-getPaddingTop(), -width);
-				rightEdgeEffect.setSize(height, width);
-				needsInvalidate |= rightEdgeEffect.draw(canvas);
-				canvas.restoreToCount(restoreCount);
-			}
-		} else {
-			leftEdgeEffect.finish();
-			rightEdgeEffect.finish();
-		}
+        canvas.save();
+        canvas.scale(scaleX, 1.0f);
+        canvas.translate(-localXOffset, 0);
 
-		if (needsInvalidate) {
-			ViewCompat.postInvalidateOnAnimation(this);
-		}
-	}
-
-	@Override
-	protected void onDraw(Canvas canvas) {
-		if (isInEditMode()) {
-			canvas.drawColor(Color.GRAY);
-			return;
-		}
-
-		if (measurementChanged) {
-			measurementChanged = false;
-			keyboard.initializeInstrument(getMeasuredHeight(), getContext());
-
-			float oldInstrumentWidth = instrumentWidth;
-			instrumentWidth = keyboard.getWidth();
-
-			float ratio = (float) instrumentWidth / oldInstrumentWidth;
-			xOffset = (int) (xOffset * ratio);
-		}
-
-		int localXOffset = getOffsetInsideOfBounds();
-
-		canvas.save();
-		canvas.scale(scaleX, 1.0f);
-		canvas.translate(-localXOffset, 0);
-
-		keyboard.updateBounds(localXOffset, canvasWidth + localXOffset);
-		keyboard.draw(canvas);
+        keyboard.updateBounds(localXOffset, canvasWidth + localXOffset);
+        keyboard.draw(canvas);
 /*
 	if (!notesToDraw.isEmpty()) {
 	    keyboard.drawOverlays(notesToDraw, canvas);
 	}
 */
-		canvas.restore();
-	}
+        canvas.restore();
+    }
 
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-	private int getCurrentVelocity() {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			return (int) scroller.getCurrVelocity();
-		}
-		return 0;
-	}
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private int getCurrentVelocity() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            return (int) scroller.getCurrVelocity();
+        }
+        return 0;
+    }
 
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
-		measurementChanged = true;
-		Log.d(VIEW_LOG_TAG, "measurement changed");
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
+        measurementChanged = true;
+        Log.d(VIEW_LOG_TAG, "measurement changed");
 
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-	}
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 
-	@Override
-	protected int computeHorizontalScrollExtent() {
-		return canvasWidth;
-	}
+    @Override
+    protected int computeHorizontalScrollExtent() {
+        return canvasWidth;
+    }
 
-	@Override
-	protected int computeHorizontalScrollOffset() {
-		return getOffsetInsideOfBounds();
-	}
+    @Override
+    protected int computeHorizontalScrollOffset() {
+        return getOffsetInsideOfBounds();
+    }
 
-	@Override
-	protected int computeHorizontalScrollRange() {
-		return instrumentWidth;
-	}
+    @Override
+    protected int computeHorizontalScrollRange() {
+        return instrumentWidth;
+    }
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
 
-		int action = event.getAction();
+        int action = event.getAction();
 
-		if (action == MotionEvent.ACTION_CANCEL) {
-			resetTouchFeedback();
-			releaseEdgeEffects();
-			xOffset = getOffsetInsideOfBounds();
-			ViewCompat.postInvalidateOnAnimation(this);
-		}
-		if (action == MotionEvent.ACTION_UP) {
-			xOffset = getOffsetInsideOfBounds();
-			releaseEdgeEffects();
-			ViewCompat.postInvalidateOnAnimation(this);
-		}
+        if (action == MotionEvent.ACTION_CANCEL) {
+            resetTouchFeedback();
+            releaseEdgeEffects();
+            xOffset = getOffsetInsideOfBounds();
+            //ViewCompat.postInvalidateOnAnimation(this);
+        }
+        if (action == MotionEvent.ACTION_UP) {
+            xOffset = getOffsetInsideOfBounds();
+            releaseEdgeEffects();
+            //ViewCompat.postInvalidateOnAnimation(this);
+        }
 
-		if (action == MotionEvent.ACTION_MOVE) {
-			for(int i = 0; i < event.getPointerCount(); i++){
-				keyboard.touchItem(event.getX() / scaleX + xOffset, event.getY());
-				sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
-				//PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
-				//PdBase.sendFloat("X_KB_gate", 1);
+        if (action == MotionEvent.ACTION_MOVE) {
+            for (int i = 0; i < event.getPointerCount(); i++) {
+                keyboard.touchItem(event.getX() / scaleX + xOffset, event.getY());
+                sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+                //PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+                //PdBase.sendFloat("X_KB_gate", 1);
 
-				Note note = Note.fromCode(keyboard.getPressedKey().midiCode);
-				//addNotes(Arrays.asList(note));
+                Note note = Note.fromCode(keyboard.getPressedKey().midiCode);
+                //addNotes(Arrays.asList(note));
 
-				resetTouchFeedback();
-			}
-			xOffset = getOffsetInsideOfBounds();
-			releaseEdgeEffects();
-			ViewCompat.postInvalidateOnAnimation(this);
-		}
+                resetTouchFeedback();
+            }
+            xOffset = getOffsetInsideOfBounds();
+            releaseEdgeEffects();
+            //ViewCompat.postInvalidateOnAnimation(this);
+        }
 
-		boolean retVal = scaleGestureDetector.onTouchEvent(event);
-		retVal = gestureDetector.onTouchEvent(event) || retVal;
-		return retVal || super.onTouchEvent(event);
-	}
+        boolean retVal = scaleGestureDetector.onTouchEvent(event);
+        retVal = gestureDetector.onTouchEvent(event) || retVal;
+        return retVal || super.onTouchEvent(event);
+    }
 
-	private void fireTouchListeners(int code) {
-		if (onTouchListener != null) {
-			onTouchListener.onTouch(code);
-		}
-	}
+    private void fireTouchListeners(int code) {
+        if (onTouchListener != null) {
+            onTouchListener.onTouch(code);
+        }
+    }
 
-	private void fireLongTouchListeners(int code) {
-		if (onTouchListener != null) {
-			onTouchListener.onLongTouch(code);
-		}
-	}
+    private void fireLongTouchListeners(int code) {
+        if (onTouchListener != null) {
+            onTouchListener.onLongTouch(code);
+        }
+    }
 
-	public void setOnKeyTouchListener(OnKeyTouchListener listener) {
-		this.onTouchListener = listener;
-	}
+    public void setOnKeyTouchListener(OnKeyTouchListener listener) {
+        this.onTouchListener = listener;
+    }
 
-	public interface OnKeyTouchListener {
+    private void releaseEdgeEffects() {
+        leftEdgeEffectActive = rightEdgeEffectActive = false;
+        //leftEdgeEffect.onRelease();
+        //rightEdgeEffect.onRelease();
+    }
 
-		void onTouch(int midiCode);
+    private void resetTouchFeedback() {
+        if (keyboard.releaseTouch()) {
+            releaseNote();
+            //PdBase.sendFloat("X_KB_gate", 0);
+            invalidate();
+        }
+    }
 
-		void onLongTouch(int midiCode);
+    private int getOffsetInsideOfBounds() {
+        int localxOffset = xOffset;
+        if (localxOffset < 0) {
+            localxOffset = 0;
+        }
+        if (localxOffset > instrumentWidth - getMeasuredWidth()) {
+            localxOffset = instrumentWidth - getMeasuredWidth();
+        }
+        return localxOffset;
+    }
+
+    protected void sendNote(int note) {
+    }
+
+    ;
+
+    protected void releaseNote() {
+    }
+
+    public interface OnKeyTouchListener {
+
+        void onTouch(int midiCode);
+
+        void onLongTouch(int midiCode);
 
 
-	}
+    }
 
-	private OnScaleGestureListener scaleGestureListener = new OnScaleGestureListener() {
+    public static class SavedState extends BaseSavedState {
 
-		@Override
-		public void onScaleEnd(ScaleGestureDetector detector) {
-		}
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
 
-		@Override
-		public boolean onScaleBegin(ScaleGestureDetector detector) {
-			return true;
-		}
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+        int xOffset;
+        int instrumentWidth;
 
-		@Override
-		public boolean onScale(ScaleGestureDetector detector) {
-			return true;
-		}
-	};
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
 
-	private void releaseEdgeEffects() {
-		leftEdgeEffectActive = rightEdgeEffectActive = false;
-		leftEdgeEffect.onRelease();
-		rightEdgeEffect.onRelease();
-	}
+        private SavedState(Parcel in) {
+            super(in);
+            xOffset = in.readInt();
+            instrumentWidth = in.readInt();
+        }
 
-	private OnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(xOffset);
+            out.writeInt(instrumentWidth);
+        }
 
-		public boolean onDown(MotionEvent e) {
-			releaseEdgeEffects();
-			scroller.forceFinished(true);
-			if (keyboard.touchItem(e.getX() / scaleX + xOffset, e.getY())) {
-				sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
-				//PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
-				//PdBase.sendFloat("X_KB_gate", 1);
-				invalidate();
-			}
-
-			return true;
-		}
-
-		public boolean onSingleTapUp(MotionEvent e) {
-			fireTouchListeners(keyboard.getTouchedCode());
-			resetTouchFeedback();
-			return super.onSingleTapUp(e);
-		}
-
-		public void onLongPress(MotionEvent e) {
-			fireLongTouchListeners(keyboard.getTouchedCode());
-			resetTouchFeedback();
-			super.onLongPress(e);
-		};
-
-		public boolean onDoubleTapEvent(MotionEvent e) {
-			resetTouchFeedback();
-			return super.onDoubleTapEvent(e);
-		};
-
-	};
-
-	private void resetTouchFeedback() {
-		if (keyboard.releaseTouch()) {
-			releaseNote();
-			//PdBase.sendFloat("X_KB_gate", 0);
-			invalidate();
-		}
-	};
-
-	private int getOffsetInsideOfBounds() {
-		int localxOffset = xOffset;
-		if (localxOffset < 0) {
-			localxOffset = 0;
-		}
-		if (localxOffset > instrumentWidth - getMeasuredWidth()) {
-			localxOffset = instrumentWidth - getMeasuredWidth();
-		}
-		return localxOffset;
-	}
-	
-	protected void sendNote(int note){}
-	
-	protected void releaseNote(){}
+    }
 
 }
