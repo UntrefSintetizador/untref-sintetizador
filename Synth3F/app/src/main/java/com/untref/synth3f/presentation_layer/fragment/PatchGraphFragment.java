@@ -53,12 +53,12 @@ public class PatchGraphFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
-        mapView = (MapView) patchGraphView.findViewById(R.id.mapView);
+        mapView = patchGraphView.findViewById(R.id.mapView);
         createDragAndDropEvent();
         createSaveLoadEvent();
         createEngineEvent();
         createWireDrawer(patchGraphView);
-        patchMenuView = (PatchMenuView) patchGraphView.findViewById(R.id.patch_menu_view);
+        patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
         return patchGraphView;
     }
@@ -102,7 +102,7 @@ public class PatchGraphFragment extends Fragment {
 
         if (requestCode == REQUEST_LOAD) {
             if (resultCode == RESULT_OK) {
-                ConstraintLayout mapLayout = (ConstraintLayout) getActivity().findViewById(R.id.map);
+                ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
                 while (mapLayout.getChildCount() > 1) {
                     mapLayout.removeViewAt(0);
                 }
@@ -168,7 +168,7 @@ public class PatchGraphFragment extends Fragment {
         this.wireDrawer = new WireDrawer(getActivity(), mapView);
         wireDrawer.setId(findUnusedId());
 
-        ConstraintLayout mapLayout = (ConstraintLayout) view.findViewById(R.id.map);
+        ConstraintLayout mapLayout = view.findViewById(R.id.map);
         mapLayout.addView(wireDrawer);
 
         ConstraintSet constraintSet = new ConstraintSet();
@@ -215,7 +215,7 @@ public class PatchGraphFragment extends Fragment {
                                 }
                                 ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
 
-                                ConstraintLayout mapLayout = (ConstraintLayout) getActivity().findViewById(R.id.map);
+                                ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
                                 mapLayout.addView(patchView, drawerLayoutParams);
 
                                 xDelta = drawerLayoutParams.width / 2;
