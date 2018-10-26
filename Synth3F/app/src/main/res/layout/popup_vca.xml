@@ -4,14 +4,15 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@android:color/black">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@android:color/white"
         android:gravity="center"
-        android:layout_marginTop="0dp"
-        >
+        android:layout_marginTop="0dp">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,13 +30,13 @@
                 android:gravity="center"
                 android:background="@android:color/black"
                 android:textColor="@android:color/white"
-                android:textSize="40px"/>
+                android:textSize="40px" />
 
-            <TableLayout
-                android:id="@+id/tablaVCA1"
+            <TableLayout android:id="@+id/tablaVCA1"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 xmlns:android="http://schemas.android.com/apk/res/android">
+
                 <TableRow
                     android:layout_height="fill_parent"
                     android:layout_width="wrap_content"
@@ -47,8 +48,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="100dp"
                         android:layout_weight="1"
-                        android:text="att_control"
-                        />
+                        android:text="att_control" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,8 +68,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="100dp"
                         android:layout_weight="1"
-                        android:text="att_control"
-                        />
+                        android:text="att_control" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -88,8 +89,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="100dp"
                         android:layout_weight="1"
-                        android:text="base"
-                        />
+                        android:text="base" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,8 +110,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="100dp"
                         android:layout_weight="1"
-                        android:text="clip"
-                        />
+                        android:text="clip" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

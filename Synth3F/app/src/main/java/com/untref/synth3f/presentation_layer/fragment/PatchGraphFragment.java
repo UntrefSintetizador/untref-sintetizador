@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
@@ -21,7 +22,6 @@ import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.activity.StorageActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
-import com.untref.synth3f.R;
 
 import java.util.HashMap;
 

@@ -4,14 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/black">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@android:color/white"
         android:gravity="center"
-        android:layout_marginTop="0dp"
-        >
+        android:layout_marginTop="0dp">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,13 +30,13 @@
                 android:gravity="center"
                 android:background="@android:color/black"
                 android:textColor="@android:color/white"
-                android:textSize="40px"/>
+                android:textSize="40px" />
 
-            <TableLayout
-                android:id="@+id/tablaVCO1"
+            <TableLayout android:id="@+id/tablaVCO1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android">
+
                 <TableRow
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -48,8 +49,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="att_freq0"
-                        />
+                        android:text="att_freq0" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -69,8 +70,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="att_freq0"
-                        />
+                        android:text="att_freq0" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -90,8 +91,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
-                        android:text="att_freq1"
-                        />
+                        android:text="att_freq1" />
+
                     <SeekBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,8 +112,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
-                        android:text="att_pw"
-                        />
+                        android:text="att_pw" />
+
                     <SeekBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -131,8 +132,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
-                        android:text="waveform"
-                        />
+                        android:text="waveform" />
+
                     <SeekBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,13 +147,14 @@
                     android:layout_width="match_parent"
                     android:id="@+id/tableRowVCO1_4"
                     android:gravity="center_vertical">
+
                     <TextView
                         android:id="@+id/label_freq"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
-                        android:text="freq"
-                        />
+                        android:text="freq" />
+
                     <SeekBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -172,8 +174,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
-                        android:text="offset"
-                        />
+                        android:text="offset" />
+
                     <SeekBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -187,13 +189,14 @@
                     android:layout_width="match_parent"
                     android:id="@+id/tableRowVCO1_5"
                     android:gravity="center_vertical">
+
                     <TextView
                         android:id="@+id/label_pw"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
-                        android:text="pw"
-                        />
+                        android:text="pw" />
+
                     <SeekBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -12,4 +12,4 @@
     android:textSize="15sp"
     android:ellipsize="marquee"
     android:background="@android:color/black"
-    android:textColor="@android:color/white"/>
+    android:textColor="@android:color/white" />

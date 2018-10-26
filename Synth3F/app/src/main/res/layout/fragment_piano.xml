@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:piano="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -15,7 +14,7 @@
         android:textColor="@android:color/white"
         android:padding="10sp"
         android:textStyle="bold"
-        android:text="@string/piano"/>
+        android:text="@string/piano" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,21 +29,20 @@
             piano:overlay_circle_radius="18dip"
             piano:overlay_circle_text_size="18sp"
             piano:overlay_color="#00FF00"
-            android:layout_weight="0.1"
-            />
+            android:layout_weight="0.1" />
 
-        <LinearLayout
-            android:id="@+id/tablaBotonesOctavas"
+        <LinearLayout android:id="@+id/tablaBotonesOctavas"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="0"
             xmlns:android="http://schemas.android.com/apk/res/android">
 
-            <Button android:id="@+id/botonOctavaMas"
+            <Button
+                android:id="@+id/botonOctavaMas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Octava +"/>
+                android:text="Octava +" />
 
             <TextView
                 android:id="@+id/labelOctava"
@@ -57,13 +55,13 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
-                android:textAlignment="center"
-                />
+                android:textAlignment="center" />
 
-            <Button android:id="@+id/botonOctavaMenos"
+            <Button
+                android:id="@+id/botonOctavaMenos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Octava -"/>
+                android:text="Octava -" />
 
         </LinearLayout>
     </LinearLayout>

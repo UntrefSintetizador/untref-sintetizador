@@ -22,8 +22,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-//import android.support.v7.view.ViewCompat;
-//import android.support.v7.widget.EdgeEffectCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -37,6 +35,9 @@ import android.widget.OverScroller;
 
 import com.evilduck.piano.R;
 import com.evilduck.piano.music.Note;
+
+//import android.support.v7.view.ViewCompat;
+//import android.support.v7.widget.EdgeEffectCompat;
 
 //import org.puredata.core.PdBase;
 

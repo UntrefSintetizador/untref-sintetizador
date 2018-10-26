@@ -4,14 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/black">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@android:color/white"
         android:gravity="center"
-        android:layout_marginTop="0dp"
-        >
+        android:layout_marginTop="0dp">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,13 +30,13 @@
                 android:gravity="center"
                 android:background="@android:color/black"
                 android:textColor="@android:color/white"
-                android:textSize="40px"/>
+                android:textSize="40px" />
 
-            <TableLayout
-                android:id="@+id/tablaDAC1"
+            <TableLayout android:id="@+id/tablaDAC1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android">
+
                 <TableRow
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -48,8 +49,8 @@
                         android:layout_height="wrap_content"
                         android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="att_freq0"
-                        />
+                        android:text="att_freq0" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

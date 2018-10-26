@@ -14,7 +14,7 @@ public class MapView extends ConstraintLayout {
     public static float MAX_ZOOM = 6.0f;
 
     private ScaleGestureDetector scaleGestureDetector;
-    private  GestureDetector gestureDetector;
+    private GestureDetector gestureDetector;
     private float scale = MIN_ZOOM;
     private float translationX = 0.0f;
     private float translationY = 0.0f;
@@ -136,7 +136,7 @@ public class MapView extends ConstraintLayout {
             }
         };
         scaleGestureDetector = new ScaleGestureDetector(context, scaleGestureListener);
-        gestureDetector = new  GestureDetector(context, gestureListener);
+        gestureDetector = new GestureDetector(context, gestureListener);
 
         this.post(new Runnable() {
             @Override

@@ -2,8 +2,8 @@ package com.untref.synth3f.presentation_layer.presenters;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchKBMenuView;
+import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;

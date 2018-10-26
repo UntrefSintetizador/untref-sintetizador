@@ -9,7 +9,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled = false
     }
     buildTypes {
         release {
@@ -17,9 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-            configurations {
-                all*.exclude group: 'com.android.support', module: 'support-v4'
-            }
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
 }
 
 dependencies {

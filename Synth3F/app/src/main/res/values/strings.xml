@@ -3,15 +3,15 @@
 
     <string name="action_salir">Salir</string>
     <string-array name="Presets">
-        <item > sq_bass1 </item>
-        <item > filter_tone </item>
-        <item > herbie </item>
-        <item > extasis </item>
-        <item > fm </item>
-        <item > saw_seq </item>
-        <item > bell </item>
-        <item > sq_bass </item>
-        <item > chord_pad </item>
+        <item> sq_bass1 </item>
+        <item> filter_tone </item>
+        <item> herbie </item>
+        <item> extasis </item>
+        <item> fm </item>
+        <item> saw_seq </item>
+        <item> bell </item>
+        <item> sq_bass </item>
+        <item> chord_pad </item>
     </string-array>
 
     <string name="piano">PIANO</string>

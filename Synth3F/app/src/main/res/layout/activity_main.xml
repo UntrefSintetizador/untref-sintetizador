@@ -10,8 +10,7 @@
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true">
 
-    <android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/activity_main"
@@ -29,16 +28,16 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
-            android:id="@+id/navview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:layout_gravity="start"
-            app:itemTextColor="@android:color/black"
-            app:itemTextAppearance="@color/background_title_menu"
-            app:itemBackground="@color/background_title_menu"
-            app:headerLayout="@layout/header_navview"
-            app:menu="@menu/menu_navview" >
+        android:id="@+id/navview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:itemTextColor="@android:color/black"
+        app:itemTextAppearance="@color/background_title_menu"
+        app:itemBackground="@color/background_title_menu"
+        app:headerLayout="@layout/header_navview"
+        app:menu="@menu/menu_navview">
 
     </android.support.design.widget.NavigationView>
 

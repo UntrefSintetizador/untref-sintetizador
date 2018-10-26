@@ -4,8 +4,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
-import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.entities.MIXPatch;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
