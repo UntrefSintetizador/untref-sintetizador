@@ -6,9 +6,7 @@ import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.MenuScaleFunction;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
-import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
 import com.untref.synth3f.presentation_layer.View.PatchView;
-import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 import java.lang.reflect.Field;
 
@@ -37,9 +35,7 @@ public abstract class PatchPresenter {
         patchGraphPresenter.tryConnect(x, y);
     }
 
-    public abstract PatchMenuView createMenuView(MainActivity context);
-
-    public abstract boolean initMenuView(PatchMenuView2 patchMenuView2);
+    public abstract boolean initMenuView(PatchMenuView patchMenuView);
 
     public void setValue(String name, float value) {
         try {

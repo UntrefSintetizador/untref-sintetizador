@@ -17,7 +17,7 @@ import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
-import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
+import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.activity.StorageActivity;
@@ -33,7 +33,7 @@ public class PatchGraphFragment extends Fragment {
     private IProcessor processor;
     private MapView mapView;
     private Context context;
-    private PatchMenuView2 patchMenuView2;
+    private PatchMenuView patchMenuView;
 
     public static final int RESULT_CANCEL = 0;
     public static final int RESULT_OK = 1;
@@ -54,8 +54,8 @@ public class PatchGraphFragment extends Fragment {
         createDragAndDropEvent();
         createSaveLoadEvent();
         createWireDrawer(patchGraphView);
-        patchMenuView2 = (PatchMenuView2) patchGraphView.findViewById(R.id.patch_menu_view);
-        patchMenuView2.setPatchGraphFragment(this);
+        patchMenuView = (PatchMenuView) patchGraphView.findViewById(R.id.patch_menu_view);
+        patchMenuView.setPatchGraphFragment(this);
         return patchGraphView;
     }
 
@@ -142,8 +142,8 @@ public class PatchGraphFragment extends Fragment {
         }
     }
 
-    public PatchMenuView2 getPatchMenuView2() {
-        return patchMenuView2;
+    public PatchMenuView getPatchMenuView() {
+        return patchMenuView;
     }
 
     public int findUnusedId() {

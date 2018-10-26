@@ -14,7 +14,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
     private static final int MAX_ROTATION = 135;
 
-    private PatchMenuView2 patchMenuView2;
+    private PatchMenuView patchMenuView;
 
     private String parameterName;
     private float maxValue;
@@ -33,11 +33,11 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         super(context);
     }
 
-    public Knob(Context context, PatchMenuView2 patchMenuView2, String parameterName,
+    public Knob(Context context, PatchMenuView patchMenuView, String parameterName,
                 float minValue, float maxValue, int precision, float value,
                 MenuScaleFunction scaleFunction, int color) {
         super(context);
-        this.patchMenuView2 = patchMenuView2;
+        this.patchMenuView = patchMenuView;
         this.parameterName = parameterName;
         this.minValue = minValue;
         this.maxValue = maxValue;
@@ -78,7 +78,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
             case MotionEvent.ACTION_DOWN:
                 initialTouch = y;
-                patchMenuView2.setParameterToEdit(parameterName, value);
+                patchMenuView.setParameterToEdit(parameterName, value);
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -86,7 +86,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
                 convertRotationToValue(-clampedRotation);
                 setRotation(calculateRotation());
                 checkLinkedKnob();
-                patchMenuView2.setValue(parameterName, value);
+                patchMenuView.setValue(parameterName, value);
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -120,7 +120,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
             checkLinkedKnob();
         }
 
-        patchMenuView2.setValue(getName(), value);
+        patchMenuView.setValue(getName(), value);
     }
 
     private void normalizeValue() {
@@ -133,7 +133,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
         if (linkedKnob != null) {
             linkedKnob.setValueCheckingLinks(linkingFunction.calculate(value), false);
-            patchMenuView2.setValue(linkedKnobParameterName, linkedKnob.getValue());
+            patchMenuView.setValue(linkedKnobParameterName, linkedKnob.getValue());
         }
     }
 

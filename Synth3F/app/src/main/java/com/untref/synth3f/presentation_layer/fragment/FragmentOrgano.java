@@ -13,10 +13,6 @@ import com.evilduck.piano.views.instrument.PianoView;
 import com.untref.synth3f.R;
 import com.untref.synth3f.presentation_layer.presenters.PianoPresenter;
 
-/**
- * Created by ddavi on 25/2/2017.
- */
-
 public class FragmentOrgano extends Fragment {
 
     private PianoView piano;
@@ -36,16 +32,16 @@ public class FragmentOrgano extends Fragment {
         View view = inflater.inflate(R.layout.fragment_piano, container, false);
 
         //inicializo valores en teclas de piano
-        piano = (PianoView) view.findViewById(R.id.pianito);
+        piano = view.findViewById(R.id.pianito);
         presenter.initializePiano(piano);
 
         //inicializo valor de octava
         int value = presenter.getOctava();
-        label_octava = (TextView) view.findViewById(R.id.labelOctava);
+        label_octava = view.findViewById(R.id.labelOctava);
         label_octava.setText(String.valueOf(value));
 
         //Defino onCLick listener
-        Button btn_more = (Button) view.findViewById(R.id.botonOctavaMas);
+        Button btn_more = view.findViewById(R.id.botonOctavaMas);
         btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +50,7 @@ public class FragmentOrgano extends Fragment {
             }
         });
 
-        Button btn_minus = (Button) view.findViewById(R.id.botonOctavaMenos);
+        Button btn_minus = view.findViewById(R.id.botonOctavaMenos);
         btn_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
