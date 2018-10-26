@@ -26,6 +26,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/menuButtonChangeEngine"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/change_engine"
+        app:layout_constraintBottom_toTopOf="@id/menuButtonOpenDragMenu"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/menuButtonDragVCO"
         android:layout_width="64dp"
         android:layout_height="64dp"

@@ -281,7 +281,7 @@ public class PatchGraphFragment extends Fragment {
 
     private void createEngineEvent() {
 
-        patchGraphView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuButtonChangeEngine).setOnClickListener(
 
                 new View.OnClickListener() {
 
