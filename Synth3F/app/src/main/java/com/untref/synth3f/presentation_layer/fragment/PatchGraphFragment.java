@@ -89,14 +89,14 @@ public class PatchGraphFragment extends Fragment {
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
                 patchGraphPresenter.save(context, data.getStringExtra("filename"));
-            }
 
-            if (activityWillReset) {
-                Activity activity = (Activity) context; //Cast or change type?
-                Intent activityIntent = activity.getIntent();
-                ConfigFactory.changeEngine();
-                activity.finish();
-                startActivity(activityIntent);
+                if (activityWillReset) {
+                    Activity activity = (Activity) context; //Cast or change type?
+                    Intent activityIntent = activity.getIntent();
+                    ConfigFactory.changeEngine();
+                    activity.finish();
+                    startActivity(activityIntent);
+                }
             }
         }
 
