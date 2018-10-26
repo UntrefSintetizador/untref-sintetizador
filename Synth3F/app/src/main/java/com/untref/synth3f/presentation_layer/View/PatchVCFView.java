@@ -8,7 +8,6 @@ import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchVCFPresenter;
-import com.untref.synth3f.presentation_layer.presenters.PatchVCOPresenter;
 
 public class PatchVCFView extends PatchView {
 

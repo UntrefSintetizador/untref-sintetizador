@@ -1,11 +1,8 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
-import com.evilduck.piano.music.Note;
 import com.untref.synth3f.presentation_layer.presenters.PatchKBPresenter;
 
 public class PianoView extends com.evilduck.piano.views.instrument.PianoView {

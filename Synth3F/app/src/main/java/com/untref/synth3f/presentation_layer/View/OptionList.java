@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 public class OptionList extends LinearLayout {
 
-    private PatchMenuView2 patchMenuView2;
+    private PatchMenuView patchMenuView;
     private String parameterName;
     private OptionItem[] options;
 
@@ -31,8 +31,8 @@ public class OptionList extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void init(PatchMenuView2 patchMenuView2, int buttonSize) {
-        this.patchMenuView2 = patchMenuView2;
+    public void init(PatchMenuView patchMenuView, int buttonSize) {
+        this.patchMenuView = patchMenuView;
         this.buttonSize = buttonSize;
     }
 
@@ -62,8 +62,8 @@ public class OptionList extends LinearLayout {
         options[this.selectedValue].setColor(inactiveColor);
         this.selectedValue = selectedValue;
         options[selectedValue].setColor(activeColor);
-        patchMenuView2.setParameterToEdit(parameterName, selectedValue);
-        patchMenuView2.setValue(parameterName, selectedValue);
+        patchMenuView.setParameterToEdit(parameterName, selectedValue);
+        patchMenuView.setValue(parameterName, selectedValue);
     }
 
     private int darken(int color) {

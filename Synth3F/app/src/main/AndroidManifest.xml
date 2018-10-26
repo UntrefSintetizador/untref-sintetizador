@@ -5,7 +5,9 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -28,14 +30,12 @@
             android:name=".presentation_layer.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
         <activity
             android:name=".presentation_layer.activity.StorageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
 
         <service android:name="org.puredata.android.service.PdService" />
     </application>

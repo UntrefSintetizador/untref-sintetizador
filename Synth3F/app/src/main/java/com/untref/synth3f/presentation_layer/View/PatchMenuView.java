@@ -1,188 +1,230 @@
 package com.untref.synth3f.presentation_layer.View;
 
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
+import android.content.Context;
+import android.graphics.Color;
+import android.text.Editable;
+import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
-import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.activity.MainActivity;
+import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
-import java.lang.reflect.Field;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+public class PatchMenuView extends TableLayout {
 
-public abstract class PatchMenuView extends PopupWindow {
+    private PatchGraphFragment patchGraphFragment;
+    private TextView parameterNameView;
+    private EditText parameterValueView;
+    private OptionList optionList;
+    private PatchPresenter patchPresenter;
+    private List<Knob> knobList;
+    private int knobSize;
+    private int knobsPerRow;
+    private int color;
 
-    private View button;
-    private int id_layout;
-    private String title;
-    private LayoutInflater layoutInflater;
-    private View popupView;
-    protected PatchPresenter patchPresenter;
-    protected Patch patch;
-
-    public PatchMenuView(MainActivity context, int layout, PatchPresenter patchPresenter, Patch patch) {
-        super(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-
-        this.id_layout = layout;
-        this.title = patch.getTypeName() + "_" + patch.getId();
-        this.patchPresenter = patchPresenter;
-        this.patch = patch;
-
-        layoutInflater = (LayoutInflater) context.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        initializePopupView();
-
-        this.setContentView(popupView);
+    public PatchMenuView(Context context) {
+        super(context);
     }
 
-    public View getButton() {
-        return this.button;
+    public PatchMenuView(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    public void setButton(View boton) {
-        this.button = boton;
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    private void initializePopupView() {
+    public PatchGraphFragment getPatchGraphFragment() {
+        return patchGraphFragment;
+    }
 
-        popupView = layoutInflater.inflate(id_layout, null);
-        //defino comportamiento de elementos del XML
-        initializeModule(title, popupView);
+    public void setPatchGraphFragment(PatchGraphFragment patchGraphFragment) {
+        this.patchGraphFragment = patchGraphFragment;
+        this.knobList = new ArrayList<>();
+        this.parameterNameView = findViewById(R.id.patch_menu_view_parameter_name);
+        this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
+        this.optionList = ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
 
-        //Defino comportamiento del boton que cierrar el popup
-        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_cerrar);
-        btn_Cerrar.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        setBackgroundColor(Color.MAGENTA);
+        optionList.setVisibility(View.GONE);
+        setVisibility(View.GONE);
 
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            private int dx = 0;
-            private int dy = 0;
+        this.knobsPerRow = 4;
+        ((TableRow.LayoutParams) parameterNameView.getLayoutParams()).span = knobsPerRow - 1;
+        ((TableRow.LayoutParams) parameterValueView.getLayoutParams()).span = knobsPerRow;
 
-            private int xp = 0;
-            private int yp = 0;
+        //pixels
+        float defaultScreenHeight = 728;
+        int defaultHeight = 600;
+        int defaultWidth = 600;
+        int defaultKnobHeight = 150;
+        float relationOfHeight = (float) getResources().getDisplayMetrics().heightPixels / defaultScreenHeight;
+        getLayoutParams().height = (int) (relationOfHeight * defaultHeight);
+        getLayoutParams().width = (int) (relationOfHeight * defaultWidth);
+        this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
 
-            private int sides = 0;
-            private int topBot = 0;
+        int defaultButtonSize = 150;
+        optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
 
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        dx = (int) motionEvent.getX();
-                        dy = (int) motionEvent.getY();
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        xp = (int) motionEvent.getRawX();
-                        yp = (int) motionEvent.getRawY();
-                        sides = (xp - dx);
-                        topBot = (yp - dy);
-                        update(sides, topBot, -1, -1, true);
-                        break;
+        int defaultCloseButtonSize = 50;
+        Button button = findViewById(R.id.patch_menu_view_close);
+        button.getLayoutParams().width = (int) (relationOfHeight * defaultCloseButtonSize);
+        button.getLayoutParams().height = (int) (relationOfHeight * defaultCloseButtonSize);
+        button.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        close();
+                    }
                 }
-                return true;
-            }
-        });
-    }
+        );
 
-    protected void createSeekBarComponent(int id_seekBar, int id_label_seekBar, final String identificador_modulo, final String name_modulo, final float max_module, final float min_module, float multiplicador_modulo, final float multiplicador_seekBar, View view, float value, final MenuScale scale) {
-        SeekBar seekBar = (SeekBar) view.findViewById(id_seekBar);
-        final TextView label_module = (TextView) view.findViewById(id_label_seekBar);
-        //final String indetificador = identificador_modulo;
-        /*ESTABLECER MAXIMO PARA SEEKBAR
-         If you want values from 3 to 5 with a step of 0.1 (3, 3.1, 3.2, ..., 5)
-         this means that you have 21 possible values in the seekbar.
-        So the range of the seek bar will be [0 ; (5-3)/0.1 = 20].*/
-
-        seekBar.setMax((int) ((max_module - min_module) / multiplicador_modulo));
-        final float maxValue = max_module - min_module;
-        final float steps = (max_module - min_module) / multiplicador_modulo;
-        if (scale == MenuScale.LINEAR) {
-            seekBar.setProgress((int) ((value - min_module) / multiplicador_seekBar));
-        } else if (scale == MenuScale.EXPONENTIAL_LEFT) {
-            seekBar.setProgress((int) (steps * Math.log(value - min_module - 1) / Math.log(maxValue + 1)));
-        } else if (scale == MenuScale.EXPONENTIAL_CENTER) {
-            double aux = 0;
-            if (value > 0) {
-                aux = Math.log(value + 1) / Math.log(max_module + 1);
-            } else {
-                aux = -Math.log(-value + 1) / Math.log(-min_module + 1);
-            }
-            seekBar.setProgress((int) ((aux + 1) * steps / 2));
-        }
-        DecimalFormat decimales = new DecimalFormat("0.00");
-        label_module.setText(identificador_modulo + ": " + decimales.format(value));
-        seekBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-
+        parameterValueView.setOnEditorActionListener(
+                new EditText.OnEditorActionListener() {
                     @Override
-                    public void onProgressChanged(SeekBar seekBar1, int progress, boolean fromUser) {
-                        //3) MANDAR PARAMETROS MSJ
-                        String msj = "x_" + name_modulo + "_" + identificador_modulo;
-                        String label_moduel_text = identificador_modulo;
-                        float multiplicador = multiplicador_seekBar;
-                        float valorInicial = min_module;
-                        DecimalFormat decimales = new DecimalFormat("0.00");
-                        float value = 0;
-                        if (scale == MenuScale.LINEAR) {
-                            value = (float) (valorInicial + (progress * multiplicador));
-                        } else if (scale == MenuScale.EXPONENTIAL_LEFT) {
-                            value = (float) (valorInicial + Math.pow(maxValue + 1, progress / steps) - 1);
-                        } else if (scale == MenuScale.EXPONENTIAL_CENTER) {
-                            double aux = Math.abs((progress - steps / 2) * 2 / steps);
-                            if (progress > steps / 2) {
-                                value = (float) Math.pow(max_module + 1, aux) - 1;
-                            } else {
-                                value = (float) -Math.pow(-min_module + 1, aux) + 1;
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if ((actionId == EditorInfo.IME_ACTION_SEARCH ||
+                                actionId == EditorInfo.IME_ACTION_DONE ||
+                                event != null &&
+                                        event.getAction() == KeyEvent.ACTION_DOWN &&
+                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+                                && (event == null || !event.isShiftPressed())) {
+                            changeValue(parameterValueView.getText());
+                            InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            if (inputMethodManager != null) {
+                                inputMethodManager.hideSoftInputFromWindow(parameterValueView.getWindowToken(), 0);
                             }
+                            return true;
                         }
-                        //float value = (float) (valorInicial + progress * multiplicador);
-//                        Log.i("Mensaje seek" + name_modulo + "ER1_" + identificador_modulo, msj);
-//                        Log.i("Valor   seek" + name_modulo + "ER1_" + identificador_modulo, decimales.format(value));
-
-                        //context.masterConfig.config.sendValue(msj.replace(" ","") , value);
-
-                        try {
-                            Class<?> c = patch.getClass();
-                            Field f = c.getDeclaredField(identificador_modulo.replace("-", "_"));
-                            f.setAccessible(true);
-                            f.setFloat(patch, value);
-                        } catch (NoSuchFieldException e) {
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        }
-
-                        patchPresenter.setValue(msj, value);
-                        label_module.setText(label_moduel_text + ": " + decimales.format(value));
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar1) {
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar1) {
+                        return false;
                     }
                 }
         );
     }
 
-    public abstract void initializeModule(String title, View view);
+    public void createKnob(String parameterName, int precision, float value,
+                           MenuScaleFunction scale) {
 
-    public enum MenuScale {
-        LINEAR, EXPONENTIAL_LEFT, EXPONENTIAL_CENTER
+        Knob newKnob = new Knob(getContext(), this, parameterName,
+                scale.getMinValue(), scale.getMaxValue(), precision, value, scale, color);
+
+        knobList.add(newKnob);
+    }
+
+    public void createOptionList(String parameterName, int[] imageIds, int selectedValue) {
+        optionList.setValues(parameterName, imageIds, selectedValue, color);
+    }
+
+    public void linkKnobs(String parameterName1, String parameterName2, LinkingFunction normalFunction, LinkingFunction inverseFunction) {
+        Knob firstKnob = null;
+        Knob secondKnob = null;
+
+        for (Knob knob : knobList) {
+            String knobName = knob.getName();
+
+            if (knobName.contentEquals(parameterName1)) {
+                firstKnob = knob;
+
+            } else if (knobName.contentEquals(parameterName2)) {
+                secondKnob = knob;
+            }
+        }
+
+        if (firstKnob != null && secondKnob != null) {
+            firstKnob.link(secondKnob, parameterName2, inverseFunction);
+            secondKnob.link(firstKnob, parameterName1, normalFunction);
+        }
+    }
+
+    public void open(PatchPresenter patchPresenter) {
+        this.patchPresenter = patchPresenter;
+        TableRow knobTableRow;
+        TableRow textTableRow;
+        int knobsInRow;
+        TextView textView;
+        Knob knob;
+        LinearLayout.LayoutParams layoutParams;
+        for (int i = 0; i < knobList.size(); i = i + knobsPerRow) {
+            textTableRow = new TableRow(getContext());
+            knobTableRow = new TableRow(getContext());
+            knobsInRow = Math.min(knobsPerRow, knobList.size() - i);
+            for (int j = 0; j < knobsInRow; j++) {
+                knob = knobList.get(i + j);
+                textView = new TextView(getContext());
+                textView.setText(knob.getName());
+                textTableRow.addView(textView);
+                knobTableRow.addView(knob);
+                layoutParams = (LinearLayout.LayoutParams) knob.getLayoutParams();
+                layoutParams.width = knobSize;
+                layoutParams.height = knobSize;
+            }
+            addView(textTableRow);
+            addView(knobTableRow);
+        }
+        optionList.setVisibility(View.VISIBLE);
+        setVisibility(View.VISIBLE);
+        setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
+    }
+
+    public void close() {
+        knobList.clear();
+        int permanentViews = 2;
+        while (getChildCount() > permanentViews) {
+            removeViewAt(permanentViews);
+        }
+        optionList.clear();
+        optionList.setVisibility(View.GONE);
+        setVisibility(View.GONE);
+    }
+
+    public void setParameterToEdit(String parameterName, float value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.#######");
+        parameterNameView.setText(parameterName);
+        parameterValueView.setText(decimalFormat.format(value).replace(",", "."));
+    }
+
+    public void setValue(String parameterName, float value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.#######");
+        parameterValueView.setText(decimalFormat.format(value).replace(",", "."));
+        patchPresenter.setValue(parameterName, value);
+    }
+
+    public void changeValue(Editable editable) {
+        Knob knob = null;
+        float value;
+
+        for (Knob currentKnob : knobList) {
+
+            if (currentKnob.getName().contentEquals(parameterNameView.getText())) {
+                knob = currentKnob;
+            }
+        }
+
+        if (knob != null) {
+            value = Float.parseFloat(editable.toString());
+            knob.setValue(value);
+
+        } else {
+            value = Float.parseFloat(editable.toString());
+            value = Math.max(0, Math.min(optionList.getChildCount() - 1, Math.round(value)));
+            optionList.selectValue((int) value);
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.#######");
+        editable.clear();
+        editable.append(decimalFormat.format(value).replace(",", "."));
     }
 }

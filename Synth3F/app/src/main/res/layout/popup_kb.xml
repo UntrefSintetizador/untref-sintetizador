@@ -4,14 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/black">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@android:color/white"
         android:gravity="center"
-        android:layout_marginTop="0dp"
-        >
+        android:layout_marginTop="0dp">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,13 +30,13 @@
                 android:gravity="center"
                 android:background="@android:color/black"
                 android:textColor="@android:color/white"
-                android:textSize="40px"/>
+                android:textSize="40px" />
 
-            <TableLayout
-                android:id="@+id/tablaKB1"
+            <TableLayout android:id="@+id/tablaKB1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android">
+
                 <TableRow
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -48,20 +49,21 @@
                         android:layout_height="wrap_content"
                         android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="on-off"
-                        />
+                        android:text="on-off" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/seekBar_KB0"
                         android:layout_weight="5" />
+
                     <TextView
                         android:id="@+id/label_KB1"
                         android:layout_height="wrap_content"
                         android:layout_width="75dp"
                         android:layout_weight="1"
-                        android:text="glide"
-                        />
+                        android:text="glide" />
+
                     <SeekBar
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,8 +72,7 @@
                 </TableRow>
             </TableLayout>
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:piano="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -86,7 +87,7 @@
                     android:textColor="@android:color/white"
                     android:padding="10sp"
                     android:textStyle="bold"
-                    android:text="@string/piano"/>
+                    android:text="@string/piano" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,21 +102,20 @@
                         piano:overlay_circle_radius="18dip"
                         piano:overlay_circle_text_size="18sp"
                         piano:overlay_color="#00FF00"
-                        android:layout_weight="0.1"
-                        />
+                        android:layout_weight="0.1" />
 
-                    <LinearLayout
-                        android:id="@+id/tablaBotonesOctavas"
+                    <LinearLayout android:id="@+id/tablaBotonesOctavas"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:layout_weight="0"
                         xmlns:android="http://schemas.android.com/apk/res/android">
 
-                        <Button android:id="@+id/botonOctavaMas"
+                        <Button
+                            android:id="@+id/botonOctavaMas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Octava +"/>
+                            android:text="Octava +" />
 
                         <TextView
                             android:id="@+id/labelOctava"
@@ -128,13 +128,13 @@
                             android:textSize="25sp"
                             android:textStyle="bold"
                             android:layout_weight="1"
-                            android:textAlignment="center"
-                            />
+                            android:textAlignment="center" />
 
-                        <Button android:id="@+id/botonOctavaMenos"
+                        <Button
+                            android:id="@+id/botonOctavaMenos"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Octava -"/>
+                            android:text="Octava -" />
 
                     </LinearLayout>
                 </LinearLayout>

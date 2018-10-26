@@ -3,8 +3,6 @@ package com.untref.synth3f.domain_layer.helpers;
 import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.entities.Patch;

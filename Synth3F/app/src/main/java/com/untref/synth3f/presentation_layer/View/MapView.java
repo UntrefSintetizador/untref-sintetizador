@@ -2,8 +2,6 @@ package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -16,7 +14,7 @@ public class MapView extends ConstraintLayout {
     public static float MAX_ZOOM = 6.0f;
 
     private ScaleGestureDetector scaleGestureDetector;
-    private GestureDetectorCompat gestureDetector;
+    private GestureDetector gestureDetector;
     private float scale = MIN_ZOOM;
     private float translationX = 0.0f;
     private float translationY = 0.0f;
@@ -138,7 +136,7 @@ public class MapView extends ConstraintLayout {
             }
         };
         scaleGestureDetector = new ScaleGestureDetector(context, scaleGestureListener);
-        gestureDetector = new GestureDetectorCompat(context, gestureListener);
+        gestureDetector = new GestureDetector(context, gestureListener);
 
         this.post(new Runnable() {
             @Override
@@ -157,7 +155,8 @@ public class MapView extends ConstraintLayout {
         translationY = Math.min(Math.max(translationY, -maxTranslationY), maxTranslationY);
         getAffectedView().setX(translationX);
         getAffectedView().setY(translationY);
-        ViewCompat.postInvalidateOnAnimation(getAffectedView());
+        invalidate();
+        postInvalidateOnAnimation();
     }
 
     private View getAffectedView() {
