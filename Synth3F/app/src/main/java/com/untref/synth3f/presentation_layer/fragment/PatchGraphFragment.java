@@ -1,6 +1,7 @@
 package com.untref.synth3f.presentation_layer.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
@@ -34,6 +36,7 @@ public class PatchGraphFragment extends Fragment {
     private MapView mapView;
     private Context context;
     private PatchMenuView patchMenuView;
+    private boolean activityWillReset;
 
     public static final int RESULT_CANCEL = 0;
     public static final int RESULT_OK = 1;
@@ -50,11 +53,12 @@ public class PatchGraphFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
-        mapView = (MapView) patchGraphView.findViewById(R.id.mapView);
+        mapView = patchGraphView.findViewById(R.id.mapView);
         createDragAndDropEvent();
         createSaveLoadEvent();
+        createEngineEvent();
         createWireDrawer(patchGraphView);
-        patchMenuView = (PatchMenuView) patchGraphView.findViewById(R.id.patch_menu_view);
+        patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
         return patchGraphView;
     }
@@ -85,12 +89,20 @@ public class PatchGraphFragment extends Fragment {
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
                 patchGraphPresenter.save(context, data.getStringExtra("filename"));
+
+                if (activityWillReset) {
+                    Activity activity = (Activity) context; //Cast or change type?
+                    Intent activityIntent = activity.getIntent();
+                    ConfigFactory.changeEngine();
+                    activity.finish();
+                    startActivity(activityIntent);
+                }
             }
         }
 
         if (requestCode == REQUEST_LOAD) {
             if (resultCode == RESULT_OK) {
-                ConstraintLayout mapLayout = (ConstraintLayout) getActivity().findViewById(R.id.map);
+                ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
                 while (mapLayout.getChildCount() > 1) {
                     mapLayout.removeViewAt(0);
                 }
@@ -156,7 +168,7 @@ public class PatchGraphFragment extends Fragment {
         this.wireDrawer = new WireDrawer(getActivity(), mapView);
         wireDrawer.setId(findUnusedId());
 
-        ConstraintLayout mapLayout = (ConstraintLayout) view.findViewById(R.id.map);
+        ConstraintLayout mapLayout = view.findViewById(R.id.map);
         mapLayout.addView(wireDrawer);
 
         ConstraintSet constraintSet = new ConstraintSet();
@@ -203,7 +215,7 @@ public class PatchGraphFragment extends Fragment {
                                 }
                                 ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
 
-                                ConstraintLayout mapLayout = (ConstraintLayout) getActivity().findViewById(R.id.map);
+                                ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
                                 mapLayout.addView(patchView, drawerLayoutParams);
 
                                 xDelta = drawerLayoutParams.width / 2;
@@ -269,20 +281,14 @@ public class PatchGraphFragment extends Fragment {
 
     private void createEngineEvent() {
 
-        patchGraphView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuButtonChangeEngine).setOnClickListener(
 
                 new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         requestSave();
-                        /*
-                        JSONObject appJson = new JSONObject(loadConfigFile()); //loadConfigFile esta en MainActivityPresenter...
-                        [...]
-                        */
-                        Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
+                        activityWillReset = true;
                     }
                 }
         );

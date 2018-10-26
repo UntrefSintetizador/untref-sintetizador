@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         PatchGraphFragment patchGraphFragment = new PatchGraphFragment();
         transaction.add(R.id.graph, patchGraphFragment);
         transaction.commit();
-        config = ConfigFactory.create("PureData");
+        config = ConfigFactory.create();
         config.setContext(this);
         patchGraphFragment.setProcessor(config.getProcessor());
         patchGraphFragment.setContext(this);

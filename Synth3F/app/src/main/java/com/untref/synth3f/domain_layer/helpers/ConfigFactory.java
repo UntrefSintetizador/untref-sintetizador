@@ -1,24 +1,43 @@
 package com.untref.synth3f.domain_layer.helpers;
 
+import android.util.Log;
+
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 //CAMBIAR NOMBRE
 public class ConfigFactory {
-    private static Map<String, String> engines;
+    private static Map.Entry<String, String> currentEntry;
+    private static LinkedHashMap<String, String> engines;
+    private static Iterator<Map.Entry<String, String>> enginesIterator;
 
     static {
-        engines = new HashMap<>();
+        engines = new LinkedHashMap<>();
         engines.put("PureData", "com.untref.synth3f.domain_layer.helpers.PureDataConfig");
         engines.put("Faust", "com.untref.synth3f.domain_layer.helpers.FaustConfig");
+        enginesIterator = generateIterator();
+        currentEntry = enginesIterator.next();
+
+        Log.i("Engine", "Current engine is " + currentEntry.getKey());
     }
 
-    public static IConfig create(String engineName) {
+    public static void changeEngine() {
+
+        if (!enginesIterator.hasNext()) {
+            enginesIterator = generateIterator();
+        }
+
+        currentEntry = enginesIterator.next();
+        Log.i("Engine", "Current engine is " + currentEntry.getKey());
+    }
+
+    public static IConfig create() {
         IConfig result = null;
 
         try {
-            Class<?> configClass = Class.forName(engines.get(engineName));
+            Class<?> configClass = Class.forName(currentEntry.getValue());
             Constructor constructor = configClass.getConstructor();
             result = (IConfig) constructor.newInstance();
 
@@ -27,5 +46,9 @@ public class ConfigFactory {
         }
 
         return result;
+    }
+
+    private static Iterator<Map.Entry<String, String>> generateIterator() {
+        return engines.entrySet().iterator();
     }
 }
