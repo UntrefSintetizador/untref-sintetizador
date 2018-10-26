@@ -1,6 +1,6 @@
 package com.untref.synth3f.entities;
 
-import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
+import com.untref.synth3f.domain_layer.helpers.IProcessor;
 
 public class SHPatch extends Patch {
 
@@ -9,7 +9,7 @@ public class SHPatch extends Patch {
     public float glide = 0f;
 
     @Override
-    public void initialize(BaseProcessor processor) {
+    public void initialize(IProcessor processor) {
         String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "att_signal", att_signal);

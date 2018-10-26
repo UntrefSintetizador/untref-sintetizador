@@ -22,7 +22,7 @@ public class PatchVCAView extends PatchView {
         centerImage = R.drawable.map_node_vca;
         topImage = R.drawable.map_node_in_vca;
         bottomImage = R.drawable.map_node_out_vca;
-        color = Color.rgb(6,214,160);
+        color = Color.rgb(6, 214, 160);
     }
 
     @Override

@@ -7,10 +7,10 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.View;
 
+import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.domain_layer.helpers.PatchGraphManager;
 import com.untref.synth3f.domain_layer.serializers.JSONSerializer;
 import com.untref.synth3f.entities.Connection;
-import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
 import com.untref.synth3f.entities.DACPatch;
 import com.untref.synth3f.entities.EGPatch;
 import com.untref.synth3f.entities.KBPatch;
@@ -38,19 +38,19 @@ import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 public class PatchGraphPresenter {
 
     private PatchGraphFragment patchGraphFragment;
-    private BaseProcessor processor;
+    private IProcessor processor;
     private PatchGraphManager patchGraphManager;
 
     private int dragPatchOrigin;
     private View dragOutlet;
 
-    public PatchGraphPresenter(PatchGraphFragment patchGraphFragment, BaseProcessor processor) {
+    public PatchGraphPresenter(PatchGraphFragment patchGraphFragment, IProcessor processor) {
         this.patchGraphFragment = patchGraphFragment;
         this.processor = processor;
         this.patchGraphManager = new PatchGraphManager();
     }
 
-    public BaseProcessor getProcessor() {
+    public IProcessor getProcessor() {
         return processor;
     }
 

@@ -1,6 +1,6 @@
 package com.untref.synth3f.entities;
 
-import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
+import com.untref.synth3f.domain_layer.helpers.IProcessor;
 
 public class EGPatch extends Patch {
 
@@ -12,7 +12,7 @@ public class EGPatch extends Patch {
     public float gate = 1f;
 
     @Override
-    public void initialize(BaseProcessor processor) {
+    public void initialize(IProcessor processor) {
         String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "attack", attack);

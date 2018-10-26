@@ -16,7 +16,7 @@ public class PianoPresenter {
     private FragmentOrgano piano;
     private int octava;
 
-    public PianoPresenter(){
+    public PianoPresenter() {
         this.octava = initial_octava;
     }
 
@@ -34,11 +34,11 @@ public class PianoPresenter {
             octava++;
     }
 
-    public void initializePiano(PianoView piano){
+    public void initializePiano(PianoView piano) {
 
         piano.setOnKeyTouchListener(new PianoView.OnKeyTouchListener() {
 
-            public void addNote(int midiCode){
+            public void addNote(int midiCode) {
                 //Note note = Note.fromCode(midiCode);
                 //pianoView.addNotes(Arrays.asList(note));
             }

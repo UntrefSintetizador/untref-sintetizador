@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.untref.synth3f.domain_layer.helpers.BaseProcessor;
+import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView2;
@@ -29,9 +29,9 @@ import java.util.HashMap;
 public class PatchGraphFragment extends Fragment {
 
     private PatchGraphPresenter patchGraphPresenter;
-    private View PatchGraphView;
+    private View patchGraphView;
     private WireDrawer wireDrawer;
-    private BaseProcessor processor;
+    private IProcessor processor;
     private MapView mapView;
     private Context context;
     private PatchMenuView2 patchMenuView2;
@@ -50,17 +50,17 @@ public class PatchGraphFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        PatchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
-        mapView = (MapView) PatchGraphView.findViewById(R.id.mapView);
+        patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
+        mapView = (MapView) patchGraphView.findViewById(R.id.mapView);
         createDragAndDropEvent();
         createSaveLoadEvent();
-        createWireDrawer(PatchGraphView);
-        patchMenuView2 = (PatchMenuView2) PatchGraphView.findViewById(R.id.patch_menu_view);
+        createWireDrawer(patchGraphView);
+        patchMenuView2 = (PatchMenuView2) patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView2.setPatchGraphFragment(this);
-        return PatchGraphView;
+        return patchGraphView;
     }
 
-    public void setProcessor(BaseProcessor processor) {
+    public void setProcessor(IProcessor processor) {
         this.processor = processor;
     }
 
@@ -235,30 +235,28 @@ public class PatchGraphFragment extends Fragment {
                         return true;
                     }
                 };
-        PatchGraphView.findViewById(R.id.menuButtonDragVCO).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragVCA).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragVCF).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragEG).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragDAC).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragKB).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragLFO).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragMIX).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragNG).setOnTouchListener(listener);
-        PatchGraphView.findViewById(R.id.menuButtonDragSH).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragVCO).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragVCA).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragVCF).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragEG).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragDAC).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragKB).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragLFO).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragMIX).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragNG).setOnTouchListener(listener);
+        patchGraphView.findViewById(R.id.menuButtonDragSH).setOnTouchListener(listener);
     }
 
     private void createSaveLoadEvent() {
-        PatchGraphView.findViewById(R.id.menuSave).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuSave).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), StorageActivity.class);
-                        intent.putExtra("mode", REQUEST_SAVE);
-                        startActivityForResult(intent, REQUEST_SAVE);
+                        requestSave();
                     }
                 }
         );
-        PatchGraphView.findViewById(R.id.menuLoad).setOnClickListener(
+        patchGraphView.findViewById(R.id.menuLoad).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -268,5 +266,32 @@ public class PatchGraphFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private void createEngineEvent() {
+
+        patchGraphView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        requestSave();
+                        /*
+                        JSONObject appJson = new JSONObject(loadConfigFile()); //loadConfigFile esta en MainActivityPresenter...
+                        [...]
+                        */
+                        Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                    }
+                }
+        );
+    }
+
+    private void requestSave() {
+        Intent intent = new Intent(getActivity(), StorageActivity.class);
+        intent.putExtra("mode", REQUEST_SAVE);
+        startActivityForResult(intent, REQUEST_SAVE);
     }
 }
