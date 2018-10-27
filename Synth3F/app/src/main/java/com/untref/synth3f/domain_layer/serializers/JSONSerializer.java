@@ -18,10 +18,43 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 
+/**
+ * Persiste y recupera los patches.
+ */
 public class JSONSerializer {
 
     public static final String FILE_FOLDER = "saves";
 
+    /**
+     * Crea un PatchGraphManager con los datos del archivo.
+     *
+     * @param context  Contexto requerido para obtener la ubicacion de los archivos.
+     * @param filename Nombre del Archivo.
+     * @return PatchGraphManager inicializado con los datos del archivo.
+     */
+    public PatchGraphManager load(Context context, String filename) {
+        PatchGraphManager patchGraphManager;
+        try {
+            String json = getStringFromFile(context, filename);
+            Log.i("json", json);
+            Gson gson = new GsonBuilder().registerTypeAdapter(Patch.class, new InterfaceAdapter<Patch>()).create();
+            Type type = new TypeToken<PatchGraphManager>() {
+            }.getType();
+            patchGraphManager = gson.fromJson(json, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+            patchGraphManager = new PatchGraphManager();
+        }
+        return patchGraphManager;
+    }
+
+    /**
+     * Crea o sobrescribe el archivo con los datos del PatchGraphManager recibido.
+     *
+     * @param context           Contexto requerido para obtener la ubicacion de los archivos.
+     * @param patchGraphManager PatchGraphManager a guardar.
+     * @param filename          Nombre del Archivo.
+     */
     public void save(Context context, PatchGraphManager patchGraphManager, String filename) {
 
         Gson gson = new GsonBuilder().registerTypeAdapter(Patch.class, new InterfaceAdapter<Patch>()).create();
@@ -43,22 +76,6 @@ public class JSONSerializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public PatchGraphManager load(Context context, String filename) {
-        PatchGraphManager patchGraphManager;
-        try {
-            String json = getStringFromFile(context, filename);
-            Log.i("json", json);
-            Gson gson = new GsonBuilder().registerTypeAdapter(Patch.class, new InterfaceAdapter<Patch>()).create();
-            Type type = new TypeToken<PatchGraphManager>() {
-            }.getType();
-            patchGraphManager = gson.fromJson(json, type);
-        } catch (Exception e) {
-            e.printStackTrace();
-            patchGraphManager = new PatchGraphManager();
-        }
-        return patchGraphManager;
     }
 
     private String getStringFromFile(Context context, String filePath) throws Exception {
