@@ -3,6 +3,7 @@ package com.untref.synth3f.presentation_layer.presenters;
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.LFOPatch;
 import com.untref.synth3f.entities.Patch;
+import com.untref.synth3f.presentation_layer.View.LinkingFunction;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 
@@ -21,7 +22,24 @@ public class PatchLFOPresenter extends PatchPresenter {
         patchMenuView.createOptionList("shape", imageIds, (int) ((LFOPatch) patch).shape);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, ((LFOPatch) patch).freq, new ExponentialLeftFunction(0f, 100f));
         patchMenuView.createKnob("BPM", FLOAT_PRECISION, ((LFOPatch) patch).BPM, new ExponentialLeftFunction(0f, 6000f));
+        patchMenuView.linkKnobs("BPM", "freq", new FreqToBPM(), new BPMToFreq());
         patchMenuView.createKnob("pw", FLOAT_PRECISION, ((LFOPatch) patch).pw, new LinearFunction(0f, 100f));
         return true;
+    }
+
+    private static class BPMToFreq implements LinkingFunction {
+
+        @Override
+        public float calculate(Float x) {
+            return x / 60;
+        }
+    }
+
+    private static class FreqToBPM implements LinkingFunction {
+
+        @Override
+        public float calculate(Float x) {
+            return x * 60;
+        }
     }
 }
