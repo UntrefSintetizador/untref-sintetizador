@@ -24,13 +24,12 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class PatchKBMenuView extends PopupWindow {
 
+    protected PatchPresenter patchPresenter;
+    protected Patch patch;
     private View button;
     private int id_layout;
     private String title;
-    private LayoutInflater layoutInflater;
     private View popupView;
-    protected PatchPresenter patchPresenter;
-    protected Patch patch;
 
     public PatchKBMenuView(MainActivity context, int layout, PatchPresenter patchPresenter, Patch patch) {
         super(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
@@ -40,8 +39,7 @@ public class PatchKBMenuView extends PopupWindow {
         this.patchPresenter = patchPresenter;
         this.patch = patch;
 
-        layoutInflater = (LayoutInflater) context.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        initializePopupView();
+        initializePopupView((LayoutInflater) context.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE));
 
         this.setContentView(popupView);
         setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
@@ -55,9 +53,10 @@ public class PatchKBMenuView extends PopupWindow {
         this.button = boton;
     }
 
-    private void initializePopupView() {
+    private void initializePopupView(LayoutInflater layoutInflater) {
 
         popupView = layoutInflater.inflate(id_layout, null);
+
         //defino comportamiento de elementos del XML
         initializeModule(title, popupView);
 
@@ -111,6 +110,7 @@ public class PatchKBMenuView extends PopupWindow {
         PianoView pianoView = view.findViewById(R.id.pianito);
         pianoView.setPresenter((PatchKBPresenter) patchPresenter);
         pianoView.setPatchId(patch.getId());
+        pianoView.init(view);
 
         createSeekBarComponent(R.id.seekBar_KB0, R.id.label_KB0, "on-off", title, 1.0f, 0.0f, 1.0f, 1.0f, view, kbPatch.on_off, MenuScale.LINEAR);
         createSeekBarComponent(R.id.seekBar_KB1, R.id.label_KB1, "glide", title, 5000.0f, 0.0f, 1.0f, 1.0f, view, kbPatch.glide, MenuScale.EXPONENTIAL_LEFT);
@@ -185,7 +185,7 @@ public class PatchKBMenuView extends PopupWindow {
                             e.printStackTrace();
                         }
 
-                        patchPresenter.setValue(msj, value);
+                        patchPresenter.setValue(label_moduel_text, value);
                         label_module.setText(label_moduel_text + ": " + decimales.format(value));
                     }
 
