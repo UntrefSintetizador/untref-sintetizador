@@ -25,7 +25,6 @@ public class StorageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_activity);
-
         populateList();
         setMode(getIntent().getIntExtra("mode", 0));
         createClickEvents();
@@ -42,7 +41,7 @@ public class StorageActivity extends AppCompatActivity {
                 list.add(name);
             }
         }
-        ListView listview = (ListView) findViewById(R.id.filenameList);
+        ListView listview = findViewById(R.id.filenameList);
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
     }

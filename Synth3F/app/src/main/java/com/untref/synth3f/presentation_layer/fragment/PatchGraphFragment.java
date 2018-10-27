@@ -28,6 +28,10 @@ import java.util.HashMap;
 
 public class PatchGraphFragment extends Fragment {
 
+    public static final int RESULT_CANCEL = 0;
+    public static final int RESULT_OK = 1;
+    public static final int REQUEST_LOAD = 1;
+    public static final int REQUEST_SAVE = 2;
     private PatchGraphPresenter patchGraphPresenter;
     private View patchGraphView;
     private WireDrawer wireDrawer;
@@ -35,11 +39,6 @@ public class PatchGraphFragment extends Fragment {
     private MapView mapView;
     private Context context;
     private PatchMenuView patchMenuView;
-
-    public static final int RESULT_CANCEL = 0;
-    public static final int RESULT_OK = 1;
-    public static final int REQUEST_LOAD = 1;
-    public static final int REQUEST_SAVE = 2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +82,6 @@ public class PatchGraphFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
                 patchGraphPresenter.save(context, data.getStringExtra("filename"));
@@ -240,7 +238,7 @@ public class PatchGraphFragment extends Fragment {
         );
     }
 
-    private void loadFile(String filename){
+    private void loadFile(String filename) {
         ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
         while (mapLayout.getChildCount() > 1) {
             mapLayout.removeViewAt(0);

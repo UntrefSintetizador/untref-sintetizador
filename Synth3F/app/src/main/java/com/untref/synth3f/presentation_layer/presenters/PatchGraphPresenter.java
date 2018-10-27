@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
-import android.util.Log;
 import android.view.View;
 
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
@@ -170,7 +169,6 @@ public class PatchGraphPresenter {
         for (int i = 0; i < patches.length; i++) {
             Patch patch = patches[i];
             String type = patch.getTypeName();
-            Log.i("type", type);
             PatchView patchView;
             switch (type) {
                 case "vco":
