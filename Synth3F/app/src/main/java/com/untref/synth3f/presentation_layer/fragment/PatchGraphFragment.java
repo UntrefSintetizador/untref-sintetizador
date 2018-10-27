@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +35,6 @@ public class PatchGraphFragment extends Fragment {
     private MapView mapView;
     private Context context;
     private PatchMenuView patchMenuView;
-    private boolean activityWillReset;
 
     public static final int RESULT_CANCEL = 0;
     public static final int RESULT_OK = 1;
@@ -89,67 +87,12 @@ public class PatchGraphFragment extends Fragment {
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
                 patchGraphPresenter.save(context, data.getStringExtra("filename"));
-
-                if (activityWillReset) {
-                    Activity activity = (Activity) context; //Cast or change type?
-                    Intent activityIntent = activity.getIntent();
-                    ConfigFactory.changeEngine();
-                    activity.finish();
-                    startActivity(activityIntent);
-                }
             }
         }
 
         if (requestCode == REQUEST_LOAD) {
             if (resultCode == RESULT_OK) {
-                ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
-                while (mapLayout.getChildCount() > 1) {
-                    mapLayout.removeViewAt(0);
-                }
-
-                PatchView[] patchViews = patchGraphPresenter.load(context, data.getStringExtra("filename"));
-                HashMap<Integer, Integer> patchToView = new HashMap<>();
-
-                PatchView patchView;
-                DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
-                int hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
-                for (int i = 0; i < patchViews.length; i++) {
-                    patchView = patchViews[i];
-                    patchView.setId(findUnusedId());
-                    ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
-                    mapLayout.addView(patchView, drawerLayoutParams);
-
-                    ConstraintSet constraintSet = new ConstraintSet();
-                    constraintSet.clone(mapLayout);
-                    constraintSet.connect(patchView.getId(), ConstraintSet.LEFT, R.id.map, ConstraintSet.LEFT, (int) (patchView.getPatch().getPosX() * displayMetrics.widthPixels) - drawerLayoutParams.width / 2);
-                    constraintSet.connect(patchView.getId(), ConstraintSet.TOP, R.id.map, ConstraintSet.TOP, (int) (patchView.getPatch().getPosY() * displayMetrics.heightPixels) - drawerLayoutParams.height / 2);
-                    constraintSet.applyTo(mapLayout);
-
-                    patchToView.put(patchView.getPatchId(), i);
-                }
-
-                wireDrawer.clear();
-
-                View start;
-                View end;
-
-                for (int i = 0; i < patchViews.length; i++) {
-                    patchView = patchViews[i];
-
-                    for (Connection connection : patchView.getPatch().getOutputConnections()) {
-                        processor.connect(connection);
-                        start = patchView.getOutputs()[connection.getSourceOutlet()];
-                        end = patchViews[patchToView.get(connection.getTargetPatch())].getInputs()[connection.getTargetInlet()];
-                        wireDrawer.startDraw(patchView, patchView.getColor());
-                        wireDrawer.addConnection(connection, start, end);
-                    }
-                }
-
-                wireDrawer.bringToFront();
-
-                wireDrawer.reload(patchViews, displayMetrics.widthPixels, displayMetrics.heightPixels);
-
-                wireDrawer.release();
+                loadFile(data.getStringExtra("filename"));
             }
         }
     }
@@ -263,7 +206,9 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        requestSave();
+                        Intent intent = new Intent(getActivity(), StorageActivity.class);
+                        intent.putExtra("mode", REQUEST_SAVE);
+                        startActivityForResult(intent, REQUEST_SAVE);
                     }
                 }
         );
@@ -287,16 +232,62 @@ public class PatchGraphFragment extends Fragment {
 
                     @Override
                     public void onClick(View v) {
-                        requestSave();
-                        activityWillReset = true;
+                        patchGraphPresenter.save(context, "_temp_");
+                        ConfigFactory.changeEngine();
+                        loadFile("_temp_");
                     }
                 }
         );
     }
 
-    private void requestSave() {
-        Intent intent = new Intent(getActivity(), StorageActivity.class);
-        intent.putExtra("mode", REQUEST_SAVE);
-        startActivityForResult(intent, REQUEST_SAVE);
+    private void loadFile(String filename){
+        ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
+        while (mapLayout.getChildCount() > 1) {
+            mapLayout.removeViewAt(0);
+        }
+
+        PatchView[] patchViews = patchGraphPresenter.load(context, filename);
+        HashMap<Integer, Integer> patchToView = new HashMap<>();
+
+        PatchView patchView;
+        DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
+        int hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
+        for (int i = 0; i < patchViews.length; i++) {
+            patchView = patchViews[i];
+            patchView.setId(findUnusedId());
+            ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
+            mapLayout.addView(patchView, drawerLayoutParams);
+
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(mapLayout);
+            constraintSet.connect(patchView.getId(), ConstraintSet.LEFT, R.id.map, ConstraintSet.LEFT, (int) (patchView.getPatch().getPosX() * displayMetrics.widthPixels) - drawerLayoutParams.width / 2);
+            constraintSet.connect(patchView.getId(), ConstraintSet.TOP, R.id.map, ConstraintSet.TOP, (int) (patchView.getPatch().getPosY() * displayMetrics.heightPixels) - drawerLayoutParams.height / 2);
+            constraintSet.applyTo(mapLayout);
+
+            patchToView.put(patchView.getPatchId(), i);
+        }
+
+        wireDrawer.clear();
+
+        View start;
+        View end;
+
+        for (int i = 0; i < patchViews.length; i++) {
+            patchView = patchViews[i];
+
+            for (Connection connection : patchView.getPatch().getOutputConnections()) {
+                processor.connect(connection);
+                start = patchView.getOutputs()[connection.getSourceOutlet()];
+                end = patchViews[patchToView.get(connection.getTargetPatch())].getInputs()[connection.getTargetInlet()];
+                wireDrawer.startDraw(patchView, patchView.getColor());
+                wireDrawer.addConnection(connection, start, end);
+            }
+        }
+
+        wireDrawer.bringToFront();
+
+        wireDrawer.reload(patchViews, displayMetrics.widthPixels, displayMetrics.heightPixels);
+
+        wireDrawer.release();
     }
 }
