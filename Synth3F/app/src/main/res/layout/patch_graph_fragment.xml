@@ -32,7 +32,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/change_engine"
+        android:background="@drawable/menu_change_engine"
         app:layout_constraintBottom_toTopOf="@id/menuButtonOpenDragMenu"
         app:layout_constraintStart_toStartOf="parent" />
 
