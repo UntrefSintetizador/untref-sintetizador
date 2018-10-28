@@ -257,39 +257,50 @@ public abstract class PatchView extends LinearLayout {
 
     @SuppressLint("ClickableViewAccessibility")
     private void createLineEvents() {
-        View.OnTouchListener listener =
-                new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent event) {
-
-                        int x = (int) event.getRawX();
-                        int y = (int) event.getRawY();
-
-                        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                            case MotionEvent.ACTION_DOWN:
-                                if (patchGraphFragment.isModeConnect()) {
-                                    patchPresenter.setDragOn(PatchView.this.getPatchId(), view);
-                                    wireDrawer.startDraw(view, PatchView.this.getColor());
-                                } else {
-                                    patchPresenter.disconnect(PatchView.this.getPatchId(), view);
-                                }
-                                break;
-                            case MotionEvent.ACTION_MOVE:
-                                wireDrawer.draw(x, y);
-                                break;
-                            case MotionEvent.ACTION_UP:
-                                patchPresenter.setDragUp(x, y);
-                                wireDrawer.release();
-                            default:
-                                break;
-                        }
-                        return true;
-                    }
-                };
-
+        View.OnTouchListener listener = new connectorListener(true);
+        for (View view : inputs) {
+            view.setOnTouchListener(listener);
+        }
+        listener = new connectorListener(false);
         for (View view : outputs) {
             view.setOnTouchListener(listener);
+        }
+    }
+
+    private class connectorListener implements View.OnTouchListener {
+
+        private boolean isInlet;
+
+        private connectorListener(boolean isInlet) {
+            this.isInlet = isInlet;
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+
+            int x = (int) event.getRawX();
+            int y = (int) event.getRawY();
+
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+
+                case MotionEvent.ACTION_DOWN:
+                    if (patchGraphFragment.isModeConnect()) {
+                        patchPresenter.setDragOn(PatchView.this.getPatchId(), view);
+                        wireDrawer.startDraw(view, PatchView.this.getColor());
+                    } else {
+                        patchPresenter.disconnect(PatchView.this.getPatchId(), view, isInlet);
+                    }
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    wireDrawer.draw(x, y);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    patchPresenter.setDragUp(x, y, isInlet);
+                    wireDrawer.release();
+                default:
+                    break;
+            }
+            return true;
         }
     }
 }

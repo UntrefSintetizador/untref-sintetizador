@@ -31,12 +31,12 @@ public abstract class PatchPresenter {
         patchGraphPresenter.setDragOn(patchId, output);
     }
 
-    public void setDragUp(int x, int y) {
-        patchGraphPresenter.tryConnect(x, y);
+    public void setDragUp(int x, int y, boolean isInlet) {
+        patchGraphPresenter.tryConnect(x, y, isInlet);
     }
 
-    public void disconnect(int patchId, View output) {
-        patchGraphPresenter.disconnect(patchId, output);
+    public void disconnect(int patchId, View connector, boolean isInlet) {
+        patchGraphPresenter.disconnect(patchId, connector, isInlet);
     }
 
     public abstract boolean initMenuView(PatchMenuView patchMenuView);

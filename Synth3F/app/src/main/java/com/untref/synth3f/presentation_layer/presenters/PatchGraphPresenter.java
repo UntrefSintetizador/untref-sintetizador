@@ -43,7 +43,7 @@ public class PatchGraphPresenter {
     private PatchGraphManager patchGraphManager;
 
     private int dragPatchOrigin;
-    private View dragOutlet;
+    private View dragConnectorOrigin;
 
     public PatchGraphPresenter(PatchGraphFragment patchGraphFragment, IProcessor processor) {
         this.patchGraphFragment = patchGraphFragment;
@@ -116,12 +116,12 @@ public class PatchGraphPresenter {
         return patchView;
     }
 
-    public void setDragOn(int patchId, View outlet) {
+    public void setDragOn(int patchId, View connector) {
         dragPatchOrigin = patchId;
-        dragOutlet = outlet;
+        dragConnectorOrigin = connector;
     }
 
-    public void tryConnect(int x, int y) {
+    public void tryConnect(int x, int y, boolean isInlet) {
         Rect bounds;
         int[] location;
         ConstraintLayout map = (ConstraintLayout) patchGraphFragment.getMapView().getChildAt(0);
@@ -130,16 +130,28 @@ public class PatchGraphPresenter {
             bounds = new Rect();
             PatchView patch = (PatchView) map.getChildAt(i);
             if (patch.getPatchId() != dragPatchOrigin) {
-                for (AppCompatImageView inlet : patch.getInputs()) {
-                    inlet.getHitRect(bounds);
-                    location = getPositionOfView(inlet);
+                AppCompatImageView[] targets;
+                if (isInlet) {
+                    targets = patch.getOutputs();
+                } else {
+                    targets = patch.getInputs();
+                }
+                for (AppCompatImageView targetConnector : targets) {
+                    targetConnector.getHitRect(bounds);
+                    location = getPositionOfView(targetConnector);
                     bounds.left *= scale;
                     bounds.right *= scale;
                     bounds.top *= scale;
                     bounds.bottom *= scale;
                     if (bounds.contains(x - location[0] + bounds.left, y - location[1] + bounds.top)) {
-                        Connection connection = patchGraphManager.connect(dragPatchOrigin, (int) dragOutlet.getTag(), patch.getPatchId(), (int) inlet.getTag());
-                        patchGraphFragment.getWireDrawer().addConnection(connection, dragOutlet, inlet);
+                        Connection connection;
+                        if (isInlet) {
+                            connection = patchGraphManager.connect(patch.getPatchId(), (int) targetConnector.getTag(), dragPatchOrigin, (int) dragConnectorOrigin.getTag());
+                            patchGraphFragment.getWireDrawer().addConnection(connection, targetConnector, dragConnectorOrigin);
+                        } else {
+                            connection = patchGraphManager.connect(dragPatchOrigin, (int) dragConnectorOrigin.getTag(), patch.getPatchId(), (int) targetConnector.getTag());
+                            patchGraphFragment.getWireDrawer().addConnection(connection, dragConnectorOrigin, targetConnector);
+                        }
                         processor.connect(connection);
                     }
                 }
@@ -147,18 +159,31 @@ public class PatchGraphPresenter {
         }
     }
 
-    public void disconnect(int patchId, View outlet) {
+    public void disconnect(int patchId, View outlet, boolean isInlet) {
         Patch patch = patchGraphManager.getPatch(patchId);
         List<Connection> connectionList;
         int connectorId = (int) outlet.getTag();
-        connectionList = patch.getOutputConnections();
-        for (int i = 0; i < connectionList.size(); i++) {
-            Connection connection = connectionList.get(i);
-            if (connection.getSourceOutlet() == connectorId) {
-                patchGraphManager.disconnect(connection.getId());
-                patchGraphFragment.getWireDrawer().removeConnection(connection);
-                processor.disconnect(connection);
-                i--;
+        if (isInlet) {
+            connectionList = patch.getInputConnections();
+            for (int i = 0; i < connectionList.size(); i++) {
+                Connection connection = connectionList.get(i);
+                if (connection.getTargetInlet() == connectorId) {
+                    patchGraphManager.disconnect(connection.getId());
+                    patchGraphFragment.getWireDrawer().removeConnection(connection);
+                    processor.disconnect(connection);
+                    i--;
+                }
+            }
+        } else {
+            connectionList = patch.getOutputConnections();
+            for (int i = 0; i < connectionList.size(); i++) {
+                Connection connection = connectionList.get(i);
+                if (connection.getSourceOutlet() == connectorId) {
+                    patchGraphManager.disconnect(connection.getId());
+                    patchGraphFragment.getWireDrawer().removeConnection(connection);
+                    processor.disconnect(connection);
+                    i--;
+                }
             }
         }
     }
