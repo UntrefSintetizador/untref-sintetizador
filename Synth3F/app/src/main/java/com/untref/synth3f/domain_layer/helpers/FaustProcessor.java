@@ -38,7 +38,7 @@ public class FaustProcessor implements IProcessor {
         List<Connection> patchOutputConnections = patch.getOutputConnections();
 
         for (Connection outputConnection : patchOutputConnections) {
-            disconnectPatch(outputConnection);
+            disconnect(outputConnection);
         }
 
         FaustApi.removePatchFaustApi(graphPointer, patch.getId());
@@ -52,7 +52,8 @@ public class FaustProcessor implements IProcessor {
         }
     }
 
-    private void disconnectPatch(Connection connection) {
+    @Override
+    public void disconnect(Connection connection) {
         int source = connection.getSourcePatch();
         int outlet = connection.getSourceOutlet();
         int target = connection.getTargetPatch();

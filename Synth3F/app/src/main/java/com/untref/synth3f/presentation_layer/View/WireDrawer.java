@@ -18,11 +18,10 @@ import java.util.Map;
 
 public class WireDrawer extends View {
 
+    Path path;
     private Paint mPaint;
     private MapView mapView;
     private Map<Integer, Line> lines;
-    Path path;
-
     private boolean drawing;
     private int color;
     private int startX;
@@ -108,6 +107,11 @@ public class WireDrawer extends View {
         line.midX = (line.startX + line.endX) / 2;
         line.midY = (line.startY + line.endY) / 2 + Math.abs(line.endX - line.startX) / 4;
         lines.put(connection.getId(), line);
+        invalidate();
+    }
+
+    public void removeConnection(Connection connection) {
+        lines.remove(connection.getId());
         invalidate();
     }
 

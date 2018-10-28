@@ -38,6 +38,13 @@ public interface IProcessor {
     void delete(Patch patch);
 
     /**
+     * Desconecta los patches entre el inlet y outlet recibidos.
+     *
+     * @param connection Datos de la conexion.
+     */
+    void disconnect(Connection connection);
+
+    /**
      * Asigna el valor del parametro solicitado al patch en la herramienta.
      *
      * @param name  Nombre de la variable a modificar en el formato

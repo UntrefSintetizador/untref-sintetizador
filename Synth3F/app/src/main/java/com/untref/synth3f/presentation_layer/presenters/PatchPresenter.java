@@ -35,6 +35,10 @@ public abstract class PatchPresenter {
         patchGraphPresenter.tryConnect(x, y);
     }
 
+    public void disconnect(int patchId, View output) {
+        patchGraphPresenter.disconnect(patchId, output);
+    }
+
     public abstract boolean initMenuView(PatchMenuView patchMenuView);
 
     public void setValue(String name, float value) {

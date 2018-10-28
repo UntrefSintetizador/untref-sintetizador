@@ -39,6 +39,7 @@ public class PatchGraphFragment extends Fragment {
     private MapView mapView;
     private Context context;
     private PatchMenuView patchMenuView;
+    private boolean modeConnect;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class PatchGraphFragment extends Fragment {
         createDragAndDropEvent();
         createSaveLoadEvent();
         createEngineEvent();
+        createConnectDisconnectEvent();
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
@@ -97,6 +99,10 @@ public class PatchGraphFragment extends Fragment {
 
     public PatchMenuView getPatchMenuView() {
         return patchMenuView;
+    }
+
+    public boolean isModeConnect() {
+        return modeConnect;
     }
 
     public int findUnusedId() {
@@ -233,6 +239,23 @@ public class PatchGraphFragment extends Fragment {
                         patchGraphPresenter.save(context, "_temp_");
                         ConfigFactory.changeEngine();
                         loadFile("_temp_");
+                    }
+                }
+        );
+    }
+
+    private void createConnectDisconnectEvent() {
+        modeConnect = true;
+        patchGraphView.findViewById(R.id.menuConnect).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modeConnect = !modeConnect;
+                        if (modeConnect) {
+                            view.setBackgroundResource(R.drawable.menu_connect);
+                        } else {
+                            view.setBackgroundResource(R.drawable.menu_disconnect);
+                        }
                     }
                 }
         );

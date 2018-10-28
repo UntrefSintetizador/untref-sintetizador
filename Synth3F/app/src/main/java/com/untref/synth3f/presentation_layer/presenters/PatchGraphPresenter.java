@@ -34,6 +34,8 @@ import com.untref.synth3f.presentation_layer.View.PatchVCOView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
+import java.util.List;
+
 public class PatchGraphPresenter {
 
     private PatchGraphFragment patchGraphFragment;
@@ -141,6 +143,22 @@ public class PatchGraphPresenter {
                         processor.connect(connection);
                     }
                 }
+            }
+        }
+    }
+
+    public void disconnect(int patchId, View outlet) {
+        Patch patch = patchGraphManager.getPatch(patchId);
+        List<Connection> connectionList;
+        int connectorId = (int) outlet.getTag();
+        connectionList = patch.getOutputConnections();
+        for (int i = 0; i < connectionList.size(); i++) {
+            Connection connection = connectionList.get(i);
+            if (connection.getSourceOutlet() == connectorId) {
+                patchGraphManager.disconnect(connection.getId());
+                patchGraphFragment.getWireDrawer().removeConnection(connection);
+                processor.disconnect(connection);
+                i--;
             }
         }
     }

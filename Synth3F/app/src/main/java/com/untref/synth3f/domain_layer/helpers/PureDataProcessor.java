@@ -14,11 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PureDataProcessor implements IProcessor {
+    private final Handler handler = new Handler();
+    private final PatchCollector patchCollector = new PatchCollector();
     private String mainPatchName = "pd-empty.pd";
     private HashMap<Integer, Integer> pureDataIDs;
-    private final Handler handler = new Handler();
     private List<Pair<String, Integer>> toDelete = new ArrayList<>();
-    private final PatchCollector patchCollector = new PatchCollector();
 
     public PureDataProcessor() {
         pureDataIDs = new HashMap<>();
@@ -103,6 +103,13 @@ public class PureDataProcessor implements IProcessor {
 
         toDelete.clear();
         pureDataIDs.clear();
+    }
+
+    @Override
+    public void disconnect(Connection connection) {
+        PdBase.sendFloat("x_fade_" + Integer.toString(connection.getId()), 0);
+        toDelete.add(new Pair<>("x_fade_" + Integer.toString(connection.getId()), connection.getId()));
+        handler.postDelayed(patchCollector, 100);
     }
 
     private class PatchCollector implements Runnable {
