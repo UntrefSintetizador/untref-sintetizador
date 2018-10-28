@@ -83,7 +83,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
             case MotionEvent.ACTION_MOVE:
                 int clampedRotation = getClampedRotation(rotationWhileNotMoving, y, initialTouch);
-                convertRotationToValue(-clampedRotation);
+                convertRotationToValue(clampedRotation);
                 setRotation(calculateRotation());
                 checkLinkedKnob();
                 patchMenuView.setValue(parameterName, value);
@@ -138,7 +138,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     }
 
     private int getClampedRotation(int rotation, int y, int initialTouch) {
-        return Math.max(-MAX_ROTATION, Math.min(MAX_ROTATION, rotation + y - initialTouch));
+        return Math.max(-MAX_ROTATION, Math.min(MAX_ROTATION, rotation - y + initialTouch));
     }
 
     private int calculateRotation() {
