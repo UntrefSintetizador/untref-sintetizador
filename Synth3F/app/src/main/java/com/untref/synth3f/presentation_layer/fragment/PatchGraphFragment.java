@@ -107,7 +107,7 @@ public class PatchGraphFragment extends Fragment {
 
     public int findUnusedId() {
         int fID = 0;
-        while (getActivity().findViewById(++fID) != null) ;
+        while (getActivity().findViewById(++fID) != null);
         return fID;
     }
 
