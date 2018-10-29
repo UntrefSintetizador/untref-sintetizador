@@ -32,7 +32,7 @@ public class OptionsMenuView extends TableLayout {
         close();
     }
 
-    public void toogle() {
+    public boolean toogle() {
 
         if (opened) {
             close();
@@ -40,6 +40,8 @@ public class OptionsMenuView extends TableLayout {
         } else {
             open();
         }
+
+        return opened;
     }
 
     private void open() {

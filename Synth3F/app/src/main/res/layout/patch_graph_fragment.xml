@@ -24,7 +24,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/open_options_menu"
+        android:background="@drawable/open_options_menu_off"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -223,7 +223,7 @@
 
     <com.untref.synth3f.presentation_layer.View.OptionsMenuView
         android:id="@+id/options_menu_view"
-        android:layout_width="72dp"
+        android:layout_width="80dp"
         android:layout_height="374dp"
         android:columnCount="1"
         android:gravity="top"
@@ -235,38 +235,46 @@
         tools:layout_editor_absoluteX="517dp"
         tools:layout_editor_absoluteY="348dp">
 
-        <Button
-            android:id="@+id/menuSave"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/menu_save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <TableRow>
+            <Button
+                android:id="@+id/menuSave"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/menu_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/menuLoad"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/menu_load"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/menuSave" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/menuButtonChangeEngine"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/menu_change_engine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/menuLoad" />
+        <TableRow>
+            <Button
+                android:id="@+id/menuLoad"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/menu_load"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/menuSave" />
 
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/menuButtonChangeEngine"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/menu_change_engine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/menuLoad" />
+
+        </TableRow>
     </com.untref.synth3f.presentation_layer.View.OptionsMenuView>
 </com.untref.synth3f.presentation_layer.View.MapView>

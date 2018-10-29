@@ -272,8 +272,12 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.i("OptionsMenu", "Visibility is " + optionsMenuView.getVisibility());
-                        optionsMenuView.toogle();
+
+                        if (optionsMenuView.toogle()) {
+                            view.setBackgroundResource(R.drawable.open_options_menu_on);
+                        } else {
+                            view.setBackgroundResource(R.drawable.open_options_menu_off);
+                        }
                     }
                 }
         );
