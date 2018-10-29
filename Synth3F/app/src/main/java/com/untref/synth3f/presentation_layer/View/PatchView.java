@@ -292,11 +292,15 @@ public abstract class PatchView extends LinearLayout {
                     }
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    wireDrawer.draw(x, y);
+                    if (patchGraphFragment.isModeConnect()) {
+                        wireDrawer.draw(x, y);
+                    }
                     break;
                 case MotionEvent.ACTION_UP:
-                    patchPresenter.setDragUp(x, y, isInlet);
-                    wireDrawer.release();
+                    if (patchGraphFragment.isModeConnect()) {
+                        patchPresenter.setDragUp(x, y, isInlet);
+                        wireDrawer.release();
+                    }
                 default:
                     break;
             }
