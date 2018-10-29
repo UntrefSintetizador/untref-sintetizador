@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
+import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
@@ -40,6 +42,7 @@ public class PatchGraphFragment extends Fragment {
     private Context context;
     private PatchMenuView patchMenuView;
     private boolean modeConnect;
+    private OptionsMenuView optionsMenuView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,16 +52,18 @@ public class PatchGraphFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
         mapView = patchGraphView.findViewById(R.id.mapView);
         createDragAndDropEvent();
         createSaveLoadEvent();
         createEngineEvent();
         createConnectDisconnectEvent();
+        createOptionsMenuEvent();
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
+        optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);
+        optionsMenuView.setPatchGraphFragment(this);
         return patchGraphView;
     }
 
@@ -107,7 +112,7 @@ public class PatchGraphFragment extends Fragment {
 
     public int findUnusedId() {
         int fID = 0;
-        while (getActivity().findViewById(++fID) != null);
+        while (getActivity().findViewById(++fID) != null) ;
         return fID;
     }
 
@@ -256,6 +261,19 @@ public class PatchGraphFragment extends Fragment {
                         } else {
                             view.setBackgroundResource(R.drawable.menu_disconnect);
                         }
+                    }
+                }
+        );
+    }
+
+    private void createOptionsMenuEvent() {
+
+        patchGraphView.findViewById(R.id.menuButtonOpenOptionsMenu).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("OptionsMenu", "Visibility is " + optionsMenuView.getVisibility());
+                        optionsMenuView.toogle();
                     }
                 }
         );
