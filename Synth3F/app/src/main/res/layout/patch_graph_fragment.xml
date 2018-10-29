@@ -2,6 +2,7 @@
 
 <com.untref.synth3f.presentation_layer.View.MapView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mapView"
     android:layout_width="match_parent"
     android:layout_height="fill_parent">
@@ -10,9 +11,22 @@
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue_soft">
+        android:background="@color/blue_soft"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
     </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/menuButtonOpenOptionsMenu"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/open_options_menu_off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/menuButtonOpenDragMenu"
@@ -23,18 +37,6 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/open_drag_menu"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/menuButtonChangeEngine"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/menu_change_engine"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/menuButtonOpenDragMenu"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -179,34 +181,13 @@
         app:layout_constraintStart_toEndOf="@+id/menuDelete"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/menuSave"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/menu_save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/menuLoad"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/menu_load"
-        app:layout_constraintEnd_toStartOf="@+id/menuSave"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.untref.synth3f.presentation_layer.View.PatchMenuView
         android:id="@+id/patch_menu_view"
         android:layout_width="600px"
         android:layout_height="600px"
         android:columnCount="5"
         android:rowCount="6"
+        android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -234,9 +215,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:elevation="2dp"
         app:layout_constraintEnd_toStartOf="@+id/patch_menu_view"
         app:layout_constraintTop_toTopOf="parent">
 
     </com.untref.synth3f.presentation_layer.View.OptionList>
 
+    <com.untref.synth3f.presentation_layer.View.OptionsMenuView
+        android:id="@+id/options_menu_view"
+        android:layout_width="80dp"
+        android:layout_height="374dp"
+        android:columnCount="1"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:rowCount="6"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menuButtonOpenOptionsMenu"
+        tools:layout_editor_absoluteX="517dp"
+        tools:layout_editor_absoluteY="348dp">
+
+        <TableRow>
+            <Button
+                android:id="@+id/menuSave"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/menu_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/menuLoad"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/menu_load"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/menuSave" />
+
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/menuButtonChangeEngine"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:background="@drawable/menu_change_engine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/menuLoad" />
+
+        </TableRow>
+    </com.untref.synth3f.presentation_layer.View.OptionsMenuView>
 </com.untref.synth3f.presentation_layer.View.MapView>
