@@ -2,6 +2,7 @@ package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -155,8 +156,7 @@ public class MapView extends ConstraintLayout {
         translationY = Math.min(Math.max(translationY, -maxTranslationY), maxTranslationY);
         getAffectedView().setX(translationX);
         getAffectedView().setY(translationY);
-        invalidate();
-        postInvalidateOnAnimation();
+        ViewCompat.postInvalidateOnAnimation(getAffectedView());
     }
 
     private View getAffectedView() {
