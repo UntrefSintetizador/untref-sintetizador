@@ -187,7 +187,7 @@
         android:layout_height="600px"
         android:columnCount="5"
         android:rowCount="6"
-        android:elevation="2dp"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -215,7 +215,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="2dp"
+        android:elevation="4dp"
         app:layout_constraintEnd_toStartOf="@+id/patch_menu_view"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -229,7 +229,7 @@
         android:gravity="top"
         android:orientation="vertical"
         android:rowCount="6"
-        android:elevation="4dp"
+        android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/menuButtonOpenOptionsMenu"
         tools:layout_editor_absoluteX="517dp"
