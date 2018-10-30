@@ -10,13 +10,13 @@ import com.untref.synth3f.presentation_layer.presenters.PatchKBPresenter;
 
 public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
 
-    private static final int MIN_OCTIVE = 5;
+    private static final int MIN_OCTIVE = 0;
     private static final int MAX_OCTIVE = 8;
     private PatchKBPresenter presenter;
     private int patchId;
     private TextView label_octava;
     private com.evilduck.piano.views.instrument.PianoView piano;
-    private int octava = MIN_OCTIVE;
+    private int octava = 4;
 
     public PianoView(Context context, AttributeSet attrs) {
         super(context, attrs);
