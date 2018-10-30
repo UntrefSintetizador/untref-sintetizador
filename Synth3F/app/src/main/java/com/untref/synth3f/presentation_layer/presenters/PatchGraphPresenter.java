@@ -61,53 +61,42 @@ public class PatchGraphPresenter {
 
     public PatchView createPatch(String type) {
         Patch patch;
-        PatchView patchView;
         switch (type) {
             case "vco":
                 patch = new VCOPatch();
-                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "vca":
                 patch = new VCAPatch();
-                patchView = new PatchVCAView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "vcf":
                 patch = new VCFPatch();
-                patchView = new PatchVCFView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "eg":
                 patch = new EGPatch();
-                patchView = new PatchEGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "dac":
                 patch = new DACPatch();
-                patchView = new PatchDACView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "kb":
                 patch = new KBPatch();
-                patchView = new PatchKBView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "lfo":
                 patch = new LFOPatch();
-                patchView = new PatchLFOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "mix":
                 patch = new MIXPatch();
-                patchView = new PatchMIXView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "ng":
                 patch = new NGPatch();
-                patchView = new PatchNGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "sh":
                 patch = new SHPatch();
-                patchView = new PatchSHView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             default:
                 patch = new VCOPatch();
-                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
         }
+        PatchView patchView = createPatchView(patch);
         patchGraphManager.addPatch(patch);
         int newId = patchGraphFragment.findUnusedId();
         patchView.setId(newId);
@@ -211,29 +200,8 @@ public class PatchGraphPresenter {
         PatchView[] patchViews = new PatchView[patches.length];
         for (int i = 0; i < patches.length; i++) {
             Patch patch = patches[i];
-            String type = patch.getTypeName();
-            PatchView patchView;
-            switch (type) {
-                case "vco":
-                    patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
-                    break;
-                case "vca":
-                    patchView = new PatchVCAView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
-                    break;
-                case "vcf":
-                    patchView = new PatchVCFView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
-                    break;
-                case "eg":
-                    patchView = new PatchEGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
-                    break;
-                case "dac":
-                    patchView = new PatchDACView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
-                    break;
-                default:
-                    patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
-                    break;
-            }
-            processor.createPatch(type, patch.getId());
+            PatchView patchView = createPatchView(patch);
+            processor.createPatch(patch.getTypeName(), patch.getId());
             patch.initialize(processor);
             patchViews[i] = patchView;
         }
@@ -244,5 +212,45 @@ public class PatchGraphPresenter {
         int[] position = new int[2];
         view.getLocationOnScreen(position);
         return position;
+    }
+
+    private PatchView createPatchView(Patch patch) {
+        PatchView patchView;
+        switch (patch.getTypeName()) {
+            case "vco":
+                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "vca":
+                patchView = new PatchVCAView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "vcf":
+                patchView = new PatchVCFView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "eg":
+                patchView = new PatchEGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "dac":
+                patchView = new PatchDACView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "kb":
+                patchView = new PatchKBView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "lfo":
+                patchView = new PatchLFOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "mix":
+                patchView = new PatchMIXView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "ng":
+                patchView = new PatchNGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            case "sh":
+                patchView = new PatchSHView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+            default:
+                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                break;
+        }
+        return patchView;
     }
 }
