@@ -92,7 +92,7 @@ public class PureDataConfig implements IConfig {
 
         try {
             service.initAudio(-1, 0, -1, -1);   // negative values will be replaced with defaults/preferences
-            service.startAudio(new Intent(context, MainActivity.class), R.drawable.icon_synth, name, "Return to " + name + ".");
+            service.startAudio();
         } catch (IOException e) {
             toast(e.toString());
         }
