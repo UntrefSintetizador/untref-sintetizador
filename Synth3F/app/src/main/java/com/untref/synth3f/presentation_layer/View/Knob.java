@@ -33,6 +33,18 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         super(context);
     }
 
+    /**
+     *
+     * @param context contexto
+     * @param patchMenuView patchMenuView
+     * @param parameterName el nombre (string) que representa al knob
+     * @param minValue valor minimo que puede representar el knob
+     * @param maxValue valor maximo que puede representar el knob
+     * @param precision la precision de los ajustes de los valores
+     * @param value valor actual que representa el knob
+     * @param scaleFunction la funcion de escala de los valores
+     * @param color color
+     */
     public Knob(Context context, PatchMenuView patchMenuView, String parameterName,
                 float minValue, float maxValue, int precision, float value,
                 MenuScaleFunction scaleFunction, int color) {
@@ -47,18 +59,41 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         init(color);
     }
 
+    /**
+     *
+     * @return devuelve el parameterName, el nombre (string) que lo representa.
+     */
     public String getName() {
         return parameterName;
     }
 
+    /**
+     *
+     * @return el valor que esta representando segun los movimientos que se la hayan aplicado al
+     * knob.
+     */
     public float getValue() {
         return value;
     }
 
+    /**
+     * Setea el valor del knob, y a su vez si tiene kobs vinculados, ejecuta las funciones necesarias
+     * para setear de manera correcta tambien al knob vinculado.
+     *
+     * @param value el valor que va a representar el knob.
+     */
     public void setValue(float value) {
         setValueCheckingLinks(value, true);
     }
 
+    /**
+     *
+     * @param knob knob con el cual se va a vincular
+     * @param parameterName nombre del parameterName (nombre que representa al knob) del knob al
+     *                      cual se va a vincular
+     * @param linkingFunction la funcion que indica la relacion que va a tener el knob que ejecuta
+     *                        esta funcion con el knob con el cual se vincula
+     */
     public void link(Knob knob, String parameterName, LinkingFunction linkingFunction) {
         linkedKnob = knob;
         linkedKnobParameterName = parameterName;
@@ -70,6 +105,10 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         return super.performClick();
     }
 
+    /**
+     * Al tocar el knob, segun los movimientos que se le hagan, se ajustan los parametros que este
+     * representa.
+     */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int y = (int) motionEvent.getRawY();

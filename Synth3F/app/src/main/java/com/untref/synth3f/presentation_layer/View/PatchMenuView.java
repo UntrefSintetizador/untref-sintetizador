@@ -51,6 +51,7 @@ public class PatchMenuView extends TableLayout {
         return patchGraphFragment;
     }
 
+
     public void setPatchGraphFragment(PatchGraphFragment patchGraphFragment) {
         this.patchGraphFragment = patchGraphFragment;
         this.knobList = new ArrayList<>();
@@ -115,6 +116,12 @@ public class PatchMenuView extends TableLayout {
         );
     }
 
+    /**
+     * Funcion para crear el knob. Los parametros van a ser atributos del knob a crear, y son necesarios
+     * en el constructor del mismo.
+     * Luego de crearlo, agrega al knob a una lista.
+     *
+     */
     public void createKnob(String parameterName, int precision, float value,
                            MenuScaleFunction scale) {
 
@@ -128,6 +135,24 @@ public class PatchMenuView extends TableLayout {
         optionList.setValues(parameterName, imageIds, selectedValue, color);
     }
 
+    /**
+     *Vincula dos knobs para que el comportamiento de uno tenga influencia en el otro de acuerdo a
+     *las funciones que se pasen como parametro
+     *
+     *@param parameterName1 es el nombre que representa al primer knob, el cual es atributo de cada
+     *                      knob, y es dado cuando se construye.
+     *
+     *@param parameterName2 es el nombre que representa al segundo knob, el cual es atributo de cada
+     *                      knob, y es dado cuando se construye.
+     *
+     *@param normalFunction es la funcion que se ejecuta cuando se modifica un valor del primer knob
+     *                      sobre el segundo knob, es decir su knob vinculado
+     *
+     *@param inverseFunction es la funcion que se ejecuta cuando se modifica un valor del segundo knob
+     *                      sobre el primer knob, es decir su knob vinculado. Esta funcion es la
+     *                       inversa de la funcion normal
+     *
+     */
     public void linkKnobs(String parameterName1, String parameterName2, LinkingFunction normalFunction, LinkingFunction inverseFunction) {
         Knob firstKnob = null;
         Knob secondKnob = null;
@@ -149,6 +174,11 @@ public class PatchMenuView extends TableLayout {
         }
     }
 
+    /**
+     * Abre, es decir deja visible, la vista que permite editar y ver los valores del patch.
+     *
+     * @param patchPresenter presenter del patch
+     */
     public void open(PatchPresenter patchPresenter) {
         this.patchPresenter = patchPresenter;
         TableRow knobTableRow;
@@ -179,6 +209,9 @@ public class PatchMenuView extends TableLayout {
         setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
     }
 
+    /**
+     * Vuelve a dejar No-Visible la vista para ver y editar el patch.
+     */
     public void close() {
         knobList.clear();
         int permanentViews = 2;
