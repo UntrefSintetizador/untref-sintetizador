@@ -153,6 +153,11 @@ public class PureDataConfig implements IConfig {
         dictionary.put("attenuator.pd", R.raw.attenuator);
         dictionary.put("cell.pd", R.raw.cell);
         dictionary.put("param.pd", R.raw.param);
+        dictionary.put("ramp.pd", R.raw.ramp);
+        dictionary.put("saw.pd", R.raw.saw);
+        dictionary.put("sine.pd", R.raw.sine);
+        dictionary.put("square.pd", R.raw.square);
+        dictionary.put("triangle.pd", R.raw.triangle);
         dictionary.put("x_dac.pd", R.raw.x_dac);
         dictionary.put("x_eg.pd", R.raw.x_eg);
         dictionary.put("x_fade.pd", R.raw.x_fade);
