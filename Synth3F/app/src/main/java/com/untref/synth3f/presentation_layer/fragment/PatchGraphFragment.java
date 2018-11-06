@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -186,6 +185,7 @@ public class PatchGraphFragment extends Fragment {
                                     return false;
                                 }
                                 patchView.movePatch(x, y, xDelta, yDelta);
+                                break;
                             case MotionEvent.ACTION_UP:
                                 if (patchView == null) {
                                     return false;
