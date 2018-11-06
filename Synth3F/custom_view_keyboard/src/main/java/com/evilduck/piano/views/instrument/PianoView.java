@@ -377,12 +377,15 @@ public class PianoView extends View {
         int action = event.getAction();
 
         if (action == MotionEvent.ACTION_CANCEL) {
+            getParent().requestDisallowInterceptTouchEvent(false);
             resetTouchFeedback();
             releaseEdgeEffects();
             xOffset = getOffsetInsideOfBounds();
             //ViewCompat.postInvalidateOnAnimation(this);
         }
         if (action == MotionEvent.ACTION_UP) {
+            getParent().requestDisallowInterceptTouchEvent(false);
+            resetTouchFeedback();
             xOffset = getOffsetInsideOfBounds();
             releaseEdgeEffects();
             //ViewCompat.postInvalidateOnAnimation(this);
@@ -390,24 +393,35 @@ public class PianoView extends View {
 
         if (action == MotionEvent.ACTION_MOVE) {
             for (int i = 0; i < event.getPointerCount(); i++) {
-                keyboard.touchItem(event.getX() / scaleX + xOffset, event.getY());
-                sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+                resetTouchFeedback();
+                if(keyboard.touchItem(event.getX() / scaleX + xOffset, event.getY())) {
+                    sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+                }
                 //PdBase.sendFloat("X_KB_midi_note", (keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
                 //PdBase.sendFloat("X_KB_gate", 1);
 
-                Note note = Note.fromCode(keyboard.getPressedKey().midiCode);
+                //Note note = Note.fromCode(keyboard.getPressedKey().midiCode);
                 //addNotes(Arrays.asList(note));
 
-                resetTouchFeedback();
+                //resetTouchFeedback();
             }
             xOffset = getOffsetInsideOfBounds();
-            releaseEdgeEffects();
+            //releaseEdgeEffects();
             //ViewCompat.postInvalidateOnAnimation(this);
         }
 
-        boolean retVal = scaleGestureDetector.onTouchEvent(event);
-        retVal = gestureDetector.onTouchEvent(event) || retVal;
-        return retVal || super.onTouchEvent(event);
+        if (action == MotionEvent.ACTION_DOWN) {
+            getParent().requestDisallowInterceptTouchEvent(true);
+            for (int i = 0; i < event.getPointerCount(); i++) {
+                keyboard.touchItem(event.getX() / scaleX + xOffset, event.getY());
+                sendNote((keyboard.getPressedKey().midiCode - 24) + (INITIAL_OCTIVE * 12));
+            }
+        }
+        invalidate();
+//        boolean retVal = scaleGestureDetector.onTouchEvent(event);
+//        retVal = gestureDetector.onTouchEvent(event) || retVal;
+//        return retVal || super.onTouchEvent(event);
+        return true;
     }
 
     private void fireTouchListeners(int code) {
