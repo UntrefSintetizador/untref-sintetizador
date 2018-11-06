@@ -25,7 +25,7 @@ public class PatchVCOPresenter extends PatchPresenter {
         int[] imageIds = {R.drawable.edit_vco_sine, R.drawable.edit_vco_isaw, R.drawable.edit_vco_saw, R.drawable.edit_vco_triangle, R.drawable.edit_vco_square};
         patchMenuView.createOptionList("shape", imageIds, (int) ((VCOPatch) patch).shape);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, patchFreq, new ExponentialLeftFunction(0f, 20000f));
-        patchMenuView.createKnob("offset", FLOAT_PRECISION, ((VCOPatch) patch).offset, new LinearFunction(-64f, 63f));
+        patchMenuView.createKnob("offset", INTEGER_PRECISION, ((VCOPatch) patch).offset, new LinearFunction(-64f, 63f));
         patchMenuView.linkKnobs("freq", "offset", new FrequencyOffsetFunction(patchFreq), new OffsetFrequencyFunction(patchFreq));
         patchMenuView.createKnob("pw", FLOAT_PRECISION, ((VCOPatch) patch).pw, new LinearFunction(0f, 100f));
         return true;

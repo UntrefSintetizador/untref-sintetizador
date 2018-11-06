@@ -151,7 +151,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
     private void setValueCheckingLinks(float value, boolean checksLink) {
         this.value = Math.max(minValue, Math.min(maxValue, value));
-        normalizeValue();
         rotationWhileNotMoving = calculateRotation();
         setRotation(rotationWhileNotMoving);
 
