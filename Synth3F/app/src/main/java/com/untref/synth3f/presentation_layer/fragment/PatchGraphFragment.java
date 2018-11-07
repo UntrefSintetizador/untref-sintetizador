@@ -62,7 +62,7 @@ public class PatchGraphFragment extends Fragment {
         createEngineEvent();
         createConnectDisconnectEvent();
         createOptionsMenuEvent();
-        createScrollEvent();
+        createDragMenuEvents();
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
@@ -288,7 +288,7 @@ public class PatchGraphFragment extends Fragment {
         );
     }
 
-    private void createScrollEvent() {
+    private void createDragMenuEvents() {
 
         dragMenuView.findViewById(R.id.menuButtonScrollLeft).setOnClickListener(
                 new View.OnClickListener() {
@@ -304,6 +304,15 @@ public class PatchGraphFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dragMenuView.scrollRight();
+                    }
+                }
+        );
+
+        dragMenuView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dragMenuView.toogle();
                     }
                 }
         );

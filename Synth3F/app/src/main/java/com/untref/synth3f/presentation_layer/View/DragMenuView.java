@@ -15,6 +15,7 @@ public class DragMenuView extends LinearLayout {
     private static final int PAGE_SIZE = 4;
     private List<List<Button>> patchButtonPages;
     private int pageIndex = 0;
+    private boolean opened;
 
     public DragMenuView(Context context) {
         super(context);
@@ -55,12 +56,12 @@ public class DragMenuView extends LinearLayout {
         }
 
         pageIndex = 0;
+        close();
     }
 
     public void scrollLeft() {
 
         if (pageIndex > 0) {
-            Log.i("OpenDragMenu", "Scroll left");
             hideCurrentPage();
             pageIndex--;
             showCurrentPage();
@@ -70,10 +71,19 @@ public class DragMenuView extends LinearLayout {
     public void scrollRight() {
 
         if (pageIndex < patchButtonPages.get(pageIndex).size() - 1) {
-            Log.i("OpenDragMenu", "Scroll right");
             hideCurrentPage();
             pageIndex++;
             showCurrentPage();
+        }
+    }
+
+    public void toogle() {
+
+        if (opened) {
+            close();
+
+        } else {
+            open();
         }
     }
 
@@ -91,5 +101,22 @@ public class DragMenuView extends LinearLayout {
         for (Button button : currentPage) {
             button.setVisibility(VISIBLE);
         }
+    }
+
+    private void close() {
+        setScrollButtonsVisibility(GONE);
+        hideCurrentPage();
+        opened = false;
+    }
+
+    private void open() {
+        setScrollButtonsVisibility(VISIBLE);
+        showCurrentPage();
+        opened = true;
+    }
+
+    private void setScrollButtonsVisibility(int visibility) {
+        getChildAt(1).setVisibility(visibility);
+        getChildAt(getChildCount() - 1).setVisibility(visibility);
     }
 }
