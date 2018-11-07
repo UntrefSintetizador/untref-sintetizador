@@ -17,154 +17,172 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <Button
-        android:id="@+id/menuButtonOpenOptionsMenu"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/open_options_menu_off"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.untref.synth3f.presentation_layer.View.PatchesLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/menuButtonOpenDragMenu"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/open_drag_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/menuButtonOpenDragMenu"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/open_drag_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/menuButtonDragVCO"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_vco"
-        android:tag="vco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonOpenDragMenu" />
+        <Button
+            android:id="@+id/menuButtonScrollLeft"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/scroll_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/menuButtonOpenDragMenu" />
 
-    <Button
-        android:id="@+id/menuButtonDragVCF"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_vcf"
-        android:tag="vcf"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragVCO" />
+        <Button
+            android:id="@+id/menuButtonDragVCO"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_vco"
+            android:tag="vco"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonOpenDragMenu" />
 
-    <Button
-        android:id="@+id/menuButtonDragEG"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_eg"
-        android:tag="eg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragVCF" />
+        <Button
+            android:id="@+id/menuButtonDragVCF"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_vcf"
+            android:tag="vcf"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragVCO" />
 
-    <Button
-        android:id="@+id/menuButtonDragVCA"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_vca"
-        android:tag="vca"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragEG" />
+        <Button
+            android:id="@+id/menuButtonDragEG"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_eg"
+            android:tag="eg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragVCF" />
 
-    <Button
-        android:id="@+id/menuButtonDragDAC"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_dac"
-        android:tag="dac"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragVCA" />
+        <Button
+            android:id="@+id/menuButtonDragVCA"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_vca"
+            android:tag="vca"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragEG" />
 
-    <Button
-        android:id="@+id/menuButtonDragKB"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_kb"
-        android:tag="kb"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragDAC" />
+        <Button
+            android:id="@+id/menuButtonDragDAC"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_dac"
+            android:tag="dac"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragVCA" />
 
-    <Button
-        android:id="@+id/menuButtonDragLFO"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_lfo"
-        android:tag="lfo"
-        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCO"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonOpenDragMenu" />
+        <Button
+            android:id="@+id/menuButtonDragKB"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_kb"
+            android:tag="kb"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragDAC" />
 
-    <Button
-        android:id="@+id/menuButtonDragMIX"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_mix"
-        android:tag="mix"
-        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCF"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragLFO" />
+        <Button
+            android:id="@+id/menuButtonDragLFO"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_lfo"
+            android:tag="lfo"
+            app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCO"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonOpenDragMenu" />
 
-    <Button
-        android:id="@+id/menuButtonDragNG"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_ng"
-        android:tag="ng"
-        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragEG"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragMIX" />
+        <Button
+            android:id="@+id/menuButtonDragMIX"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_mix"
+            android:tag="mix"
+            app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCF"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragLFO" />
 
-    <Button
-        android:id="@+id/menuButtonDragSH"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_sh"
-        android:tag="sh"
-        app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCA"
-        app:layout_constraintStart_toEndOf="@+id/menuButtonDragNG" />
+        <Button
+            android:id="@+id/menuButtonDragNG"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_ng"
+            android:tag="ng"
+            app:layout_constraintBottom_toTopOf="@+id/menuButtonDragEG"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragMIX" />
+
+        <Button
+            android:id="@+id/menuButtonDragSH"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/drag_sh"
+            android:tag="sh"
+            app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCA"
+            app:layout_constraintStart_toEndOf="@+id/menuButtonDragNG" />
+
+        <Button
+            android:id="@+id/menuButtonScrollLeft"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/scroll_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/menuButtonOpenDragMenu" />
+
+    </com.untref.synth3f.presentation_layer.View.PatchesLayout>
 
     <Button
         android:id="@+id/menuDelete"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/menu_delete"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,8 +192,8 @@
         android:id="@+id/menuConnect"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/menu_connect"
         app:layout_constraintStart_toEndOf="@+id/menuDelete"
@@ -186,8 +204,8 @@
         android:layout_width="600px"
         android:layout_height="600px"
         android:columnCount="5"
-        android:rowCount="6"
         android:elevation="4dp"
+        android:rowCount="6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -214,34 +232,46 @@
         android:id="@+id/patch_menu_view_option_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:elevation="4dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/patch_menu_view"
         app:layout_constraintTop_toTopOf="parent">
 
     </com.untref.synth3f.presentation_layer.View.OptionList>
+
+    <Button
+        android:id="@+id/menuButtonOpenOptionsMenu"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/open_options_menu_off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.untref.synth3f.presentation_layer.View.OptionsMenuView
         android:id="@+id/options_menu_view"
         android:layout_width="80dp"
         android:layout_height="374dp"
         android:columnCount="1"
+        android:elevation="2dp"
         android:gravity="top"
         android:orientation="vertical"
         android:rowCount="6"
-        android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/menuButtonOpenOptionsMenu"
         tools:layout_editor_absoluteX="517dp"
         tools:layout_editor_absoluteY="348dp">
 
         <TableRow>
+
             <Button
                 android:id="@+id/menuSave"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/menu_save"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -250,12 +280,13 @@
         </TableRow>
 
         <TableRow>
+
             <Button
                 android:id="@+id/menuLoad"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/menu_load"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -264,15 +295,16 @@
         </TableRow>
 
         <TableRow>
+
             <Button
                 android:id="@+id/menuButtonChangeEngine"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 android:background="@drawable/menu_change_engine"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/menuLoad" />
 
