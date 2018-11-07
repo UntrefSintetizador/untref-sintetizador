@@ -3,6 +3,7 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -11,8 +12,9 @@ import java.util.List;
 
 public class DragMenuView extends LinearLayout {
 
-    private static final int PAGE_SIZE = 5;
-    private List<List<Button>> patchButtons;
+    private static final int PAGE_SIZE = 4;
+    private List<List<Button>> patchButtonPages;
+    private int pageIndex = 0;
 
     public DragMenuView(Context context) {
         super(context);
@@ -27,16 +29,15 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void init() {
-        int pageIndex = 0;
         int count = getChildCount();
         boolean makeVisible = true;
         List<Button> firstPage = new ArrayList<>();
-        patchButtons = new ArrayList<>();
-        patchButtons.add(firstPage);
+        patchButtonPages = new ArrayList<>();
+        patchButtonPages.add(firstPage);
 
         for (int i = 2; i < count - 1; i++) {
             Button child = (Button) getChildAt(i);
-            List<Button> currentPage = patchButtons.get(pageIndex);
+            List<Button> currentPage = patchButtonPages.get(pageIndex);
             child.setVisibility(GONE);
 
             if (makeVisible) {
@@ -45,11 +46,50 @@ public class DragMenuView extends LinearLayout {
 
             currentPage.add(child);
 
-            if (currentPage.size() > PAGE_SIZE) {
+            if (currentPage.size() == PAGE_SIZE) {
                 List<Button> nextPage = new ArrayList<>();
-                patchButtons.add(nextPage);
+                patchButtonPages.add(nextPage);
+                makeVisible = false;
                 pageIndex++;
             }
+        }
+
+        pageIndex = 0;
+    }
+
+    public void scrollLeft() {
+
+        if (pageIndex > 0) {
+            Log.i("OpenDragMenu", "Scroll left");
+            hideCurrentPage();
+            pageIndex--;
+            showCurrentPage();
+        }
+    }
+
+    public void scrollRight() {
+
+        if (pageIndex < patchButtonPages.get(pageIndex).size() - 1) {
+            Log.i("OpenDragMenu", "Scroll right");
+            hideCurrentPage();
+            pageIndex++;
+            showCurrentPage();
+        }
+    }
+
+    private void hideCurrentPage() {
+        List<Button> currentPage = patchButtonPages.get(pageIndex);
+
+        for (Button button : currentPage) {
+            button.setVisibility(GONE);
+        }
+    }
+
+    private void showCurrentPage() {
+        List<Button> currentPage = patchButtonPages.get(pageIndex);
+
+        for (Button button : currentPage) {
+            button.setVisibility(VISIBLE);
         }
     }
 }

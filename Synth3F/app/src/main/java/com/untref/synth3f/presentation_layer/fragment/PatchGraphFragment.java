@@ -55,18 +55,19 @@ public class PatchGraphFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
         mapView = patchGraphView.findViewById(R.id.mapView);
+        dragMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
+        dragMenuView.init();
         createDragAndDropEvent();
         createSaveLoadEvent();
         createEngineEvent();
         createConnectDisconnectEvent();
         createOptionsMenuEvent();
+        createScrollEvent();
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
         optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);
         optionsMenuView.setPatchGraphFragment(this);
-        dragMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
-        dragMenuView.init();
         return patchGraphView;
     }
 
@@ -282,6 +283,27 @@ public class PatchGraphFragment extends Fragment {
                         } else {
                             view.setBackgroundResource(R.drawable.open_options_menu_off);
                         }
+                    }
+                }
+        );
+    }
+
+    private void createScrollEvent() {
+
+        dragMenuView.findViewById(R.id.menuButtonScrollLeft).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dragMenuView.scrollLeft();
+                    }
+                }
+        );
+
+        dragMenuView.findViewById(R.id.menuButtonScrollRight).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dragMenuView.scrollRight();
                     }
                 }
         );
