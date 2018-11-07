@@ -8,6 +8,7 @@ public class KBPatch extends Patch {
     public float gate = 1f;
     public float midi_note = 0f;
     public float glide = 0f;
+    public int octava = 4;
 
     @Override
     public void initialize(IProcessor processor) {

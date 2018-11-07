@@ -63,7 +63,7 @@ public class OptionList extends LinearLayout {
         this.selectedValue = selectedValue;
         options[selectedValue].setColor(activeColor);
         patchMenuView.setParameterToEdit(parameterName, selectedValue);
-        patchMenuView.setValue(parameterName, selectedValue);
+        patchMenuView.setValue(parameterName, selectedValue, true);
     }
 
     private int darken(int color) {

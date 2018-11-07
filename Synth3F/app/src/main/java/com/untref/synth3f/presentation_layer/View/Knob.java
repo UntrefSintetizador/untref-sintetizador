@@ -81,9 +81,11 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
      * para setear de manera correcta tambien al knob vinculado.
      *
      * @param value el valor que va a representar el knob.
+     * @return el valor normalizado.
      */
-    public void setValue(float value) {
+    public float setValue(float value) {
         setValueCheckingLinks(value, true);
+        return this.value;
     }
 
     /**
@@ -125,7 +127,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
                 convertRotationToValue(clampedRotation);
                 setRotation(calculateRotation());
                 checkLinkedKnob();
-                patchMenuView.setValue(parameterName, value);
+                patchMenuView.setValue(parameterName, value, true);
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -158,8 +160,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         if (checksLink) {
             checkLinkedKnob();
         }
-
-        patchMenuView.setValue(getName(), value);
     }
 
     private void normalizeValue() {
@@ -172,7 +172,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
         if (linkedKnob != null) {
             linkedKnob.setValueCheckingLinks(linkingFunction.calculate(value), false);
-            patchMenuView.setValue(linkedKnobParameterName, linkedKnob.getValue());
+            patchMenuView.setValue(linkedKnobParameterName, linkedKnob.getValue(), false);
         }
     }
 

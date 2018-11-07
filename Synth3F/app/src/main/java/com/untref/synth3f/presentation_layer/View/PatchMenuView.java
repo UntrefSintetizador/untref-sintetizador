@@ -120,7 +120,6 @@ public class PatchMenuView extends TableLayout {
      * Funcion para crear el knob. Los parametros van a ser atributos del knob a crear, y son necesarios
      * en el constructor del mismo.
      * Luego de crearlo, agrega al knob a una lista.
-     *
      */
     public void createKnob(String parameterName, int precision, float value,
                            MenuScaleFunction scale) {
@@ -136,22 +135,18 @@ public class PatchMenuView extends TableLayout {
     }
 
     /**
-     *Vincula dos knobs para que el comportamiento de uno tenga influencia en el otro de acuerdo a
-     *las funciones que se pasen como parametro
+     * Vincula dos knobs para que el comportamiento de uno tenga influencia en el otro de acuerdo a
+     * las funciones que se pasen como parametro
      *
-     *@param parameterName1 es el nombre que representa al primer knob, el cual es atributo de cada
-     *                      knob, y es dado cuando se construye.
-     *
-     *@param parameterName2 es el nombre que representa al segundo knob, el cual es atributo de cada
-     *                      knob, y es dado cuando se construye.
-     *
-     *@param normalFunction es la funcion que se ejecuta cuando se modifica un valor del primer knob
-     *                      sobre el segundo knob, es decir su knob vinculado
-     *
-     *@param inverseFunction es la funcion que se ejecuta cuando se modifica un valor del segundo knob
-     *                      sobre el primer knob, es decir su knob vinculado. Esta funcion es la
-     *                       inversa de la funcion normal
-     *
+     * @param parameterName1  es el nombre que representa al primer knob, el cual es atributo de cada
+     *                        knob, y es dado cuando se construye.
+     * @param parameterName2  es el nombre que representa al segundo knob, el cual es atributo de cada
+     *                        knob, y es dado cuando se construye.
+     * @param normalFunction  es la funcion que se ejecuta cuando se modifica un valor del primer knob
+     *                        sobre el segundo knob, es decir su knob vinculado
+     * @param inverseFunction es la funcion que se ejecuta cuando se modifica un valor del segundo knob
+     *                        sobre el primer knob, es decir su knob vinculado. Esta funcion es la
+     *                        inversa de la funcion normal
      */
     public void linkKnobs(String parameterName1, String parameterName2, LinkingFunction normalFunction, LinkingFunction inverseFunction) {
         Knob firstKnob = null;
@@ -229,9 +224,11 @@ public class PatchMenuView extends TableLayout {
         parameterValueView.setText(decimalFormat.format(value).replace(",", "."));
     }
 
-    public void setValue(String parameterName, float value) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.#######");
-        parameterValueView.setText(decimalFormat.format(value).replace(",", "."));
+    public void setValue(String parameterName, float value, boolean active) {
+        if (active) {
+            DecimalFormat decimalFormat = new DecimalFormat("#.#######");
+            parameterValueView.setText(decimalFormat.format(value).replace(",", "."));
+        }
         patchPresenter.setValue(parameterName, value);
     }
 
@@ -248,7 +245,7 @@ public class PatchMenuView extends TableLayout {
 
         if (knob != null) {
             value = Float.parseFloat(editable.toString());
-            knob.setValue(value);
+            value = knob.setValue(value);
 
         } else {
             value = Float.parseFloat(editable.toString());

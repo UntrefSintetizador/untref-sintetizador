@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.KBPatch;
 import com.untref.synth3f.presentation_layer.presenters.PatchKBPresenter;
 
 public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
@@ -13,21 +14,21 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
     private static final int MIN_OCTIVE = 0;
     private static final int MAX_OCTIVE = 8;
     private PatchKBPresenter presenter;
-    private int patchId;
     private TextView label_octava;
     private com.evilduck.piano.views.instrument.PianoView piano;
-    private int octava = 4;
+    private KBPatch patch;
 
     public PianoView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
     }
 
-    public void init(View view) {
+    public void init(View view, KBPatch patch) {
+        this.patch = patch;
         piano = findViewById(R.id.pianito);
 
         label_octava = view.findViewById(R.id.labelOctava);
-        label_octava.setText(String.valueOf(octava));
+        label_octava.setText(String.valueOf(patch.octava));
 
         view.findViewById(R.id.botonOctavaMas).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,10 +49,6 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
         this.presenter = presenter;
     }
 
-    public void setPatchId(int patchId) {
-        this.patchId = patchId;
-    }
-
     @Override
     protected void sendNote(int note) {
         presenter.setValue("midi_note", note);
@@ -64,21 +61,21 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
     }
 
     private void reduceOctava() {
-        if (octava > MIN_OCTIVE) {
-            octava--;
+        if (patch.octava > MIN_OCTIVE) {
+            patch.octava--;
             updateLabelOctava();
         }
     }
 
     private void incrementOctava() {
-        if (octava < MAX_OCTIVE) {
-            octava++;
+        if (patch.octava < MAX_OCTIVE) {
+            patch.octava++;
             updateLabelOctava();
         }
     }
 
     private void updateLabelOctava() {
-        piano.setINITIAL_OCTIVE(octava);
-        label_octava.setText(String.valueOf(octava));
+        piano.setINITIAL_OCTIVE(patch.octava);
+        label_octava.setText(String.valueOf(patch.octava));
     }
 }
