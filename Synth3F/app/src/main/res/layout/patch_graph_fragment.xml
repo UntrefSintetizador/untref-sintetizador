@@ -17,7 +17,8 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <com.untref.synth3f.presentation_layer.View.PatchesLayout
+    <com.untref.synth3f.presentation_layer.View.DragMenuView
+        android:id="@+id/drag_menu_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -165,17 +166,17 @@
             app:layout_constraintStart_toEndOf="@+id/menuButtonDragNG" />
 
         <Button
-            android:id="@+id/menuButtonScrollLeft"
+            android:id="@+id/menuButtonScrollRight"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/scroll_left"
+            android:background="@drawable/scroll_right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/menuButtonOpenDragMenu" />
 
-    </com.untref.synth3f.presentation_layer.View.PatchesLayout>
+    </com.untref.synth3f.presentation_layer.View.DragMenuView>
 
     <Button
         android:id="@+id/menuDelete"

@@ -21,7 +21,7 @@ import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
-import com.untref.synth3f.presentation_layer.View.PatchesLayout;
+import com.untref.synth3f.presentation_layer.View.DragMenuView;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.activity.StorageActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
@@ -43,7 +43,7 @@ public class PatchGraphFragment extends Fragment {
     private PatchMenuView patchMenuView;
     private boolean modeConnect;
     private OptionsMenuView optionsMenuView;
-    private PatchesLayout patchesLayout;
+    private DragMenuView dragMenuView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,8 @@ public class PatchGraphFragment extends Fragment {
         patchMenuView.setPatchGraphFragment(this);
         optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);
         optionsMenuView.setPatchGraphFragment(this);
-        patchesLayout.init();
+        dragMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
+        dragMenuView.init();
         return patchGraphView;
     }
 
