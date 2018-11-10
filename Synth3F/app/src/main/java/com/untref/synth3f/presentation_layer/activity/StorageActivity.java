@@ -12,12 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
-import com.untref.synth3f.domain_layer.serializers.JSONSerializer;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.untref.synth3f.domain_layer.serializers.FileManager.getFilenameList;
 
 public class StorageActivity extends AppCompatActivity {
 
@@ -31,16 +30,7 @@ public class StorageActivity extends AppCompatActivity {
     }
 
     private void populateList() {
-        File filesDir = new File(getBaseContext().getFilesDir(), JSONSerializer.FILE_FOLDER);
-        filesDir.mkdirs();
-        String name;
-        List<String> list = new ArrayList<>();
-        for (File file : filesDir.listFiles()) {
-            if (file.isFile()) {
-                name = file.getName();
-                list.add(name);
-            }
-        }
+        List<String> list = getFilenameList(getBaseContext());
         ListView listview = findViewById(R.id.filenameList);
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
