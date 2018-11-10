@@ -1,6 +1,7 @@
 package com.untref.synth3f.domain_layer.serializers;
 
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,10 +15,10 @@ import java.util.List;
 
 public class FileManager {
 
-    private static final String FILE_FOLDER = "saves";
+    private static final String FILE_FOLDER = "synth3f_saves";
 
     public static void writeOnFile(Context context, String filename, String data) throws IOException {
-        File file = new File(new File(context.getFilesDir(), FileManager.FILE_FOLDER), filename);
+        File file = new File(getFileFolder(context), filename);
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -33,17 +34,16 @@ public class FileManager {
         }
     }
 
-    public static String getStringFromFile(Context context, String filePath) throws Exception {
-        File fl = new File(new File(context.getFilesDir(), FILE_FOLDER), filePath);
+    public static String getStringFromFile(Context context, String filename) throws Exception {
+        File fl = new File(getFileFolder(context), filename);
         FileInputStream fin = new FileInputStream(fl);
         String ret = convertStreamToString(fin);
         fin.close();
         return ret;
     }
 
-    public static List<String> getFilenameList(Context context){
-        File filesDir = new File(context.getFilesDir(), FILE_FOLDER);
-        filesDir.mkdirs();
+    public static List<String> getFilenameList(Context context) {
+        File filesDir = getFileFolder(context);
         String name;
         List<String> list = new ArrayList<>();
         for (File file : filesDir.listFiles()) {
@@ -64,5 +64,24 @@ public class FileManager {
         }
         reader.close();
         return sb.toString();
+    }
+
+    private static File getFileFolder(Context context) {
+        String state = Environment.getExternalStorageState();
+        File fileFolder = null;
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            fileFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), FILE_FOLDER);
+            //Si el directorio no existe y no se puede crear usar directorio privado
+            if (!fileFolder.isDirectory() && !fileFolder.mkdir()) {
+                fileFolder = null;
+            }
+        }
+        if (fileFolder == null) {
+            fileFolder = new File(context.getFilesDir(), FILE_FOLDER);
+            if (!fileFolder.isDirectory()) {
+                fileFolder.mkdir();
+            }
+        }
+        return fileFolder;
     }
 }

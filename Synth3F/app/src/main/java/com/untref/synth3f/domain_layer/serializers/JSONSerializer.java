@@ -54,7 +54,6 @@ public class JSONSerializer {
      * @param filename          Nombre del Archivo.
      */
     public void save(Context context, PatchGraphManager patchGraphManager, String filename) {
-
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Patch.class, new InterfaceAdapter<Patch>())
                 .setExclusionStrategies(new ExclusionStrategy() {
@@ -80,7 +79,6 @@ public class JSONSerializer {
         }
     }
 
-
     private void assignConnections(PatchGraphManager patchGraphManager) throws IllegalAccessException, NoSuchFieldException {
         Field f = patchGraphManager.getClass().getDeclaredField("patchMap");
         f.setAccessible(true);
@@ -93,5 +91,4 @@ public class JSONSerializer {
             patchMap.get(connection.getTargetPatch()).addInputConnection(connection);
         }
     }
-
 }
