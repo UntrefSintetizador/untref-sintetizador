@@ -5,6 +5,7 @@ import com.untref.synth3f.entities.Patch;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -136,6 +137,23 @@ public class PatchGraphManager {
             patchMap.get(connection.getTargetPatch()).removeInputConnection(connection);
         }
         return patch;
+    }
+
+    public Patch[] removeAllPatches(){
+        Patch[] patchesToRemove = new Patch[this.patchMap.size()];
+        int positionToAddPatch = 0;
+        Iterator it = this.patchMap.keySet().iterator();
+        while(it.hasNext()) {
+            Integer key = (Integer) it.next();
+            Patch patch = this.patchMap.get(key);
+            patchesToRemove[positionToAddPatch] = patch;
+            positionToAddPatch++;
+        }
+        for (int i = 0; i < patchesToRemove.length; i++){
+            Patch patch = patchesToRemove[i];
+            this.removePatch(patch.getId());
+        }
+        return patchesToRemove;
     }
 
 }

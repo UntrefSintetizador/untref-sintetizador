@@ -310,5 +310,20 @@
                 app:layout_constraintTop_toTopOf="@+id/menuLoad" />
 
         </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/menuDeleteAll"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background= "@drawable/menu_view_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/menuLoad" />
+
+        </TableRow>
     </com.untref.synth3f.presentation_layer.View.OptionsMenuView>
 </com.untref.synth3f.presentation_layer.View.MapView>

@@ -97,6 +97,7 @@ public abstract class PatchView extends LinearLayout {
         if (bounds.contains((int) event.getRawX() - location[0] + bounds.left,
                 (int) event.getRawY() - location[1] + bounds.top)) {
             patchPresenter.delete(patch.getId());
+            //patchPresenter.deleteAll();
             ((ViewManager) PatchView.this.getParent()).removeView(PatchView.this);
         }
     }

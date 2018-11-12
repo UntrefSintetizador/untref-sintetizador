@@ -63,6 +63,7 @@ public class PatchGraphFragment extends Fragment {
         createConnectDisconnectEvent();
         createOptionsMenuEvent();
         createDragMenuEvents();
+        createRemoveAllPatchesEvent();
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
@@ -316,6 +317,26 @@ public class PatchGraphFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private void createRemoveAllPatchesEvent(){
+        patchGraphView.findViewById(R.id.menuDeleteAll).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        removeAllPatches();
+                    }
+                }
+        );
+    }
+
+    private void removeAllPatches(){
+        ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
+        while (mapLayout.getChildCount() > 1) {
+            mapLayout.removeViewAt(0);
+        }
+        wireDrawer.clear();
+        this.patchGraphPresenter.deleteAll();
     }
 
     private void loadFile(String filename) {

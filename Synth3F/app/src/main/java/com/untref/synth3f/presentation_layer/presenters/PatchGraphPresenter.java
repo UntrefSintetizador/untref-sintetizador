@@ -183,6 +183,17 @@ public class PatchGraphPresenter {
         return patch;
     }
 
+    public void deleteAll() {
+        Patch[] patches = new Patch[this.patchGraphManager.getPatches().size()];
+        this.patchGraphManager.getPatches().toArray(patches);
+        processor.clear(patches);
+        Patch[] patchesToRemove = patchGraphManager.removeAllPatches();
+        for (Patch patch: patchesToRemove) {
+            patchGraphFragment.getWireDrawer().removePatch(patch);
+            this.processor.delete(patch);
+        }
+    }
+
     public void save(Context context, String filename) {
         JSONSerializer jsonSerializer = new JSONSerializer();
         jsonSerializer.save(context, patchGraphManager, filename);
