@@ -145,8 +145,16 @@ public abstract class PatchView extends LinearLayout {
 
     protected abstract PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch);
 
+    /**
+     * Inicializa aspectos visuales del componente (patch)
+     */
     protected abstract void initialize();
 
+    /**
+     * Dibuja el patch
+     *
+     * @param context contexto en el que se dibuja el Patch
+     */
     protected void drawPatch(Context context) {
         this.setOrientation(LinearLayout.VERTICAL);
         this.setGravity(Gravity.CENTER);
