@@ -155,6 +155,15 @@ public class PatchGraphFragment extends Fragment {
 
                     private int hardcodedSize = 150;
 
+                    /**
+                     * Detecta los eventos realizados por el usuario sobre los patches
+                     *
+                     * @param view la vista donde se esta
+                     * @param event el evento detectado: ACTION_DOWN (toco la pantalla),
+                     *              ACTION_MOVE (mueve el dedo por la pantalla),
+                     *              ACTION_UP (dejo de tocar la pantalla)
+                     * @return false (si no hay un patchView), true en caso contrario
+                     */
                     @Override
                     public boolean onTouch(View view, MotionEvent event) {
 

@@ -19,6 +19,9 @@ import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
+/**
+ * Es la vista de la cual extienden luego las vistas de los componentes (VCO, LFOL, DAC, EG, etc)
+ */
 public abstract class PatchView extends LinearLayout {
 
     protected PatchPresenter patchPresenter;
@@ -49,30 +52,62 @@ public abstract class PatchView extends LinearLayout {
         createLineEvents();
     }
 
+    /**
+     *
+     * @return devuelve el color del componente
+     */
     public int getColor() {
         return color;
     }
 
+    /**
+     *
+     * @return las entradas que posee el componente, es decir las conexiones entrantes
+     */
     public AppCompatImageView[] getInputs() {
         return inputs;
     }
 
+    /**
+     *
+     * @return las salidas que posee el componente, es decir las conexiones que salen del componente
+     */
     public AppCompatImageView[] getOutputs() {
         return outputs;
     }
 
+    /**
+     *
+     * @return la id del patch
+     */
     public int getPatchId() {
         return patch.getId();
     }
 
+    /**
+     *
+     * @return el patch en cuestion
+     */
     public Patch getPatch() {
         return patch;
     }
 
+    /**
+     *
+     * @return
+     */
     public int widthRatio() {
         return Math.max(Math.max(this.inputs.length, this.outputs.length), 2);
     }
 
+    /**
+     * Se ejecuta mientras se esta moviendo el patch
+     *
+     * @param x posicion en el eje horizontal donde se hace click
+     * @param y posicion en el eje vertical donde se hace click
+     * @param xDelta valor que ayuda a mantener el patch dentro de los margenes
+     * @param yDelta valor que ayuda a mantener el patch dentro de los margenes
+     */
     public void movePatch(int x, int y, int xDelta, int yDelta) {
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
         layoutParams.leftMargin = Math.min(x - xDelta,
@@ -85,6 +120,13 @@ public abstract class PatchView extends LinearLayout {
         wireDrawer.movePatch(patch, x, y);
     }
 
+    /**
+     * Se ejecuta cuando se suelta el patch (se lo deja de mover)
+     *
+     * @param x posicion en el eje horizontal donde se solto el patch
+     * @param y posicion en el eje vertical donde se solto el patch
+     * @param event el evento que haga el usuario
+     */
     public void endMovePatch(float x, float y, MotionEvent event) {
         View delete = patchGraphFragment.getActivity().findViewById(R.id.menuDelete);
         Rect bounds = new Rect();
@@ -97,7 +139,6 @@ public abstract class PatchView extends LinearLayout {
         if (bounds.contains((int) event.getRawX() - location[0] + bounds.left,
                 (int) event.getRawY() - location[1] + bounds.top)) {
             patchPresenter.delete(patch.getId());
-            //patchPresenter.deleteAll();
             ((ViewManager) PatchView.this.getParent()).removeView(PatchView.this);
         }
     }
