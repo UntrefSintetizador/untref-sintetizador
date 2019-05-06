@@ -5,4 +5,5 @@
     <color name="blue_soft">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
     <color name="background_title_menu">#DEB887</color>
+    <color name="background">#ff333333</color>
 </resources>

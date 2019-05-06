@@ -6,11 +6,14 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.untref.synth3f.R;
+
 public class DragMenuView extends LinearLayout {
 
     private static final int PAGE_SIZE = 4;
-    private int firstButtonIndex = 1;
+    private int firstButtonIndex = 2;
     private boolean opened;
+    private PatchesView patchesView;
 
     public DragMenuView(Context context) {
         super(context);
@@ -25,18 +28,31 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void init() {
-        updateVisibility();
+        patchesView = findViewById(R.id.patches_view);
+        patchesView.init();
         close();
     }
 
     public void scrollLeft() {
-        firstButtonIndex = (firstButtonIndex + PAGE_SIZE) % getChildCount();
-        updateVisibility();
+        patchesView.scrollLeft();
+        /*firstButtonIndex -= PAGE_SIZE;
+
+        if (firstButtonIndex < 2) {
+            firstButtonIndex = getChildCount() - 2;
+        }
+
+        updateVisibility();*/
     }
 
     public void scrollRight() {
-        firstButtonIndex = (firstButtonIndex - PAGE_SIZE) % getChildCount();
-        updateVisibility();
+        patchesView.scrollRight();
+        /*firstButtonIndex += PAGE_SIZE;
+
+        if (firstButtonIndex > getChildCount() - 2) {
+            firstButtonIndex = 2;
+        }
+
+        updateVisibility();*/
     }
 
     public void toogle() {
@@ -50,20 +66,20 @@ public class DragMenuView extends LinearLayout {
     }
 
     private void updateVisibility() {
-        int count = getChildCount();
-        int visibility = GONE;
+        int count = getChildCount() - 1;
+        int index = firstButtonIndex;
 
-        for (int i = 0; i < count; i++) {
-            View current = getChildAt(i);
+        for (int i = 2; i < count; i++) {
+            getChildAt(i).setVisibility(GONE);
+        }
 
-            if (i == firstButtonIndex) {
-                visibility = VISIBLE;
+        for (int i = 0; i < PAGE_SIZE; i++) {
+            getChildAt(index).setVisibility(VISIBLE);
+            index++;
 
-            } else if (i == PAGE_SIZE) {
-                visibility = GONE;
+            if (index > getChildCount() - 2) {
+                index = 2;
             }
-
-            current.setVisibility(visibility);
         }
     }
 
@@ -80,9 +96,17 @@ public class DragMenuView extends LinearLayout {
     private void setButtonsVisibility(int visibility) {
         getChildAt(1).setVisibility(visibility);
         getChildAt(getChildCount() - 1).setVisibility(visibility);
+        int count = getChildCount() - 1;
+        int v = visibility;
 
-        for (int i = 0; i < PAGE_SIZE; i++) {
-            getChildAt(firstButtonIndex + i).setVisibility(visibility);
+        for (int i = 1; i < count; i++) {
+            View current = getChildAt(i);
+
+            if (i == firstButtonIndex + PAGE_SIZE) {
+                v = GONE;
+            }
+
+            current.setVisibility(v);
         }
     }
 }
