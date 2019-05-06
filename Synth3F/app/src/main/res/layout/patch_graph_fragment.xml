@@ -45,20 +45,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/menuButtonOpenDragMenu" />
 
-        <Button
-            android:id="@+id/menuButtonScrollRight"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/scroll_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/patches_view" />
-
         <com.untref.synth3f.presentation_layer.View.PatchesView
             android:id="@+id/patches_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent">
 
@@ -109,6 +98,17 @@
                 android:tag="vca"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/menuButtonDragEG" />
+            <Button
+                android:id="@+id/menuButtonDragSH"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/drag_sh"
+                android:tag="sh"
+                app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCA"
+                app:layout_constraintStart_toEndOf="@+id/menuButtonDragNG" />
 
             <Button
                 android:id="@+id/menuButtonDragDAC"
@@ -170,20 +170,40 @@
                 app:layout_constraintBottom_toTopOf="@+id/menuButtonDragEG"
                 app:layout_constraintStart_toEndOf="@+id/menuButtonDragMIX" />
 
-            <Button
-                android:id="@+id/menuButtonDragSH"
+            <View
+                android:id="@+id/empty1"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/drag_sh"
-                android:tag="sh"
-                app:layout_constraintBottom_toTopOf="@+id/menuButtonDragVCA"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/menuButtonDragEG"
                 app:layout_constraintStart_toEndOf="@+id/menuButtonDragNG" />
+
+            <View
+                android:id="@+id/empty2"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/menuButtonDragEG"
+                app:layout_constraintStart_toEndOf="@+id/empty1" />
 
         </com.untref.synth3f.presentation_layer.View.PatchesView>
 
+        <Button
+            android:id="@+id/menuButtonScrollRight"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/scroll_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/menuButtonDragSH" />
 
     </com.untref.synth3f.presentation_layer.View.DragMenuView>
 
