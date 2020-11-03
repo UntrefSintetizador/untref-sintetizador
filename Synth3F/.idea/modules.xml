@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Synth3F.iml" filepath="$PROJECT_DIR$/Synth3F.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Synth3F-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Synth3F-app.iml" group="Synth3F/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/custom_view_keyboard/Synth3F-custom_view_keyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/custom_view_keyboard/Synth3F-custom_view_keyboard.iml" group="Synth3F/custom_view_keyboard" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/custom_view_keyboard/custom_view_keyboard.iml" filepath="$PROJECT_DIR$/custom_view_keyboard/custom_view_keyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untref-sintetizador-Synth3F.iml" filepath="$PROJECT_DIR$/.idea/modules/untref-sintetizador-Synth3F.iml" group="Synth3F" />
     </modules>
   </component>
 </project>
