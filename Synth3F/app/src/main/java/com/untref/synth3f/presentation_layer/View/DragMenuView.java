@@ -13,7 +13,7 @@ public class DragMenuView extends LinearLayout {
     private static final int PAGE_SIZE = 4;
     private int firstButtonIndex = 2;
     private boolean opened;
-    private PatchesView patchesView;
+    private DragMenu dragMenu;
 
     public DragMenuView(Context context) {
         super(context);
@@ -28,13 +28,16 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void init() {
-        patchesView = findViewById(R.id.patches_view);
-        patchesView.init();
+        int[] viewVisibilities = new int[getChildCount()];
+        for (int i = 0; i < getChildCount(); i++) {
+            viewVisibilities[i] = GONE;
+        }
+        dragMenu = new DragMenu(viewVisibilities, VISIBLE, GONE);
         close();
     }
 
     public void scrollLeft() {
-        patchesView.scrollLeft();
+        dragMenu.scrollLeft();
         /*firstButtonIndex -= PAGE_SIZE;
 
         if (firstButtonIndex < 2) {
@@ -45,7 +48,7 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void scrollRight() {
-        patchesView.scrollRight();
+        dragMenu.scrollRight();
         /*firstButtonIndex += PAGE_SIZE;
 
         if (firstButtonIndex > getChildCount() - 2) {

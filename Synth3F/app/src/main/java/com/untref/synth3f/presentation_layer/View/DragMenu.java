@@ -5,21 +5,24 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-public class PatchesView extends LinearLayout {
+public class DragMenu {
 
+    private final int[] viewVisibilites;
+    private final int visible;
+    private final int gone;
     private int currentPageIndex = 0;
+
     private int[][] pages = new int[][] {
             {0, 1, 2, 3},
             {4, 5, 6, 7},
             {8, 9, 10, 11}
     };
 
-    public PatchesView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public PatchesView(Context context) {
-        super(context);
+    public DragMenu(int[] viewVisibilities, int visible, int gone) {
+        this.viewVisibilites = viewVisibilities;
+        this.visible = visible;
+        this.gone = gone;
+        this.viewVisibilites[0] = visible;
     }
 
     public void init() {
@@ -40,11 +43,15 @@ public class PatchesView extends LinearLayout {
             currentPageIndex = pages.length - 1;
         }
         int[] currentChildrenIndex = pages[currentPageIndex];
-        for (int i = 0; i < getChildCount(); i++) {
-            getChildAt(i).setVisibility(GONE);
-        }
-        for (int i = 0; i < currentChildrenIndex.length; i++) {
-            getChildAt(currentChildrenIndex[i]).setVisibility(VISIBLE);
-        }
+//        for (int i = 0; i < getChildCount(); i++) {
+//            getChildAt(i).setVisibility(GONE);
+//        }
+//        for (int i = 0; i < currentChildrenIndex.length; i++) {
+//            getChildAt(currentChildrenIndex[i]).setVisibility(VISIBLE);
+//        }
+    }
+
+    public int getVisibility(int viewIndex) {
+        return viewVisibilites[viewIndex];
     }
 }
