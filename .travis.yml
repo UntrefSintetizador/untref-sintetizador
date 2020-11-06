@@ -26,4 +26,6 @@ before_script:
 notifications:
   email: false
 
-script: ./gradlew connectedAndroidTest
+script:
+  - ./gradlew test
+  - ./gradlew connectedAndroidTest
