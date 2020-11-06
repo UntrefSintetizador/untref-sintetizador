@@ -39,4 +39,22 @@ public class DragMenuTest {
         assertThat(secondButton, is(visible));
         assertThat(lastButton, is(visible));
     }
+
+    @Test
+    public void closeDragMenuHidesSecondAndLastButton() {
+        int visible = 1;
+        int gone = 0;
+        int numberOfButtons = 10;
+        int[] visibilities = new int[numberOfButtons];
+        Arrays.fill(visibilities, gone);
+        DragMenu dragMenu = new DragMenu(visibilities, visible, gone);
+
+        dragMenu.open();
+        dragMenu.close();
+        int secondButton = dragMenu.getVisibility(1);
+        int lastButton = dragMenu.getVisibility(-1);
+
+        assertThat(secondButton, is(gone));
+        assertThat(lastButton, is(gone));
+    }
 }

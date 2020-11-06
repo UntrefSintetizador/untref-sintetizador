@@ -62,4 +62,9 @@ public class DragMenu {
         viewVisibilites[1] = visible;
         viewVisibilites[viewVisibilites.length - 1] = visible;
     }
+
+    public void close() {
+        viewVisibilites[1] = gone;
+        viewVisibilites[viewVisibilites.length - 1] = gone;
+    }
 }
