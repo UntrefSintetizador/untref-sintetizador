@@ -19,7 +19,7 @@ public class DragMenu {
     };
 
     public DragMenu(int[] viewVisibilities, int visible, int gone) {
-        this.viewVisibilites = viewVisibilities;
+        this.viewVisibilites = viewVisibilities.clone();
         this.visible = visible;
         this.gone = gone;
         this.viewVisibilites[0] = visible;
