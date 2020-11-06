@@ -52,6 +52,14 @@ public class DragMenu {
     }
 
     public int getVisibility(int viewIndex) {
+        if (viewIndex < 0) {
+            viewIndex = viewVisibilites.length + viewIndex;
+        }
         return viewVisibilites[viewIndex];
+    }
+
+    public void open() {
+        viewVisibilites[1] = visible;
+        viewVisibilites[viewVisibilites.length - 1] = visible;
     }
 }
