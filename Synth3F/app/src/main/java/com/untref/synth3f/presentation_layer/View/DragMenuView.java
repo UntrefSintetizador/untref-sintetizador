@@ -65,24 +65,14 @@ public class DragMenuView extends LinearLayout {
 
         } else {
             open();
+            updateVisibility();
         }
     }
 
     private void updateVisibility() {
-        int count = getChildCount() - 1;
-        int index = firstButtonIndex;
-
-        for (int i = 2; i < count; i++) {
-            getChildAt(i).setVisibility(GONE);
-        }
-
-        for (int i = 0; i < PAGE_SIZE; i++) {
-            getChildAt(index).setVisibility(VISIBLE);
-            index++;
-
-            if (index > getChildCount() - 2) {
-                index = 2;
-            }
+        for (int i = 0; i < getChildCount(); i++) {
+            int viewVisibility = dragMenu.getVisibility(i);
+            getChildAt(i).setVisibility(viewVisibility);
         }
     }
 
@@ -92,7 +82,7 @@ public class DragMenuView extends LinearLayout {
     }
 
     private void open() {
-        setButtonsVisibility(VISIBLE);
+        dragMenu.open();
         opened = true;
     }
 
