@@ -54,11 +54,15 @@ public class PatchGraphFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container,
+                                         false);
         mapView = patchGraphView.findViewById(R.id.mapView);
         dragMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
         dragMenuView.init();
+        optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);
+        optionsMenuView.init();
         createDragAndDropEvent();
         createSaveLoadEvent();
         createEngineEvent();
@@ -69,8 +73,6 @@ public class PatchGraphFragment extends Fragment {
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
-        optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);
-        optionsMenuView.setPatchGraphFragment(this);
         return patchGraphView;
     }
 
@@ -118,27 +120,33 @@ public class PatchGraphFragment extends Fragment {
     }
 
     public int findUnusedId() {
-        int fID = 0;
-        while (getActivity().findViewById(++fID) != null) ;
+        int fID = 1;
+        while (getActivity().findViewById(fID) != null) {
+            fID++;
+        }
         return fID;
     }
 
     private void createWireDrawer(View view) {
-        this.wireDrawer = new WireDrawer(getActivity(), mapView);
+        this.wireDrawer = new WireDrawer(context, mapView);
         wireDrawer.setId(findUnusedId());
-
         ConstraintLayout mapLayout = view.findViewById(R.id.map);
         mapLayout.addView(wireDrawer);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(mapLayout);
-        constraintSet.connect(wireDrawer.getId(), ConstraintSet.LEFT, R.id.map, ConstraintSet.LEFT, 0);
-        constraintSet.connect(wireDrawer.getId(), ConstraintSet.TOP, R.id.map, ConstraintSet.TOP, 0);
-        constraintSet.connect(wireDrawer.getId(), ConstraintSet.RIGHT, R.id.map, ConstraintSet.RIGHT, 0);
-        constraintSet.connect(wireDrawer.getId(), ConstraintSet.BOTTOM, R.id.map, ConstraintSet.BOTTOM, 0);
+        constraintSet.connect(wireDrawer.getId(), ConstraintSet.LEFT, R.id.map,
+                              ConstraintSet.LEFT, 0);
+        constraintSet.connect(wireDrawer.getId(), ConstraintSet.TOP, R.id.map,
+                              ConstraintSet.TOP, 0);
+        constraintSet.connect(wireDrawer.getId(), ConstraintSet.RIGHT, R.id.map,
+                              ConstraintSet.RIGHT, 0);
+        constraintSet.connect(wireDrawer.getId(), ConstraintSet.BOTTOM, R.id.map,
+                              ConstraintSet.BOTTOM, 0);
         constraintSet.applyTo(mapLayout);
 
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) wireDrawer.getLayoutParams();
+        ConstraintLayout.LayoutParams layoutParams =
+                (ConstraintLayout.LayoutParams) wireDrawer.getLayoutParams();
         layoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT;
         layoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT;
 
@@ -147,74 +155,7 @@ public class PatchGraphFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void createDragAndDropEvent() {
-        View.OnTouchListener listener =
-                new View.OnTouchListener() {
-
-                    private int xDelta;
-                    private int yDelta;
-
-                    private PatchView patchView;
-
-                    private int hardcodedSize = 150;
-
-                    /**
-                     * Detecta los eventos realizados por el usuario sobre los patches
-                     *
-                     * @param view la vista donde se esta
-                     * @param event el evento detectado: ACTION_DOWN (toco la pantalla),
-                     *              ACTION_MOVE (mueve el dedo por la pantalla),
-                     *              ACTION_UP (dejo de tocar la pantalla)
-                     * @return false (si no hay un patchView), true en caso contrario
-                     */
-                    @Override
-                    public boolean onTouch(View view, MotionEvent event) {
-
-                        DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
-                        hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
-
-                        int x = (int) mapView.convertScreenToLayoutX(event.getRawX());
-                        int y = (int) mapView.convertScreenToLayoutY(event.getRawY());
-
-                        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-                            case MotionEvent.ACTION_DOWN:
-                                patchView = patchGraphPresenter.createPatch((String) view.getTag());
-                                if (patchView == null) {
-                                    return false;
-                                }
-                                ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
-
-                                ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
-                                mapLayout.addView(patchView, drawerLayoutParams);
-
-                                xDelta = drawerLayoutParams.width / 2;
-                                yDelta = drawerLayoutParams.height / 2;
-
-                                ConstraintSet constraintSet = new ConstraintSet();
-                                constraintSet.clone(mapLayout);
-                                constraintSet.connect(patchView.getId(), ConstraintSet.LEFT, R.id.map, ConstraintSet.LEFT, x - xDelta);
-                                constraintSet.connect(patchView.getId(), ConstraintSet.TOP, R.id.map, ConstraintSet.TOP, y - yDelta);
-                                constraintSet.applyTo(mapLayout);
-
-                                wireDrawer.bringToFront();
-                                break;
-                            case MotionEvent.ACTION_MOVE:
-                                if (patchView == null) {
-                                    return false;
-                                }
-                                patchView.movePatch(x, y, xDelta, yDelta);
-                                break;
-                            case MotionEvent.ACTION_UP:
-                                if (patchView == null) {
-                                    return false;
-                                }
-                                patchView.endMovePatch(x, y, event);
-                                break;
-                            default:
-                                break;
-                        }
-                        return true;
-                    }
-                };
+        View.OnTouchListener listener = new DragAndDropListener();
         patchGraphView.findViewById(R.id.menuButtonDragVCO).setOnTouchListener(listener);
         patchGraphView.findViewById(R.id.menuButtonDragVCA).setOnTouchListener(listener);
         patchGraphView.findViewById(R.id.menuButtonDragVCF).setOnTouchListener(listener);
@@ -251,9 +192,7 @@ public class PatchGraphFragment extends Fragment {
     }
 
     private void createEngineEvent() {
-
         patchGraphView.findViewById(R.id.menuButtonChangeEngine).setOnClickListener(
-
                 new View.OnClickListener() {
 
                     @Override
@@ -284,13 +223,11 @@ public class PatchGraphFragment extends Fragment {
     }
 
     private void createOptionsMenuEvent() {
-
         patchGraphView.findViewById(R.id.menuButtonOpenOptionsMenu).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        if (optionsMenuView.toogle()) {
+                        if (optionsMenuView.toggle()) {
                             view.setBackgroundResource(R.drawable.open_options_menu_on);
                         } else {
                             view.setBackgroundResource(R.drawable.open_options_menu_off);
@@ -301,7 +238,6 @@ public class PatchGraphFragment extends Fragment {
     }
 
     private void createDragMenuEvents() {
-
         dragMenuView.findViewById(R.id.menuButtonScrollLeft).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -310,7 +246,6 @@ public class PatchGraphFragment extends Fragment {
                     }
                 }
         );
-
         dragMenuView.findViewById(R.id.menuButtonScrollRight).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -319,7 +254,6 @@ public class PatchGraphFragment extends Fragment {
                     }
                 }
         );
-
         dragMenuView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -376,19 +310,26 @@ public class PatchGraphFragment extends Fragment {
         PatchView[] patchViews = patchGraphPresenter.load(context, filename);
         HashMap<Integer, Integer> patchToView = new HashMap<>();
 
-        PatchView patchView;
         DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
         int hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
         for (int i = 0; i < patchViews.length; i++) {
-            patchView = patchViews[i];
+            PatchView patchView = patchViews[i];
             patchView.setId(findUnusedId());
-            ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(), hardcodedSize * 4);
+            ConstraintLayout.LayoutParams drawerLayoutParams =
+                    new ConstraintLayout.LayoutParams(hardcodedSize * patchView.widthRatio(),
+                                                      hardcodedSize * 4);
             mapLayout.addView(patchView, drawerLayoutParams);
 
+            int leftMargin = (int) (patchView.getPatch().getPosX() * displayMetrics.widthPixels) -
+                             drawerLayoutParams.width / 2;
+            int topMargin = (int) (patchView.getPatch().getPosY() * displayMetrics.heightPixels) -
+                            drawerLayoutParams.height / 2;
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(mapLayout);
-            constraintSet.connect(patchView.getId(), ConstraintSet.LEFT, R.id.map, ConstraintSet.LEFT, (int) (patchView.getPatch().getPosX() * displayMetrics.widthPixels) - drawerLayoutParams.width / 2);
-            constraintSet.connect(patchView.getId(), ConstraintSet.TOP, R.id.map, ConstraintSet.TOP, (int) (patchView.getPatch().getPosY() * displayMetrics.heightPixels) - drawerLayoutParams.height / 2);
+            constraintSet.connect(patchView.getId(), ConstraintSet.LEFT, R.id.map,
+                                  ConstraintSet.LEFT, leftMargin);
+            constraintSet.connect(patchView.getId(), ConstraintSet.TOP, R.id.map,
+                                  ConstraintSet.TOP, topMargin);
             constraintSet.applyTo(mapLayout);
 
             patchToView.put(patchView.getPatchId(), i);
@@ -399,9 +340,7 @@ public class PatchGraphFragment extends Fragment {
         View start;
         View end;
 
-        for (int i = 0; i < patchViews.length; i++) {
-            patchView = patchViews[i];
-
+        for (PatchView patchView : patchViews) {
             for (Connection connection : patchView.getPatch().getOutputConnections()) {
                 processor.connect(connection);
                 start = patchView.getOutputs()[connection.getSourceOutlet()];
@@ -412,9 +351,86 @@ public class PatchGraphFragment extends Fragment {
         }
 
         wireDrawer.bringToFront();
-
         wireDrawer.reload(patchViews, displayMetrics.widthPixels, displayMetrics.heightPixels);
-
         wireDrawer.release();
+    }
+
+    private class DragAndDropListener implements View.OnTouchListener {
+        private int xDelta;
+        private int yDelta;
+
+        private PatchView patchView;
+
+        private int hardcodedSize = 150;
+
+        /**
+         * Detecta los eventos realizados por el usuario sobre los patches
+         *
+         * @param view la vista donde se esta
+         * @param event el evento detectado: ACTION_DOWN (toco la pantalla),
+         *              ACTION_MOVE (mueve el dedo por la pantalla),
+         *              ACTION_UP (dejo de tocar la pantalla)
+         * @return false (si no hay un patchView), true en caso contrario
+         */
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            view.performClick();
+
+            DisplayMetrics displayMetrics =
+                    PatchGraphFragment.this.getResources().getDisplayMetrics();
+            hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
+
+            int x = (int) mapView.convertScreenToLayoutX(event.getRawX());
+            int y = (int) mapView.convertScreenToLayoutY(event.getRawY());
+
+            return checkMotionEvents(view, event, x, y);
+        }
+
+        private boolean checkMotionEvents(View view, MotionEvent event, int x, int y) {
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_DOWN:
+                    patchView = patchGraphPresenter.createPatch((String) view.getTag());
+                    if (patchView == null) {
+                        return false;
+                    }
+                    doActionDown(x, y);
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (patchView == null) {
+                        return false;
+                    }
+                    patchView.movePatch(x, y, xDelta, yDelta);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (patchView == null) {
+                        return false;
+                    }
+                    patchView.endMovePatch(x, y, event);
+                    break;
+            }
+            return true;
+        }
+
+        private void doActionDown(int x, int y) {
+            ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(
+                    hardcodedSize * patchView.widthRatio(),
+                    hardcodedSize * 4
+            );
+            ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
+            mapLayout.addView(patchView, drawerLayoutParams);
+
+            xDelta = drawerLayoutParams.width / 2;
+            yDelta = drawerLayoutParams.height / 2;
+
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(mapLayout);
+            constraintSet.connect(patchView.getId(), ConstraintSet.LEFT, R.id.map,
+                                  ConstraintSet.LEFT, x - xDelta);
+            constraintSet.connect(patchView.getId(), ConstraintSet.TOP, R.id.map,
+                                  ConstraintSet.TOP, y - yDelta);
+            constraintSet.applyTo(mapLayout);
+
+            wireDrawer.bringToFront();
+        }
     }
 }

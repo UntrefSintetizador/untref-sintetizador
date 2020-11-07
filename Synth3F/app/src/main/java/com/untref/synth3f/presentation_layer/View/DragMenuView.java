@@ -3,10 +3,7 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.LinearLayout;
-
-import com.untref.synth3f.R;
 
 public class DragMenuView extends LinearLayout {
 
