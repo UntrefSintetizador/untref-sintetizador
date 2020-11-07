@@ -18,6 +18,9 @@ android:
 notifications:
   email: false
 
+before_script:
+  - cd Synth3F
+
 
 stages:
 
@@ -27,8 +30,7 @@ stages:
   - name: instrumented_test
     if: branch = master
   - before_script:
-    # Create and start emulator
-    - cd Synth3F
+    # Create and start emulato
     - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
     - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
