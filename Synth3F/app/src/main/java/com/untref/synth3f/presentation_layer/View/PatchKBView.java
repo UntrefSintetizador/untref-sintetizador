@@ -5,15 +5,17 @@ import android.graphics.Color;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
+import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchKBPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
 public class PatchKBView extends PatchView {
 
-
-    public PatchKBView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
-        super(context, wireDrawer, patchGraphPresenter, patch);
+    public PatchKBView(Context context, WireDrawer wireDrawer,
+                       PatchGraphPresenter patchGraphPresenter,
+                       PatchGraphFragment patchGraphFragment, Patch patch) {
+        super(context, wireDrawer, patchGraphPresenter, patchGraphFragment, patch);
     }
 
     @Override

@@ -48,12 +48,6 @@ public class PatchGraphFragment extends Fragment {
     private DragMenuView dragMenuView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.patchGraphPresenter = new PatchGraphPresenter(this, processor);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container,
@@ -73,6 +67,7 @@ public class PatchGraphFragment extends Fragment {
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
+        patchGraphPresenter = new PatchGraphPresenter(processor, mapView, wireDrawer, context);
         return patchGraphView;
     }
 
@@ -307,7 +302,7 @@ public class PatchGraphFragment extends Fragment {
             mapLayout.removeViewAt(0);
         }
 
-        PatchView[] patchViews = patchGraphPresenter.load(context, filename);
+        PatchView[] patchViews = patchGraphPresenter.load(context, filename, this);
         HashMap<Integer, Integer> patchToView = new HashMap<>();
 
         DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
@@ -400,7 +395,8 @@ public class PatchGraphFragment extends Fragment {
         private boolean checkMotionEvents(View view, MotionEvent event, int x, int y) {
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
-                    patchView = patchGraphPresenter.createPatch((String) view.getTag());
+                    patchView = patchGraphPresenter.createPatch((String) view.getTag(),
+                                                                PatchGraphFragment.this);
                     if (patchView == null) {
                         return false;
                     }
