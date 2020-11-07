@@ -13,7 +13,7 @@ public class DragMenuView extends LinearLayout {
     private static final int PAGE_SIZE = 4;
     private int firstButtonIndex = 2;
     private boolean opened;
-    private PatchesView patchesView;
+    private DragMenu dragMenu;
 
     public DragMenuView(Context context) {
         super(context);
@@ -28,13 +28,16 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void init() {
-        patchesView = findViewById(R.id.patches_view);
-        patchesView.init();
-        close();
+        int[] viewVisibilities = new int[getChildCount()];
+        for (int i = 0; i < getChildCount(); i++) {
+            viewVisibilities[i] = GONE;
+        }
+        dragMenu = new DragMenu(viewVisibilities, PAGE_SIZE, VISIBLE, GONE);
+        updateVisibility();
     }
 
     public void scrollLeft() {
-        patchesView.scrollLeft();
+        dragMenu.scrollLeft();
         /*firstButtonIndex -= PAGE_SIZE;
 
         if (firstButtonIndex < 2) {
@@ -45,7 +48,7 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void scrollRight() {
-        patchesView.scrollRight();
+        dragMenu.scrollRight();
         /*firstButtonIndex += PAGE_SIZE;
 
         if (firstButtonIndex > getChildCount() - 2) {
@@ -56,40 +59,28 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void toogle() {
-
         if (opened) {
             close();
-
         } else {
             open();
         }
+        updateVisibility();
     }
 
     private void updateVisibility() {
-        int count = getChildCount() - 1;
-        int index = firstButtonIndex;
-
-        for (int i = 2; i < count; i++) {
-            getChildAt(i).setVisibility(GONE);
-        }
-
-        for (int i = 0; i < PAGE_SIZE; i++) {
-            getChildAt(index).setVisibility(VISIBLE);
-            index++;
-
-            if (index > getChildCount() - 2) {
-                index = 2;
-            }
+        for (int i = 0; i < getChildCount(); i++) {
+            int viewVisibility = dragMenu.getVisibility(i);
+            getChildAt(i).setVisibility(viewVisibility);
         }
     }
 
     private void close() {
-        setButtonsVisibility(GONE);
+        dragMenu.close();
         opened = false;
     }
 
     private void open() {
-        setButtonsVisibility(VISIBLE);
+        dragMenu.open();
         opened = true;
     }
 
