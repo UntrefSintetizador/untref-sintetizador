@@ -307,14 +307,6 @@ public class PatchGraphFragment extends Fragment {
 
         DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
         int hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
-        placePatches(mapLayout, patchViews, patchToView, displayMetrics, hardcodedSize);
-
-        reconnectPatches(patchViews, patchToView, displayMetrics);
-    }
-
-    private void placePatches(ConstraintLayout mapLayout, PatchView[] patchViews,
-                              HashMap<Integer, Integer> patchToView, DisplayMetrics displayMetrics,
-                              int hardcodedSize) {
         for (int i = 0; i < patchViews.length; i++) {
             PatchView patchView = patchViews[i];
             patchView.setId(findUnusedId());
@@ -337,11 +329,9 @@ public class PatchGraphFragment extends Fragment {
 
             patchToView.put(patchView.getPatchId(), i);
         }
-    }
 
-    private void reconnectPatches(PatchView[] patchViews, HashMap<Integer, Integer> patchToView,
-                                  DisplayMetrics displayMetrics) {
         wireDrawer.clear();
+
         View start;
         View end;
 
@@ -349,8 +339,7 @@ public class PatchGraphFragment extends Fragment {
             for (Connection connection : patchView.getPatch().getOutputConnections()) {
                 processor.connect(connection);
                 start = patchView.getOutputs()[connection.getSourceOutlet()];
-                int targetPatchView = patchToView.get(connection.getTargetPatch());
-                end = patchViews[targetPatchView].getInputs()[connection.getTargetInlet()];
+                end = patchViews[patchToView.get(connection.getTargetPatch())].getInputs()[connection.getTargetInlet()];
                 wireDrawer.startDraw(patchView, patchView.getColor());
                 wireDrawer.addConnection(connection, start, end);
             }
