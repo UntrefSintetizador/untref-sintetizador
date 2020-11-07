@@ -19,7 +19,16 @@ public class DragMenu {
         numberOfButtonsInPages = viewVisibilities.length - 1;
     }
 
-    public void scrollLeft() {}
+    public void scrollLeft() {
+        int previousPageFirstIndex = pageFirstIndex - pageSize;
+        for (int i = pageFirstIndex; i < pageFirstIndex + pageSize; i++) {
+            viewVisibilities[i] = gone;
+        }
+        for (int i = previousPageFirstIndex; i < previousPageFirstIndex + pageSize; i++) {
+            viewVisibilities[i] = visible;
+        }
+        pageFirstIndex = previousPageFirstIndex;
+    }
 
     public void scrollRight() {
         int nextPageFirstIndex = pageFirstIndex + pageSize;
