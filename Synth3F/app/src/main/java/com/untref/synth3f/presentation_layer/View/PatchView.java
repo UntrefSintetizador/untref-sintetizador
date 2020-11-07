@@ -40,12 +40,10 @@ public abstract class PatchView extends LinearLayout {
 
     private Patch patch;
 
-    public PatchView(Context context, WireDrawer wireDrawer,
-                     PatchGraphPresenter patchGraphPresenter,
-                     PatchGraphFragment patchGraphFragment, Patch patch) {
+    public PatchView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(context);
         patchPresenter = createPresenter(patchGraphPresenter, patch);
-        this.patchGraphFragment = patchGraphFragment;
+        patchGraphFragment = patchGraphPresenter.getPatchGraphFragment();
         this.patch = patch;
         initialize();
         drawPatch(context);

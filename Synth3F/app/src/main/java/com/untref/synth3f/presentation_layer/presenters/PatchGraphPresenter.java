@@ -21,7 +21,6 @@ import com.untref.synth3f.entities.SHPatch;
 import com.untref.synth3f.entities.VCAPatch;
 import com.untref.synth3f.entities.VCFPatch;
 import com.untref.synth3f.entities.VCOPatch;
-import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.PatchDACView;
 import com.untref.synth3f.presentation_layer.View.PatchEGView;
 import com.untref.synth3f.presentation_layer.View.PatchKBView;
@@ -33,28 +32,22 @@ import com.untref.synth3f.presentation_layer.View.PatchVCAView;
 import com.untref.synth3f.presentation_layer.View.PatchVCFView;
 import com.untref.synth3f.presentation_layer.View.PatchVCOView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
-import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
 import java.util.List;
 
 public class PatchGraphPresenter {
 
-    private final MapView mapView;
-    private final WireDrawer wireDrawer;
-    private final Context context;
+    private PatchGraphFragment patchGraphFragment;
     private IProcessor processor;
     private PatchGraphManager patchGraphManager;
 
     private int dragPatchOrigin;
     private View dragConnectorOrigin;
 
-    public PatchGraphPresenter(IProcessor processor, MapView mapView, WireDrawer wireDrawer,
-                               Context context) {
+    public PatchGraphPresenter(PatchGraphFragment patchGraphFragment, IProcessor processor) {
+        this.patchGraphFragment = patchGraphFragment;
         this.processor = processor;
-        this.mapView = mapView;
-        this.wireDrawer = wireDrawer;
-        this.context = context;
         this.patchGraphManager = new PatchGraphManager();
     }
 
@@ -62,7 +55,11 @@ public class PatchGraphPresenter {
         return processor;
     }
 
-    public PatchView createPatch(String type, PatchGraphFragment patchGraphFragment) {
+    public PatchGraphFragment getPatchGraphFragment() {
+        return patchGraphFragment;
+    }
+
+    public PatchView createPatch(String type) {
         Patch patch;
         switch (type) {
             case "vco":
@@ -99,7 +96,7 @@ public class PatchGraphPresenter {
                 patch = new VCOPatch();
                 break;
         }
-        PatchView patchView = createPatchView(patch, patchGraphFragment);
+        PatchView patchView = createPatchView(patch);
         patchGraphManager.addPatch(patch);
         int newId = patchGraphFragment.findUnusedId();
         patchView.setId(newId);
@@ -116,8 +113,8 @@ public class PatchGraphPresenter {
     public void tryConnect(int x, int y, boolean isInlet) {
         Rect bounds;
         int[] location;
-        ConstraintLayout map = (ConstraintLayout) mapView.getChildAt(0);
-        float scale = mapView.getScale();
+        ConstraintLayout map = (ConstraintLayout) patchGraphFragment.getMapView().getChildAt(0);
+        float scale = patchGraphFragment.getMapView().getScale();
         for (int i = 0; i < map.getChildCount() - 1; i++) {
             bounds = new Rect();
             PatchView patch = (PatchView) map.getChildAt(i);
@@ -139,10 +136,10 @@ public class PatchGraphPresenter {
                         Connection connection;
                         if (isInlet) {
                             connection = patchGraphManager.connect(patch.getPatchId(), (int) targetConnector.getTag(), dragPatchOrigin, (int) dragConnectorOrigin.getTag());
-                            wireDrawer.addConnection(connection, targetConnector, dragConnectorOrigin);
+                            patchGraphFragment.getWireDrawer().addConnection(connection, targetConnector, dragConnectorOrigin);
                         } else {
                             connection = patchGraphManager.connect(dragPatchOrigin, (int) dragConnectorOrigin.getTag(), patch.getPatchId(), (int) targetConnector.getTag());
-                            wireDrawer.addConnection(connection, dragConnectorOrigin, targetConnector);
+                            patchGraphFragment.getWireDrawer().addConnection(connection, dragConnectorOrigin, targetConnector);
                         }
                         processor.connect(connection);
                     }
@@ -161,7 +158,7 @@ public class PatchGraphPresenter {
                 Connection connection = connectionList.get(i);
                 if (connection.getTargetInlet() == connectorId) {
                     patchGraphManager.disconnect(connection.getId());
-                    wireDrawer.removeConnection(connection);
+                    patchGraphFragment.getWireDrawer().removeConnection(connection);
                     processor.disconnect(connection);
                     i--;
                 }
@@ -172,7 +169,7 @@ public class PatchGraphPresenter {
                 Connection connection = connectionList.get(i);
                 if (connection.getSourceOutlet() == connectorId) {
                     patchGraphManager.disconnect(connection.getId());
-                    wireDrawer.removeConnection(connection);
+                    patchGraphFragment.getWireDrawer().removeConnection(connection);
                     processor.disconnect(connection);
                     i--;
                 }
@@ -182,7 +179,7 @@ public class PatchGraphPresenter {
 
     public Patch delete(int patchId) {
         Patch patch = patchGraphManager.removePatch(patchId);
-        wireDrawer.removePatch(patch);
+        patchGraphFragment.getWireDrawer().removePatch(patch);
         return patch;
     }
 
@@ -192,7 +189,7 @@ public class PatchGraphPresenter {
         processor.clear(patches);
         Patch[] patchesToRemove = patchGraphManager.removeAllPatches();
         for (Patch patch: patchesToRemove) {
-            wireDrawer.removePatch(patch);
+            patchGraphFragment.getWireDrawer().removePatch(patch);
             this.processor.delete(patch);
         }
     }
@@ -202,8 +199,7 @@ public class PatchGraphPresenter {
         jsonSerializer.save(context, patchGraphManager, filename);
     }
 
-    public PatchView[] load(Context context, String filename,
-                            PatchGraphFragment patchGraphFragment) {
+    public PatchView[] load(Context context, String filename) {
         JSONSerializer jsonSerializer = new JSONSerializer();
         Patch[] patches = new Patch[this.patchGraphManager.getPatches().size()];
         this.patchGraphManager.getPatches().toArray(patches);
@@ -215,7 +211,7 @@ public class PatchGraphPresenter {
         PatchView[] patchViews = new PatchView[patches.length];
         for (int i = 0; i < patches.length; i++) {
             Patch patch = patches[i];
-            PatchView patchView = createPatchView(patch, patchGraphFragment);
+            PatchView patchView = createPatchView(patch);
             processor.createPatch(patch.getTypeName(), patch.getId());
             patch.initialize(processor);
             patchViews[i] = patchView;
@@ -229,52 +225,41 @@ public class PatchGraphPresenter {
         return position;
     }
 
-    private PatchView createPatchView(Patch patch, PatchGraphFragment patchGraphFragment) {
+    private PatchView createPatchView(Patch patch) {
         PatchView patchView;
         switch (patch.getTypeName()) {
             case "vco":
-                patchView = new PatchVCOView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "vca":
-                patchView = new PatchVCAView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchVCAView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "vcf":
-                patchView = new PatchVCFView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchVCFView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "eg":
-                patchView = new PatchEGView(context, wireDrawer, this,
-                                            patchGraphFragment, patch);
+                patchView = new PatchEGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "dac":
-                patchView = new PatchDACView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchDACView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "kb":
-                patchView = new PatchKBView(context, wireDrawer, this,
-                                            patchGraphFragment, patch);
+                patchView = new PatchKBView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "lfo":
-                patchView = new PatchLFOView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchLFOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "mix":
-                patchView = new PatchMIXView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchMIXView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "ng":
-                patchView = new PatchNGView(context, wireDrawer, this,
-                                            patchGraphFragment, patch);
+                patchView = new PatchNGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             case "sh":
-                patchView = new PatchSHView(context, wireDrawer, this,
-                                            patchGraphFragment, patch);
+                patchView = new PatchSHView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
             default:
-                patchView = new PatchVCOView(context, wireDrawer, this,
-                                             patchGraphFragment, patch);
+                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
         }
         return patchView;

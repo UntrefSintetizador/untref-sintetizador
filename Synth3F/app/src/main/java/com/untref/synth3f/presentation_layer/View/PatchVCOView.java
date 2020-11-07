@@ -5,17 +5,15 @@ import android.graphics.Color;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
-import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 import com.untref.synth3f.presentation_layer.presenters.PatchVCOPresenter;
 
 public class PatchVCOView extends PatchView {
 
-    public PatchVCOView(Context context, WireDrawer wireDrawer,
-                        PatchGraphPresenter patchGraphPresenter,
-                        PatchGraphFragment patchGraphFragment, Patch patch) {
-        super(context, wireDrawer, patchGraphPresenter, patchGraphFragment, patch);
+
+    public PatchVCOView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+        super(context, wireDrawer, patchGraphPresenter, patch);
     }
 
     @Override
