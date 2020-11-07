@@ -2,7 +2,6 @@ package com.untref.synth3f;
 
 import com.untref.synth3f.presentation_layer.View.DragMenu;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,97 +11,84 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DragMenuTest {
 
-    private int visible;
-    private int gone;
-    private int pageSize;
-
-    @Before
-    public void setUp() {
-        visible = 1;
-        gone = 0;
-        pageSize = 4;
-    }
+    private static final int VISIBLE = 0;
+    private static final int GONE = 1;
+    private final int pageSize = 2;
 
     @Test
     public void whenCreatedFirstButtonIsVisible() {
-        int[] visibilities = new int[] {gone, gone};
+        int[] visibilities = new int[] {GONE, GONE};
         int firstButtonIndex = 0;
 
-        DragMenu dragMenu = new DragMenu(visibilities, pageSize, visible, gone);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
         int firstButton = dragMenu.getVisibility(firstButtonIndex);
 
-        assertThat(firstButton, is(visible));
+        assertThat(firstButton, is(VISIBLE));
     }
 
     @Test
     public void openDragMenuShowsSecondAndLastButton() {
         int numberOfButtons = 10;
         int[] visibilities = new int[numberOfButtons];
-        Arrays.fill(visibilities, gone);
-        DragMenu dragMenu = new DragMenu(visibilities, pageSize, visible, gone);
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
 
         dragMenu.open();
         int secondButton = dragMenu.getVisibility(1);
         int lastButton = dragMenu.getVisibility(-1);
 
-        assertThat(secondButton, is(visible));
-        assertThat(lastButton, is(visible));
+        assertThat(secondButton, is(VISIBLE));
+        assertThat(lastButton, is(VISIBLE));
     }
 
     @Test
     public void closeDragMenuHidesSecondAndLastButton() {
         int numberOfButtons = 10;
         int[] visibilities = new int[numberOfButtons];
-        Arrays.fill(visibilities, gone);
-        DragMenu dragMenu = new DragMenu(visibilities, pageSize, visible, gone);
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
 
         dragMenu.open();
         dragMenu.close();
         int secondButton = dragMenu.getVisibility(1);
         int lastButton = dragMenu.getVisibility(-1);
 
-        assertThat(secondButton, is(gone));
-        assertThat(lastButton, is(gone));
+        assertThat(secondButton, is(GONE));
+        assertThat(lastButton, is(GONE));
     }
 
     @Test
     public void openDragMenuShowsButtonsThatFitInAPage() {
-        int numberOfButtons = 8;
+        int numberOfButtons = 6;
         int[] visibilities = new int[numberOfButtons];
-        Arrays.fill(visibilities, gone);
-        DragMenu dragMenu = new DragMenu(visibilities, pageSize, visible, gone);
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
 
         dragMenu.open();
-        int firstButtonInPage = dragMenu.getVisibility(2);
-        int secondButtonInPage = dragMenu.getVisibility(3);
-        int thirdButtonInPage = dragMenu.getVisibility(4);
-        int fourthButtonInPage = dragMenu.getVisibility(5);
-        int fifthButtonInPage = dragMenu.getVisibility(6);
+        int firstButtonInCurrentPage = dragMenu.getVisibility(2);
+        int secondButtonInCurrentPage = dragMenu.getVisibility(3);
+        int firstButtonInNextPage = dragMenu.getVisibility(4);
 
-        assertThat(firstButtonInPage, is(visible));
-        assertThat(secondButtonInPage, is(visible));
-        assertThat(thirdButtonInPage, is(visible));
-        assertThat(fourthButtonInPage, is(visible));
-        assertThat(fifthButtonInPage, is(gone));
+        assertThat(firstButtonInCurrentPage, is(VISIBLE));
+        assertThat(secondButtonInCurrentPage, is(VISIBLE));
+        assertThat(firstButtonInNextPage, is(GONE));
     }
 
     @Test
-    public void openDragMenuHidesButtonsThatFitInAPage() {
-        int numberOfButtons = 8;
+    public void closeDragMenuHidesButtonsThatFitInAPage() {
+        int numberOfButtons = 6;
         int[] visibilities = new int[numberOfButtons];
-        Arrays.fill(visibilities, gone);
-        DragMenu dragMenu = new DragMenu(visibilities, pageSize, visible, gone);
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
 
         dragMenu.open();
         dragMenu.close();
-        int firstButtonInPage = dragMenu.getVisibility(2);
-        int secondButtonInPage = dragMenu.getVisibility(3);
-        int thirdButtonInPage = dragMenu.getVisibility(4);
-        int fourthButtonInPage = dragMenu.getVisibility(5);
+        int firstButtonInCurrentPage = dragMenu.getVisibility(2);
+        int secondButtonInCurrentPage = dragMenu.getVisibility(3);
+        int firstButtonInNextPage = dragMenu.getVisibility(4);
 
-        assertThat(firstButtonInPage, is(gone));
-        assertThat(secondButtonInPage, is(gone));
-        assertThat(thirdButtonInPage, is(gone));
-        assertThat(fourthButtonInPage, is(gone));
+        assertThat(firstButtonInCurrentPage, is(GONE));
+        assertThat(secondButtonInCurrentPage, is(GONE));
+        assertThat(firstButtonInNextPage, is(GONE));
     }
 }
