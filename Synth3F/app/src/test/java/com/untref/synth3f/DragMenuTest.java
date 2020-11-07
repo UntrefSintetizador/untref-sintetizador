@@ -91,4 +91,24 @@ public class DragMenuTest {
         assertThat(secondButtonInCurrentPage, is(GONE));
         assertThat(firstButtonInNextPage, is(GONE));
     }
+
+    @Test
+    public void scrollRightOnceHidesCurrentPageAndShowsNext() {
+        int numberOfButtons = 7;
+        int[] visibilities = new int[numberOfButtons];
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
+
+        dragMenu.open();
+        dragMenu.scrollRight();
+        int firstButtonInCurrentPage = dragMenu.getVisibility(2);
+        int secondButtonInCurrentPage = dragMenu.getVisibility(3);
+        int firstButtonInNextPage = dragMenu.getVisibility(4);
+        int secondButtonInNextPage = dragMenu.getVisibility(5);
+
+        assertThat(firstButtonInCurrentPage, is(GONE));
+        assertThat(secondButtonInCurrentPage, is(GONE));
+        assertThat(firstButtonInNextPage, is(VISIBLE));
+        assertThat(secondButtonInNextPage, is(VISIBLE));
+    }
 }

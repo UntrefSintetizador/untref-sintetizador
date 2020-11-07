@@ -22,30 +22,15 @@ public class DragMenu {
         this.viewVisibilities[0] = visible;
     }
 
-    public void init() {
-        scroll(0);
-    }
-
-    public void scrollLeft() {
-        scroll(-1);
-    }
+    public void scrollLeft() {}
 
     public void scrollRight() {
-        scroll(1);
-    }
-
-    private void scroll(int delta) {
-        currentPageIndex = (currentPageIndex + delta) % pages.length;
-        if (currentPageIndex < 0) {
-            currentPageIndex = pages.length - 1;
+        for (int i = 2; i < 2 + pageSize; i++) {
+            viewVisibilities[i] = gone;
         }
-        int[] currentChildrenIndex = pages[currentPageIndex];
-//        for (int i = 0; i < getChildCount(); i++) {
-//            getChildAt(i).setVisibility(GONE);
-//        }
-//        for (int i = 0; i < currentChildrenIndex.length; i++) {
-//            getChildAt(currentChildrenIndex[i]).setVisibility(VISIBLE);
-//        }
+        for (int i = 2 + pageSize; i < Math.min(2 + pageSize * 2, viewVisibilities.length); i++) {
+            viewVisibilities[i] = visible;
+        }
     }
 
     public int getVisibility(int viewIndex) {
