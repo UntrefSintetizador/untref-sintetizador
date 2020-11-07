@@ -21,6 +21,9 @@ public class DragMenu {
 
     public void scrollLeft() {
         int previousPageFirstIndex = pageFirstIndex - pageSize;
+        if (previousPageFirstIndex < FIRST_PAGE_FIRST_INDEX) {
+            previousPageFirstIndex = numberOfButtonsInPages - pageSize;
+        }
         for (int i = pageFirstIndex; i < pageFirstIndex + pageSize; i++) {
             viewVisibilities[i] = gone;
         }

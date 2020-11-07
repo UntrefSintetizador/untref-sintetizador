@@ -234,4 +234,23 @@ public class DragMenuTest {
         assertThat(secondButtonInSecondPage, is(GONE));
     }
 
+    @Test
+    public void scrollLeftFirstPageGoesToLastPage() {
+        int numberOfButtons = 9;
+        int[] visibilities = new int[numberOfButtons];
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
+
+        dragMenu.open();
+        dragMenu.scrollLeft();
+        int firstButtonInFirstPage = dragMenu.getVisibility(2);
+        int secondButtonInFirstPage = dragMenu.getVisibility(3);
+        int firstButtonInLastPage = dragMenu.getVisibility(6);
+        int secondButtonInLastPage = dragMenu.getVisibility(7);
+
+        assertThat(firstButtonInFirstPage, is(GONE));
+        assertThat(secondButtonInFirstPage, is(GONE));
+        assertThat(firstButtonInLastPage, is(VISIBLE));
+        assertThat(secondButtonInLastPage, is(VISIBLE));
+    }
 }
