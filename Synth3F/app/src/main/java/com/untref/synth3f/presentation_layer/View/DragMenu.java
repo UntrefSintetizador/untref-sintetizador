@@ -2,11 +2,12 @@ package com.untref.synth3f.presentation_layer.View;
 
 public class DragMenu {
 
+    private static final int FIRST_PAGE_FIRST_INDEX = 2;
     private final int[] viewVisibilities;
     private final int visible;
     private final int gone;
     private final int pageSize;
-    private int pageFirstIndex;
+    private int pageFirstIndex = FIRST_PAGE_FIRST_INDEX;
     private int numberOfButtonsInPages;
 
     public DragMenu(int[] viewVisibilities, int pageSize, int visible, int gone) {
@@ -15,7 +16,6 @@ public class DragMenu {
         this.visible = visible;
         this.gone = gone;
         this.viewVisibilities[0] = visible;
-        pageFirstIndex = 2;
         numberOfButtonsInPages = viewVisibilities.length - 1;
     }
 
@@ -24,7 +24,7 @@ public class DragMenu {
     public void scrollRight() {
         int nextPageFirstIndex = pageFirstIndex + pageSize;
         if (nextPageFirstIndex >= numberOfButtonsInPages) {
-            nextPageFirstIndex = 2;
+            nextPageFirstIndex = FIRST_PAGE_FIRST_INDEX;
         }
         int nextPageLastIndex = Math.min(nextPageFirstIndex + pageSize, numberOfButtonsInPages);
         for (int i = pageFirstIndex; i < pageFirstIndex + pageSize; i++) {
@@ -54,7 +54,7 @@ public class DragMenu {
     public void close() {
         viewVisibilities[1] = gone;
         viewVisibilities[viewVisibilities.length - 1] = gone;
-        for (int i = 2; i < numberOfButtonsInPages; i++) {
+        for (int i = FIRST_PAGE_FIRST_INDEX; i < numberOfButtonsInPages; i++) {
             viewVisibilities[i] = gone;
         }
     }
