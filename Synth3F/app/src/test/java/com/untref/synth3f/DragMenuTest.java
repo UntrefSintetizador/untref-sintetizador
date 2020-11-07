@@ -111,4 +111,29 @@ public class DragMenuTest {
         assertThat(firstButtonInNextPage, is(VISIBLE));
         assertThat(secondButtonInNextPage, is(VISIBLE));
     }
+
+    @Test
+    public void scrollRightTwiceAdvancesTwoPages() {
+        int numberOfButtons = 9;
+        int[] visibilities = new int[numberOfButtons];
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
+
+        dragMenu.open();
+        dragMenu.scrollRight();
+        dragMenu.scrollRight();
+        int firstButtonInFirstPage = dragMenu.getVisibility(2);
+        int secondButtonInFirstPage = dragMenu.getVisibility(3);
+        int firstButtonInSecondPage = dragMenu.getVisibility(4);
+        int secondButtonInSecondPage = dragMenu.getVisibility(5);
+        int firstButtonInThirdPage = dragMenu.getVisibility(6);
+        int secondButtonInThirdPage = dragMenu.getVisibility(7);
+
+        assertThat(firstButtonInFirstPage, is(GONE));
+        assertThat(secondButtonInFirstPage, is(GONE));
+        assertThat(firstButtonInSecondPage, is(GONE));
+        assertThat(secondButtonInSecondPage, is(GONE));
+        assertThat(firstButtonInThirdPage, is(VISIBLE));
+        assertThat(secondButtonInThirdPage, is(VISIBLE));
+    }
 }

@@ -6,13 +6,7 @@ public class DragMenu {
     private final int visible;
     private final int gone;
     private final int pageSize;
-    private int currentPageIndex = 0;
-
-    private int[][] pages = new int[][] {
-            {0, 1, 2, 3},
-            {4, 5, 6, 7},
-            {8, 9, 10, 11}
-    };
+    private int pageFirstIndex;
 
     public DragMenu(int[] viewVisibilities, int pageSize, int visible, int gone) {
         this.viewVisibilities = viewVisibilities.clone();
@@ -20,17 +14,21 @@ public class DragMenu {
         this.visible = visible;
         this.gone = gone;
         this.viewVisibilities[0] = visible;
+        pageFirstIndex = 2;
     }
 
     public void scrollLeft() {}
 
     public void scrollRight() {
-        for (int i = 2; i < 2 + pageSize; i++) {
+        int nextPageFirstIndex = pageFirstIndex + pageSize;
+        int nextPageLastIndex = Math.min(nextPageFirstIndex + pageSize, viewVisibilities.length);
+        for (int i = pageFirstIndex; i < pageFirstIndex + pageSize; i++) {
             viewVisibilities[i] = gone;
         }
-        for (int i = 2 + pageSize; i < Math.min(2 + pageSize * 2, viewVisibilities.length); i++) {
+        for (int i = nextPageFirstIndex; i < nextPageLastIndex; i++) {
             viewVisibilities[i] = visible;
         }
+        pageFirstIndex = nextPageFirstIndex;
     }
 
     public int getVisibility(int viewIndex) {
