@@ -24,4 +24,4 @@ jobs:
     - name: Build with Gradle
       run: cd Synth3F && ./gradlew build
     - name: Run local unit tests
-      run: ./gradlew test
+      run: cd Synth3F && ./gradlew test
