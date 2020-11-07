@@ -1,15 +1,11 @@
 package com.untref.synth3f.presentation_layer.View;
 
-import android.content.Context;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.widget.LinearLayout;
-
 public class DragMenu {
 
-    private final int[] viewVisibilites;
+    private final int[] viewVisibilities;
     private final int visible;
     private final int gone;
+    private final int pageSize;
     private int currentPageIndex = 0;
 
     private int[][] pages = new int[][] {
@@ -18,11 +14,12 @@ public class DragMenu {
             {8, 9, 10, 11}
     };
 
-    public DragMenu(int[] viewVisibilities, int visible, int gone) {
-        this.viewVisibilites = viewVisibilities.clone();
+    public DragMenu(int[] viewVisibilities, int pageSize, int visible, int gone) {
+        this.viewVisibilities = viewVisibilities.clone();
+        this.pageSize = pageSize;
         this.visible = visible;
         this.gone = gone;
-        this.viewVisibilites[0] = visible;
+        this.viewVisibilities[0] = visible;
     }
 
     public void init() {
@@ -53,18 +50,21 @@ public class DragMenu {
 
     public int getVisibility(int viewIndex) {
         if (viewIndex < 0) {
-            viewIndex = viewVisibilites.length + viewIndex;
+            viewIndex = viewVisibilities.length + viewIndex;
         }
-        return viewVisibilites[viewIndex];
+        return viewVisibilities[viewIndex];
     }
 
     public void open() {
-        viewVisibilites[1] = visible;
-        viewVisibilites[viewVisibilites.length - 1] = visible;
+        viewVisibilities[1] = visible;
+        viewVisibilities[viewVisibilities.length - 1] = visible;
+        for (int i = 2; i < 2 + pageSize; i++) {
+            viewVisibilities[i] = visible;
+        }
     }
 
     public void close() {
-        viewVisibilites[1] = gone;
-        viewVisibilites[viewVisibilites.length - 1] = gone;
+        viewVisibilities[1] = gone;
+        viewVisibilities[viewVisibilities.length - 1] = gone;
     }
 }
