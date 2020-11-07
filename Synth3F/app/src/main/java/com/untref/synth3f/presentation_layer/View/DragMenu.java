@@ -20,8 +20,9 @@ public class DragMenu {
     public void scrollLeft() {}
 
     public void scrollRight() {
-        int nextPageFirstIndex = pageFirstIndex + pageSize;
-        int nextPageLastIndex = Math.min(nextPageFirstIndex + pageSize, viewVisibilities.length);
+        int numberOfButtonsInPages = viewVisibilities.length - 1;
+        int nextPageFirstIndex = (pageFirstIndex + pageSize) % numberOfButtonsInPages;
+        int nextPageLastIndex = Math.min(nextPageFirstIndex + pageSize, numberOfButtonsInPages);
         for (int i = pageFirstIndex; i < pageFirstIndex + pageSize; i++) {
             viewVisibilities[i] = gone;
         }
