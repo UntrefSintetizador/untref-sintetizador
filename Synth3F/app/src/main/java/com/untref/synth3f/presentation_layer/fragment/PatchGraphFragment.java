@@ -324,7 +324,7 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dragMenuView.toogle();
+                        dragMenuView.toggle();
                     }
                 }
         );
