@@ -19,6 +19,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Install NDK
+      run: sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;21.3.6113669" --sdk_root=${ANDROID_SDK_ROOT}
     - name: Build with Gradle
       run: cd Synth3F && ./gradlew build
     - name: Run local unit tests
