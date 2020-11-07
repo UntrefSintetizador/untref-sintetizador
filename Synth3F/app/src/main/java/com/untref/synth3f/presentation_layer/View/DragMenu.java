@@ -7,6 +7,7 @@ public class DragMenu {
     private final int gone;
     private final int pageSize;
     private int pageFirstIndex;
+    private int numberOfButtonsInPages;
 
     public DragMenu(int[] viewVisibilities, int pageSize, int visible, int gone) {
         this.viewVisibilities = viewVisibilities.clone();
@@ -15,12 +16,12 @@ public class DragMenu {
         this.gone = gone;
         this.viewVisibilities[0] = visible;
         pageFirstIndex = 2;
+        numberOfButtonsInPages = viewVisibilities.length - 1;
     }
 
     public void scrollLeft() {}
 
     public void scrollRight() {
-        int numberOfButtonsInPages = viewVisibilities.length - 1;
         int nextPageFirstIndex = pageFirstIndex + pageSize;
         if (nextPageFirstIndex >= numberOfButtonsInPages) {
             nextPageFirstIndex = 2;
@@ -53,7 +54,7 @@ public class DragMenu {
     public void close() {
         viewVisibilities[1] = gone;
         viewVisibilities[viewVisibilities.length - 1] = gone;
-        for (int i = 2; i < 2 + pageSize; i++) {
+        for (int i = 2; i < numberOfButtonsInPages; i++) {
             viewVisibilities[i] = gone;
         }
     }
