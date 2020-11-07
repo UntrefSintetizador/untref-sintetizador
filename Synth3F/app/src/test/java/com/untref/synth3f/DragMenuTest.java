@@ -194,4 +194,22 @@ public class DragMenuTest {
         assertThat(firstButtonInSecondPage, is(GONE));
         assertThat(secondButtonInSecondPage, is(GONE));
     }
+
+    @Test
+    public void reopenDragMenuShowsButtonsInLastPageShown() {
+        int numberOfButtons = 7;
+        int[] visibilities = new int[numberOfButtons];
+        Arrays.fill(visibilities, GONE);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, VISIBLE, GONE);
+
+        dragMenu.open();
+        dragMenu.scrollRight();
+        dragMenu.close();
+        dragMenu.open();
+        int firstButtonInSecondPage = dragMenu.getVisibility(4);
+        int secondButtonInSecondPage = dragMenu.getVisibility(5);
+
+        assertThat(firstButtonInSecondPage, is(VISIBLE));
+        assertThat(secondButtonInSecondPage, is(VISIBLE));
+    }
 }

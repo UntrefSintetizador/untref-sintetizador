@@ -46,7 +46,7 @@ public class DragMenu {
     public void open() {
         viewVisibilities[1] = visible;
         viewVisibilities[viewVisibilities.length - 1] = visible;
-        for (int i = 2; i < 2 + pageSize; i++) {
+        for (int i = pageFirstIndex; i < pageFirstIndex + pageSize; i++) {
             viewVisibilities[i] = visible;
         }
     }
