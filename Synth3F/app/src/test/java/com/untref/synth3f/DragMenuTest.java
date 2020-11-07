@@ -85,4 +85,24 @@ public class DragMenuTest {
         assertThat(fourthButtonInPage, is(visible));
         assertThat(fifthButtonInPage, is(gone));
     }
+
+    @Test
+    public void openDragMenuHidesButtonsThatFitInAPage() {
+        int numberOfButtons = 8;
+        int[] visibilities = new int[numberOfButtons];
+        Arrays.fill(visibilities, gone);
+        DragMenu dragMenu = new DragMenu(visibilities, pageSize, visible, gone);
+
+        dragMenu.open();
+        dragMenu.close();
+        int firstButtonInPage = dragMenu.getVisibility(2);
+        int secondButtonInPage = dragMenu.getVisibility(3);
+        int thirdButtonInPage = dragMenu.getVisibility(4);
+        int fourthButtonInPage = dragMenu.getVisibility(5);
+
+        assertThat(firstButtonInPage, is(gone));
+        assertThat(secondButtonInPage, is(gone));
+        assertThat(thirdButtonInPage, is(gone));
+        assertThat(fourthButtonInPage, is(gone));
+    }
 }

@@ -66,5 +66,8 @@ public class DragMenu {
     public void close() {
         viewVisibilities[1] = gone;
         viewVisibilities[viewVisibilities.length - 1] = gone;
+        for (int i = 2; i < 2 + pageSize; i++) {
+            viewVisibilities[i] = gone;
+        }
     }
 }

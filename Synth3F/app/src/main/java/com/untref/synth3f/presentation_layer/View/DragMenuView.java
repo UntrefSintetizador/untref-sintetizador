@@ -32,8 +32,8 @@ public class DragMenuView extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             viewVisibilities[i] = GONE;
         }
-        dragMenu = new DragMenu(viewVisibilities, VISIBLE, GONE);
-        close();
+        dragMenu = new DragMenu(viewVisibilities, PAGE_SIZE, VISIBLE, GONE);
+        updateVisibility();
     }
 
     public void scrollLeft() {
@@ -59,14 +59,12 @@ public class DragMenuView extends LinearLayout {
     }
 
     public void toogle() {
-
         if (opened) {
             close();
-
         } else {
             open();
-            updateVisibility();
         }
+        updateVisibility();
     }
 
     private void updateVisibility() {
@@ -77,7 +75,7 @@ public class DragMenuView extends LinearLayout {
     }
 
     private void close() {
-        setButtonsVisibility(GONE);
+        dragMenu.close();
         opened = false;
     }
 
