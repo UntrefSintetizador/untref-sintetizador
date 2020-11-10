@@ -18,7 +18,10 @@ public class PatchLFOPresenter extends PatchPresenter {
         patchMenuView.createKnob("on-off", INTEGER_PRECISION, ((LFOPatch) patch).on_off, new LinearFunction(0f, 1f));
         patchMenuView.createKnob("att_freq0", FLOAT_PRECISION, ((LFOPatch) patch).att_freq0, new ExponentialCenterFunction(-100f, 100f));
         patchMenuView.createKnob("att_pw", FLOAT_PRECISION, ((LFOPatch) patch).att_pw, new ExponentialCenterFunction(-100f, 100f));
-        int[] imageIds = {R.drawable.edit_lfo_sine, R.drawable.edit_lfo_isaw, R.drawable.edit_lfo_saw, R.drawable.edit_lfo_triangle, R.drawable.edit_lfo_square};
+        //int[] imageIds = {R.drawable.edit_lfo_sine, R.drawable.edit_lfo_isaw, R.drawable.edit_lfo_saw, R.drawable.edit_lfo_triangle, R.drawable.edit_lfo_square};
+        int[] imageIds = {R.drawable.ic_osc_sine_off, R.drawable.ic_osc_saw_off,
+                          R.drawable.ic_osc_saw_off, R.drawable.ic_osc_triangle_off,
+                          R.drawable.ic_osc_square_off};
         patchMenuView.createOptionList("shape", imageIds, (int) ((LFOPatch) patch).shape);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, ((LFOPatch) patch).freq, new ExponentialLeftFunction(0f, 100f));
         patchMenuView.createKnob("BPM", FLOAT_PRECISION, ((LFOPatch) patch).BPM, new ExponentialLeftFunction(0f, 6000f));

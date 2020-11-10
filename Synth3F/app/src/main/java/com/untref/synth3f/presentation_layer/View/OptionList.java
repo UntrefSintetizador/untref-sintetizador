@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -74,7 +75,7 @@ public class OptionList extends LinearLayout {
         return ((color >> 1) & 0x007F7F7F) | (color & 0xFF000000);
     }
 
-    private class OptionItem extends AppCompatButton implements View.OnClickListener {
+    private static class OptionItem extends AppCompatImageButton implements View.OnClickListener {
 
         private int id;
 
@@ -86,7 +87,7 @@ public class OptionList extends LinearLayout {
         public void init(int imageId, int size, int color) {
             getLayoutParams().width = size;
             getLayoutParams().height = size;
-            setBackgroundResource(imageId);
+            setImageResource(imageId);
             this.setColor(color);
             this.setClickable(true);
             this.setOnClickListener(this);
