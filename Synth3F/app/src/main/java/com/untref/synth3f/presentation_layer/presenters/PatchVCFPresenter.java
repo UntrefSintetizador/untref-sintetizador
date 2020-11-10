@@ -17,9 +17,11 @@ public class PatchVCFPresenter extends PatchPresenter {
         patchMenuView.createKnob("on-off", INTEGER_PRECISION, ((VCFPatch) patch).on_off, new LinearFunction(0f, 1f));
         patchMenuView.createKnob("att_signal", FLOAT_PRECISION, ((VCFPatch) patch).att_signal, new ExponentialLeftFunction(0f, 1000f));
         patchMenuView.createKnob("att_freq", FLOAT_PRECISION, ((VCFPatch) patch).att_freq, new ExponentialLeftFunction(0f, 1000f));
-        int[] imageIds = {R.drawable.ic_filter_bp_off, R.drawable.ic_filter_lp_off,
-                          R.drawable.ic_filter_hp_off};
-        patchMenuView.createOptionList("mode", imageIds, (int) ((VCFPatch) patch).mode);
+        int[] iconOffIds = {R.drawable.ic_filter_bp_off, R.drawable.ic_filter_lp_off,
+                            R.drawable.ic_filter_hp_off};
+        int[] iconOnIds = {R.drawable.ic_filter_bp_on, R.drawable.ic_filter_lp_on,
+                           R.drawable.ic_filter_hp_on};
+        patchMenuView.createOptionList("mode", iconOffIds, iconOnIds, (int) ((VCFPatch) patch).mode);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, ((VCFPatch) patch).freq, new ExponentialLeftFunction(0f, 15000f));
         patchMenuView.createKnob("q", FLOAT_PRECISION, ((VCFPatch) patch).q, new LinearFunction(0f, 100f));
         return true;

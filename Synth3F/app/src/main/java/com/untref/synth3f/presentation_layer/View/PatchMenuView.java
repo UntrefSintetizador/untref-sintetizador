@@ -130,8 +130,9 @@ public class PatchMenuView extends TableLayout {
         knobList.add(newKnob);
     }
 
-    public void createOptionList(String parameterName, int[] imageIds, int selectedValue) {
-        optionList.setValues(parameterName, imageIds, selectedValue, color);
+    public void createOptionList(String parameterName, int[] iconOffIds, int[] iconOnIds,
+                                 int selectedValue) {
+        optionList.setValues(parameterName, iconOffIds, iconOnIds, selectedValue);
     }
 
     /**

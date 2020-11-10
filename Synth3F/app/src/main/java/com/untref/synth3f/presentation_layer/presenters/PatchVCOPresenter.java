@@ -23,10 +23,13 @@ public class PatchVCOPresenter extends PatchPresenter {
         patchMenuView.createKnob("att_freq1", FLOAT_PRECISION, ((VCOPatch) patch).att_freq1, new ExponentialCenterFunction(-100f, 100f));
         patchMenuView.createKnob("att_pw", FLOAT_PRECISION, ((VCOPatch) patch).att_pw, new ExponentialCenterFunction(-100f, 100f));
         // int[] imageIds = {R.drawable.edit_vco_sine, R.drawable.edit_vco_isaw, R.drawable.edit_vco_saw, R.drawable.edit_vco_triangle, R.drawable.edit_vco_square};
-        int[] imageIds = {R.drawable.ic_osc_sine_off, R.drawable.ic_osc_saw_off,
-                          R.drawable.ic_osc_saw_off, R.drawable.ic_osc_triangle_off,
-                          R.drawable.ic_osc_square_off};
-        patchMenuView.createOptionList("shape", imageIds, (int) ((VCOPatch) patch).shape);
+        int[] iconOffIds = {R.drawable.ic_osc_sine_off, R.drawable.ic_osc_saw_off,
+                            R.drawable.ic_osc_saw_off, R.drawable.ic_osc_triangle_off,
+                            R.drawable.ic_osc_square_off};
+        int[] iconOnIds = {R.drawable.ic_osc_sine_on, R.drawable.ic_osc_saw_on,
+                           R.drawable.ic_osc_saw_on, R.drawable.ic_osc_triangle_on,
+                           R.drawable.ic_osc_square_on};
+        patchMenuView.createOptionList("shape", iconOffIds, iconOnIds, (int) ((VCOPatch) patch).shape);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, patchFreq, new ExponentialLeftFunction(0f, 20000f));
         patchMenuView.createKnob("offset", INTEGER_PRECISION, ((VCOPatch) patch).offset, new LinearFunction(-64f, 63f));
         patchMenuView.linkKnobs("freq", "offset", new FrequencyOffsetFunction(patchFreq), new OffsetFrequencyFunction(patchFreq));

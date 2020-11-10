@@ -17,8 +17,6 @@ public class OptionList extends LinearLayout {
 
     private int selectedValue;
     private int buttonSize;
-    private int activeColor;
-    private int inactiveColor;
 
     public OptionList(Context context) {
         super(context);
@@ -37,20 +35,19 @@ public class OptionList extends LinearLayout {
         this.buttonSize = buttonSize;
     }
 
-    public void setValues(String parameterName, int[] imagesIds, int selectedValue, int color) {
-        this.activeColor = color;
-        this.inactiveColor = darken(color);
+    public void setValues(String parameterName, int[] iconOffIds, int[] iconOnIds,
+                          int selectedValue) {
         this.parameterName = parameterName;
         this.selectedValue = selectedValue;
-        options = new OptionItem[imagesIds.length];
+        options = new OptionItem[iconOffIds.length];
         OptionItem optionItem;
-        for (int i = 0; i < imagesIds.length; i++) {
-            optionItem = new OptionItem(getContext(), i);
+        for (int i = 0; i < iconOffIds.length; i++) {
+            optionItem = new OptionItem(getContext(), i, iconOffIds[i], iconOnIds[i]);
             addView(optionItem);
             options[i] = optionItem;
-            optionItem.init(imagesIds[i], buttonSize, inactiveColor);
+            optionItem.init(buttonSize);
         }
-        options[selectedValue].setColor(activeColor);
+        options[selectedValue].setIcon(true);
     }
 
     public void clear() {
@@ -60,9 +57,9 @@ public class OptionList extends LinearLayout {
     }
 
     public void selectValue(int selectedValue) {
-        options[this.selectedValue].setColor(inactiveColor);
+        options[this.selectedValue].setIcon(false);
         this.selectedValue = selectedValue;
-        options[selectedValue].setColor(activeColor);
+        options[selectedValue].setIcon(true);
         patchMenuView.setParameterToEdit(parameterName, selectedValue);
         patchMenuView.setValue(parameterName, selectedValue, true);
     }
@@ -77,24 +74,27 @@ public class OptionList extends LinearLayout {
 
     private static class OptionItem extends AppCompatImageButton implements View.OnClickListener {
 
-        private int id;
+        private final int iconOffId;
+        private final int iconOnId;
+        private final int id;
 
-        public OptionItem(Context context, int id) {
+        public OptionItem(Context context, int id, int iconOffId, int iconOnId) {
             super(context);
             this.id = id;
+            this.iconOffId = iconOffId;
+            this.iconOnId = iconOnId;
         }
 
-        public void init(int imageId, int size, int color) {
+        public void init(int size) {
             getLayoutParams().width = size;
             getLayoutParams().height = size;
-            setImageResource(imageId);
-            this.setColor(color);
-            this.setClickable(true);
-            this.setOnClickListener(this);
+            setIcon(false);
+            setClickable(true);
+            setOnClickListener(this);
         }
 
-        public void setColor(int color) {
-            getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+        public void setIcon(boolean active) {
+            setImageResource(active ? iconOnId : iconOffId);
         }
 
         @Override
