@@ -1,12 +1,16 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
+import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
+import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -102,7 +106,16 @@ public class OptionList extends LinearLayout {
         public void setSelected(boolean selected) {
             super.setSelected(selected);
             setImageResource(selected ? iconOnId : iconOffId);
-            setBackgroundColor(getResources().getColor(selected ? color : R.color.panel));
+            ShapeDrawable shapeDrawable = new ShapeDrawable();
+            if (selected) {
+                setBackgroundColor(getResources().getColor(color));
+            } else {
+                shapeDrawable.setShape(new RectShape());
+                shapeDrawable.getPaint().setColor(getResources().getColor(color));
+                shapeDrawable.getPaint().setStrokeWidth(10f);
+                shapeDrawable.getPaint().setStyle(Paint.Style.STROKE);
+                setBackground(shapeDrawable);
+            }
         }
 
         @Override
