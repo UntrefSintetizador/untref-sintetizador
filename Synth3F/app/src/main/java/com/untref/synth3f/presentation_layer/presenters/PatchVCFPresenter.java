@@ -21,7 +21,7 @@ public class PatchVCFPresenter extends PatchPresenter {
                             R.drawable.ic_filter_hp_off};
         int[] iconOnIds = {R.drawable.ic_filter_bp_on, R.drawable.ic_filter_lp_on,
                            R.drawable.ic_filter_hp_on};
-        patchMenuView.createOptionList("mode", iconOffIds, iconOnIds, (int) ((VCFPatch) patch).mode);
+        patchMenuView.createOptionList("mode", R.color.vcf, iconOffIds, iconOnIds, (int) ((VCFPatch) patch).mode);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, ((VCFPatch) patch).freq, new ExponentialLeftFunction(0f, 15000f));
         patchMenuView.createKnob("q", FLOAT_PRECISION, ((VCFPatch) patch).q, new LinearFunction(0f, 100f));
         return true;

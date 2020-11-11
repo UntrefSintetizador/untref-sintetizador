@@ -5,5 +5,9 @@
     <color name="blue_soft">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
     <color name="background_title_menu">#DEB887</color>
-    <color name="background">#ff333333</color>
+    <color name="background">#333333</color>
+    <color name="panel">#333333</color>
+    <color name="vco">#FD3E81</color>
+    <color name="vcf">#FCC500</color>
+    <color name="lfo">#FD3E81</color>
 </resources>

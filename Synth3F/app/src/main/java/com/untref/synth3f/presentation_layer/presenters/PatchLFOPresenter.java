@@ -25,7 +25,7 @@ public class PatchLFOPresenter extends PatchPresenter {
         int[] iconOnIds = {R.drawable.ic_osc_sine_on, R.drawable.ic_osc_saw_on,
                            R.drawable.ic_osc_saw_on, R.drawable.ic_osc_triangle_on,
                            R.drawable.ic_osc_square_on};
-        patchMenuView.createOptionList("shape", iconOffIds, iconOnIds, (int) ((LFOPatch) patch).shape);
+        patchMenuView.createOptionList("shape", R.color.lfo, iconOffIds, iconOnIds, (int) ((LFOPatch) patch).shape);
         patchMenuView.createKnob("freq", FLOAT_PRECISION, ((LFOPatch) patch).freq, new ExponentialLeftFunction(0f, 100f));
         patchMenuView.createKnob("BPM", FLOAT_PRECISION, ((LFOPatch) patch).BPM, new ExponentialLeftFunction(0f, 6000f));
         patchMenuView.linkKnobs("BPM", "freq", new FreqToBPM(), new BPMToFreq());

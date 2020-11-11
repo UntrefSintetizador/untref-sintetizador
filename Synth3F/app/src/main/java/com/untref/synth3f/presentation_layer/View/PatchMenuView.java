@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -59,7 +58,6 @@ public class PatchMenuView extends TableLayout {
         this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
         this.optionList = ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
 
-        setBackgroundColor(Color.MAGENTA);
         optionList.setVisibility(View.GONE);
         setVisibility(View.GONE);
 
@@ -130,9 +128,9 @@ public class PatchMenuView extends TableLayout {
         knobList.add(newKnob);
     }
 
-    public void createOptionList(String parameterName, int[] iconOffIds, int[] iconOnIds,
-                                 int selectedValue) {
-        optionList.setValues(parameterName, iconOffIds, iconOnIds, selectedValue);
+    public void createOptionList(String parameterName, int color, int[] iconOffIds,
+                                 int[] iconOnIds, int selectedValue) {
+        optionList.setValues(parameterName, color, iconOffIds, iconOnIds, selectedValue);
     }
 
     /**

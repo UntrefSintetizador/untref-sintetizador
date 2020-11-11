@@ -12,12 +12,12 @@
         android:icon="@drawable/icon_synth"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".presentation_layer.activity.MainMenuActivity"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,12 +28,12 @@
             android:name=".presentation_layer.activity.MainActivity"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".presentation_layer.activity.StorageActivity"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/AppTheme"></activity>
 
         <service android:name="org.puredata.android.service.PdService" />
     </application>

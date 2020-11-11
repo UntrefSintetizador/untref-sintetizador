@@ -6,8 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.untref.synth3f.R;
 
 public class OptionList extends LinearLayout {
 
@@ -35,19 +38,19 @@ public class OptionList extends LinearLayout {
         this.buttonSize = buttonSize;
     }
 
-    public void setValues(String parameterName, int[] iconOffIds, int[] iconOnIds,
+    public void setValues(String parameterName, int color, int[] iconOffIds, int[] iconOnIds,
                           int selectedValue) {
         this.parameterName = parameterName;
         this.selectedValue = selectedValue;
         options = new OptionItem[iconOffIds.length];
         OptionItem optionItem;
         for (int i = 0; i < iconOffIds.length; i++) {
-            optionItem = new OptionItem(getContext(), i, iconOffIds[i], iconOnIds[i]);
+            optionItem = new OptionItem(getContext(), i, color, iconOffIds[i], iconOnIds[i]);
             addView(optionItem);
             options[i] = optionItem;
             optionItem.init(buttonSize);
         }
-        options[selectedValue].setIcon(true);
+        options[selectedValue].setSelected(true);
     }
 
     public void clear() {
@@ -57,9 +60,9 @@ public class OptionList extends LinearLayout {
     }
 
     public void selectValue(int selectedValue) {
-        options[this.selectedValue].setIcon(false);
+        options[this.selectedValue].setSelected(false);
         this.selectedValue = selectedValue;
-        options[selectedValue].setIcon(true);
+        options[selectedValue].setSelected(true);
         patchMenuView.setParameterToEdit(parameterName, selectedValue);
         patchMenuView.setValue(parameterName, selectedValue, true);
     }
@@ -77,24 +80,29 @@ public class OptionList extends LinearLayout {
         private final int iconOffId;
         private final int iconOnId;
         private final int id;
+        private final int color;
 
-        public OptionItem(Context context, int id, int iconOffId, int iconOnId) {
+        public OptionItem(Context context, int id, int color, int iconOffId, int iconOnId) {
             super(context);
-            this.id = id;
             this.iconOffId = iconOffId;
             this.iconOnId = iconOnId;
+            this.id = id;
+            this.color = color;
         }
 
         public void init(int size) {
             getLayoutParams().width = size;
             getLayoutParams().height = size;
-            setIcon(false);
+            setSelected(false);
             setClickable(true);
             setOnClickListener(this);
         }
 
-        public void setIcon(boolean active) {
-            setImageResource(active ? iconOnId : iconOffId);
+        @Override
+        public void setSelected(boolean selected) {
+            super.setSelected(selected);
+            setImageResource(selected ? iconOnId : iconOffId);
+            setBackgroundColor(getResources().getColor(selected ? color : R.color.panel));
         }
 
         @Override
