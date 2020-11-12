@@ -11,4 +11,8 @@
         <item name="android:background">@color/background</item>
     </style>
 
+    <style name="AppTheme.Text" parent="android:TextAppearance.Material">
+        <item name="android:textColor">@color/text</item>
+    </style>
+
 </resources>

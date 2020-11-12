@@ -3,6 +3,7 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.text.Editable;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -189,6 +190,7 @@ public class PatchMenuView extends TableLayout {
                 knob = knobList.get(i + j);
                 textView = new TextView(getContext());
                 textView.setText(knob.getName());
+                textView.setTextAppearance(getContext(), R.style.AppTheme_Text);
                 textTableRow.addView(textView);
                 knobTableRow.addView(knob);
                 layoutParams = (LinearLayout.LayoutParams) knob.getLayoutParams();
