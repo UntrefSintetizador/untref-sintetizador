@@ -26,10 +26,10 @@
             android:id="@+id/menuButtonOpenDragMenu"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/open_drag_menu"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/open_drag_menu_off"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -268,9 +268,8 @@
         android:id="@+id/menuButtonOpenOptionsMenu"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/open_options_menu_off"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -42,7 +42,7 @@ public class DragMenuView extends LinearLayout {
         updateVisibility();
     }
 
-    public void toggle() {
+    public boolean toggle() {
         if (opened) {
             dragMenu.close();
             opened = false;
@@ -51,6 +51,8 @@ public class DragMenuView extends LinearLayout {
             opened = true;
         }
         updateVisibility();
+
+        return opened;
     }
 
     private void updateVisibility() {

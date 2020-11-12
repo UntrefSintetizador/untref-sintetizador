@@ -257,8 +257,12 @@ public class PatchGraphFragment extends Fragment {
         dragMenuView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        dragMenuView.toggle();
+                    public void onClick(View view) {
+                        if (dragMenuView.toggle()) {
+                            view.setBackgroundResource(R.drawable.open_drag_menu_on);
+                        } else {
+                            view.setBackgroundResource(R.drawable.open_drag_menu_off);
+                        }
                     }
                 }
         );
