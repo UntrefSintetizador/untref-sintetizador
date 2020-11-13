@@ -20,12 +20,10 @@
         android:id="@+id/inputFilename"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="100dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:hint="Save"
+        android:layout_marginBottom="100dp"
         android:inputType="text"
-        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Synth3F</string>
 
-    <string name="action_salir">Salir</string>
+    <string name="action_salir" translatable="false">Salir</string>
     <string-array name="Presets">
         <item> sq_bass1 </item>
         <item> filter_tone </item>
@@ -14,7 +14,7 @@
         <item> chord_pad </item>
     </string-array>
 
-    <string name="piano">PIANO</string>
+    <string name="piano" translatable="false">PIANO</string>
     <string name="section_sliders">Modulos</string>
     <string name="vco1">VCO 1</string>
     <string name="vco2">VCO 2</string>
@@ -28,5 +28,7 @@
     <string name="eg1">EG 1</string>
     <string name="eg2">EG 2</string>
     <string name="sequencer">Sequencer</string>
+    <string name="save">Save</string>
+    <string name="load">Load</string>
 
 </resources>
