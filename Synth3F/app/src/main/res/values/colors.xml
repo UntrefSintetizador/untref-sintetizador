@@ -8,8 +8,10 @@
 
     <color name="background">#333333</color>
     <color name="panel">#333333</color>
-    <color name="text">#FFFFFF</color>
+    <color name="panelText">#FFFFFF</color>
     <color name="vco">#FD3E81</color>
     <color name="vcf">#FCC500</color>
     <color name="lfo">#FDC400</color>
+    <color name="optionsMenu">#3590f3</color>
+    <color name="optionText">#232323</color>
 </resources>

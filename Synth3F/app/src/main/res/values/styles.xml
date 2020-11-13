@@ -12,8 +12,22 @@
     </style>
 
     <style name="PatchMenuText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/panelText</item>
         <item name="android:fontFamily">@font/roboto_condensed_light</item>
+    </style>
+
+    <style name="OptionsMenuButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@color/optionsMenu</item>
+        <item name="android:fontFamily">@font/roboto_condensed_light</item>
+        <item name="android:textColor">@color/optionText</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:layout_width">192dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_marginStart">9dp</item>
+        <item name="android:layout_marginTop">1dp</item>
     </style>
 
 </resources>

@@ -18,7 +18,6 @@ public class OptionsMenuView extends TableLayout {
     }
 
     public void init() {
-        setBackgroundColor(Color.BLUE);
         close();
     }
 
