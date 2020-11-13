@@ -18,7 +18,6 @@ public class PatchLFOPresenter extends PatchPresenter {
         patchMenuView.createKnob("on-off", INTEGER_PRECISION, ((LFOPatch) patch).on_off, new LinearFunction(0f, 1f));
         patchMenuView.createKnob("att_freq0", FLOAT_PRECISION, ((LFOPatch) patch).att_freq0, new ExponentialCenterFunction(-100f, 100f));
         patchMenuView.createKnob("att_pw", FLOAT_PRECISION, ((LFOPatch) patch).att_pw, new ExponentialCenterFunction(-100f, 100f));
-        //int[] imageIds = {R.drawable.edit_lfo_sine, R.drawable.edit_lfo_isaw, R.drawable.edit_lfo_saw, R.drawable.edit_lfo_triangle, R.drawable.edit_lfo_square};
         int[] iconOffIds = {R.drawable.ic_lfo_sine_off, R.drawable.ic_lfo_isaw_off,
                             R.drawable.ic_lfo_saw_off, R.drawable.ic_lfo_triangle_off,
                             R.drawable.ic_lfo_square_off};
