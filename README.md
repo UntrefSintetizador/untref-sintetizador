@@ -2,4 +2,4 @@
 
 Link APK:
 
-https://drive.google.com/open?id=1_w1rAbAMZmOqD3q9UWgmycgoGbc7t8b9
+https://drive.google.com/drive/folders/1Vqkq2RsOuF_fVl3adexDhmE_ze6HCdBv?usp=sharing
