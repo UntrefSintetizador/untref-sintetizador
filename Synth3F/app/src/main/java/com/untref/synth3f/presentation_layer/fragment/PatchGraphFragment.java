@@ -69,7 +69,7 @@ public class PatchGraphFragment extends Fragment {
         createConnectDisconnectEvent();
         createOptionsMenuEvent();
         createDragMenuEvents();
-        createRemoveAllPatchesEvent();
+        createNewPresetEvent();
         createWireDrawer(patchGraphView);
         patchMenuView = patchGraphView.findViewById(R.id.patch_menu_view);
         patchMenuView.setPatchGraphFragment(this);
@@ -268,22 +268,26 @@ public class PatchGraphFragment extends Fragment {
         );
     }
 
-    private void createRemoveAllPatchesEvent(){
-        patchGraphView.findViewById(R.id.menuDeleteAll).setOnClickListener(
+    private void createNewPresetEvent(){
+        patchGraphView.findViewById(R.id.menuNew).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                        alertDialog.setTitle("DELETE PRESET");
-                        alertDialog.setMessage("Are you sure you want to delete?");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
+                        alertDialog.setTitle(R.string.new_preset_dialog_title);
+                        alertDialog.setMessage(
+                                getResources().getString(R.string.new_preset_dialog_message)
+                        );
+                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+                                getResources().getString(R.string.dialog_cancel),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                     }
                                 });
 
-                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "DELETE",
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+                                getResources().getString(R.string.dialog_accept),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();

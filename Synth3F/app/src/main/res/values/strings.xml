@@ -4,5 +4,11 @@
     <string name="piano">PIANO</string>
     <string name="save">Save</string>
     <string name="load">Load</string>
-    <string name="remove_all">Remove All Patches</string>
+    <string name="new_preset">New</string>
+    <string name="new_preset_dialog_title">NEW</string>
+    <string name="new_preset_dialog_message">
+        This action will remove all patches created without saving. Continue?
+    </string>
+    <string name="dialog_cancel">CANCEL</string>
+    <string name="dialog_accept">ACCEPT</string>
 </resources>
