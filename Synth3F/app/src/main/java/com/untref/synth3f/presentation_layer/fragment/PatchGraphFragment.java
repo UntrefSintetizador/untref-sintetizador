@@ -1,11 +1,13 @@
 package com.untref.synth3f.presentation_layer.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -19,6 +21,7 @@ import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
+import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
@@ -268,45 +271,9 @@ public class PatchGraphFragment extends Fragment {
         );
     }
 
-    private void createNewPresetEvent(){
-        patchGraphView.findViewById(R.id.menuNew).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                        alertDialog.setTitle(R.string.new_preset_dialog_title);
-                        alertDialog.setMessage(
-                                getResources().getString(R.string.new_preset_dialog_message)
-                        );
-                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
-                                getResources().getString(R.string.dialog_cancel),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-
-                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
-                                getResources().getString(R.string.dialog_accept),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        removeAllPatches();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-                }
-        );
-    }
-
-    private void removeAllPatches(){
-        ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
-        while (mapLayout.getChildCount() > 1) {
-            mapLayout.removeViewAt(0);
-        }
-        wireDrawer.clear();
-        this.patchGraphPresenter.deleteAll();
+    private void createNewPresetEvent() {
+        View.OnClickListener listener = new NewPresetListener();
+        patchGraphView.findViewById(R.id.menuNew).setOnClickListener(listener);
     }
 
     private void loadFile(String filename) {
@@ -439,6 +406,46 @@ public class PatchGraphFragment extends Fragment {
             constraintSet.applyTo(mapLayout);
 
             wireDrawer.bringToFront();
+        }
+    }
+
+    private class NewPresetListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Resources resources = PatchGraphFragment.this.getResources();
+            Context context = PatchGraphFragment.this.context;
+            int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert;
+            AlertDialog alertDialog = new AlertDialog.Builder(context, dialogStyle).create();
+            alertDialog.setTitle(R.string.new_preset_dialog_title);
+            alertDialog.setMessage(resources.getString(R.string.new_preset_dialog_message));
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+                    resources.getString(R.string.dialog_cancel),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+                    resources.getString(R.string.dialog_accept),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            removeAllPatches();
+                        }
+                    });
+            alertDialog.show();
+        }
+
+        private void removeAllPatches() {
+            Activity activity = PatchGraphFragment.this.getActivity();
+            ConstraintLayout mapLayout = activity.findViewById(R.id.map);
+            while (mapLayout.getChildCount() > 1) {
+                mapLayout.removeViewAt(0);
+            }
+            PatchGraphFragment.this.wireDrawer.clear();
+            PatchGraphFragment.this.patchGraphPresenter.deleteAll();
         }
     }
 }
