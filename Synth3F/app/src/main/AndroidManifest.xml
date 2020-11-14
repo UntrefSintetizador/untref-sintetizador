@@ -28,12 +28,12 @@
             android:name=".presentation_layer.activity.MainActivity"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".presentation_layer.activity.StorageActivity"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme.Storage" />
 
         <service android:name="org.puredata.android.service.PdService" />
     </application>

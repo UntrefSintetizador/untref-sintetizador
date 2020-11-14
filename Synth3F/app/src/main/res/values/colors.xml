@@ -15,4 +15,5 @@
     <color name="optionsMenu">#3590f3</color>
     <color name="optionText">#232323</color>
     <color name="alertDialog">#FFFFFF</color>
+    <color name="storageText">#232323</color>
 </resources>
