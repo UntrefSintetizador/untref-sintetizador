@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -13,7 +15,7 @@
         android:gravity="center"
         android:layout_marginTop="0dp">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -23,14 +25,28 @@
             android:layout_marginTop="40dp"
             android:layout_alignParentTop="true">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@id/title"
-                android:gravity="center"
-                android:background="@android:color/black"
-                android:textColor="@android:color/white"
-                android:textSize="40px" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/id_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/close" />
+
+                <TextView
+                    android:id="@id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/black"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="40px" />
+
+            </LinearLayout>
 
             <TableLayout android:id="@+id/tablaKB1"
                 android:layout_width="match_parent"
@@ -141,12 +157,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/id_cerrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Cerrar" />
         </LinearLayout>
 
     </RelativeLayout>

@@ -11,4 +11,5 @@
     </string>
     <string name="dialog_cancel">CANCEL</string>
     <string name="dialog_accept">ACCEPT</string>
+    <string name="close">Close</string>
 </resources>

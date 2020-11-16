@@ -61,7 +61,7 @@ public class PatchKBMenuView extends PopupWindow {
         initializeModule(title, popupView);
 
         //Defino comportamiento del boton que cierrar el popup
-        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_cerrar);
+        Button btn_Cerrar = (Button) popupView.findViewById(R.id.id_close);
         btn_Cerrar.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
