@@ -39,13 +39,13 @@
             xmlns:android="http://schemas.android.com/apk/res/android">
 
             <Button
-                android:id="@+id/botonOctavaMas"
+                android:id="@+id/button_octave_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Octava +" />
 
             <TextView
-                android:id="@+id/labelOctava"
+                android:id="@+id/label_octave"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:background="@color/colorPrimary"
@@ -58,7 +58,7 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/botonOctavaMenos"
+                android:id="@+id/button_octave_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Octava -" />

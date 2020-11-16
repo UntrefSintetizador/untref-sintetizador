@@ -27,18 +27,18 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
         this.patch = patch;
         piano = findViewById(R.id.pianito);
 
-        label_octava = view.findViewById(R.id.labelOctava);
+        label_octava = view.findViewById(R.id.label_octave);
         label_octava.setText(String.valueOf(patch.octava));
         updateLabelOctava();
 
-        view.findViewById(R.id.botonOctavaMas).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_octave_up).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 incrementOctava();
             }
         });
 
-        view.findViewById(R.id.botonOctavaMenos).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_octave_down).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 reduceOctava();

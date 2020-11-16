@@ -12,4 +12,6 @@
     <string name="dialog_cancel">CANCEL</string>
     <string name="dialog_accept">ACCEPT</string>
     <string name="close">Close</string>
+    <string name="octave_up">Octave +</string>
+    <string name="octave_down">Octave -</string>
 </resources>
