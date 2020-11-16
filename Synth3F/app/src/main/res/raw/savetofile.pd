@@ -1,0 +1,25 @@
+#N canvas 224 246 848 478 10;
+#X obj 76 206 dac~, f 8;
+#N canvas 48 54 702 640 synth 0;
+#X obj 94 508 outlet~;
+#X obj 159 509 outlet~;
+#X restore 76 156 pd synth;
+#X msg 568 164 \; pd-synth disconnect 3 0 0 0;
+#X msg 568 124 \; x_fade_1 0;
+#X msg 257 202 \; pd-synth obj 100 250 x_fade x_fade_1 \;;
+#X msg 258 164 \; x_vco_1_load bang;
+#X msg 257 283 \; x_vco_1_on-off 1;
+#X msg 258 124 \; pd-synth obj 100 100 x_vco x_vco_1;
+#X msg 257 243 \; pd-synth connect 2 0 3 0;
+#X msg 257 323 \; pd-synth connect 3 0 0 0;
+#X msg 257 363 \; x_fade_1 1;
+#X msg 569 205 \; pd-synth find +x_vco_1 1;
+#X msg 569 246 \; pd-synth cut;
+#X msg 569 326 \; pd-synth cut;
+#X msg 569 285 \; pd-synth find +x_fade_1 1;
+#X text 257 100 add;
+#X text 565 97 remove;
+#X msg 46 424 \; pd-example.pd savetofile abc.pd /Users/JX/Documents/UNTREF/XUL/pd/dynamic/5
+;
+#X connect 1 0 0 0;
+#X connect 1 1 0 1;
