@@ -25,7 +25,8 @@
     </style>
 
     <style name="PatchMenuText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/optionText</item>
+        <item name="android:textColor">@color/panelText</item>
+        <item name="android:fontFamily">@font/roboto_condensed_light</item>
     </style>
 
     <style name="OptionsMenuButton" parent="Widget.AppCompat.Button.Borderless">
