@@ -221,7 +221,7 @@ public class PatchGraphPresenter {
 
     private int[] getPositionOfView(View view) {
         int[] position = new int[2];
-        view.getLocationOnScreen(position);
+        view.getLocationInWindow(position);
         return position;
     }
 

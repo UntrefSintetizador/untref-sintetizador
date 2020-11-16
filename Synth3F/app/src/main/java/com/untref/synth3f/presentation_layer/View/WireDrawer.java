@@ -157,7 +157,7 @@ public class WireDrawer extends View {
     private int[] getPositionOfView(View view) {
         int[] position = new int[2];
         Rect rect = new Rect();
-        view.getLocationOnScreen(position);
+        view.getLocationInWindow(position);
         view.getHitRect(rect);
         position[0] += ((rect.right - rect.left) / 2) * mapView.getScale();
         position[1] += ((rect.bottom - rect.top) / 2) * mapView.getScale();
