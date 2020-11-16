@@ -29,6 +29,7 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
 
         label_octava = view.findViewById(R.id.labelOctava);
         label_octava.setText(String.valueOf(patch.octava));
+        updateLabelOctava();
 
         view.findViewById(R.id.botonOctavaMas).setOnClickListener(new View.OnClickListener() {
             @Override
