@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private IConfig config;
+    private PatchGraphFragment patchGraphFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         setContentView(R.layout.activity_main);
         FragmentManager fmanager = getFragmentManager();
         FragmentTransaction transaction = fmanager.beginTransaction();
-        PatchGraphFragment patchGraphFragment = new PatchGraphFragment();
+        patchGraphFragment = new PatchGraphFragment();
         transaction.add(R.id.graph, patchGraphFragment);
         transaction.commit();
         config = ConfigFactory.create();
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.finishAffinity();
+        patchGraphFragment.handleBackPressedCallback();
     }
 }

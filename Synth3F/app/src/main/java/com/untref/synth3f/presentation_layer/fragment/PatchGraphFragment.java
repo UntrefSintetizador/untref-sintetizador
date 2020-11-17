@@ -21,7 +21,6 @@ import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.domain_layer.helpers.IProcessor;
 import com.untref.synth3f.entities.Connection;
-import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
@@ -103,13 +102,19 @@ public class PatchGraphFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
-                patchGraphPresenter.save(context, data.getStringExtra("filename"));
+                patchGraphPresenter.save(context,
+                                         data.getStringExtra(getString(R.string.intent_filename)));
+                boolean closeApp = data.getBooleanExtra(getString(R.string.intent_close_app),
+                                                                 false);
+                if (closeApp) {
+                    getActivity().finishAffinity();
+                }
             }
         }
 
         if (requestCode == REQUEST_LOAD) {
             if (resultCode == RESULT_OK) {
-                loadFile(data.getStringExtra("filename"));
+                loadFile(data.getStringExtra(getString(R.string.intent_filename)));
             }
         }
     }
@@ -128,6 +133,37 @@ public class PatchGraphFragment extends Fragment {
             fID++;
         }
         return fID;
+    }
+
+    public void handleBackPressedCallback() {
+        int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert;
+        AlertDialog alertDialog = new AlertDialog.Builder(context, dialogStyle).create();
+        alertDialog.setTitle(R.string.new_preset_dialog_title);
+        alertDialog.setMessage(getResources().getString(R.string.close_dialog_message));
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+                getResources().getString(R.string.dialog_cancel),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+                getResources().getString(R.string.dialog_no),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        getActivity().finishAffinity();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+                getResources().getString(R.string.dialog_yes),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        startStorageActivity(REQUEST_SAVE, true);
+                    }
+                });
+        alertDialog.show();
     }
 
     private void createWireDrawer(View view) {
@@ -176,9 +212,7 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), StorageActivity.class);
-                        intent.putExtra("mode", REQUEST_SAVE);
-                        startActivityForResult(intent, REQUEST_SAVE);
+                        startStorageActivity(REQUEST_SAVE, false);
                     }
                 }
         );
@@ -186,12 +220,17 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), StorageActivity.class);
-                        intent.putExtra("mode", REQUEST_LOAD);
-                        startActivityForResult(intent, REQUEST_LOAD);
+                        startStorageActivity(REQUEST_LOAD, false);
                     }
                 }
         );
+    }
+
+    private void startStorageActivity(int request, boolean closeApp) {
+        Intent intent = new Intent(getActivity(), StorageActivity.class);
+        intent.putExtra(getString(R.string.intent_mode), request);
+        intent.putExtra(getString(R.string.intent_close_app), closeApp);
+        startActivityForResult(intent, request);
     }
 
     private void createEngineEvent() {

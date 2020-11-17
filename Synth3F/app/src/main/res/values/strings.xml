@@ -14,4 +14,10 @@
     <string name="close">Close</string>
     <string name="octave_up">Octave +</string>
     <string name="octave_down">Octave -</string>
+    <string name="close_dialog_message">Save changes before closing?</string>
+    <string name="dialog_yes">YES</string>
+    <string name="dialog_no">NO</string>
+    <string name="intent_filename">filename</string>
+    <string name="intent_close_app">closeApp</string>
+    <string name="intent_mode">mode</string>
 </resources>

@@ -20,12 +20,15 @@ import static com.untref.synth3f.domain_layer.serializers.FileManager.getFilenam
 
 public class StorageActivity extends AppCompatActivity {
 
+    private boolean closeApp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_activity);
         populateList();
         setMode(getIntent().getIntExtra("mode", 0));
+        closeApp = getIntent().getBooleanExtra("closeApp", false);
         createClickEvents();
     }
 
@@ -57,6 +60,7 @@ public class StorageActivity extends AppCompatActivity {
                         Intent returnIntent = new Intent();
                         String filename = ((EditText) findViewById(R.id.inputFilename)).getText().toString();
                         returnIntent.putExtra("filename", filename);
+                        returnIntent.putExtra("closeApp", closeApp);
 
                         setResult(PatchGraphFragment.RESULT_OK, returnIntent);
                         finish();
