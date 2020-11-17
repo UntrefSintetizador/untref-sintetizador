@@ -65,4 +65,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         config.cleanup();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finishAffinity();
+    }
 }
