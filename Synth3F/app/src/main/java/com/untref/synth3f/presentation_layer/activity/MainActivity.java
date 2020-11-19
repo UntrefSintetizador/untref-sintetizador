@@ -4,19 +4,19 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
-import com.untref.synth3f.domain_layer.helpers.IConfig;
+import com.untref.synth3f.domain_layer.helpers.Config;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private IConfig config;
+    private Config config;
     private PatchGraphFragment patchGraphFragment;
 
     @Override
@@ -32,6 +32,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         config.setContext(this);
         patchGraphFragment.setProcessor(config.getProcessor());
         patchGraphFragment.setContext(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        View decorView = getWindow().getDecorView();
+//        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override

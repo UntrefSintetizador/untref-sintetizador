@@ -1,6 +1,6 @@
 package com.untref.synth3f.entities;
 
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class LFOPatch extends Patch {
 
@@ -13,7 +13,7 @@ public class LFOPatch extends Patch {
     public float pw = 50;
 
     @Override
-    public void initialize(IProcessor processor) {
+    public void initialize(Processor processor) {
         String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "att_freq0", att_freq0);

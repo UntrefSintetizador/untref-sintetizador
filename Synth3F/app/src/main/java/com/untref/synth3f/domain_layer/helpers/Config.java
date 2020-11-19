@@ -6,7 +6,7 @@ import com.untref.synth3f.presentation_layer.activity.MainActivity;
  * Inicializa y configura la herramienta de procesamiento del sonido.
  * Debe ofrecer un metodo para liberar todos los recursos utilizados.
  */
-public interface IConfig {
+public interface Config {
 
     /**
      * Libera los recursos utilizados.
@@ -18,7 +18,7 @@ public interface IConfig {
      *
      * @return IProccesor inicializado.
      */
-    IProcessor getProcessor();
+    Processor getProcessor();
 
     /**
      * Indica si esta en ejecucion.

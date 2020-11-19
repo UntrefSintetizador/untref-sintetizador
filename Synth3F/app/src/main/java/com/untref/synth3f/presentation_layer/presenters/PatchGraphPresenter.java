@@ -4,9 +4,14 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 import com.untref.synth3f.domain_layer.helpers.PatchGraphManager;
 import com.untref.synth3f.domain_layer.serializers.JSONSerializer;
 import com.untref.synth3f.entities.Connection;
@@ -39,19 +44,19 @@ import java.util.List;
 public class PatchGraphPresenter {
 
     private PatchGraphFragment patchGraphFragment;
-    private IProcessor processor;
+    private Processor processor;
     private PatchGraphManager patchGraphManager;
 
     private int dragPatchOrigin;
     private View dragConnectorOrigin;
 
-    public PatchGraphPresenter(PatchGraphFragment patchGraphFragment, IProcessor processor) {
+    public PatchGraphPresenter(PatchGraphFragment patchGraphFragment, Processor processor) {
         this.patchGraphFragment = patchGraphFragment;
         this.processor = processor;
         this.patchGraphManager = new PatchGraphManager();
     }
 
-    public IProcessor getProcessor() {
+    public Processor getProcessor() {
         return processor;
     }
 
@@ -219,12 +224,6 @@ public class PatchGraphPresenter {
         return patchViews;
     }
 
-    private int[] getPositionOfView(View view) {
-        int[] position = new int[2];
-        view.getLocationInWindow(position);
-        return position;
-    }
-
     private PatchView createPatchView(Patch patch) {
         PatchView patchView;
         switch (patch.getTypeName()) {
@@ -263,5 +262,21 @@ public class PatchGraphPresenter {
                 break;
         }
         return patchView;
+    }
+
+    public int[] getPositionOfView(View view) {
+        int[] position = new int[2];
+        view.getLocationOnScreen(position);
+        WindowManager windowManager = patchGraphFragment.getActivity().getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        display.getRealMetrics(realDisplayMetrics);
+        int realWidth = realDisplayMetrics.widthPixels;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+        int displayWidth = displayMetrics.widthPixels;
+        position[0] -= (realWidth - displayWidth) / 2;
+
+        return position;
     }
 }

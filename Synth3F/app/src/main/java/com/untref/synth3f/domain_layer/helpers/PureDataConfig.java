@@ -30,7 +30,7 @@ import java.util.Map;
 
 import static android.content.Context.BIND_AUTO_CREATE;
 
-public class PureDataConfig implements IConfig {
+public class PureDataConfig implements Config {
     private PdService service = null;
     private MainActivity context;
     private Toast toast = null;
@@ -129,7 +129,7 @@ public class PureDataConfig implements IConfig {
     }
 
     @Override
-    public IProcessor getProcessor() {
+    public Processor getProcessor() {
         return processor;
     }
 

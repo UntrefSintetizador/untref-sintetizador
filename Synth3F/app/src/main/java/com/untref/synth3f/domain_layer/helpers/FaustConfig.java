@@ -7,7 +7,7 @@ import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 import org.puredata.android.io.AudioParameters;
 
-public class FaustConfig implements IConfig {
+public class FaustConfig implements Config {
     private Context context;
     private long graphPointer;
     private FaustProcessor processor;
@@ -45,7 +45,7 @@ public class FaustConfig implements IConfig {
     }
 
     @Override
-    public IProcessor getProcessor() {
+    public Processor getProcessor() {
         return processor;
     }
 }

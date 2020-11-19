@@ -12,14 +12,17 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
@@ -41,7 +44,7 @@ public class PatchGraphFragment extends Fragment {
     private PatchGraphPresenter patchGraphPresenter;
     private View patchGraphView;
     private WireDrawer wireDrawer;
-    private IProcessor processor;
+    private Processor processor;
     private MapView mapView;
     private Context context;
     private PatchMenuView patchMenuView;
@@ -78,7 +81,7 @@ public class PatchGraphFragment extends Fragment {
         return patchGraphView;
     }
 
-    public void setProcessor(IProcessor processor) {
+    public void setProcessor(Processor processor) {
         this.processor = processor;
     }
 

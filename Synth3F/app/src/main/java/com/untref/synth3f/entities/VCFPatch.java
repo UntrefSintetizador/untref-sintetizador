@@ -1,6 +1,6 @@
 package com.untref.synth3f.entities;
 
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class VCFPatch extends Patch {
 
@@ -12,7 +12,7 @@ public class VCFPatch extends Patch {
     public float q = 1f;
 
     @Override
-    public void initialize(IProcessor processor) {
+    public void initialize(Processor processor) {
         String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "att_signal", att_signal);

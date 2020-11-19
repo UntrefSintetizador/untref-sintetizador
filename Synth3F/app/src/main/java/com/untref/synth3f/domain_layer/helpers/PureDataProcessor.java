@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PureDataProcessor implements IProcessor {
+public class PureDataProcessor implements Processor {
     private final Handler handler = new Handler();
     private final PatchCollector patchCollector = new PatchCollector();
     private String mainPatchName = "pd-empty.pd";

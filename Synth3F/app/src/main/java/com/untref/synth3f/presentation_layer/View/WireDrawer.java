@@ -1,5 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,7 +9,11 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.entities.Patch;
@@ -157,7 +162,21 @@ public class WireDrawer extends View {
     private int[] getPositionOfView(View view) {
         int[] position = new int[2];
         Rect rect = new Rect();
+        // Same logic in PatchGraphPresenter.getPositionOfView(View) ---
         view.getLocationInWindow(position);
+        WindowManager windowManager = ((Activity) getContext()).getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        int rotation = display.getRotation();
+        if (rotation == Surface.ROTATION_270) {
+            DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+            display.getRealMetrics(realDisplayMetrics);
+            int realWidth = realDisplayMetrics.widthPixels;
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            display.getMetrics(displayMetrics);
+            int displayWidth = displayMetrics.widthPixels;
+            position[0] -= (realWidth - displayWidth) / 2;
+        }
+        // ---
         view.getHitRect(rect);
         position[0] += ((rect.right - rect.left) / 2) * mapView.getScale();
         position[1] += ((rect.bottom - rect.top) / 2) * mapView.getScale();

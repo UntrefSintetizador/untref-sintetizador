@@ -33,13 +33,13 @@ public class ConfigFactory {
         Log.i("Engine", "Current engine is " + currentEntry.getKey());
     }
 
-    public static IConfig create() {
-        IConfig result = null;
+    public static Config create() {
+        Config result = null;
 
         try {
             Class<?> configClass = Class.forName(currentEntry.getValue());
             Constructor constructor = configClass.getConstructor();
-            result = (IConfig) constructor.newInstance();
+            result = (Config) constructor.newInstance();
 
         } catch (Exception a) {
             a.printStackTrace();

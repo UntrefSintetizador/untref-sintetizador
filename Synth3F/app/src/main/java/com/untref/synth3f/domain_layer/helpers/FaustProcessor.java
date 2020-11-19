@@ -6,7 +6,7 @@ import com.untref.synth3f.entities.Patch;
 
 import java.util.List;
 
-public class FaustProcessor implements IProcessor {
+public class FaustProcessor implements Processor {
 
     private final long graphPointer;
 

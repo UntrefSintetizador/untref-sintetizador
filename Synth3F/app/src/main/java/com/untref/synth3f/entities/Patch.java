@@ -1,6 +1,6 @@
 package com.untref.synth3f.entities;
 
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public abstract class Patch {
         return this.posY;
     }
 
-    public abstract void initialize(IProcessor processor);
+    public abstract void initialize(Processor processor);
 
     public abstract String getTypeName();
 

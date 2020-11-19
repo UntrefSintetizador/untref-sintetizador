@@ -1,6 +1,6 @@
 package com.untref.synth3f.entities;
 
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class KBPatch extends Patch {
 
@@ -11,7 +11,7 @@ public class KBPatch extends Patch {
     public int octava = 4;
 
     @Override
-    public void initialize(IProcessor processor) {
+    public void initialize(Processor processor) {
         String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "gate", gate);

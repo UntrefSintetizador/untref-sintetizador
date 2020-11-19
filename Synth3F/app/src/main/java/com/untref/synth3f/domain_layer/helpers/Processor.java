@@ -6,7 +6,7 @@ import com.untref.synth3f.entities.Patch;
 /**
  * Acceso para el uso de la herramienta de procesamiento del sonido.
  */
-public interface IProcessor {
+public interface Processor {
 
     /**
      * Elimina todos los patches recibidos.

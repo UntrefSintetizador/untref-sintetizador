@@ -2,7 +2,7 @@ package com.untref.synth3f.presentation_layer.presenters;
 
 import android.view.View;
 
-import com.untref.synth3f.domain_layer.helpers.IProcessor;
+import com.untref.synth3f.domain_layer.helpers.Processor;
 import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.MenuScaleFunction;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
@@ -17,7 +17,7 @@ public abstract class PatchPresenter {
 
     protected PatchView patchView;
     protected PatchGraphPresenter patchGraphPresenter;
-    protected IProcessor processor;
+    protected Processor processor;
     protected Patch patch;
 
     public PatchPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
