@@ -53,7 +53,7 @@ public class StorageActivity extends AppCompatActivity {
                         ((EditText) findViewById(R.id.inputFilename)).setText(((TextView) view).getText());
                     }
                 });
-        findViewById(R.id.buttonOK).setOnClickListener(
+        findViewById(R.id.buttonSave).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
