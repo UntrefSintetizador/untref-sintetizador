@@ -2,22 +2,35 @@
     <string name="app_name">Synth3F</string>
     <string name="action_salir">Salir</string>
     <string name="piano">PIANO</string>
+
+    <!-- Menu options -->
     <string name="save">Save</string>
     <string name="load">Load</string>
     <string name="new_preset">New</string>
+
+    <!-- New preset dialog -->
     <string name="new_preset_dialog_title">NEW</string>
     <string name="new_preset_dialog_message">
         This action will remove all patches created without saving. Continue?
     </string>
-    <string name="dialog_cancel">CANCEL</string>
-    <string name="dialog_accept">ACCEPT</string>
+
+    <!-- Dialog -->
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_accept">Accept</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_save">Save</string>
+
+    <!-- Keyboard -->
     <string name="close">Close</string>
     <string name="octave_up">Octave +</string>
     <string name="octave_down">Octave -</string>
-    <string name="close_dialog_message">Save changes before closing?</string>
-    <string name="dialog_yes">YES</string>
-    <string name="dialog_no">NO</string>
+
+    <!-- Intent extra -->
     <string name="intent_filename">filename</string>
     <string name="intent_close_app">closeApp</string>
     <string name="intent_mode">mode</string>
+
+    <string name="close_dialog_message">Save changes before closing?</string>
+    <string name="save_hint">Name</string>
 </resources>

@@ -43,7 +43,7 @@ public class StorageActivity extends AppCompatActivity {
         boolean saveMode = mode == PatchGraphFragment.REQUEST_SAVE;
         TextView inputFileNameView = findViewById(R.id.inputFilename);
         inputFileNameView.setEnabled(saveMode);
-        inputFileNameView.setHint(saveMode ? R.string.save : R.string.load);
+        inputFileNameView.setHint(R.string.save_hint);
     }
 
     private void createClickEvents() {
