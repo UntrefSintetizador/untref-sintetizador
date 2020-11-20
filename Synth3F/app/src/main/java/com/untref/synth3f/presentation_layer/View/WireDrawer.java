@@ -162,7 +162,6 @@ public class WireDrawer extends View {
     private int[] getPositionOfView(View view) {
         int[] position = new int[2];
         Rect rect = new Rect();
-        // Same logic in PatchGraphPresenter.getPositionOfView(View) ---
         view.getLocationInWindow(position);
         WindowManager windowManager = ((Activity) getContext()).getWindowManager();
         Display display = windowManager.getDefaultDisplay();
@@ -176,7 +175,6 @@ public class WireDrawer extends View {
             int displayWidth = displayMetrics.widthPixels;
             position[0] -= (realWidth - displayWidth) / 2;
         }
-        // ---
         view.getHitRect(rect);
         position[0] += ((rect.right - rect.left) / 2) * mapView.getScale();
         position[1] += ((rect.bottom - rect.top) / 2) * mapView.getScale();
