@@ -59,11 +59,13 @@ public class StorageActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent returnIntent = new Intent();
                         String filename = ((EditText) findViewById(R.id.inputFilename)).getText().toString();
-                        returnIntent.putExtra("filename", filename);
-                        returnIntent.putExtra("closeApp", closeApp);
+                        if (!isOverwriting(filename)) {
+                            returnIntent.putExtra("filename", filename);
+                            returnIntent.putExtra("closeApp", closeApp);
 
-                        setResult(PatchGraphFragment.RESULT_OK, returnIntent);
-                        finish();
+                            setResult(PatchGraphFragment.RESULT_OK, returnIntent);
+                            finish();
+                        }
                     }
                 });
         findViewById(R.id.buttonCancel).setOnClickListener(
@@ -76,5 +78,14 @@ public class StorageActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+    }
+
+    private boolean isOverwriting(String newFilename) {
+        List<String> filenameList = getFilenameList(getBaseContext());
+        boolean filenameAlreadyExists = filenameList.contains(newFilename);
+        if (filenameAlreadyExists) {
+            // TODO: Overwriting dialog
+        }
+        return filenameAlreadyExists;
     }
 }
