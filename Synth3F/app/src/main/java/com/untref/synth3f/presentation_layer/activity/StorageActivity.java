@@ -25,6 +25,8 @@ public class StorageActivity extends AppCompatActivity {
 
     private boolean closeApp;
     private boolean saveMode;
+    private ListView listView;
+    private View lastViewSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,9 @@ public class StorageActivity extends AppCompatActivity {
 
     private void populateList() {
         List<String> list = getFilenameList(getBaseContext());
-        ListView listview = findViewById(R.id.filenameList);
+        listView = findViewById(R.id.filenameList);
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(adapter);
+        listView.setAdapter(adapter);
     }
 
     private void setMode(int mode) {
@@ -53,9 +55,15 @@ public class StorageActivity extends AppCompatActivity {
     }
 
     private void createClickEvents() {
-        ((ListView) findViewById(R.id.filenameList)).setOnItemClickListener(
+        listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        listView.setItemChecked(position, true);
+                        view.setBackgroundResource(R.color.optionsMenu);
+                        if (lastViewSelected != null) {
+                            lastViewSelected.setBackgroundColor(0);
+                        }
+                        lastViewSelected = view;
                         ((EditText) findViewById(R.id.inputFilename)).setText(((TextView) view).getText());
                     }
                 });
