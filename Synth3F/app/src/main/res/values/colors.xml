@@ -2,18 +2,13 @@
 <resources>
     <color name="colorPrimary">#FF9800</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="blue_soft">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="background_title_menu">#DEB887</color>
 
-    <color name="background">#333333</color>
-    <color name="panel">#333333</color>
-    <color name="panelText">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#333333</color>
+    <color name="dark_grey">#232323</color>
+    <color name="blue">#3590f3</color>
     <color name="vco">#FD3E81</color>
     <color name="vcf">#FCC500</color>
     <color name="lfo">#FDC400</color>
-    <color name="optionsMenu">#3590f3</color>
-    <color name="optionText">#232323</color>
-    <color name="alertDialog">#FFFFFF</color>
-    <color name="storageText">#232323</color>
 </resources>

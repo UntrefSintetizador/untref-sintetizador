@@ -59,7 +59,7 @@ public class StorageActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         listView.setItemChecked(position, true);
-                        view.setBackgroundResource(R.color.optionsMenu);
+                        view.setBackgroundResource(R.color.blue);
                         if (lastViewSelected != null) {
                             lastViewSelected.setBackgroundColor(0);
                         }
