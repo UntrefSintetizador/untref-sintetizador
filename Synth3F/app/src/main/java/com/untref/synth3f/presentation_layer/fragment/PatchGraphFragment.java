@@ -458,18 +458,10 @@ public class PatchGraphFragment extends Fragment {
             Resources resources = PatchGraphFragment.this.getResources();
             Context context = PatchGraphFragment.this.context;
             int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert;
-            AlertDialog alertDialog = new AlertDialog.Builder(context, dialogStyle).create();
+            final AlertDialog alertDialog = new AlertDialog.Builder(context, dialogStyle).create();
             alertDialog.setTitle(R.string.new_preset_dialog_title);
             alertDialog.setMessage(resources.getString(R.string.new_preset_dialog_message));
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
-                    resources.getString(R.string.dialog_cancel),
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
                     resources.getString(R.string.dialog_accept),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -477,6 +469,20 @@ public class PatchGraphFragment extends Fragment {
                             removeAllPatches();
                         }
                     });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+                    resources.getString(R.string.dialog_cancel),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    int red = getResources().getColor(R.color.red);
+                    alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(red);
+                }
+            });
             alertDialog.show();
         }
 

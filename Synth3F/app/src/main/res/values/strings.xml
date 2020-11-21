@@ -20,7 +20,7 @@
 
     <!-- Dialog -->
     <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_accept">Accept</string>
+    <string name="dialog_accept">Clean screen without saving</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="dialog_save">Save</string>
