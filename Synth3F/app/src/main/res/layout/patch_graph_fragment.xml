@@ -254,7 +254,7 @@
 
     </com.untref.synth3f.presentation_layer.View.PatchMenuView>
 
-    <com.untref.synth3f.presentation_layer.View.OptionList
+    <com.untref.synth3f.domain_layer.helpers.OptionList
         android:id="@+id/patch_menu_view_option_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
         app:layout_constraintEnd_toStartOf="@+id/patch_menu_view"
         app:layout_constraintTop_toTopOf="parent">
 
-    </com.untref.synth3f.presentation_layer.View.OptionList>
+    </com.untref.synth3f.domain_layer.helpers.OptionList>
 
     <Button
         android:id="@+id/menuButtonOpenOptionsMenu"

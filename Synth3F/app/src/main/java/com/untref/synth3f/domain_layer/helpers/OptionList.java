@@ -1,20 +1,16 @@
-package com.untref.synth3f.presentation_layer.View;
+package com.untref.synth3f.domain_layer.helpers;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.untref.synth3f.R;
+import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 
 public class OptionList extends LinearLayout {
 

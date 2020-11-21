@@ -15,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.domain_layer.helpers.OptionList;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
