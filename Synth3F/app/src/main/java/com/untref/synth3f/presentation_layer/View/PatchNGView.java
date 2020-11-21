@@ -21,7 +21,7 @@ public class PatchNGView extends PatchView {
         centerImage = R.drawable.map_node_ng;
         topImage = R.drawable.map_node_in_ng;
         bottomImage = R.drawable.map_node_out_ng;
-        color = Color.rgb(253, 180, 0);
+        color = getResources().getColor(R.color.ng);
     }
 
     @Override

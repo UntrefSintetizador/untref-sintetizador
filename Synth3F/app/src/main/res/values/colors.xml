@@ -10,5 +10,12 @@
     <color name="blue">#3590f3</color>
     <color name="vco">#FD3E81</color>
     <color name="vcf">#FCC500</color>
+    <color name="eg">#FF6B35</color>
+    <color name="vca">#06D6A0</color>
     <color name="lfo">#FDC400</color>
+    <color name="sh">#FDB400</color>
+    <color name="dac">#00FF00</color>
+    <color name="kb">#B200FF</color>
+    <color name="mix">#FDB400</color>
+    <color name="ng">#FDB400</color>
 </resources>

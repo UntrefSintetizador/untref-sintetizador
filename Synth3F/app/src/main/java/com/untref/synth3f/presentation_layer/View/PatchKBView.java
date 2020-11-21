@@ -21,7 +21,7 @@ public class PatchKBView extends PatchView {
         centerImage = R.drawable.map_node_kb;
         topImage = R.drawable.map_node_out_kb;
         bottomImage = R.drawable.map_node_out_kb;
-        color = Color.rgb(178, 0, 255);
+        color = getResources().getColor(R.color.kb);
     }
 
     @Override

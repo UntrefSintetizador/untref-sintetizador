@@ -21,7 +21,7 @@ public class PatchEGView extends PatchView {
         centerImage = R.drawable.map_node_eg;
         topImage = R.drawable.map_node_in_eg;
         bottomImage = R.drawable.map_node_out_eg;
-        color = Color.rgb(255, 107, 53);
+        color = getResources().getColor(R.color.eg);
     }
 
     @Override

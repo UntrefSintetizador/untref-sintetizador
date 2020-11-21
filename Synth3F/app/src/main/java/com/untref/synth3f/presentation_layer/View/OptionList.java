@@ -108,10 +108,10 @@ public class OptionList extends LinearLayout {
             setImageResource(selected ? iconOnId : iconOffId);
             ShapeDrawable shapeDrawable = new ShapeDrawable();
             if (selected) {
-                setBackgroundColor(getResources().getColor(color));
+                setBackgroundColor(color);
             } else {
                 shapeDrawable.setShape(new RectShape());
-                shapeDrawable.getPaint().setColor(getResources().getColor(color));
+                shapeDrawable.getPaint().setColor(color);
                 shapeDrawable.getPaint().setStrokeWidth(10f);
                 shapeDrawable.getPaint().setStyle(Paint.Style.STROKE);
                 setBackground(shapeDrawable);

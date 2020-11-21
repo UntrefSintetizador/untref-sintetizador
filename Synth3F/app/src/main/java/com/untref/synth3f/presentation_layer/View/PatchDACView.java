@@ -21,7 +21,7 @@ public class PatchDACView extends PatchView {
         centerImage = R.drawable.drag_dac;
         topImage = R.drawable.map_node_in_dac;
         bottomImage = R.drawable.map_node_in_dac;
-        color = Color.GREEN;
+        color = getResources().getColor(R.color.dac);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class PatchLFOView extends PatchView {
         centerImage = R.drawable.map_node_lfo;
         topImage = R.drawable.map_node_in_lfo;
         bottomImage = R.drawable.map_node_out_lfo;
-        color = Color.rgb(253, 180, 0);
+        color = getResources().getColor(R.color.lfo);
     }
 
     @Override
