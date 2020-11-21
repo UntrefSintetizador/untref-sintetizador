@@ -12,13 +12,10 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
@@ -107,10 +104,13 @@ public class PatchGraphFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 patchGraphPresenter.save(context,
                                          data.getStringExtra(getString(R.string.intent_filename)));
-                boolean closeApp = data.getBooleanExtra(getString(R.string.intent_close_app),
-                                                                 false);
+                boolean closeApp = data.getBooleanExtra(getString(R.string.intent_close_app), false);
                 if (closeApp) {
                     getActivity().finishAffinity();
+                }
+                boolean removeAll = data.getBooleanExtra(getString(R.string.intent_remove_all), false);
+                if (removeAll) {
+                    removeAllPatches();
                 }
             }
         }
@@ -163,7 +163,7 @@ public class PatchGraphFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        startStorageActivity(REQUEST_SAVE, true);
+                        startStorageActivity(REQUEST_SAVE, true, false);
                     }
                 });
         alertDialog.show();
@@ -215,7 +215,7 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startStorageActivity(REQUEST_SAVE, false);
+                        startStorageActivity(REQUEST_SAVE, false, false);
                     }
                 }
         );
@@ -223,16 +223,17 @@ public class PatchGraphFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startStorageActivity(REQUEST_LOAD, false);
+                        startStorageActivity(REQUEST_LOAD, false, false);
                     }
                 }
         );
     }
 
-    private void startStorageActivity(int request, boolean closeApp) {
+    private void startStorageActivity(int request, boolean closeApp, boolean removeAll) {
         Intent intent = new Intent(getActivity(), StorageActivity.class);
         intent.putExtra(getString(R.string.intent_mode), request);
         intent.putExtra(getString(R.string.intent_close_app), closeApp);
+        intent.putExtra(getString(R.string.intent_remove_all), removeAll);
         startActivityForResult(intent, request);
     }
 
@@ -372,6 +373,15 @@ public class PatchGraphFragment extends Fragment {
         wireDrawer.release();
     }
 
+    private void removeAllPatches() {
+        ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
+        while (mapLayout.getChildCount() > 1) {
+            mapLayout.removeViewAt(0);
+        }
+        wireDrawer.clear();
+        patchGraphPresenter.deleteAll();
+    }
+
     private class DragAndDropListener implements View.OnTouchListener {
         private int xDelta;
         private int yDelta;
@@ -462,7 +472,7 @@ public class PatchGraphFragment extends Fragment {
             alertDialog.setTitle(R.string.new_preset_dialog_title);
             alertDialog.setMessage(resources.getString(R.string.new_preset_dialog_message));
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
-                    resources.getString(R.string.dialog_accept),
+                    resources.getString(R.string.dialog_clean_screen),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -476,6 +486,15 @@ public class PatchGraphFragment extends Fragment {
                             dialog.dismiss();
                         }
                     });
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+                    resources.getString(R.string.dialog_save),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            startStorageActivity(REQUEST_SAVE, false, true);
+                        }
+                    });
             alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                 @Override
                 public void onShow(DialogInterface dialog) {
@@ -484,16 +503,6 @@ public class PatchGraphFragment extends Fragment {
                 }
             });
             alertDialog.show();
-        }
-
-        private void removeAllPatches() {
-            Activity activity = PatchGraphFragment.this.getActivity();
-            ConstraintLayout mapLayout = activity.findViewById(R.id.map);
-            while (mapLayout.getChildCount() > 1) {
-                mapLayout.removeViewAt(0);
-            }
-            PatchGraphFragment.this.wireDrawer.clear();
-            PatchGraphFragment.this.patchGraphPresenter.deleteAll();
         }
     }
 }

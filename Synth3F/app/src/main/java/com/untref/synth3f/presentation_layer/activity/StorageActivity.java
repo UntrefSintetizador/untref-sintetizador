@@ -27,6 +27,7 @@ public class StorageActivity extends AppCompatActivity {
     private boolean saveMode;
     private ListView listView;
     private View lastViewSelected;
+    private boolean removeAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class StorageActivity extends AppCompatActivity {
         populateList();
         setMode(getIntent().getIntExtra("mode", 0));
         closeApp = getIntent().getBooleanExtra("closeApp", false);
+        removeAll = getIntent().getBooleanExtra("removeAll", false);
         createClickEvents();
     }
 
@@ -120,6 +122,7 @@ public class StorageActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("filename", filename);
         returnIntent.putExtra("closeApp", closeApp);
+        returnIntent.putExtra("removeAll", removeAll);
 
         setResult(PatchGraphFragment.RESULT_OK, returnIntent);
         finish();
