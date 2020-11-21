@@ -46,7 +46,7 @@ public class StorageActivity extends AppCompatActivity {
     private void setMode(int mode) {
         saveMode = mode == PatchGraphFragment.REQUEST_SAVE;
         TextView inputFileNameView = findViewById(R.id.inputFilename);
-        inputFileNameView.setEnabled(saveMode);
+        inputFileNameView.setVisibility(saveMode ? View.VISIBLE : View.INVISIBLE);
         inputFileNameView.setHint(R.string.save_hint);
         Button buttonSave = findViewById(R.id.buttonSave);
         buttonSave.setText(getString(saveMode ? R.string.dialog_save : R.string.dialog_load));
