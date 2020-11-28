@@ -230,7 +230,8 @@
         android:elevation="4dp"
         android:rowCount="6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/panel">
 
         <TableRow android:id="@+id/patch_menu_title">
 
@@ -260,17 +261,20 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#00000000">
 
             <TextView
                 android:id="@+id/patch_menu_view_parameter_name"
+                android:background="#00000000"
                 android:textAlignment="center"
                 android:textAppearance="@style/PatchMenuText" />
 
             <EditText
                 android:id="@+id/patch_menu_view_parameter_value"
                 style="@style/PatchMenuText"
-                android:hint="0"
+                android:layout_height="30sp"
+                android:background="#00000000"
                 android:inputType="numberDecimal|numberSigned"
                 android:textAlignment="center"
                 android:textAppearance="@style/PatchMenuText" />

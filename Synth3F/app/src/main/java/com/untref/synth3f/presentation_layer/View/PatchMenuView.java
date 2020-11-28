@@ -3,6 +3,8 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -199,6 +201,7 @@ public class PatchMenuView extends TableLayout {
         patchMenuName.setTextColor(getResources().getColor(R.color.dark_grey));
         patchMenuName.setText(typeName);
         patchMenuName.setBackgroundColor(color);
+        ((GradientDrawable) getBackground()).setStroke(5, color);
         TableRow knobTableRow;
         TableRow textTableRow;
         int knobsInRow;
@@ -208,10 +211,13 @@ public class PatchMenuView extends TableLayout {
         for (int i = 0; i < knobList.size(); i = i + knobsPerRow) {
             textTableRow = new TableRow(getContext());
             knobTableRow = new TableRow(getContext());
+            textTableRow.setBackgroundColor(0);
+            knobTableRow.setBackgroundColor(0);
             knobsInRow = Math.min(knobsPerRow, knobList.size() - i);
             for (int j = 0; j < knobsInRow; j++) {
                 knob = knobList.get(i + j);
                 textView = new TextView(getContext());
+                textView.setBackgroundColor(0);
                 textView.setText(knob.getName());
                 textView.setTextAppearance(getContext(), R.style.PatchMenuText);
                 textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
