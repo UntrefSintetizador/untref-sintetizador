@@ -37,6 +37,8 @@ public class PatchMenuView extends TableLayout {
     private int knobSize;
     private int knobsPerRow;
     private int color;
+    private View menuBar;
+    private View menuBar2;
 
     public PatchMenuView(Context context) {
         super(context);
@@ -59,7 +61,6 @@ public class PatchMenuView extends TableLayout {
         this.knobList = new ArrayList<>();
         this.parameterNameView = findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
-        this.patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
         this.optionList = ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
 
         optionList.setVisibility(View.GONE);
@@ -78,6 +79,7 @@ public class PatchMenuView extends TableLayout {
         getLayoutParams().height = (int) (relationOfHeight * defaultHeight);
         getLayoutParams().width = (int) (relationOfHeight * defaultWidth);
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
+        initMenuBar();
 
         int defaultButtonSize = 150;
         optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
@@ -115,6 +117,15 @@ public class PatchMenuView extends TableLayout {
                     }
                 }
         );
+    }
+
+    private void initMenuBar() {
+        menuBar = findViewById(R.id.menu_bar);
+        menuBar.getLayoutParams().width = knobSize;
+        menuBar2 = findViewById(R.id.menu_bar2);
+        menuBar2.getLayoutParams().width = knobSize;
+        patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
+        patchMenuViewClose.getLayoutParams().width = knobSize;
     }
 
     /**
@@ -180,19 +191,19 @@ public class PatchMenuView extends TableLayout {
      */
     public void open(PatchPresenter patchPresenter, String typeName) {
         this.patchPresenter = patchPresenter;
-        TableRow knobTableRow;
-        TableRow textTableRow;
-        int knobsInRow;
-        TextView textView;
-        Knob knob;
         findViewById(R.id.patch_menu_title).setBackgroundColor(color);
-        findViewById(R.id.menu_bar).setBackgroundColor(color);
-        findViewById(R.id.menu_bar2).setBackgroundColor(color);
+        menuBar.setBackgroundColor(color);
+        menuBar2.setBackgroundColor(color);
         patchMenuViewClose.setBackgroundColor(color);
         TextView patchMenuName = findViewById(R.id.patch_menu_name);
         patchMenuName.setTextColor(getResources().getColor(R.color.dark_grey));
         patchMenuName.setText(typeName);
         patchMenuName.setBackgroundColor(color);
+        TableRow knobTableRow;
+        TableRow textTableRow;
+        int knobsInRow;
+        TextView textView;
+        Knob knob;
         LinearLayout.LayoutParams layoutParams;
         for (int i = 0; i < knobList.size(); i = i + knobsPerRow) {
             textTableRow = new TableRow(getContext());

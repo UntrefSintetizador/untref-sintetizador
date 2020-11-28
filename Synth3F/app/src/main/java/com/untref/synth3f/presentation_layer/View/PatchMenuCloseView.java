@@ -37,6 +37,7 @@ public class PatchMenuCloseView extends AppCompatButton {
     private void init() {
         closePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         closePaint.setColor(getResources().getColor(R.color.dark_grey));
+
     }
 
 }
