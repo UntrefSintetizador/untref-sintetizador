@@ -251,7 +251,7 @@ public abstract class PatchView extends LinearLayout {
                 patchMenuView.close();
                 patchMenuView.setColor(getColor());
                 if (patchPresenter.initMenuView(patchMenuView)) {
-                    patchMenuView.open(patchPresenter);
+                    patchMenuView.open(patchPresenter, patch.getTypeName());
                 }
                 return false;
             }

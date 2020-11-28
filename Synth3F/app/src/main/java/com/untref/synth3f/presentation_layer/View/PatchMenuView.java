@@ -1,6 +1,8 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -28,6 +30,7 @@ public class PatchMenuView extends TableLayout {
     private PatchGraphFragment patchGraphFragment;
     private TextView parameterNameView;
     private EditText parameterValueView;
+    private PatchMenuCloseView patchMenuViewClose;
     private OptionList optionList;
     private PatchPresenter patchPresenter;
     private List<Knob> knobList;
@@ -51,12 +54,12 @@ public class PatchMenuView extends TableLayout {
         return patchGraphFragment;
     }
 
-
     public void setPatchGraphFragment(PatchGraphFragment patchGraphFragment) {
         this.patchGraphFragment = patchGraphFragment;
         this.knobList = new ArrayList<>();
         this.parameterNameView = findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
+        this.patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
         this.optionList = ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
 
         optionList.setVisibility(View.GONE);
@@ -80,10 +83,9 @@ public class PatchMenuView extends TableLayout {
         optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
 
         int defaultCloseButtonSize = 50;
-        Button button = findViewById(R.id.patch_menu_view_close);
-        button.getLayoutParams().width = (int) (relationOfHeight * defaultCloseButtonSize);
-        button.getLayoutParams().height = (int) (relationOfHeight * defaultCloseButtonSize);
-        button.setOnClickListener(
+        patchMenuViewClose.getLayoutParams().width = (int) (relationOfHeight * defaultCloseButtonSize);
+        patchMenuViewClose.getLayoutParams().height = (int) (relationOfHeight * defaultCloseButtonSize);
+        patchMenuViewClose.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -174,14 +176,23 @@ public class PatchMenuView extends TableLayout {
      * Abre, es decir deja visible, la vista que permite editar y ver los valores del patch.
      *
      * @param patchPresenter presenter del patch
+     * @param typeName
      */
-    public void open(PatchPresenter patchPresenter) {
+    public void open(PatchPresenter patchPresenter, String typeName) {
         this.patchPresenter = patchPresenter;
         TableRow knobTableRow;
         TableRow textTableRow;
         int knobsInRow;
         TextView textView;
         Knob knob;
+        findViewById(R.id.patch_menu_title).setBackgroundColor(color);
+        findViewById(R.id.menu_bar).setBackgroundColor(color);
+        findViewById(R.id.menu_bar2).setBackgroundColor(color);
+        patchMenuViewClose.setBackgroundColor(color);
+        TextView patchMenuName = findViewById(R.id.patch_menu_name);
+        patchMenuName.setTextColor(getResources().getColor(R.color.dark_grey));
+        patchMenuName.setText(typeName);
+        patchMenuName.setBackgroundColor(color);
         LinearLayout.LayoutParams layoutParams;
         for (int i = 0; i < knobList.size(); i = i + knobsPerRow) {
             textTableRow = new TableRow(getContext());
