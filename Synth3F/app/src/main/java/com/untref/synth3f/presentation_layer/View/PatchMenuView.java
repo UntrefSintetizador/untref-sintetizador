@@ -192,14 +192,15 @@ public class PatchMenuView extends TableLayout {
                 textView = new TextView(getContext());
                 textView.setText(knob.getName());
                 textView.setTextAppearance(getContext(), R.style.PatchMenuText);
+                textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
                 textTableRow.addView(textView);
                 knobTableRow.addView(knob);
                 layoutParams = (LinearLayout.LayoutParams) knob.getLayoutParams();
                 layoutParams.width = knobSize;
                 layoutParams.height = knobSize;
             }
-            addView(textTableRow);
             addView(knobTableRow);
+            addView(textTableRow);
         }
         optionList.setVisibility(View.VISIBLE);
         setVisibility(View.VISIBLE);
