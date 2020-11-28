@@ -124,7 +124,8 @@ public class PatchMenuView extends TableLayout {
                            MenuScaleFunction scale) {
 
         Knob newKnob = new Knob(getContext(), this, parameterName,
-                scale.getMinValue(), scale.getMaxValue(), precision, value, scale, color);
+                                scale.getMinValue(), scale.getMaxValue(), precision, value,
+                                scale, color);
 
         knobList.add(newKnob);
     }

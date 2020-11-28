@@ -1,7 +1,9 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,14 +30,16 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     private Knob linkedKnob;
     private String linkedKnobParameterName;
     private LinkingFunction linkingFunction;
+    private Paint centerCirclePaint;
+    private Paint borderCirclePaint;
+    private Paint markPaint;
 
     public Knob(Context context) {
         super(context);
     }
 
     /**
-     *
-     * @param context contexto
+     *  @param context contexto
      * @param patchMenuView patchMenuView
      * @param parameterName el nombre (string) que representa al knob
      * @param minValue valor minimo que puede representar el knob
@@ -44,6 +48,7 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
      * @param value valor actual que representa el knob
      * @param scaleFunction la funcion de escala de los valores
      * @param color color
+     * @param knobSize
      */
     public Knob(Context context, PatchMenuView patchMenuView, String parameterName,
                 float minValue, float maxValue, int precision, float value,
@@ -141,14 +146,37 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         return true;
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        int centerX = getWidth() / 2;
+        int centerY = getWidth() / 2;
+        int centerCircleSize = getHeight() / 4;
+        int borderCircleSize = getHeight() * 5 / 16;
+        canvas.drawCircle(centerX, centerY, centerCircleSize, centerCirclePaint);
+        canvas.drawCircle(centerX, centerY, borderCircleSize, borderCirclePaint);
+        int markLeft = centerX - 5;
+        int markTop = borderCircleSize / 2;
+        int markRight = centerX + 5;
+        int markBottom = borderCircleSize * 5 / 4;
+        canvas.drawRect(markLeft, markTop, markRight, markBottom, markPaint);
+    }
+
     private void init(int color) {
         rotationWhileNotMoving = calculateRotation();
         setRotation(rotationWhileNotMoving);
         setClickable(true);
         setOnTouchListener(this);
-        setBackgroundResource(R.drawable.knob);
+        setBackgroundColor(0);
+        centerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        centerCirclePaint.setColor(color);
+        borderCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        borderCirclePaint.setStyle(Paint.Style.STROKE);
+        borderCirclePaint.setColor(color);
+        borderCirclePaint.setStrokeWidth(10);
+        markPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        markPaint.setColor(getResources().getColor(R.color.white));
         setScaleType(AppCompatImageView.ScaleType.CENTER_INSIDE);
-        getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
     }
 
     private void setValueCheckingLinks(float value, boolean checksLink) {
