@@ -20,6 +20,7 @@
         android:id="@+id/drag_menu_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00000000"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
@@ -280,6 +281,7 @@
         android:layout_width="209dp"
         android:layout_height="382dp"
         android:layout_marginTop="8dp"
+        android:background="#00000000"
         android:columnCount="1"
         android:elevation="2dp"
         android:gravity="top"
@@ -288,7 +290,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/menuButtonOpenOptionsMenu">
 
-        <TableRow>
+        <TableRow android:background="#00000000">
 
             <Button
                 android:id="@+id/menuNew"
@@ -299,7 +301,7 @@
 
         </TableRow>
 
-        <TableRow>
+        <TableRow android:background="#00000000">
 
             <Button
                 android:id="@+id/menuLoad"
@@ -310,7 +312,7 @@
 
         </TableRow>
 
-        <TableRow>
+        <TableRow android:background="#00000000">
 
             <Button
                 android:id="@+id/menuSave"
@@ -321,7 +323,7 @@
 
         </TableRow>
 
-        <TableRow>
+        <TableRow android:background="#00000000">
 
             <Button
                 android:id="@+id/menuButtonChangeEngine"
