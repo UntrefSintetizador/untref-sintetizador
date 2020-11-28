@@ -253,7 +253,8 @@
                 android:layout_height="wrap_content" />
 
             <com.untref.synth3f.presentation_layer.View.PatchMenuCloseView
-                android:id="@+id/patch_menu_view_close" />
+                android:id="@+id/patch_menu_view_close"
+                style="@style/Widget.AppCompat.Button.Borderless" />
 
         </TableRow>
 
