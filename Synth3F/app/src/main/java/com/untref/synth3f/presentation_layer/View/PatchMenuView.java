@@ -63,7 +63,7 @@ public class PatchMenuView extends TableLayout {
         this.knobList = new ArrayList<>();
         this.parameterNameView = findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
-        this.optionList = ((View) getParent()).findViewById(R.id.patch_menu_view_option_list);
+        this.optionList = new OptionList(getContext());
 
         optionList.setVisibility(View.GONE);
         setVisibility(View.GONE);
@@ -83,7 +83,7 @@ public class PatchMenuView extends TableLayout {
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
         initMenuBar();
 
-        int defaultButtonSize = 150;
+        int defaultButtonSize = 80;
         optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
 
         int defaultCloseButtonSize = 50;
@@ -193,8 +193,9 @@ public class PatchMenuView extends TableLayout {
         patchMenuName.setText(typeName);
         patchMenuName.setBackgroundColor(color);
         ((GradientDrawable) getBackground()).setStroke(5, color);
-        populateKnobs();
         optionList.setVisibility(View.VISIBLE);
+        addView(optionList);
+        populateKnobs();
         setVisibility(View.VISIBLE);
         setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
     }

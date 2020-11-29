@@ -9,10 +9,11 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 
-public class OptionList extends LinearLayout {
+public class OptionList extends TableRow {
 
     private PatchMenuView patchMenuView;
     private String parameterName;
@@ -27,10 +28,6 @@ public class OptionList extends LinearLayout {
 
     public OptionList(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    public OptionList(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
     }
 
     public void init(PatchMenuView patchMenuView, int buttonSize) {
@@ -93,6 +90,8 @@ public class OptionList extends LinearLayout {
         public void init(int size) {
             getLayoutParams().width = size;
             getLayoutParams().height = size;
+            setScaleType(ScaleType.CENTER);
+            setAdjustViewBounds(true);
             setSelected(false);
             setClickable(true);
             setOnClickListener(this);
