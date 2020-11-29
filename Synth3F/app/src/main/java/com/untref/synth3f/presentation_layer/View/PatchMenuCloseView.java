@@ -28,7 +28,7 @@ public class PatchMenuCloseView extends AppCompatButton {
         int width = 100;
         int height = 20;
         int left = getWidth() / 2;
-        int top = getHeight() * 7 / 8;
+        int top = getHeight() * 3 / 4;
         int right = left + width / 2;
         int bottom = top + height / 2;
         canvas.drawRect(left, top, right, bottom, closePaint);

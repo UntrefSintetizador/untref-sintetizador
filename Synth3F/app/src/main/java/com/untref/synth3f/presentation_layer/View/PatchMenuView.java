@@ -1,9 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
 import android.util.AttributeSet;
@@ -11,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -39,8 +35,6 @@ public class PatchMenuView extends TableLayout {
     private int knobSize;
     private int knobsPerRow;
     private int color;
-    private View menuBar;
-    private View menuBar2;
 
     public PatchMenuView(Context context) {
         super(context);
@@ -81,14 +75,12 @@ public class PatchMenuView extends TableLayout {
         getLayoutParams().height = (int) (relationOfHeight * defaultHeight);
         getLayoutParams().width = (int) (relationOfHeight * defaultWidth);
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
-        initMenuBar();
 
         int defaultButtonSize = 80;
         optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
 
-        int defaultCloseButtonSize = 50;
-        patchMenuViewClose.getLayoutParams().width = (int) (relationOfHeight * defaultCloseButtonSize);
-        patchMenuViewClose.getLayoutParams().height = (int) (relationOfHeight * defaultCloseButtonSize);
+        patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
+        patchMenuViewClose.getLayoutParams().width = knobSize;
         patchMenuViewClose.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -185,13 +177,11 @@ public class PatchMenuView extends TableLayout {
     public void open(PatchPresenter patchPresenter, String typeName) {
         this.patchPresenter = patchPresenter;
         findViewById(R.id.patch_menu_title).setBackgroundColor(color);
-        menuBar.setBackgroundColor(color);
-        menuBar2.setBackgroundColor(color);
         patchMenuViewClose.setBackgroundColor(color);
-        TextView patchMenuName = findViewById(R.id.patch_menu_name);
-        patchMenuName.setTextColor(getResources().getColor(R.color.dark_grey));
-        patchMenuName.setText(typeName);
-        patchMenuName.setBackgroundColor(color);
+        TextView patchMenuNameView = findViewById(R.id.patch_menu_name);
+        patchMenuNameView.setTextColor(getResources().getColor(R.color.dark_grey));
+        patchMenuNameView.setText(typeName);
+        patchMenuNameView.setBackgroundColor(color);
         ((GradientDrawable) getBackground()).setStroke(5, color);
         optionList.setVisibility(View.VISIBLE);
         addView(optionList);
@@ -252,15 +242,6 @@ public class PatchMenuView extends TableLayout {
         DecimalFormat decimalFormat = new DecimalFormat("#.#######");
         editable.clear();
         editable.append(decimalFormat.format(value).replace(",", "."));
-    }
-
-    private void initMenuBar() {
-        menuBar = findViewById(R.id.menu_bar);
-        menuBar.getLayoutParams().width = knobSize;
-        menuBar2 = findViewById(R.id.menu_bar2);
-        menuBar2.getLayoutParams().width = knobSize;
-        patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
-        patchMenuViewClose.getLayoutParams().width = knobSize;
     }
 
     private void populateKnobs() {
