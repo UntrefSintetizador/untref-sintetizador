@@ -66,8 +66,8 @@ public class PatchMenuView extends TableLayout {
         setVisibility(View.GONE);
 
         this.knobsPerRow = 4;
-        ((TableRow.LayoutParams) parameterNameView.getLayoutParams()).span = knobsPerRow / 2;
-        ((TableRow.LayoutParams) parameterValueView.getLayoutParams()).span = knobsPerRow / 2;
+        ((TableRow.LayoutParams) parameterValueView.getLayoutParams()).span = knobsPerRow - 1;
+        parameterValueView.setMinimumWidth(getLayoutParams().width);
 
         //pixels
         float defaultScreenHeight = 728;
@@ -86,6 +86,7 @@ public class PatchMenuView extends TableLayout {
 
         patchMenuViewName = findViewById(R.id.patch_menu_name);
         ((TableRow.LayoutParams) patchMenuViewName.getLayoutParams()).span = knobsPerRow - 1;
+        patchMenuViewName.setMinimumWidth(getLayoutParams().width);
 
         patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
         patchMenuViewClose.getLayoutParams().width = knobSize;
@@ -277,6 +278,16 @@ public class PatchMenuView extends TableLayout {
             }
             addView(knobTableRow);
             addView(textTableRow);
+        }
+        fixRowsWidth();
+    }
+
+    private void fixRowsWidth() {
+        ViewGroup lastRow = (ViewGroup) getChildAt(getChildCount() - 1);
+        while (lastRow.getChildCount() < knobsPerRow - 1) {
+            View dummy = new View(getContext());
+            lastRow.addView(dummy);
+            dummy.getLayoutParams().width = knobSize;
         }
     }
 }
