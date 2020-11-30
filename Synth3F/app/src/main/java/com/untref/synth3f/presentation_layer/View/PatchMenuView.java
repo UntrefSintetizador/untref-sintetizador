@@ -30,6 +30,7 @@ public class PatchMenuView extends TableLayout {
     private EditText parameterValueView;
     private TextView patchMenuViewName;
     private PatchMenuCloseView patchMenuViewClose;
+    private TableLayout parameterView;
     private OptionList optionList;
     private PatchPresenter patchPresenter;
     private List<Knob> knobList;
@@ -75,7 +76,7 @@ public class PatchMenuView extends TableLayout {
         getLayoutParams().width = (int) (relationOfHeight * defaultWidth);
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
 
-        TableLayout parameterView = findViewById(R.id.patch_menu_view_parameter);
+        parameterView = findViewById(R.id.patch_menu_view_parameter);
         ((TableRow.LayoutParams) parameterView.getLayoutParams()).span = knobsPerRow;
 
         int defaultButtonSize = 80;
@@ -187,9 +188,7 @@ public class PatchMenuView extends TableLayout {
         patchMenuViewClose.setBackgroundColor(color);
         patchMenuViewName.setText(typeName);
         patchMenuViewName.setBackgroundColor(color);
-        findViewById(R.id.patch_menu_view_parameter_name_row).setBackgroundColor(color);
-        parameterValueView.setTextColor(color);
-        ((GradientDrawable) getBackground()).setStroke(2, color);
+        styleParameterView();
         optionList.setVisibility(View.VISIBLE);
         populateKnobs();
         setVisibility(View.VISIBLE);
@@ -248,6 +247,23 @@ public class PatchMenuView extends TableLayout {
         DecimalFormat decimalFormat = new DecimalFormat("#.#######");
         editable.clear();
         editable.append(decimalFormat.format(value).replace(",", "."));
+    }
+
+    private void styleParameterView() {
+        int cornerRadius = 15;
+        int strokeWidth = 2;
+        GradientDrawable parameterNameBackground = new GradientDrawable();
+        parameterNameBackground.setColor(color);
+        parameterNameBackground.setCornerRadii(new float[] {
+                cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0, 0, 0, 0
+        });
+        parameterNameView.setBackground(parameterNameBackground);
+        parameterValueView.setTextColor(color);
+        ((GradientDrawable) getBackground()).setStroke(strokeWidth, color);
+        GradientDrawable parameterBackground = new GradientDrawable();
+        parameterBackground.setStroke(strokeWidth, color);
+        parameterBackground.setCornerRadius(cornerRadius);
+        parameterView.setBackground(parameterBackground);
     }
 
     private void populateKnobs() {
