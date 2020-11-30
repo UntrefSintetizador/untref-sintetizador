@@ -181,7 +181,6 @@ public class PatchMenuView extends TableLayout {
         findViewById(R.id.patch_menu_title).setBackgroundColor(color);
         patchMenuViewClose.setBackgroundColor(color);
         TextView patchMenuNameView = findViewById(R.id.patch_menu_name);
-        patchMenuNameView.setTextColor(getResources().getColor(R.color.dark_grey));
         patchMenuNameView.setText(typeName);
         patchMenuNameView.setBackgroundColor(color);
         ((GradientDrawable) getBackground()).setStroke(5, color);

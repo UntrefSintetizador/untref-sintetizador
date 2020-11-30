@@ -25,12 +25,12 @@ public class PatchMenuCloseView extends AppCompatButton {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width = 100;
-        int height = 20;
+        int width = 45;
+        int height = 15;
         int left = getWidth() / 2;
-        int top = getHeight() * 3 / 4;
-        int right = left + width / 2;
-        int bottom = top + height / 2;
+        int top = getHeight() / 2;
+        int right = left + width;
+        int bottom = top + height;
         canvas.drawRect(left, top, right, bottom, closePaint);
     }
 
