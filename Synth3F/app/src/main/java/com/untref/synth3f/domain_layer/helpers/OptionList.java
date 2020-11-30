@@ -1,16 +1,11 @@
 package com.untref.synth3f.domain_layer.helpers;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.LinearLayout;
 
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
@@ -22,7 +17,9 @@ public class OptionList extends LinearLayout {
     private OptionItem[] options;
 
     private int selectedValue;
-    private int buttonSize;
+    private int height;
+    private int width;
+    private int spacing;
 
     public OptionList(Context context) {
         super(context);
@@ -32,9 +29,11 @@ public class OptionList extends LinearLayout {
         super(context, attrs);
     }
 
-    public void init(PatchMenuView patchMenuView, int buttonSize) {
+    public void init(PatchMenuView patchMenuView, int width, int height, int spacing) {
         this.patchMenuView = patchMenuView;
-        this.buttonSize = buttonSize;
+        this.width = width;
+        this.height = height;
+        this.spacing = spacing;
         setBackgroundColor(0);
     }
 
@@ -42,13 +41,14 @@ public class OptionList extends LinearLayout {
                           int selectedValue) {
         this.parameterName = parameterName;
         this.selectedValue = selectedValue;
+        int buttonWidth = width / iconOffIds.length - spacing * 2;
         options = new OptionItem[iconOffIds.length];
         OptionItem optionItem;
         for (int i = 0; i < iconOffIds.length; i++) {
             optionItem = new OptionItem(getContext(), i, color, iconOffIds[i], iconOnIds[i]);
             addView(optionItem);
             options[i] = optionItem;
-            optionItem.init(buttonSize);
+            optionItem.init(buttonWidth, height, spacing);
         }
         options[selectedValue].setSelected(true);
     }
@@ -90,11 +90,11 @@ public class OptionList extends LinearLayout {
             this.color = color;
         }
 
-        public void init(int size) {
+        public void init(int width, int height, int spacing) {
             LayoutParams layoutParams = (LayoutParams) getLayoutParams();
-            layoutParams.width = size;
-            layoutParams.height = size;
-            layoutParams.leftMargin = 10;
+            layoutParams.width = width;
+            layoutParams.height = height;
+            layoutParams.leftMargin = spacing;
             setScaleType(ScaleType.CENTER);
             setAdjustViewBounds(true);
             setSelected(false);

@@ -79,7 +79,9 @@ public class PatchMenuView extends TableLayout {
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
 
         int defaultButtonSize = 80;
-        optionList.init(this, (int) (relationOfHeight * defaultButtonSize));
+        int defaultButtonSpacing = 10;
+        optionList.init(this, getLayoutParams().width,
+                        (int) (relationOfHeight * defaultButtonSize), defaultButtonSpacing);
 
         patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
         patchMenuViewClose.getLayoutParams().width = knobSize;
