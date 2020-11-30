@@ -189,7 +189,7 @@ public class PatchMenuView extends TableLayout {
         patchMenuViewClose.setBackgroundColor(color);
         patchMenuViewName.setText(typeName);
         patchMenuViewName.setBackgroundColor(color);
-        ((GradientDrawable) getBackground()).setStroke(5, color);
+        ((GradientDrawable) getBackground()).setStroke(2, color);
         optionList.setVisibility(View.VISIBLE);
         populateKnobs();
         setVisibility(View.VISIBLE);
