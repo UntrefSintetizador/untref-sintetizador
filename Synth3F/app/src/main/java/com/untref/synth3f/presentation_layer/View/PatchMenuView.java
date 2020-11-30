@@ -64,18 +64,19 @@ public class PatchMenuView extends TableLayout {
         setVisibility(View.GONE);
 
         this.knobsPerRow = 4;
-        ((TableRow.LayoutParams) parameterValueView.getLayoutParams()).span = knobsPerRow - 1;
-        parameterValueView.setMinimumWidth(getLayoutParams().width);
 
         //pixels
         float defaultScreenHeight = 728;
         int defaultHeight = 680;
-        int defaultWidth = 600;
-        int defaultKnobHeight = 150;
+        int defaultWidth = 560;
+        int defaultKnobHeight = 140;
         float relationOfHeight = (float) getResources().getDisplayMetrics().heightPixels / defaultScreenHeight;
         getLayoutParams().height = (int) (relationOfHeight * defaultHeight);
         getLayoutParams().width = (int) (relationOfHeight * defaultWidth);
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
+
+        TableLayout parameterView = findViewById(R.id.patch_menu_view_parameter);
+        ((TableRow.LayoutParams) parameterView.getLayoutParams()).span = knobsPerRow;
 
         int defaultButtonSize = 80;
         int defaultButtonSpacing = 10;
@@ -84,7 +85,6 @@ public class PatchMenuView extends TableLayout {
 
         patchMenuViewName = findViewById(R.id.patch_menu_name);
         ((TableRow.LayoutParams) patchMenuViewName.getLayoutParams()).span = knobsPerRow - 1;
-        patchMenuViewName.setMinimumWidth(getLayoutParams().width);
 
         patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
         patchMenuViewClose.getLayoutParams().width = knobSize;
@@ -187,6 +187,8 @@ public class PatchMenuView extends TableLayout {
         patchMenuViewClose.setBackgroundColor(color);
         patchMenuViewName.setText(typeName);
         patchMenuViewName.setBackgroundColor(color);
+        findViewById(R.id.patch_menu_view_parameter_name_row).setBackgroundColor(color);
+        parameterValueView.setTextColor(color);
         ((GradientDrawable) getBackground()).setStroke(2, color);
         optionList.setVisibility(View.VISIBLE);
         populateKnobs();
