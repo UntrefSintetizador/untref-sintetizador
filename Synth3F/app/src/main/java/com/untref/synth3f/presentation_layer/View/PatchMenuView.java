@@ -59,7 +59,7 @@ public class PatchMenuView extends TableLayout {
         this.knobList = new ArrayList<>();
         this.parameterNameView = findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
-        this.optionList = new OptionList(getContext());
+        this.optionList = findViewById(R.id.patch_menu_view_option_list);
 
         optionList.setVisibility(View.GONE);
         setVisibility(View.GONE);
@@ -70,7 +70,7 @@ public class PatchMenuView extends TableLayout {
 
         //pixels
         float defaultScreenHeight = 728;
-        int defaultHeight = 600;
+        int defaultHeight = 680;
         int defaultWidth = 600;
         int defaultKnobHeight = 150;
         float relationOfHeight = (float) getResources().getDisplayMetrics().heightPixels / defaultScreenHeight;
@@ -186,7 +186,7 @@ public class PatchMenuView extends TableLayout {
         patchMenuNameView.setText(typeName);
         patchMenuNameView.setBackgroundColor(color);
         ((GradientDrawable) getBackground()).setStroke(5, color);
-        addOptionsListToTable();
+        optionList.setVisibility(View.VISIBLE);
         populateKnobs();
         setVisibility(View.VISIBLE);
         setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
@@ -197,9 +197,8 @@ public class PatchMenuView extends TableLayout {
      */
     public void close() {
         knobList.clear();
-        int permanentViews = 2;
+        int permanentViews = 3;
         while (getChildCount() > permanentViews) {
-            ((TableRow) getChildAt(permanentViews)).removeAllViews();
             removeViewAt(permanentViews);
         }
         optionList.clear();
@@ -245,18 +244,6 @@ public class PatchMenuView extends TableLayout {
         DecimalFormat decimalFormat = new DecimalFormat("#.#######");
         editable.clear();
         editable.append(decimalFormat.format(value).replace(",", "."));
-    }
-
-    private void addOptionsListToTable() {
-        TableRow optionsListRow = new TableRow(getContext());
-        optionsListRow.setBackgroundColor(0);
-        optionsListRow.addView(optionList);
-        TableRow.LayoutParams optionsListParams =
-                (TableRow.LayoutParams) optionList.getLayoutParams();
-        optionsListParams.span = 4;
-        optionsListParams.gravity = Gravity.CENTER;
-        optionList.setVisibility(View.VISIBLE);
-        addView(optionsListRow);
     }
 
     private void populateKnobs() {

@@ -34,7 +34,7 @@ public class OptionList extends LinearLayout {
         this.width = width;
         this.height = height;
         this.spacing = spacing;
-        setBackgroundColor(0);
+        setMinimumHeight(height);
     }
 
     public void setValues(String parameterName, int color, int[] iconOffIds, int[] iconOnIds,
