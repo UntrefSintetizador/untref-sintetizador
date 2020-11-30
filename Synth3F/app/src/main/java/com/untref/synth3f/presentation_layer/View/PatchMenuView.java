@@ -30,6 +30,7 @@ public class PatchMenuView extends TableLayout {
     private PatchGraphFragment patchGraphFragment;
     private TextView parameterNameView;
     private EditText parameterValueView;
+    private TextView patchMenuViewName;
     private PatchMenuCloseView patchMenuViewClose;
     private OptionList optionList;
     private PatchPresenter patchPresenter;
@@ -65,8 +66,8 @@ public class PatchMenuView extends TableLayout {
         setVisibility(View.GONE);
 
         this.knobsPerRow = 4;
-        ((TableRow.LayoutParams) parameterNameView.getLayoutParams()).span = knobsPerRow - 1;
-        ((TableRow.LayoutParams) parameterValueView.getLayoutParams()).span = knobsPerRow;
+        ((TableRow.LayoutParams) parameterNameView.getLayoutParams()).span = knobsPerRow / 2;
+        ((TableRow.LayoutParams) parameterValueView.getLayoutParams()).span = knobsPerRow / 2;
 
         //pixels
         float defaultScreenHeight = 728;
@@ -80,8 +81,11 @@ public class PatchMenuView extends TableLayout {
 
         int defaultButtonSize = 80;
         int defaultButtonSpacing = 10;
-        optionList.init(this, getLayoutParams().width,
+        optionList.init(this, knobsPerRow, getLayoutParams().width,
                         (int) (relationOfHeight * defaultButtonSize), defaultButtonSpacing);
+
+        patchMenuViewName = findViewById(R.id.patch_menu_name);
+        ((TableRow.LayoutParams) patchMenuViewName.getLayoutParams()).span = knobsPerRow - 1;
 
         patchMenuViewClose = findViewById(R.id.patch_menu_view_close);
         patchMenuViewClose.getLayoutParams().width = knobSize;
@@ -182,9 +186,8 @@ public class PatchMenuView extends TableLayout {
         this.patchPresenter = patchPresenter;
         findViewById(R.id.patch_menu_title).setBackgroundColor(color);
         patchMenuViewClose.setBackgroundColor(color);
-        TextView patchMenuNameView = findViewById(R.id.patch_menu_name);
-        patchMenuNameView.setText(typeName);
-        patchMenuNameView.setBackgroundColor(color);
+        patchMenuViewName.setText(typeName);
+        patchMenuViewName.setBackgroundColor(color);
         ((GradientDrawable) getBackground()).setStroke(5, color);
         optionList.setVisibility(View.VISIBLE);
         populateKnobs();
