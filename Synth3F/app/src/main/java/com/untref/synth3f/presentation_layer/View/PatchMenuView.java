@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -183,8 +185,7 @@ public class PatchMenuView extends TableLayout {
         patchMenuNameView.setText(typeName);
         patchMenuNameView.setBackgroundColor(color);
         ((GradientDrawable) getBackground()).setStroke(5, color);
-        optionList.setVisibility(View.VISIBLE);
-        addView(optionList);
+        addOptionsListToTable();
         populateKnobs();
         setVisibility(View.VISIBLE);
         setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
@@ -197,6 +198,7 @@ public class PatchMenuView extends TableLayout {
         knobList.clear();
         int permanentViews = 2;
         while (getChildCount() > permanentViews) {
+            ((TableRow) getChildAt(permanentViews)).removeAllViews();
             removeViewAt(permanentViews);
         }
         optionList.clear();
@@ -242,6 +244,18 @@ public class PatchMenuView extends TableLayout {
         DecimalFormat decimalFormat = new DecimalFormat("#.#######");
         editable.clear();
         editable.append(decimalFormat.format(value).replace(",", "."));
+    }
+
+    private void addOptionsListToTable() {
+        TableRow optionsListRow = new TableRow(getContext());
+        optionsListRow.setBackgroundColor(0);
+        optionsListRow.addView(optionList);
+        TableRow.LayoutParams optionsListParams =
+                (TableRow.LayoutParams) optionList.getLayoutParams();
+        optionsListParams.span = 4;
+        optionsListParams.gravity = Gravity.CENTER;
+        optionList.setVisibility(View.VISIBLE);
+        addView(optionsListRow);
     }
 
     private void populateKnobs() {

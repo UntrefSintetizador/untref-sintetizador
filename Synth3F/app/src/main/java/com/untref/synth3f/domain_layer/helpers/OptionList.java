@@ -8,12 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
 
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 
-public class OptionList extends TableRow {
+public class OptionList extends LinearLayout {
 
     private PatchMenuView patchMenuView;
     private String parameterName;
@@ -33,6 +34,7 @@ public class OptionList extends TableRow {
     public void init(PatchMenuView patchMenuView, int buttonSize) {
         this.patchMenuView = patchMenuView;
         this.buttonSize = buttonSize;
+        setBackgroundColor(0);
     }
 
     public void setValues(String parameterName, int color, int[] iconOffIds, int[] iconOnIds,
