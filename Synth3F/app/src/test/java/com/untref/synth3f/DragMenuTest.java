@@ -1,6 +1,6 @@
 package com.untref.synth3f;
 
-import com.untref.synth3f.presentation_layer.View.DragMenu;
+import com.untref.synth3f.domain_layer.helpers.DragMenu;
 
 import org.junit.Test;
 

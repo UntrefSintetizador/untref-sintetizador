@@ -1,4 +1,4 @@
-package com.untref.synth3f.domain_layer.helpers;
+package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -8,8 +8,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
-
-import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 
 public class OptionList extends LinearLayout {
 

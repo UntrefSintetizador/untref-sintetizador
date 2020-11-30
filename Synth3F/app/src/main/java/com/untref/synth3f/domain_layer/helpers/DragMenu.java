@@ -1,4 +1,4 @@
-package com.untref.synth3f.presentation_layer.View;
+package com.untref.synth3f.domain_layer.helpers;
 
 public class DragMenu {
 

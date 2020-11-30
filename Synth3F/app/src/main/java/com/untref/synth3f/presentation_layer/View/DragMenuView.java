@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import com.untref.synth3f.domain_layer.helpers.DragMenu;
+
 public class DragMenuView extends LinearLayout {
 
     private static final int PAGE_SIZE = 4;
