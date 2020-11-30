@@ -2,6 +2,7 @@ package com.untref.synth3f.domain_layer.helpers;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.support.annotation.Nullable;
@@ -90,8 +91,10 @@ public class OptionList extends LinearLayout {
         }
 
         public void init(int size) {
-            getLayoutParams().width = size;
-            getLayoutParams().height = size;
+            LayoutParams layoutParams = (LayoutParams) getLayoutParams();
+            layoutParams.width = size;
+            layoutParams.height = size;
+            layoutParams.leftMargin = 10;
             setScaleType(ScaleType.CENTER);
             setAdjustViewBounds(true);
             setSelected(false);
@@ -103,16 +106,14 @@ public class OptionList extends LinearLayout {
         public void setSelected(boolean selected) {
             super.setSelected(selected);
             setImageResource(selected ? iconOnId : iconOffId);
-            ShapeDrawable shapeDrawable = new ShapeDrawable();
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setCornerRadius(15);
             if (selected) {
-                setBackgroundColor(color);
+                drawable.setColor(color);
             } else {
-                shapeDrawable.setShape(new RectShape());
-                shapeDrawable.getPaint().setColor(color);
-                shapeDrawable.getPaint().setStrokeWidth(10f);
-                shapeDrawable.getPaint().setStyle(Paint.Style.STROKE);
-                setBackground(shapeDrawable);
+                drawable.setStroke(2, color);
             }
+            setBackground(drawable);
         }
 
         @Override
