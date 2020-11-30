@@ -224,8 +224,8 @@
 
     <com.untref.synth3f.presentation_layer.View.PatchMenuView
         android:id="@+id/patch_menu_view"
-        android:layout_width="600px"
-        android:layout_height="600px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:columnCount="5"
         android:elevation="4dp"
         android:rowCount="6"
