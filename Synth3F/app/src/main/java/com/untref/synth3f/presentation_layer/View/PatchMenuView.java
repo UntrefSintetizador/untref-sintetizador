@@ -257,7 +257,7 @@ public class PatchMenuView extends TableLayout {
         parameterNameBackground.setCornerRadii(new float[] {
                 cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0, 0, 0, 0
         });
-        parameterNameView.setBackground(parameterNameBackground);
+        findViewById(R.id.patch_menu_view_parameter_name_row).setBackground(parameterNameBackground);
         parameterValueView.setTextColor(color);
         ((GradientDrawable) getBackground()).setStroke(strokeWidth, color);
         GradientDrawable parameterBackground = new GradientDrawable();
