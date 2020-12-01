@@ -19,7 +19,9 @@ public class PatchEGPresenter extends PatchPresenter {
 //        patchMenuView.createKnob("sustain", FLOAT_PRECISION, ((EGPatch) patch).sustain, new LinearFunction(0f, 1f));
 //        patchMenuView.createKnob("release", FLOAT_PRECISION, ((EGPatch) patch).release, new ExponentialLeftFunction(0f, 5000f));
 //        patchMenuView.createKnob("gate", INTEGER_PRECISION, ((EGPatch) patch).gate, new LinearFunction(0f, 1f));
-        patchMenuView.createEnvelopeEditor();
+        EGPatch egPatch = (EGPatch) patch;
+        patchMenuView.createEnvelopeEditor(egPatch.attack, egPatch.decay, egPatch.sustain,
+                                           egPatch.release);
         return true;
     }
 }
