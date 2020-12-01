@@ -13,8 +13,6 @@ public class EnvelopeEditor extends AppCompatImageView {
     private static final int NUM_OF_COLUMNS = 11;
     private static final int NUM_OF_ROWS = 8;
 
-    private int width;
-    private int height;
     private Paint borderPaint;
     private RectF borderRect;
     private Paint pointPaint;
@@ -35,8 +33,15 @@ public class EnvelopeEditor extends AppCompatImageView {
 
     public EnvelopeEditor(Context context, int width, int height) {
         super(context);
-        this.width = width;
-        this.height = height;
+        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(4);
+        borderRect = new RectF(30, 30, width - 30, height);
+        pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        initLinePoints();
+        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        linePaint.setColor(getResources().getColor(R.color.white));
+        linePaint.setAlpha(0x64);
         setBackgroundColor(0);
     }
 
@@ -46,7 +51,8 @@ public class EnvelopeEditor extends AppCompatImageView {
         this.sustain = sustain;
         this.release = release;
         open = true;
-        initPainting(color);
+        borderPaint.setColor(color);
+        pointPaint.setColor(color);
     }
 
     public void close() {
@@ -66,20 +72,6 @@ public class EnvelopeEditor extends AppCompatImageView {
         canvas.drawLines(verticalLinePts, linePaint);
         canvas.drawCircle(borderRect.left + cellWidth, borderRect.bottom - cellHeight * 2,
                           20, pointPaint);
-    }
-
-    private void initPainting(int color) {
-        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setColor(color);
-        borderPaint.setStrokeWidth(4);
-        borderRect = new RectF(30, 30, width - 30, height);
-        pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        pointPaint.setColor(color);
-        initLinePoints();
-        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        linePaint.setColor(getResources().getColor(R.color.white));
-        linePaint.setAlpha(0x64);
     }
 
     private void initLinePoints() {
