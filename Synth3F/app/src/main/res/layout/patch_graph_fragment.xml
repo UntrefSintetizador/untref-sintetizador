@@ -274,8 +274,8 @@
             <TableLayout
                 android:id="@+id/patch_menu_view_parameter"
                 android:background="#00000000"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="9dp">
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
 
                 <TableRow
                     android:id="@+id/patch_menu_view_parameter_name_row"

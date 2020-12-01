@@ -32,8 +32,9 @@ public class PatchMenuView extends TableLayout {
     private PatchMenuCloseView patchMenuViewClose;
     private TableLayout parameterView;
     private OptionList optionList;
-    private PatchPresenter patchPresenter;
+    private EnvelopeEditor envelopeEditor;
     private List<Knob> knobList;
+    private PatchPresenter patchPresenter;
     private int knobSize;
     private int knobsPerRow;
     private int color;
@@ -60,11 +61,12 @@ public class PatchMenuView extends TableLayout {
         this.parameterNameView = findViewById(R.id.patch_menu_view_parameter_name);
         this.parameterValueView = findViewById(R.id.patch_menu_view_parameter_value);
         this.optionList = findViewById(R.id.patch_menu_view_option_list);
+        this.envelopeEditor = new EnvelopeEditor(getContext());
+
+        this.knobsPerRow = 4;
 
         optionList.setVisibility(View.GONE);
         setVisibility(View.GONE);
-
-        this.knobsPerRow = 4;
 
         //pixels
         float defaultScreenHeight = 728;
@@ -136,9 +138,14 @@ public class PatchMenuView extends TableLayout {
         knobList.add(newKnob);
     }
 
+    // Remove color parameter
     public void createOptionList(String parameterName, int color, int[] iconOffIds,
                                  int[] iconOnIds, int selectedValue) {
         optionList.setValues(parameterName, color, iconOffIds, iconOnIds, selectedValue);
+    }
+
+    public void createEnvelopeEditor() {
+        envelopeEditor.open(knobSize * knobsPerRow, knobSize * 2, color);
     }
 
     /**
@@ -190,9 +197,23 @@ public class PatchMenuView extends TableLayout {
         patchMenuViewName.setBackgroundColor(color);
         styleParameterView();
         optionList.setVisibility(View.VISIBLE);
+        if (envelopeEditor.isOpen()) {
+            TableRow editorRow = new TableRow(getContext());
+            editorRow.addView(envelopeEditor);
+            editorRow.setBackgroundColor(0);
+            addView(editorRow);
+            TableRow.LayoutParams editorParams =
+                    (TableRow.LayoutParams) envelopeEditor.getLayoutParams();
+            editorParams.span = knobsPerRow;
+            editorParams.height = knobSize * 2;
+            envelopeEditor.setVisibility(View.VISIBLE);
+        }
         populateKnobs();
         setVisibility(View.VISIBLE);
-        setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
+        // TEMP
+        if (!knobList.isEmpty()) {
+            setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
+        }
     }
 
     /**
@@ -206,6 +227,11 @@ public class PatchMenuView extends TableLayout {
         }
         optionList.clear();
         optionList.setVisibility(View.GONE);
+        if (envelopeEditor.isOpen()) {
+            ((ViewGroup) envelopeEditor.getParent()).removeAllViews();
+            envelopeEditor.close();
+            envelopeEditor.setVisibility(View.GONE);
+        }
         setVisibility(View.GONE);
     }
 
@@ -223,7 +249,7 @@ public class PatchMenuView extends TableLayout {
         patchPresenter.setValue(parameterName, value);
     }
 
-    public void changeValue(Editable editable) {
+    private void changeValue(Editable editable) {
         Knob knob = null;
         float value;
 
@@ -250,18 +276,17 @@ public class PatchMenuView extends TableLayout {
     }
 
     private void styleParameterView() {
-        int cornerRadius = 15;
-        int strokeWidth = 2;
         GradientDrawable parameterNameBackground = new GradientDrawable();
         parameterNameBackground.setColor(color);
+        int cornerRadius = 15;
         parameterNameBackground.setCornerRadii(new float[] {
                 cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0, 0, 0, 0
         });
         findViewById(R.id.patch_menu_view_parameter_name_row).setBackground(parameterNameBackground);
         parameterValueView.setTextColor(color);
-        ((GradientDrawable) getBackground()).setStroke(strokeWidth, color);
+        ((GradientDrawable) getBackground()).setStroke(2, color);
         GradientDrawable parameterBackground = new GradientDrawable();
-        parameterBackground.setStroke(strokeWidth, color);
+        parameterBackground.setStroke(4, color);
         parameterBackground.setCornerRadius(cornerRadius);
         parameterView.setBackground(parameterBackground);
     }
@@ -299,6 +324,11 @@ public class PatchMenuView extends TableLayout {
     }
 
     private void fixRowsWidth() {
+        if (knobList.isEmpty()) {
+            TableRow dummyRow = new TableRow(getContext());
+            dummyRow.setBackgroundColor(0);
+            addView(dummyRow);
+        }
         ViewGroup lastRow = (ViewGroup) getChildAt(getChildCount() - 1);
         while (lastRow.getChildCount() < knobsPerRow - 1) {
             View dummy = new View(getContext());
