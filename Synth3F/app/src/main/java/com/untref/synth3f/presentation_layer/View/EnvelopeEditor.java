@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.AppCompatImageView;
 
 import com.untref.synth3f.R;
@@ -18,7 +19,8 @@ public class EnvelopeEditor extends AppCompatImageView {
     private Paint borderPaint;
     private RectF borderRect;
     private Paint pointPaint;
-    private Paint envelopePaint;
+    private Paint envelopeStrokePaint;
+    private Paint envelopeFillPaint;
     private float[] horizontalLinePts;
     private float[] verticalLinePts;
     private float cellHeight;
@@ -43,9 +45,11 @@ public class EnvelopeEditor extends AppCompatImageView {
         borderPaint.setStrokeWidth(4);
         borderRect = new RectF(30, 30, width - 30, height);
         pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        envelopePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        envelopePaint.setStyle(Paint.Style.STROKE);
-        envelopePaint.setStrokeWidth(10);
+        envelopeStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        envelopeStrokePaint.setStyle(Paint.Style.STROKE);
+        envelopeStrokePaint.setStrokeWidth(10);
+        envelopeFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        envelopeFillPaint.setStyle(Paint.Style.FILL);
         initLinePoints();
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         linePaint.setColor(getResources().getColor(R.color.white));
@@ -62,7 +66,8 @@ public class EnvelopeEditor extends AppCompatImageView {
         open = true;
         borderPaint.setColor(color);
         pointPaint.setColor(color);
-        envelopePaint.setColor(color);
+        envelopeStrokePaint.setColor(color);
+        envelopeFillPaint.setColor(ColorUtils.setAlphaComponent(color, 0x7F));
     }
 
     public void close() {
@@ -80,7 +85,8 @@ public class EnvelopeEditor extends AppCompatImageView {
         canvas.drawRoundRect(borderRect, cornerRadius, cornerRadius, borderPaint);
         canvas.drawLines(horizontalLinePts, linePaint);
         canvas.drawLines(verticalLinePts, linePaint);
-        canvas.drawPath(envelopePath, envelopePaint);
+        canvas.drawPath(envelopePath, envelopeFillPaint);
+        canvas.drawPath(envelopePath, envelopeStrokePaint);
         for (EnvelopePoint point : points) {
             canvas.drawCircle(point.x, point.y, 20, pointPaint);
         }
