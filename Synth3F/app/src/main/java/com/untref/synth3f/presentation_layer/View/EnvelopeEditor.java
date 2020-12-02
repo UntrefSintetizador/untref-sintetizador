@@ -5,20 +5,24 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.untref.synth3f.R;
 
 
-public class EnvelopeEditor extends AppCompatImageView {
+public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchListener {
 
     private static final int NUM_OF_COLUMNS = 11;
     private static final int NUM_OF_ROWS = 12;
+    private static final int POINT_RADIUS = 20;
 
     private Paint borderPaint;
     private RectF borderRect;
     private Paint pointPaint;
+    private Paint selectionPaint;
     private Paint envelopeStrokePaint;
     private Paint envelopeFillPaint;
     private float[] horizontalLinePts;
@@ -33,6 +37,7 @@ public class EnvelopeEditor extends AppCompatImageView {
     private float release;
     private EnvelopePoint[] points;
     private Path envelopePath;
+    private EnvelopePoint touchedPoint;
 
     public EnvelopeEditor(Context context) {
         super(context);
@@ -40,22 +45,12 @@ public class EnvelopeEditor extends AppCompatImageView {
 
     public EnvelopeEditor(Context context, int width, int height) {
         super(context);
-        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setStrokeWidth(4);
+        initPainting();
         borderRect = new RectF(30, 30, width - 30, height);
-        pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        envelopeStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        envelopeStrokePaint.setStyle(Paint.Style.STROKE);
-        envelopeStrokePaint.setStrokeWidth(10);
-        envelopeFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        envelopeFillPaint.setStyle(Paint.Style.FILL);
         initLinePoints();
-        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        linePaint.setColor(getResources().getColor(R.color.white));
-        linePaint.setAlpha(0x64);
-        setBackgroundColor(0);
         initEnvelopePoints();
+        setBackgroundColor(0);
+        setOnTouchListener(this);
     }
 
     public void open(int color, float attack, float decay, float sustain, float release) {
@@ -66,8 +61,11 @@ public class EnvelopeEditor extends AppCompatImageView {
         open = true;
         borderPaint.setColor(color);
         pointPaint.setColor(color);
+        selectionPaint.setColor(color);
+        selectionPaint.setAlpha(0x7F);
         envelopeStrokePaint.setColor(color);
-        envelopeFillPaint.setColor(ColorUtils.setAlphaComponent(color, 0x7F));
+        envelopeFillPaint.setColor(color);
+        envelopeFillPaint.setAlpha(0x7F);
     }
 
     public void close() {
@@ -76,6 +74,43 @@ public class EnvelopeEditor extends AppCompatImageView {
 
     public boolean isOpen() {
         return open;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent event) {
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                for (EnvelopePoint point : points) {
+                    RectF pointHitBox = new RectF(point.x - POINT_RADIUS * 2,
+                                                  point.y - POINT_RADIUS * 2,
+                                                  point.x + POINT_RADIUS * 2,
+                                                  point.y + POINT_RADIUS * 2);
+                    if (pointHitBox.contains(event.getX(), event.getY())) {
+                        touchedPoint = point;
+                        invalidate();
+                        break;
+                    }
+                }
+                if (touchedPoint == null) {
+                    return false;
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (touchedPoint == null) {
+                    return false;
+                }
+                touchedPoint.moveTo(event.getX(), event.getY());
+                updateEnvelopePath();
+                invalidate();
+                break;
+            case MotionEvent.ACTION_UP:
+                if (touchedPoint == null) {
+                    return false;
+                }
+                touchedPoint = null;
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -88,8 +123,29 @@ public class EnvelopeEditor extends AppCompatImageView {
         canvas.drawPath(envelopePath, envelopeFillPaint);
         canvas.drawPath(envelopePath, envelopeStrokePaint);
         for (EnvelopePoint point : points) {
-            canvas.drawCircle(point.x, point.y, 20, pointPaint);
+            if (touchedPoint == point) {
+                canvas.drawCircle(point.x, point.y, POINT_RADIUS * 2, selectionPaint);
+                canvas.drawCircle(point.x, point.y, (int) (POINT_RADIUS * 3 / 2), selectionPaint);
+            }
+            canvas.drawCircle(point.x, point.y, POINT_RADIUS, pointPaint);
         }
+    }
+
+    private void initPainting() {
+        borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(4);
+        pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        selectionPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        selectionPaint.setStyle(Paint.Style.STROKE);
+        envelopeStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        envelopeStrokePaint.setStyle(Paint.Style.STROKE);
+        envelopeStrokePaint.setStrokeWidth(10);
+        envelopeFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        envelopeFillPaint.setStyle(Paint.Style.FILL);
+        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        linePaint.setColor(getResources().getColor(R.color.white));
+        linePaint.setAlpha(0x64);
     }
 
     private void initLinePoints() {
@@ -128,6 +184,11 @@ public class EnvelopeEditor extends AppCompatImageView {
         };
 
         envelopePath = new Path();
+        updateEnvelopePath();
+    }
+
+    private void updateEnvelopePath() {
+        envelopePath.rewind();
         for (int i = 0; i < points.length; i++) {
             if (i == 0) {
                 envelopePath.moveTo(points[i].x, points[i].y);
@@ -138,10 +199,14 @@ public class EnvelopeEditor extends AppCompatImageView {
     }
 
     private static class EnvelopePoint {
-        private final float x;
-        private final float y;
+        private float x;
+        private float y;
 
         public EnvelopePoint(float x, float y) {
+            moveTo(x, y);
+        }
+
+        public void moveTo(float x, float y) {
             this.x = x;
             this.y = y;
         }
