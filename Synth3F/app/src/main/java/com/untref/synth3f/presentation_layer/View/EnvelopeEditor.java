@@ -3,6 +3,7 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
 
@@ -12,11 +13,12 @@ import com.untref.synth3f.R;
 public class EnvelopeEditor extends AppCompatImageView {
 
     private static final int NUM_OF_COLUMNS = 11;
-    private static final int NUM_OF_ROWS = 8;
+    private static final int NUM_OF_ROWS = 12;
 
     private Paint borderPaint;
     private RectF borderRect;
     private Paint pointPaint;
+    private Paint envelopePaint;
     private float[] horizontalLinePts;
     private float[] verticalLinePts;
     private float cellHeight;
@@ -28,6 +30,7 @@ public class EnvelopeEditor extends AppCompatImageView {
     private float sustain;
     private float release;
     private EnvelopePoint[] points;
+    private Path envelopePath;
 
     public EnvelopeEditor(Context context) {
         super(context);
@@ -40,6 +43,9 @@ public class EnvelopeEditor extends AppCompatImageView {
         borderPaint.setStrokeWidth(4);
         borderRect = new RectF(30, 30, width - 30, height);
         pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        envelopePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        envelopePaint.setStyle(Paint.Style.STROKE);
+        envelopePaint.setStrokeWidth(10);
         initLinePoints();
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         linePaint.setColor(getResources().getColor(R.color.white));
@@ -56,6 +62,7 @@ public class EnvelopeEditor extends AppCompatImageView {
         open = true;
         borderPaint.setColor(color);
         pointPaint.setColor(color);
+        envelopePaint.setColor(color);
     }
 
     public void close() {
@@ -73,8 +80,9 @@ public class EnvelopeEditor extends AppCompatImageView {
         canvas.drawRoundRect(borderRect, cornerRadius, cornerRadius, borderPaint);
         canvas.drawLines(horizontalLinePts, linePaint);
         canvas.drawLines(verticalLinePts, linePaint);
+        canvas.drawPath(envelopePath, envelopePaint);
         for (EnvelopePoint point : points) {
-            canvas.drawCircle(point.getX(), point.getY(), 20, pointPaint);
+            canvas.drawCircle(point.x, point.y, 20, pointPaint);
         }
     }
 
@@ -102,8 +110,25 @@ public class EnvelopeEditor extends AppCompatImageView {
     private void initEnvelopePoints() {
         points = new EnvelopePoint[] {
                 new EnvelopePoint(borderRect.left + cellWidth,
+                                  borderRect.bottom - cellHeight * 2),
+                new EnvelopePoint(borderRect.left + cellWidth * 3,
+                                  borderRect.top + cellHeight * 3),
+                new EnvelopePoint(borderRect.left + cellWidth * 4,
+                                  borderRect.top + cellHeight * 6),
+                new EnvelopePoint(borderRect.right - cellWidth * 4,
+                                  borderRect.top + cellHeight * 6),
+                new EnvelopePoint(borderRect.right - cellWidth,
                                   borderRect.bottom - cellHeight * 2)
         };
+
+        envelopePath = new Path();
+        for (int i = 0; i < points.length; i++) {
+            if (i == 0) {
+                envelopePath.moveTo(points[i].x, points[i].y);
+            } else {
+                envelopePath.lineTo(points[i].x, points[i].y);
+            }
+        }
     }
 
     private static class EnvelopePoint {
@@ -113,14 +138,6 @@ public class EnvelopeEditor extends AppCompatImageView {
         public EnvelopePoint(float x, float y) {
             this.x = x;
             this.y = y;
-        }
-
-        public float getX() {
-            return x;
-        }
-
-        public float getY() {
-            return y;
         }
     }
 }
