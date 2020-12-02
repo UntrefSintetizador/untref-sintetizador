@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatImageView;
 
 import com.untref.synth3f.R;
 
+
 public class EnvelopeEditor extends AppCompatImageView {
 
     private static final int NUM_OF_COLUMNS = 11;
@@ -26,6 +27,7 @@ public class EnvelopeEditor extends AppCompatImageView {
     private float decay;
     private float sustain;
     private float release;
+    private EnvelopePoint[] points;
 
     public EnvelopeEditor(Context context) {
         super(context);
@@ -43,6 +45,7 @@ public class EnvelopeEditor extends AppCompatImageView {
         linePaint.setColor(getResources().getColor(R.color.white));
         linePaint.setAlpha(0x64);
         setBackgroundColor(0);
+        initEnvelopePoints();
     }
 
     public void open(int color, float attack, float decay, float sustain, float release) {
@@ -70,8 +73,9 @@ public class EnvelopeEditor extends AppCompatImageView {
         canvas.drawRoundRect(borderRect, cornerRadius, cornerRadius, borderPaint);
         canvas.drawLines(horizontalLinePts, linePaint);
         canvas.drawLines(verticalLinePts, linePaint);
-        canvas.drawCircle(borderRect.left + cellWidth, borderRect.bottom - cellHeight * 2,
-                          20, pointPaint);
+        for (EnvelopePoint point : points) {
+            canvas.drawCircle(point.getX(), point.getY(), 20, pointPaint);
+        }
     }
 
     private void initLinePoints() {
@@ -95,4 +99,28 @@ public class EnvelopeEditor extends AppCompatImageView {
         }
     }
 
+    private void initEnvelopePoints() {
+        points = new EnvelopePoint[] {
+                new EnvelopePoint(borderRect.left + cellWidth,
+                                  borderRect.bottom - cellHeight * 2)
+        };
+    }
+
+    private static class EnvelopePoint {
+        private final float x;
+        private final float y;
+
+        public EnvelopePoint(float x, float y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public float getX() {
+            return x;
+        }
+
+        public float getY() {
+            return y;
+        }
+    }
 }
