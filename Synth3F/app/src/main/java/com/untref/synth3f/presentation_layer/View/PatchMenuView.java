@@ -77,8 +77,8 @@ public class PatchMenuView extends TableLayout {
         getLayoutParams().width = (int) (relationOfHeight * defaultWidth);
         this.knobSize = (int) (relationOfHeight * defaultKnobHeight);
 
-        this.envelopeEditor = new EnvelopeEditor(getContext(), knobSize * knobsPerRow,
-                knobSize * 2);
+        this.envelopeEditor = new EnvelopeEditor(getContext(), this,
+                                                 knobSize * knobsPerRow, knobSize * 2);
 
         parameterView = findViewById(R.id.patch_menu_view_parameter);
         ((TableRow.LayoutParams) parameterView.getLayoutParams()).span = knobsPerRow;
@@ -146,8 +146,11 @@ public class PatchMenuView extends TableLayout {
         optionList.setValues(parameterName, color, iconOffIds, iconOnIds, selectedValue);
     }
 
-    public void createEnvelopeEditor(float attack, float decay, float sustain, float release) {
-        envelopeEditor.open(color, attack, decay, sustain, release);
+    public void createEnvelopeEditor(String attackName, float attack, String decayName,
+                                     float decay, String sustainName, float sustain,
+                                     String releaseName, float release) {
+        envelopeEditor.open(color, attackName, attack, decayName, decay, sustainName, sustain,
+                            releaseName, release);
     }
 
     /**

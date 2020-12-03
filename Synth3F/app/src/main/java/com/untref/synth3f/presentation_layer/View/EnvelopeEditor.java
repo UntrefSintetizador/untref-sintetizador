@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -31,33 +30,33 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
     private float cellWidth;
     private Paint linePaint;
     private boolean open;
-    private float attack;
-    private float decay;
-    private float sustain;
-    private float release;
-    private EnvelopePoint[] points;
+    private EnvelopePoint startPoint;
+    private EnvelopePoint[] parameterPoints;
+    private String[] parameterNames;
+    private float[] parameterValues;
     private Path envelopePath;
     private EnvelopePoint touchedPoint;
+    private PatchMenuView patchMenuView;
 
     public EnvelopeEditor(Context context) {
         super(context);
     }
 
-    public EnvelopeEditor(Context context, int width, int height) {
+    public EnvelopeEditor(Context context, PatchMenuView patchMenuView, int width, int height) {
         super(context);
+        this.patchMenuView = patchMenuView;
         initPainting();
         borderRect = new RectF(30, 30, width - 30, height);
         initLinePoints();
-        initEnvelopePoints();
         setBackgroundColor(0);
         setOnTouchListener(this);
     }
 
-    public void open(int color, float attack, float decay, float sustain, float release) {
-        this.attack = attack;
-        this.decay = decay;
-        this.sustain = sustain;
-        this.release = release;
+    public void open(int color, String attackName, float attack, String decayName, float decay,
+                     String sustainName, float sustain, String releaseName, float release) {
+        parameterNames = new String[] {attackName, decayName, sustainName, releaseName};
+        parameterValues = new float[] {attack, decay, sustain, release};
+        initEnvelopePoints();
         open = true;
         borderPaint.setColor(color);
         pointPaint.setColor(color);
@@ -80,13 +79,15 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
     public boolean onTouch(View view, MotionEvent event) {
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                for (EnvelopePoint point : points) {
+                for (int i = 0; i < parameterPoints.length; i++) {
+                    EnvelopePoint point = parameterPoints[i];
                     RectF pointHitBox = new RectF(point.x - POINT_RADIUS * 2,
                                                   point.y - POINT_RADIUS * 2,
                                                   point.x + POINT_RADIUS * 2,
                                                   point.y + POINT_RADIUS * 2);
                     if (pointHitBox.contains(event.getX(), event.getY())) {
                         touchedPoint = point;
+                        patchMenuView.setParameterToEdit(parameterNames[i], parameterValues[i]);
                         invalidate();
                         break;
                     }
@@ -122,7 +123,8 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         canvas.drawLines(verticalLinePts, linePaint);
         canvas.drawPath(envelopePath, envelopeFillPaint);
         canvas.drawPath(envelopePath, envelopeStrokePaint);
-        for (EnvelopePoint point : points) {
+        canvas.drawCircle(startPoint.x, startPoint.y, POINT_RADIUS, pointPaint);
+        for (EnvelopePoint point : parameterPoints) {
             if (touchedPoint == point) {
                 canvas.drawCircle(point.x, point.y, POINT_RADIUS * 2, selectionPaint);
                 canvas.drawCircle(point.x, point.y, (int) (POINT_RADIUS * 3 / 2), selectionPaint);
@@ -170,9 +172,9 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
     }
 
     private void initEnvelopePoints() {
-        points = new EnvelopePoint[] {
-                new EnvelopePoint(borderRect.left + cellWidth,
-                                  borderRect.bottom - cellHeight * 2),
+        startPoint = new EnvelopePoint(borderRect.left + cellWidth,
+                                       borderRect.bottom - cellHeight * 2);
+        parameterPoints = new EnvelopePoint[] {
                 new EnvelopePoint(borderRect.left + cellWidth * 3,
                                   borderRect.top + cellHeight * 3),
                 new EnvelopePoint(borderRect.left + cellWidth * 4,
@@ -189,12 +191,9 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
 
     private void updateEnvelopePath() {
         envelopePath.rewind();
-        for (int i = 0; i < points.length; i++) {
-            if (i == 0) {
-                envelopePath.moveTo(points[i].x, points[i].y);
-            } else {
-                envelopePath.lineTo(points[i].x, points[i].y);
-            }
+        envelopePath.moveTo(startPoint.x, startPoint.y);
+        for (EnvelopePoint parameterPoint : parameterPoints) {
+            envelopePath.lineTo(parameterPoint.x, parameterPoint.y);
         }
     }
 
