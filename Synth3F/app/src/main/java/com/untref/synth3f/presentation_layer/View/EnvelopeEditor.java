@@ -203,6 +203,10 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         envelopePoints[RELEASE_INDEX] = new EnvelopePoint(borderRect.right - cellWidth,
                                                            borderRect.bottom - cellHeight * 2,
                                                            cellWidth * 3, release);
+        envelopePoints[RELEASE_INDEX].x =
+                calculatePosition(envelopePoints[RELEASE_INDEX].parameter,
+                                  envelopePoints[SUSTAIN_INDEX].x,
+                                  envelopePoints[RELEASE_INDEX].range);
         envelopePath = new Path();
         updateEnvelopePath();
     }
@@ -231,6 +235,11 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         } else if (point == envelopePoints[SUSTAIN_INDEX]) {
             point.y = Math.max(startPoint.y - point.range, Math.min(startPoint.y, y));
             value = convertPositionToValue(point.y, startPoint.y, -point.range, point.parameter);
+        } else if (point == envelopePoints[RELEASE_INDEX]) {
+            point.x = Math.max(envelopePoints[SUSTAIN_INDEX].x,
+                               Math.min(envelopePoints[SUSTAIN_INDEX].x + point.range, x));
+            value = convertPositionToValue(point.x, envelopePoints[SUSTAIN_INDEX].x, point.range,
+                                           point.parameter);
         }
         point.parameter.setValue(value);
         patchMenuView.setValue(point.parameter.getName(), value, true);
