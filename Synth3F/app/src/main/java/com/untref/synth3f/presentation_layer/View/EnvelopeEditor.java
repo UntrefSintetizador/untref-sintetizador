@@ -21,10 +21,10 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
     private static final int NUM_OF_COLUMNS = 11;
     private static final int NUM_OF_ROWS = 12;
     private static final int POINT_RADIUS = 20;
-    private static final int ATTACK_INDEX = 0;
-    private static final int DECAY_INDEX = 1;
-    private static final int SUSTAIN_INDEX = 2;
-    private static final int RELEASE_INDEX = 3;
+    private static final int ATTACK = 0;
+    private static final int DECAY = 1;
+    private static final int SUSTAIN = 2;
+    private static final int RELEASE = 3;
 
     private Paint borderPaint;
     private RectF borderRect;
@@ -53,6 +53,7 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         this.patchMenuView = patchMenuView;
         initPainting();
         borderRect = new RectF(30, 30, width - 30, height);
+        envelopePath = new Path();
         initLinePoints();
         setBackgroundColor(0);
         setOnTouchListener(this);
@@ -61,6 +62,7 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
     public void open(Parameter attack, Parameter decay, Parameter sustain, Parameter release,
                      int color) {
         initEnvelopePoints(attack, decay, sustain, release);
+        updateEnvelopePath();
         open = true;
         borderPaint.setColor(color);
         pointPaint.setColor(color);
@@ -108,7 +110,10 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                 if (touchedPoint == null) {
                     return false;
                 }
-                movePoint(touchedPoint, event.getX(), event.getY());
+                // TODO: Fix case of overlapping envelope points
+                touchedPoint.move(event.getX(), event.getY());
+                Parameter parameter = touchedPoint.parameter;
+                patchMenuView.setValue(parameter.getName(), parameter.getValue(), true);
                 updateEnvelopePath();
                 invalidate();
                 break;
@@ -185,30 +190,15 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         startPoint = new PointF(borderRect.left + cellWidth,
                                 borderRect.bottom - cellHeight * 2);
         envelopePoints = new EnvelopePoint[4];
-        envelopePoints[ATTACK_INDEX] = new EnvelopePoint(0, borderRect.top + cellHeight * 3,
-                                                         cellWidth * 3, attack);
-        envelopePoints[ATTACK_INDEX].x = calculatePosition(envelopePoints[ATTACK_INDEX].parameter,
-                                                           startPoint.x,
-                                                           envelopePoints[ATTACK_INDEX].range);
-        envelopePoints[DECAY_INDEX] = new EnvelopePoint(0, startPoint.y, cellWidth * 3,
-                                                        decay);
-        envelopePoints[DECAY_INDEX].x = calculatePosition(envelopePoints[DECAY_INDEX].parameter,
-                                                          envelopePoints[ATTACK_INDEX].x,
-                                                          envelopePoints[ATTACK_INDEX].range);
-        envelopePoints[SUSTAIN_INDEX] = new EnvelopePoint(borderRect.left + cellWidth * 7,
-                                                          0, cellHeight * 7, sustain);
-        envelopePoints[SUSTAIN_INDEX].y =
-                calculatePosition(envelopePoints[SUSTAIN_INDEX].parameter, startPoint.y,
-                                  -envelopePoints[SUSTAIN_INDEX].range);
-        envelopePoints[RELEASE_INDEX] = new EnvelopePoint(borderRect.right - cellWidth,
-                                                           borderRect.bottom - cellHeight * 2,
-                                                           cellWidth * 3, release);
-        envelopePoints[RELEASE_INDEX].x =
-                calculatePosition(envelopePoints[RELEASE_INDEX].parameter,
-                                  envelopePoints[SUSTAIN_INDEX].x,
-                                  envelopePoints[RELEASE_INDEX].range);
-        envelopePath = new Path();
-        updateEnvelopePath();
+        envelopePoints[ATTACK] = new EnvelopePoint(ATTACK, 0, borderRect.top + cellHeight * 3,
+                                                   cellWidth * 3, attack);
+        envelopePoints[DECAY] = new EnvelopePoint(DECAY, 0, startPoint.y, cellWidth * 3,
+                                                  decay);
+        envelopePoints[SUSTAIN] = new EnvelopePoint(SUSTAIN, borderRect.left + cellWidth * 7,
+                                                    0, cellHeight * 7, sustain);
+        envelopePoints[RELEASE] = new EnvelopePoint(RELEASE, borderRect.right - cellWidth,
+                                                    borderRect.bottom - cellHeight * 2,
+                                                    cellWidth * 3, release);
     }
 
     private void updateEnvelopePath() {
@@ -219,58 +209,80 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         }
     }
 
-    // TODO: Fix case of overlapping envelope points
-    private void movePoint(EnvelopePoint point, float x, float y) {
-        float value = point.parameter.getValue();
-        float oldX = point.x;
-        if (point == envelopePoints[ATTACK_INDEX]) {
-            point.x = Math.max(startPoint.x, Math.min(startPoint.x + point.range, x));
-            envelopePoints[DECAY_INDEX].x += point.x - oldX;
-            value = convertPositionToValue(point.x, startPoint.x, point.range, point.parameter);
-        } else if (point == envelopePoints[DECAY_INDEX]) {
-            point.x = Math.max(envelopePoints[ATTACK_INDEX].x,
-                               Math.min(envelopePoints[ATTACK_INDEX].x + point.range, x));
-            value = convertPositionToValue(point.x, envelopePoints[ATTACK_INDEX].x, point.range,
-                                           point.parameter);
-        } else if (point == envelopePoints[SUSTAIN_INDEX]) {
-            point.y = Math.max(startPoint.y - point.range, Math.min(startPoint.y, y));
-            value = convertPositionToValue(point.y, startPoint.y, -point.range, point.parameter);
-        } else if (point == envelopePoints[RELEASE_INDEX]) {
-            point.x = Math.max(envelopePoints[SUSTAIN_INDEX].x,
-                               Math.min(envelopePoints[SUSTAIN_INDEX].x + point.range, x));
-            value = convertPositionToValue(point.x, envelopePoints[SUSTAIN_INDEX].x, point.range,
-                                           point.parameter);
-        }
-        point.parameter.setValue(value);
-        patchMenuView.setValue(point.parameter.getName(), value, true);
-    }
-
-    private float calculatePosition(Parameter parameter, float minValue, float range) {
-        float percentage = parameter.getScaleFunction().calculateInverse(parameter.getValue());
-        return percentage * range + minValue;
-    }
-
-    private float convertPositionToValue(float position, float minValueAsPosition, float range,
-                                         Parameter parameter) {
-        float percentage = (position - minValueAsPosition) / range;
-        float value = parameter.getScaleFunction().calculate(percentage);
-        BigDecimal bigDecimal = BigDecimal.valueOf(value);
-        bigDecimal = bigDecimal.setScale(parameter.getPrecision(), BigDecimal.ROUND_HALF_UP);
-        return bigDecimal.floatValue();
-    }
-
-    private static class EnvelopePoint {
+    private class EnvelopePoint {
+        private int id;
         private float x;
         private float y;
         private float range;
         private Parameter parameter;
 
-        public EnvelopePoint(float x, float y, float range, Parameter parameter) {
+        public EnvelopePoint(int id, float x, float y, float range, Parameter parameter) {
+            this.id = id;
             this.x = x;
             this.y = y;
             this.range = range;
             this.parameter = parameter;
+            link();
+        }
+
+        public void move(float x, float y) {
+            float value = parameter.getValue();
+            float oldX = this.x;
+            switch (id) {
+                case ATTACK:
+                    this.x = Math.max(startPoint.x, Math.min(startPoint.x + range, x));
+                    envelopePoints[DECAY].x += this.x - oldX;
+                    value = convertPositionToValue(this.x, startPoint.x, range);
+                    break;
+                case DECAY:
+                    this.x = Math.max(envelopePoints[ATTACK].x,
+                                      Math.min(envelopePoints[ATTACK].x + range, x));
+                    value = convertPositionToValue(this.x, envelopePoints[ATTACK].x, range);
+                    break;
+                case SUSTAIN:
+                    this.y = Math.max(startPoint.y - range, Math.min(startPoint.y, y));
+                    envelopePoints[DECAY].y = this.y;
+                    value = convertPositionToValue(this.y, startPoint.y, -range);
+                    break;
+                case RELEASE:
+                    this.x = Math.max(envelopePoints[SUSTAIN].x,
+                                      Math.min(envelopePoints[SUSTAIN].x + range, x));
+                    value = convertPositionToValue(this.x, envelopePoints[SUSTAIN].x, range);
+                    break;
+            }
+            parameter.setValue(value);
+        }
+
+        private void link() {
+            switch (id) {
+                case ATTACK:
+                    x = calculatePosition(startPoint.x, range);
+                    break;
+                case DECAY:
+                    x = calculatePosition(envelopePoints[ATTACK].x, range);
+                    break;
+                case SUSTAIN:
+                    y = calculatePosition(startPoint.y, -range);
+                    envelopePoints[DECAY].y = y;
+                    break;
+                case RELEASE:
+                    x = calculatePosition(envelopePoints[SUSTAIN].x, range);
+                    break;
+            }
+        }
+
+        private float calculatePosition(float minValue, float range) {
+            float percentage = parameter.getScaleFunction().calculateInverse(parameter.getValue());
+            return percentage * range + minValue;
+        }
+
+        private float convertPositionToValue(float position, float minValueAsPosition,
+                                             float range) {
+            float percentage = (position - minValueAsPosition) / range;
+            float value = parameter.getScaleFunction().calculate(percentage);
+            BigDecimal bigDecimal = BigDecimal.valueOf(value);
+            bigDecimal = bigDecimal.setScale(parameter.getPrecision(), BigDecimal.ROUND_HALF_UP);
+            return bigDecimal.floatValue();
         }
     }
-
 }
