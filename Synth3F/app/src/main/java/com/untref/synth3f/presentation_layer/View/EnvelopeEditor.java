@@ -187,15 +187,19 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         envelopePoints = new EnvelopePoint[4];
         envelopePoints[ATTACK_INDEX] = new EnvelopePoint(0, borderRect.top + cellHeight * 3,
                                                          cellWidth * 3, attack);
-        envelopePoints[ATTACK_INDEX].x = calculatePosition(envelopePoints[ATTACK_INDEX],
-                                                           startPoint.x);
+        envelopePoints[ATTACK_INDEX].x = calculatePosition(envelopePoints[ATTACK_INDEX].parameter,
+                                                           startPoint.x,
+                                                           envelopePoints[ATTACK_INDEX].range);
         envelopePoints[DECAY_INDEX] = new EnvelopePoint(0, startPoint.y, cellWidth * 3,
                                                         decay);
-        envelopePoints[DECAY_INDEX].x = calculatePosition(envelopePoints[DECAY_INDEX],
-                                                          envelopePoints[ATTACK_INDEX].x);
-        envelopePoints[SUSTAIN_INDEX] = new EnvelopePoint(borderRect.right - cellWidth * 4,
-                                                          startPoint.y, cellWidth * 7,
-                                                          sustain);
+        envelopePoints[DECAY_INDEX].x = calculatePosition(envelopePoints[DECAY_INDEX].parameter,
+                                                          envelopePoints[ATTACK_INDEX].x,
+                                                          envelopePoints[ATTACK_INDEX].range);
+        envelopePoints[SUSTAIN_INDEX] = new EnvelopePoint(borderRect.left + cellWidth * 7,
+                                                          0, cellHeight * 7, sustain);
+        envelopePoints[SUSTAIN_INDEX].y =
+                calculatePosition(envelopePoints[SUSTAIN_INDEX].parameter, startPoint.y,
+                                  -envelopePoints[SUSTAIN_INDEX].range);
         envelopePoints[RELEASE_INDEX] = new EnvelopePoint(borderRect.right - cellWidth,
                                                            borderRect.bottom - cellHeight * 2,
                                                            cellWidth * 3, release);
@@ -211,6 +215,7 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         }
     }
 
+    // TODO: Fix case of overlapping envelope points
     private void movePoint(EnvelopePoint point, float x, float y) {
         float value = point.parameter.getValue();
         float oldX = point.x;
@@ -223,19 +228,22 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                                Math.min(envelopePoints[ATTACK_INDEX].x + point.range, x));
             value = convertPositionToValue(point.x, envelopePoints[ATTACK_INDEX].x, point.range,
                                            point.parameter);
+        } else if (point == envelopePoints[SUSTAIN_INDEX]) {
+            point.y = Math.max(startPoint.y - point.range, Math.min(startPoint.y, y));
+            value = convertPositionToValue(point.y, startPoint.y, -point.range, point.parameter);
         }
+        point.parameter.setValue(value);
         patchMenuView.setValue(point.parameter.getName(), value, true);
     }
 
-    private float calculatePosition(EnvelopePoint point, float minValue) {
-        Parameter parameter = point.parameter;
+    private float calculatePosition(Parameter parameter, float minValue, float range) {
         float percentage = parameter.getScaleFunction().calculateInverse(parameter.getValue());
-        return percentage * point.range + minValue;
+        return percentage * range + minValue;
     }
 
-    private float convertPositionToValue(float position, float minPosition, float range,
+    private float convertPositionToValue(float position, float minValueAsPosition, float range,
                                          Parameter parameter) {
-        float percentage = (position - minPosition) / range;
+        float percentage = (position - minValueAsPosition) / range;
         float value = parameter.getScaleFunction().calculate(percentage);
         BigDecimal bigDecimal = BigDecimal.valueOf(value);
         bigDecimal = bigDecimal.setScale(parameter.getPrecision(), BigDecimal.ROUND_HALF_UP);

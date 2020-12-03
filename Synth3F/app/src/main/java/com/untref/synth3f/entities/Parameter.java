@@ -23,6 +23,10 @@ public class Parameter {
         return value;
     }
 
+    public void setValue(float value) {
+        this.value = value;
+    }
+
     public int getPrecision() {
         return precision;
     }
