@@ -189,13 +189,13 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                                                          cellWidth * 3, attack);
         envelopePoints[ATTACK_INDEX].x = calculatePosition(envelopePoints[ATTACK_INDEX],
                                                            startPoint.x);
-        envelopePoints[DECAY_INDEX] = new EnvelopePoint(0, borderRect.top + cellHeight * 6,
-                                                         cellWidth * 3, decay);
+        envelopePoints[DECAY_INDEX] = new EnvelopePoint(0, startPoint.y, cellWidth * 3,
+                                                        decay);
         envelopePoints[DECAY_INDEX].x = calculatePosition(envelopePoints[DECAY_INDEX],
                                                           envelopePoints[ATTACK_INDEX].x);
         envelopePoints[SUSTAIN_INDEX] = new EnvelopePoint(borderRect.right - cellWidth * 4,
-                                                           borderRect.top + cellHeight * 6,
-                                                           cellWidth * 7, sustain);
+                                                          startPoint.y, cellWidth * 7,
+                                                          sustain);
         envelopePoints[RELEASE_INDEX] = new EnvelopePoint(borderRect.right - cellWidth,
                                                            borderRect.bottom - cellHeight * 2,
                                                            cellWidth * 3, release);
@@ -213,11 +213,16 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
 
     private void movePoint(EnvelopePoint point, float x, float y) {
         float value = point.parameter.getValue();
+        float oldX = point.x;
         if (point == envelopePoints[ATTACK_INDEX]) {
-            float oldX = point.x;
             point.x = Math.max(startPoint.x, Math.min(startPoint.x + point.range, x));
             envelopePoints[DECAY_INDEX].x += point.x - oldX;
             value = convertPositionToValue(point.x, startPoint.x, point.range, point.parameter);
+        } else if (point == envelopePoints[DECAY_INDEX]) {
+            point.x = Math.max(envelopePoints[ATTACK_INDEX].x,
+                               Math.min(envelopePoints[ATTACK_INDEX].x + point.range, x));
+            value = convertPositionToValue(point.x, envelopePoints[ATTACK_INDEX].x, point.range,
+                                           point.parameter);
         }
         patchMenuView.setValue(point.parameter.getName(), value, true);
     }
