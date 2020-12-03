@@ -16,6 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Parameter;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
@@ -146,11 +147,9 @@ public class PatchMenuView extends TableLayout {
         optionList.setValues(parameterName, color, iconOffIds, iconOnIds, selectedValue);
     }
 
-    public void createEnvelopeEditor(String attackName, float attack, String decayName,
-                                     float decay, String sustainName, float sustain,
-                                     String releaseName, float release) {
-        envelopeEditor.open(color, attackName, attack, decayName, decay, sustainName, sustain,
-                            releaseName, release);
+    public void createEnvelopeEditor(Parameter attack, Parameter decay, Parameter sustain,
+                                     Parameter release) {
+        envelopeEditor.open(attack, decay, sustain, release, color);
     }
 
     /**
@@ -202,22 +201,14 @@ public class PatchMenuView extends TableLayout {
         patchMenuViewName.setBackgroundColor(color);
         styleParameterView();
         optionList.setVisibility(View.VISIBLE);
-        if (envelopeEditor.isOpen()) {
-            TableRow editorRow = new TableRow(getContext());
-            editorRow.addView(envelopeEditor);
-            editorRow.setBackgroundColor(0);
-            addView(editorRow);
-            TableRow.LayoutParams editorParams =
-                    (TableRow.LayoutParams) envelopeEditor.getLayoutParams();
-            editorParams.span = knobsPerRow;
-            editorParams.height = knobSize * 2;
-            envelopeEditor.setVisibility(View.VISIBLE);
-        }
+        showEnvelopeEditorIfOpen();
         populateKnobs();
         setVisibility(View.VISIBLE);
-        // TEMP
         if (!knobList.isEmpty()) {
             setParameterToEdit(knobList.get(0).getName(), knobList.get(0).getValue());
+        } else if (envelopeEditor.isOpen()) {
+            Parameter firstParameter = envelopeEditor.getFirstParameter();
+            setParameterToEdit(firstParameter.getName(), firstParameter.getValue());
         }
     }
 
@@ -294,6 +285,20 @@ public class PatchMenuView extends TableLayout {
         parameterBackground.setStroke(4, color);
         parameterBackground.setCornerRadius(cornerRadius);
         parameterView.setBackground(parameterBackground);
+    }
+
+    private void showEnvelopeEditorIfOpen() {
+        if (envelopeEditor.isOpen()) {
+            TableRow editorRow = new TableRow(getContext());
+            editorRow.addView(envelopeEditor);
+            editorRow.setBackgroundColor(0);
+            addView(editorRow);
+            TableRow.LayoutParams editorParams =
+                    (TableRow.LayoutParams) envelopeEditor.getLayoutParams();
+            editorParams.span = knobsPerRow;
+            editorParams.height = knobSize * 2;
+            envelopeEditor.setVisibility(View.VISIBLE);
+        }
     }
 
     private void populateKnobs() {
