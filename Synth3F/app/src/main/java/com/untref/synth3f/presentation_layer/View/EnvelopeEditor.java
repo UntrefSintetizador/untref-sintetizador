@@ -190,15 +190,10 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         startPoint = new PointF(borderRect.left + cellWidth,
                                 borderRect.bottom - cellHeight * 2);
         envelopePoints = new EnvelopePoint[4];
-        envelopePoints[ATTACK] = new EnvelopePoint(ATTACK, 0, borderRect.top + cellHeight * 3,
-                                                   cellWidth * 3, attack);
-        envelopePoints[DECAY] = new EnvelopePoint(DECAY, 0, startPoint.y, cellWidth * 3,
-                                                  decay);
-        envelopePoints[SUSTAIN] = new EnvelopePoint(SUSTAIN, borderRect.left + cellWidth * 7,
-                                                    0, cellHeight * 7, sustain);
-        envelopePoints[RELEASE] = new EnvelopePoint(RELEASE, borderRect.right - cellWidth,
-                                                    borderRect.bottom - cellHeight * 2,
-                                                    cellWidth * 3, release);
+        envelopePoints[ATTACK] = new EnvelopePoint(ATTACK, cellWidth * 3, attack);
+        envelopePoints[DECAY] = new EnvelopePoint(DECAY, cellWidth * 3, decay);
+        envelopePoints[SUSTAIN] = new EnvelopePoint(SUSTAIN, cellHeight * 7, sustain);
+        envelopePoints[RELEASE] = new EnvelopePoint(RELEASE, cellWidth * 3, release);
     }
 
     private void updateEnvelopePath() {
@@ -214,13 +209,13 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         private float x;
         private float y;
         private float range;
+        private final float initialRange;
         private Parameter parameter;
 
-        public EnvelopePoint(int id, float x, float y, float range, Parameter parameter) {
+        public EnvelopePoint(int id, float range, Parameter parameter) {
             this.id = id;
-            this.x = x;
-            this.y = y;
             this.range = range;
+            this.initialRange = range;
             this.parameter = parameter;
             link();
         }
@@ -240,7 +235,15 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                     value = convertPositionToValue(this.x, envelopePoints[ATTACK].x, range);
                     break;
                 case SUSTAIN:
+                    // TODO: Fix rounding errors in the decay point position
                     this.y = Math.max(startPoint.y - range, Math.min(startPoint.y, y));
+                    envelopePoints[DECAY].range =
+                            envelopePoints[DECAY].initialRange *
+                            (this.y - (startPoint.y - envelopePoints[DECAY].initialRange)) /
+                            envelopePoints[DECAY].initialRange;
+                    envelopePoints[DECAY].x = calculatePosition(envelopePoints[ATTACK].x,
+                                                                envelopePoints[DECAY].range,
+                                                                envelopePoints[DECAY].parameter);
                     envelopePoints[DECAY].y = this.y;
                     value = convertPositionToValue(this.y, startPoint.y, -range);
                     break;
@@ -256,29 +259,38 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         private void link() {
             switch (id) {
                 case ATTACK:
-                    x = calculatePosition(startPoint.x, range);
+                    x = calculatePosition(startPoint.x, range, parameter);
+                    y = startPoint.y - cellHeight * 7;
                     break;
                 case DECAY:
-                    x = calculatePosition(envelopePoints[ATTACK].x, range);
+                    x = calculatePosition(envelopePoints[ATTACK].x, range, parameter);
                     break;
                 case SUSTAIN:
-                    y = calculatePosition(startPoint.y, -range);
+                    x = startPoint.x + cellWidth * 6;
+                    y = calculatePosition(startPoint.y, -range, parameter);
+                    envelopePoints[DECAY].range =
+                            envelopePoints[DECAY].initialRange *
+                            (this.y - (startPoint.y - envelopePoints[DECAY].initialRange)) /
+                            envelopePoints[DECAY].initialRange;
+                    envelopePoints[DECAY].x = calculatePosition(envelopePoints[ATTACK].x,
+                                                                envelopePoints[DECAY].range,
+                                                                envelopePoints[DECAY].parameter);
                     envelopePoints[DECAY].y = y;
                     break;
                 case RELEASE:
-                    x = calculatePosition(envelopePoints[SUSTAIN].x, range);
+                    x = calculatePosition(envelopePoints[SUSTAIN].x, range, parameter);
+                    y = startPoint.y;
                     break;
             }
         }
 
-        private float calculatePosition(float minValue, float range) {
+        private float calculatePosition(float minPosition, float range, Parameter parameter) {
             float percentage = parameter.getScaleFunction().calculateInverse(parameter.getValue());
-            return percentage * range + minValue;
+            return percentage * range + minPosition;
         }
 
-        private float convertPositionToValue(float position, float minValueAsPosition,
-                                             float range) {
-            float percentage = (position - minValueAsPosition) / range;
+        private float convertPositionToValue(float position, float minPosition, float range) {
+            float percentage = (position - minPosition) / range;
             float value = parameter.getScaleFunction().calculate(percentage);
             BigDecimal bigDecimal = BigDecimal.valueOf(value);
             bigDecimal = bigDecimal.setScale(parameter.getPrecision(), BigDecimal.ROUND_HALF_UP);
