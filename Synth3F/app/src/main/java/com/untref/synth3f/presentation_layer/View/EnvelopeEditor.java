@@ -140,6 +140,7 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         selectionPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         selectionPaint.setStyle(Paint.Style.STROKE);
+        selectionPaint.setStrokeWidth(2);
         envelopeStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         envelopeStrokePaint.setStyle(Paint.Style.STROKE);
         envelopeStrokePaint.setStrokeWidth(10);
