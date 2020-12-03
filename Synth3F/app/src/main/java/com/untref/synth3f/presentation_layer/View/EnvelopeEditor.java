@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -194,6 +195,7 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         envelopePoints[DECAY] = new EnvelopePoint(DECAY, cellWidth * 3, decay);
         envelopePoints[SUSTAIN] = new EnvelopePoint(SUSTAIN, cellHeight * 7, sustain);
         envelopePoints[RELEASE] = new EnvelopePoint(RELEASE, cellWidth * 3, release);
+        envelopePoints[SUSTAIN].updateNeighbors();
     }
 
     private void updateEnvelopePath() {
@@ -209,13 +211,13 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         private float x;
         private float y;
         private float range;
-        private final float initialRange;
+        private final float initRange;
         private Parameter parameter;
 
         public EnvelopePoint(int id, float range, Parameter parameter) {
             this.id = id;
             this.range = range;
-            this.initialRange = range;
+            this.initRange = range;
             this.parameter = parameter;
             link();
         }
@@ -232,28 +234,40 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                 case DECAY:
                     this.x = Math.max(envelopePoints[ATTACK].x,
                                       Math.min(envelopePoints[ATTACK].x + range, x));
-                    value = convertPositionToValue(this.x, envelopePoints[ATTACK].x, range);
+                    if (range > 0) {
+                        value = convertPositionToValue(this.x, envelopePoints[ATTACK].x, range);
+                    }
                     break;
                 case SUSTAIN:
-                    // TODO: Fix rounding errors in the decay point position
                     this.y = Math.max(startPoint.y - range, Math.min(startPoint.y, y));
-                    envelopePoints[DECAY].range =
-                            envelopePoints[DECAY].initialRange *
-                            (this.y - (startPoint.y - envelopePoints[DECAY].initialRange)) /
-                            envelopePoints[DECAY].initialRange;
-                    envelopePoints[DECAY].x = calculatePosition(envelopePoints[ATTACK].x,
-                                                                envelopePoints[DECAY].range,
-                                                                envelopePoints[DECAY].parameter);
-                    envelopePoints[DECAY].y = this.y;
+                    updateNeighbors();
                     value = convertPositionToValue(this.y, startPoint.y, -range);
                     break;
                 case RELEASE:
                     this.x = Math.max(envelopePoints[SUSTAIN].x,
                                       Math.min(envelopePoints[SUSTAIN].x + range, x));
-                    value = convertPositionToValue(this.x, envelopePoints[SUSTAIN].x, range);
+                    if (range > 0) {
+                        value = convertPositionToValue(this.x, envelopePoints[SUSTAIN].x, range);
+                    }
                     break;
             }
             parameter.setValue(value);
+        }
+
+        // TODO - FIX: max range is a bit larger than expected
+        public void updateNeighbors() {
+            envelopePoints[DECAY].range = range * (this.y - (startPoint.y - range)) /
+                                          envelopePoints[DECAY].initRange;
+            envelopePoints[DECAY].x = calculatePosition(envelopePoints[ATTACK].x,
+                                                        envelopePoints[DECAY].range,
+                                                        envelopePoints[DECAY].parameter);
+            envelopePoints[DECAY].y = this.y;
+
+            envelopePoints[RELEASE].range = -range * (this.y - startPoint.y) /
+                                            envelopePoints[RELEASE].initRange;
+            envelopePoints[RELEASE].x = calculatePosition(envelopePoints[SUSTAIN].x,
+                                                          envelopePoints[RELEASE].range,
+                                                          envelopePoints[RELEASE].parameter);
         }
 
         private void link() {
@@ -268,14 +282,6 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                 case SUSTAIN:
                     x = startPoint.x + cellWidth * 6;
                     y = calculatePosition(startPoint.y, -range, parameter);
-                    envelopePoints[DECAY].range =
-                            envelopePoints[DECAY].initialRange *
-                            (this.y - (startPoint.y - envelopePoints[DECAY].initialRange)) /
-                            envelopePoints[DECAY].initialRange;
-                    envelopePoints[DECAY].x = calculatePosition(envelopePoints[ATTACK].x,
-                                                                envelopePoints[DECAY].range,
-                                                                envelopePoints[DECAY].parameter);
-                    envelopePoints[DECAY].y = y;
                     break;
                 case RELEASE:
                     x = calculatePosition(envelopePoints[SUSTAIN].x, range, parameter);
