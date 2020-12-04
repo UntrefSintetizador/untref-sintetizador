@@ -111,7 +111,8 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                 if (touchedPoint == null) {
                     return false;
                 }
-                // TODO: Fix case of overlapping envelope points
+                /* TODO: Fix case of overlapping envelope points
+                   set attack = 5000, decay = 5000, sustain = 0, and try to move sustain*/
                 touchedPoint.move(event.getX(), event.getY());
                 Parameter parameter = touchedPoint.parameter;
                 patchMenuView.setValue(parameter.getName(), parameter.getValue(), true);
