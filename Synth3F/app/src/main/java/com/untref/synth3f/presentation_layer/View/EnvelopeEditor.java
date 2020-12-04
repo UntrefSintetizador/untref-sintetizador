@@ -262,8 +262,8 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                                                         envelopePoints[DECAY].parameter);
             envelopePoints[DECAY].y = this.y;
 
-            envelopePoints[RELEASE].range = envelopePoints[RELEASE].initRange / -range *
-                                            ((startPoint.y - range) - this.y);
+            envelopePoints[RELEASE].range = envelopePoints[RELEASE].initRange / range *
+                                            (startPoint.y - this.y);
             envelopePoints[RELEASE].x = calculatePosition(envelopePoints[SUSTAIN].x,
                                                           envelopePoints[RELEASE].range,
                                                           envelopePoints[RELEASE].parameter);
