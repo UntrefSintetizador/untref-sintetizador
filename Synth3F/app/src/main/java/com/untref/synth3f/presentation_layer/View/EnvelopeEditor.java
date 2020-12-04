@@ -254,17 +254,16 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
             parameter.setValue(value);
         }
 
-        // TODO - FIX: max range is a bit larger than expected
         public void updateNeighbors() {
-            envelopePoints[DECAY].range = range * (this.y - (startPoint.y - range)) /
-                                          envelopePoints[DECAY].initRange;
+            envelopePoints[DECAY].range = envelopePoints[DECAY].initRange / -range *
+                                          ((startPoint.y - range) - this.y);
             envelopePoints[DECAY].x = calculatePosition(envelopePoints[ATTACK].x,
                                                         envelopePoints[DECAY].range,
                                                         envelopePoints[DECAY].parameter);
             envelopePoints[DECAY].y = this.y;
 
-            envelopePoints[RELEASE].range = -range * (this.y - startPoint.y) /
-                                            envelopePoints[RELEASE].initRange;
+            envelopePoints[RELEASE].range = envelopePoints[RELEASE].initRange / -range *
+                                            ((startPoint.y - range) - this.y);
             envelopePoints[RELEASE].x = calculatePosition(envelopePoints[SUSTAIN].x,
                                                           envelopePoints[RELEASE].range,
                                                           envelopePoints[RELEASE].parameter);
