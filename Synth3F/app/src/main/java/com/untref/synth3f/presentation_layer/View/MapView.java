@@ -66,10 +66,8 @@ public class MapView extends ConstraintLayout {
         zoomSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    float scaleFactor = (MapView.MAX_ZOOM - MapView.MIN_ZOOM) / seekBar.getMax();
-                    setScale(progress * scaleFactor + MapView.MIN_ZOOM);
-                }
+                float scaleFactor = (MapView.MAX_ZOOM - MapView.MIN_ZOOM) / seekBar.getMax();
+                setScale(progress * scaleFactor + MapView.MIN_ZOOM);
             }
 
             @Override
