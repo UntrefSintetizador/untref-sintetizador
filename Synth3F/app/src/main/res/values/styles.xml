@@ -41,4 +41,8 @@
         <item name="android:layout_marginStart">9dp</item>
         <item name="android:layout_marginTop">1dp</item>
     </style>
+
+    <style name="VerticalSeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent">@color/blue</item>
+    </style>
 </resources>

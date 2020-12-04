@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
@@ -26,6 +27,7 @@ import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
 import com.untref.synth3f.presentation_layer.View.DragMenuView;
+import com.untref.synth3f.presentation_layer.View.VerticalSeekBar;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.activity.StorageActivity;
 import com.untref.synth3f.presentation_layer.presenters.PatchGraphPresenter;
@@ -61,6 +63,8 @@ public class PatchGraphFragment extends Fragment {
         patchGraphView = inflater.inflate(R.layout.patch_graph_fragment, container,
                                          false);
         mapView = patchGraphView.findViewById(R.id.mapView);
+        VerticalSeekBar zoomSeekBar = patchGraphView.findViewById(R.id.zoom_seek_bar);
+        mapView.setZoomSeekBar(zoomSeekBar);
         dragMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
         dragMenuView.init();
         optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);

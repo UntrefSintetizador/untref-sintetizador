@@ -8,6 +8,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.SeekBar;
+
+import com.untref.synth3f.R;
 
 public class MapView extends ConstraintLayout {
 
@@ -23,6 +26,7 @@ public class MapView extends ConstraintLayout {
     private float startY;
     private float startTranslationX = 0.0f;
     private float startTranslationY = 0.0f;
+    private VerticalSeekBar zoomSeekBar;
 
     public MapView(Context context) {
         this(context, null, 0);
@@ -57,22 +61,35 @@ public class MapView extends ConstraintLayout {
         return (y - translationY - getAffectedView().getHeight() / 2) / scale + getAffectedView().getHeight() / 2;
     }
 
-    @Override
-    public boolean performClick() {
-        return super.performClick();
+    public void setZoomSeekBar(VerticalSeekBar zoomSeekBar) {
+        this.zoomSeekBar = zoomSeekBar;
+        zoomSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    float scaleFactor = (MapView.MAX_ZOOM - MapView.MIN_ZOOM) / seekBar.getMax();
+                    setScale(progress * scaleFactor + MapView.MIN_ZOOM);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+        setScale(MAX_ZOOM);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-            case MotionEvent.ACTION_DOWN:
-                startX = event.getRawX();
-                startY = event.getRawY();
-                startTranslationX = translationX;
-                startTranslationY = translationY;
-                break;
+        if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
+            startX = event.getRawX();
+            startY = event.getRawY();
+            startTranslationX = translationX;
+            startTranslationY = translationY;
         }
         boolean retVal = scaleGestureDetector.onTouchEvent(event);
         retVal = gestureDetector.onTouchEvent(event) || retVal;
@@ -98,12 +115,9 @@ public class MapView extends ConstraintLayout {
 
             @Override
             public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-                scale *= scaleGestureDetector.getScaleFactor();
-                scale = Math.max(MIN_ZOOM, Math.min(scale, MAX_ZOOM));
-                translationX = initialFocusX - initialDistanceX * scale;
+                setScale(scale * scaleGestureDetector.getScaleFactor());
                 translationY = initialFocusY - initialDistanceY * scale;
-                getAffectedView().setScaleX(scale);
-                getAffectedView().setScaleY(scale);
+                translationX = initialFocusX - initialDistanceX * scale;
                 translate();
                 return true;
             }
@@ -138,15 +152,6 @@ public class MapView extends ConstraintLayout {
         };
         scaleGestureDetector = new ScaleGestureDetector(context, scaleGestureListener);
         gestureDetector = new GestureDetector(context, gestureListener);
-
-        this.post(new Runnable() {
-            @Override
-            public void run() {
-                scale = MAX_ZOOM;
-                getAffectedView().setScaleX(scale);
-                getAffectedView().setScaleY(scale);
-            }
-        });
     }
 
     private void translate() {
@@ -161,5 +166,14 @@ public class MapView extends ConstraintLayout {
 
     private View getAffectedView() {
         return getChildAt(0);
+    }
+
+    private void setScale(float scale) {
+        this.scale = Math.max(MIN_ZOOM, Math.min(scale, MAX_ZOOM));
+        getAffectedView().setScaleX(this.scale);
+        getAffectedView().setScaleY(this.scale);
+
+        float progressFactor = zoomSeekBar.getMax() / (MAX_ZOOM - MIN_ZOOM);
+        zoomSeekBar.setProgress((int) ((scale - MIN_ZOOM) * progressFactor));
     }
 }

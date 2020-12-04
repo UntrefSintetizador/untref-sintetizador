@@ -216,11 +216,20 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/menu_connect"
         app:layout_constraintStart_toEndOf="@+id/menuDelete"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.untref.synth3f.presentation_layer.View.VerticalSeekBar
+        android:id="@+id/zoom_seek_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:theme="@style/VerticalSeekBar"
+        app:layout_constraintBottom_toTopOf="@id/drag_menu_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menuDelete" />
 
     <com.untref.synth3f.presentation_layer.View.PatchMenuView
         android:id="@+id/patch_menu_view"
