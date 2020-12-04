@@ -42,4 +42,5 @@
     <string name="save_hint">Name</string>
     <string name="intent_remove_all">removeAll</string>
     <string name="parameter_value_hint">0</string>
+    <string name="zoom_icon_description">zoom</string>
 </resources>
