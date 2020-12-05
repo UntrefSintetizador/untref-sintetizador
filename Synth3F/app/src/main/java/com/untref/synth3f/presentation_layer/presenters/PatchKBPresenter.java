@@ -9,13 +9,16 @@ import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 public class PatchKBPresenter extends PatchPresenter {
 
-    public PatchKBPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+    public PatchKBPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter,
+                            Patch patch) {
         super(patchView, patchGraphPresenter, patch);
     }
 
     @Override
     public boolean initMenuView(PatchMenuView patchMenuView) {
-        PatchKBMenuView patchKBMenuView = new PatchKBMenuView((MainActivity) patchMenuView.getPatchGraphFragment().getActivity(), R.layout.popup_kb, this, patch);
+        MainActivity activity = (MainActivity) patchMenuView.getPatchGraphFragment().getActivity();
+        PatchKBMenuView patchKBMenuView = new PatchKBMenuView(activity, R.layout.popup_kb,
+                                                              this, patch);
         patchKBMenuView.showAsDropDown(patchView, 150, -500);
         patchKBMenuView.setButton(patchView);
         return false;

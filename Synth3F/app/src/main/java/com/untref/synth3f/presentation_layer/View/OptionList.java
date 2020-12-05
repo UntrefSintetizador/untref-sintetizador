@@ -67,14 +67,6 @@ public class OptionList extends LinearLayout {
         patchMenuView.setValue(parameterName, selectedValue, true);
     }
 
-    private int darken(int color) {
-        //El color esta representado como hecadecimal ARGB
-        //al realizar un shift hacia la derecha se dividen todos los valores por dos
-        //el and con 0x007F7F7F evita que se pase el resto de un valor a otro
-        //el or con (color & 0xFF000000) devuelve la opacidad a su estado anterior
-        return ((color >> 1) & 0x007F7F7F) | (color & 0xFF000000);
-    }
-
     private static class OptionItem extends AppCompatImageButton implements View.OnClickListener {
 
         private final int iconOffId;

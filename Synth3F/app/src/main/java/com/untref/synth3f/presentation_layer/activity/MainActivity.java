@@ -7,14 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.untref.synth3f.R;
-import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.domain_layer.helpers.Config;
+import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private Config config;
     private PatchGraphFragment patchGraphFragment;
@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentManager fmanager = getFragmentManager();
-        FragmentTransaction transaction = fmanager.beginTransaction();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         patchGraphFragment = new PatchGraphFragment();
         transaction.add(R.id.graph, patchGraphFragment);
         transaction.commit();
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
         if (config.isServiceRunning()) {
             config.startAudio();
         }
@@ -58,13 +57,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_exit:
-                config.stopAudio();
-                config.cleanup();
-                finish();
-                break;
+        if (item.getItemId() == R.id.action_exit) {
+            config.stopAudio();
+            config.cleanup();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -147,7 +147,8 @@ public class WireDrawer extends View {
             path.reset();
             mPaint.setColor(color);
             path.moveTo(startX, startY);
-            path.quadTo((startX + endX) / 2, (startY + endY) / 2 + Math.abs(endX - startX) / 4, endX, endY);
+            path.quadTo((startX + endX) / 2,
+                        (startY + endY) / 2 + Math.abs(endX - startX) / 4, endX, endY);
             canvas.drawPath(path, mPaint);
         }
         for (Line line : lines.values()) {
@@ -183,7 +184,7 @@ public class WireDrawer extends View {
         return position;
     }
 
-    private class Line {
+    private static class Line {
         View startView;
         View endView;
         int color;
@@ -211,7 +212,8 @@ public class WireDrawer extends View {
         public void run() {
             for (PatchView patchView : this.patchViews) {
                 Patch patch = patchView.getPatch();
-                movePatch(patch, (int) (patch.getPosX() * this.width), (int) (patch.getPosY() * this.height));
+                movePatch(patch, (int) (patch.getPosX() * this.width),
+                          (int) (patch.getPosY() * this.height));
             }
         }
     }

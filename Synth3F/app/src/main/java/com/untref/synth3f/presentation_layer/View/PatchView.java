@@ -40,7 +40,8 @@ public abstract class PatchView extends LinearLayout {
 
     private Patch patch;
 
-    public PatchView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+    public PatchView(Context context, WireDrawer wireDrawer,
+                     PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(context);
         patchPresenter = createPresenter(patchGraphPresenter, patch);
         patchGraphFragment = patchGraphPresenter.getPatchGraphFragment();
@@ -50,6 +51,10 @@ public abstract class PatchView extends LinearLayout {
         this.wireDrawer = wireDrawer;
         createDragAndDropEvent();
         createLineEvents();
+    }
+
+    public PatchView(Context context) {
+        super(context);
     }
 
     /**
@@ -109,11 +114,12 @@ public abstract class PatchView extends LinearLayout {
      * @param yDelta valor que ayuda a mantener el patch dentro de los margenes
      */
     public void movePatch(int x, int y, int xDelta, int yDelta) {
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
+        ConstraintLayout.LayoutParams layoutParams =
+                (ConstraintLayout.LayoutParams) getLayoutParams();
         layoutParams.leftMargin = Math.min(x - xDelta,
-                ((View) PatchView.this.getParent()).getWidth() - PatchView.this.getWidth());
+                                           ((View) getParent()).getWidth() - getWidth());
         layoutParams.topMargin = Math.min(y - yDelta,
-                ((View) PatchView.this.getParent()).getHeight() - PatchView.this.getHeight());
+                                          ((View) getParent()).getHeight() - getHeight());
         layoutParams.rightMargin = 0;
         layoutParams.bottomMargin = 0;
         PatchView.this.setLayoutParams(layoutParams);
@@ -137,13 +143,14 @@ public abstract class PatchView extends LinearLayout {
         patch.setPosX(x / displayMetrics.widthPixels);
         patch.setPosY(y / displayMetrics.heightPixels);
         if (bounds.contains((int) event.getRawX() - location[0] + bounds.left,
-                (int) event.getRawY() - location[1] + bounds.top)) {
+                            (int) event.getRawY() - location[1] + bounds.top)) {
             patchPresenter.delete(patch.getId());
             ((ViewManager) PatchView.this.getParent()).removeView(PatchView.this);
         }
     }
 
-    protected abstract PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch);
+    protected abstract PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter,
+                                                      Patch patch);
 
     /**
      * Inicializa aspectos visuales del componente (patch)
@@ -182,22 +189,21 @@ public abstract class PatchView extends LinearLayout {
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout.setGravity(Gravity.START);
         this.addView(linearLayout);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams =
+                (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
         layoutParams.height = 0;
         layoutParams.weight = 5;
         return linearLayout;
     }
 
-    private void populateConnectors(Context context, LinearLayout linearLayout, int imageId, AppCompatImageView[] connectors) {
-        AppCompatImageView connector;
-        LinearLayout.LayoutParams layoutParams;
-
+    private void populateConnectors(Context context, LinearLayout linearLayout, int imageId,
+                                    AppCompatImageView[] connectors) {
         for (int i = 0; i < connectors.length; i++) {
-            connector = new AppCompatImageView(context);
+            AppCompatImageView connector = new AppCompatImageView(context);
             connector.setTag(i);
             connector.setImageResource(imageId);
             linearLayout.addView(connector);
-            layoutParams = (LinearLayout.LayoutParams) connector.getLayoutParams();
+            LayoutParams layoutParams = (LayoutParams) connector.getLayoutParams();
             layoutParams.width = 0;
             layoutParams.weight = 1;
             connector.setScaleType(AppCompatImageView.ScaleType.CENTER_INSIDE);
@@ -215,7 +221,6 @@ public abstract class PatchView extends LinearLayout {
 
             @Override
             public void onShowPress(MotionEvent motionEvent) {
-
             }
 
             @Override
@@ -224,17 +229,18 @@ public abstract class PatchView extends LinearLayout {
             }
 
             @Override
-            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v,
+                                    float v1) {
                 return false;
             }
 
             @Override
             public void onLongPress(MotionEvent motionEvent) {
-
             }
 
             @Override
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v,
+                                   float v1) {
                 return false;
             }
         };
@@ -262,50 +268,12 @@ public abstract class PatchView extends LinearLayout {
             }
         };
 
-        final GestureDetector mDetector = new GestureDetector(patchGraphFragment.getActivity(), onGestureListener);
+        final GestureDetector mDetector = new GestureDetector(patchGraphFragment.getActivity(),
+                                                              onGestureListener);
         mDetector.setOnDoubleTapListener(onDoubleTapListener);
-
-        nodeImage.setOnTouchListener(
-                new View.OnTouchListener() {
-
-                    private int xDelta;
-                    private int yDelta;
-
-                    @Override
-                    public boolean onTouch(View view, MotionEvent event) {
-
-                        if (mDetector.onTouchEvent(event)) {
-                            return true;
-                        }
-
-                        int x = (int) patchGraphFragment.getMapView().convertScreenToLayoutX(event.getRawX());
-                        int y = (int) patchGraphFragment.getMapView().convertScreenToLayoutY(event.getRawY());
-
-                        ConstraintLayout.LayoutParams layoutParams;
-
-                        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                            case MotionEvent.ACTION_DOWN:
-                                layoutParams = (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
-                                xDelta = x - layoutParams.leftMargin;
-                                yDelta = y - layoutParams.topMargin;
-                                break;
-
-                            case MotionEvent.ACTION_MOVE:
-                                movePatch(x, y, xDelta, yDelta);
-                                break;
-                            case MotionEvent.ACTION_UP:
-                                endMovePatch(x, y, event);
-                            default:
-                                break;
-                        }
-                        return true;
-                    }
-                }
-        );
+        nodeImage.setOnTouchListener(new NodeListener(mDetector));
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void createLineEvents() {
         View.OnTouchListener listener = new connectorListener(true);
         for (View view : inputs) {
@@ -317,6 +285,45 @@ public abstract class PatchView extends LinearLayout {
         }
     }
 
+    private class NodeListener implements View.OnTouchListener {
+        private int xDelta;
+        private int yDelta;
+        private GestureDetector mDetector;
+
+        private NodeListener(GestureDetector mDetector) {
+            this.mDetector = mDetector;
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            if (mDetector.onTouchEvent(event)) {
+                return true;
+            }
+
+            MapView mapView = patchGraphFragment.getMapView();
+            int x = (int) mapView.convertScreenToLayoutX(event.getRawX());
+            int y = (int) mapView.convertScreenToLayoutY(event.getRawY());
+
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_DOWN:
+                    ConstraintLayout.LayoutParams layoutParams =
+                            (ConstraintLayout.LayoutParams) PatchView.this.getLayoutParams();
+                    xDelta = x - layoutParams.leftMargin;
+                    yDelta = y - layoutParams.topMargin;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    movePatch(x, y, xDelta, yDelta);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    endMovePatch(x, y, event);
+                default:
+                    break;
+            }
+            return true;
+        }
+    }
+
     private class connectorListener implements View.OnTouchListener {
 
         private boolean isInlet;
@@ -325,14 +332,13 @@ public abstract class PatchView extends LinearLayout {
             this.isInlet = isInlet;
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-
             int x = (int) event.getRawX();
             int y = (int) event.getRawY();
 
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
                 case MotionEvent.ACTION_DOWN:
                     if (patchGraphFragment.isModeConnect()) {
                         patchPresenter.setDragOn(PatchView.this.getPatchId(), view);

@@ -1,5 +1,7 @@
 package com.untref.synth3f.presentation_layer.presenters;
 
+import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Parameter;
 import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.entities.VCAPatch;
 import com.untref.synth3f.presentation_layer.View.MenuScaleFunction;
@@ -14,11 +16,18 @@ public class PatchVCAPresenter extends PatchPresenter {
 
     @Override
     public boolean initMenuView(PatchMenuView patchMenuView) {
+        VCAPatch vcaPatch = (VCAPatch) patch; 
         MenuScaleFunction linearFunction = new LinearFunction(0f, 1f);
-        patchMenuView.createKnob("on-off", INTEGER_PRECISION, ((VCAPatch) patch).on_off, linearFunction);
-        patchMenuView.createKnob("att_control", FLOAT_PRECISION, ((VCAPatch) patch).att_control, new ExponentialCenterFunction(-100f, 100f));
-        patchMenuView.createKnob("base", FLOAT_PRECISION, ((VCAPatch) patch).base, linearFunction);
-        patchMenuView.createKnob("clip", INTEGER_PRECISION, ((VCAPatch) patch).clip, linearFunction);
+        Parameter onOff = new Parameter(patchMenuView.getResources().getString(R.string.parameter_on_off),
+                                        vcaPatch.on_off, INTEGER_PRECISION, linearFunction);
+        patchMenuView.createKnob(onOff);
+        Parameter attControl = new Parameter(patchMenuView.getResources().getString(R.string.parameter_att_control), vcaPatch.att_control, FLOAT_PRECISION,
+                                             new ExponentialCenterFunction(-100f, 100f));
+        patchMenuView.createKnob(attControl);
+        Parameter base = new Parameter(patchMenuView.getResources().getString(R.string.parameter_base), vcaPatch.base, FLOAT_PRECISION, linearFunction);
+        patchMenuView.createKnob(base);
+        Parameter clip = new Parameter(patchMenuView.getResources().getString(R.string.parameter_clip), vcaPatch.clip, INTEGER_PRECISION, linearFunction);
+        patchMenuView.createKnob(clip);
         return true;
     }
 }

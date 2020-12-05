@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.TableLayout;
 
@@ -27,7 +26,6 @@ public class OptionsMenuView extends TableLayout {
         } else {
             open();
         }
-
         return opened;
     }
 

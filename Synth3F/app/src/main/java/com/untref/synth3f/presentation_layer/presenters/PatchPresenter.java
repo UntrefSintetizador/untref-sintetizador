@@ -2,6 +2,7 @@ package com.untref.synth3f.presentation_layer.presenters;
 
 import android.view.View;
 
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 import com.untref.synth3f.entities.Patch;
 import com.untref.synth3f.presentation_layer.View.MenuScaleFunction;
@@ -20,7 +21,8 @@ public abstract class PatchPresenter {
     protected Processor processor;
     protected Patch patch;
 
-    public PatchPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+    public PatchPresenter(PatchView patchView, PatchGraphPresenter patchGraphPresenter,
+                          Patch patch) {
         this.patchView = patchView;
         this.patch = patch;
         this.patchGraphPresenter = patchGraphPresenter;
@@ -52,7 +54,7 @@ public abstract class PatchPresenter {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        processor.sendValue("x_" + patch.getTypeName() + "_" + Integer.toString(patch.getId()) + "_" + name, value);
+        processor.sendValue(patchView.getResources().getString(R.string.pd_patch_name_prefix) + patch.getTypeName() + "_" + patch.getId() + "_" + name, value);
     }
 
     public void delete(int patchId) {
@@ -60,7 +62,7 @@ public abstract class PatchPresenter {
         processor.delete(patch);
     }
 
-    protected class LinearFunction extends MenuScaleFunction {
+    protected static class LinearFunction extends MenuScaleFunction {
 
         public LinearFunction(float minValue, float maxValue) {
             super(minValue, maxValue);
@@ -77,7 +79,7 @@ public abstract class PatchPresenter {
         }
     }
 
-    protected class ExponentialLeftFunction extends MenuScaleFunction {
+    protected static class ExponentialLeftFunction extends MenuScaleFunction {
 
         public ExponentialLeftFunction(float minValue, float maxValue) {
             super(minValue, maxValue);
@@ -94,7 +96,7 @@ public abstract class PatchPresenter {
         }
     }
 
-    protected class ExponentialCenterFunction extends MenuScaleFunction {
+    protected static class ExponentialCenterFunction extends MenuScaleFunction {
 
         public ExponentialCenterFunction(float minValue, float maxValue) {
             super(minValue, maxValue);

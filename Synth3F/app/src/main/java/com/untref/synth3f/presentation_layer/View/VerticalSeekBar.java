@@ -1,5 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -39,6 +40,7 @@ public class VerticalSeekBar extends AppCompatSeekBar {
         super.onDraw(canvas);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isEnabled()) {
@@ -51,10 +53,10 @@ public class VerticalSeekBar extends AppCompatSeekBar {
             case MotionEvent.ACTION_UP:
                 setProgress(getMax() - (int) (getMax() * event.getY() / getHeight()));
                 break;
-
-            case MotionEvent.ACTION_CANCEL:
+            default:
                 break;
         }
+
         return true;
     }
 

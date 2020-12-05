@@ -125,6 +125,8 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                 }
                 touchedPoint = null;
                 break;
+            default:
+                break;
         }
         return true;
     }
@@ -251,6 +253,8 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                         value = convertPositionToValue(this.x, envelopePoints[SUSTAIN].x, range);
                     }
                     break;
+                default:
+                    break;
             }
             parameter.setValue(value);
         }
@@ -286,6 +290,8 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
                 case RELEASE:
                     x = calculatePosition(envelopePoints[SUSTAIN].x, range, parameter);
                     y = startPoint.y;
+                    break;
+                default:
                     break;
             }
         }

@@ -5,9 +5,7 @@ import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
-import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -26,6 +24,7 @@ import com.untref.synth3f.entities.SHPatch;
 import com.untref.synth3f.entities.VCAPatch;
 import com.untref.synth3f.entities.VCFPatch;
 import com.untref.synth3f.entities.VCOPatch;
+import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.PatchDACView;
 import com.untref.synth3f.presentation_layer.View.PatchEGView;
 import com.untref.synth3f.presentation_layer.View.PatchKBView;
@@ -37,6 +36,7 @@ import com.untref.synth3f.presentation_layer.View.PatchVCAView;
 import com.untref.synth3f.presentation_layer.View.PatchVCFView;
 import com.untref.synth3f.presentation_layer.View.PatchVCOView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
+import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
 import java.util.List;
@@ -65,7 +65,107 @@ public class PatchGraphPresenter {
     }
 
     public PatchView createPatch(String type) {
-        Patch patch;
+        Patch patch = createPatchEntity(type);
+        PatchView patchView = createPatchView(patch);
+        patchGraphManager.addPatch(patch);
+        int newId = patchGraphFragment.findUnusedId();
+        patchView.setId(newId);
+        processor.createPatch(type, patch.getId());
+        patch.initialize(processor);
+        return patchView;
+    }
+
+    public void setDragOn(int patchId, View connector) {
+        dragPatchOrigin = patchId;
+        dragConnectorOrigin = connector;
+    }
+
+    public void tryConnect(int x, int y, boolean isInlet) {
+        MapView mapView = patchGraphFragment.getMapView();
+        ConstraintLayout map = (ConstraintLayout) mapView.getChildAt(0);
+        float scale = mapView.getScale();
+        for (int i = 0; i < map.getChildCount() - 1; i++) {
+            PatchView patch = (PatchView) map.getChildAt(i);
+            if (patch.getPatchId() != dragPatchOrigin) {
+                AppCompatImageView[] targets;
+                if (isInlet) {
+                    targets = patch.getOutputs();
+                } else {
+                    targets = patch.getInputs();
+                }
+                tryConnectWithTarget(x, y, isInlet, scale, patch, targets);
+            }
+        }
+    }
+
+    public void disconnect(int patchId, View connector, boolean isInlet) {
+        Patch patch = patchGraphManager.getPatch(patchId);
+        List<Connection> connectionList;
+        int connectorId = (int) connector.getTag();
+        if (isInlet) {
+            connectionList = patch.getInputConnections();
+            for (int i = 0; i < connectionList.size(); i++) {
+                Connection connection = connectionList.get(i);
+                if (connection.getTargetInlet() == connectorId) {
+                    disconnectTarget(connection);
+                    i--;
+                }
+            }
+        } else {
+            connectionList = patch.getOutputConnections();
+            for (int i = 0; i < connectionList.size(); i++) {
+                Connection connection = connectionList.get(i);
+                if (connection.getSourceOutlet() == connectorId) {
+                    disconnectTarget(connection);
+                    i--;
+                }
+            }
+        }
+    }
+
+    public void delete(int patchId) {
+        Patch patch = patchGraphManager.removePatch(patchId);
+        patchGraphFragment.getWireDrawer().removePatch(patch);
+    }
+
+    public void deleteAll() {
+        Patch[] patches = new Patch[patchGraphManager.getPatches().size()];
+        patchGraphManager.getPatches().toArray(patches);
+        processor.clear(patches);
+        Patch[] patchesToRemove = patchGraphManager.removeAllPatches();
+        for (Patch patch: patchesToRemove) {
+            patchGraphFragment.getWireDrawer().removePatch(patch);
+            processor.delete(patch);
+        }
+    }
+
+    public void save(Context context, String filename) {
+        JSONSerializer jsonSerializer = new JSONSerializer();
+        jsonSerializer.save(context, patchGraphManager, filename);
+    }
+
+    public PatchView[] load(Context context, String filename) {
+        JSONSerializer jsonSerializer = new JSONSerializer();
+        Patch[] patches = new Patch[patchGraphManager.getPatches().size()];
+        patchGraphManager.getPatches().toArray(patches);
+        processor.clear(patches);
+
+        patchGraphManager = jsonSerializer.load(context, filename);
+        patches = new Patch[patchGraphManager.getPatches().size()];
+        patchGraphManager.getPatches().toArray(patches);
+        PatchView[] patchViews = new PatchView[patches.length];
+        for (int i = 0; i < patches.length; i++) {
+            Patch patch = patches[i];
+            PatchView patchView = createPatchView(patch);
+            processor.createPatch(patch.getTypeName(), patch.getId());
+            patch.initialize(processor);
+            patchViews[i] = patchView;
+        }
+        return patchViews;
+    }
+
+    private Patch createPatchEntity(String type) {
+        Patch patch = null;
         switch (type) {
             case "vco":
                 patch = new VCOPatch();
@@ -98,173 +198,72 @@ public class PatchGraphPresenter {
                 patch = new SHPatch();
                 break;
             default:
-                patch = new VCOPatch();
                 break;
         }
-        PatchView patchView = createPatchView(patch);
-        patchGraphManager.addPatch(patch);
-        int newId = patchGraphFragment.findUnusedId();
-        patchView.setId(newId);
-        processor.createPatch(type, patch.getId());
-        patch.initialize(processor);
-        return patchView;
-    }
-
-    public void setDragOn(int patchId, View connector) {
-        dragPatchOrigin = patchId;
-        dragConnectorOrigin = connector;
-    }
-
-    public void tryConnect(int x, int y, boolean isInlet) {
-        Rect bounds;
-        int[] location;
-        ConstraintLayout map = (ConstraintLayout) patchGraphFragment.getMapView().getChildAt(0);
-        float scale = patchGraphFragment.getMapView().getScale();
-        for (int i = 0; i < map.getChildCount() - 1; i++) {
-            bounds = new Rect();
-            PatchView patch = (PatchView) map.getChildAt(i);
-            if (patch.getPatchId() != dragPatchOrigin) {
-                AppCompatImageView[] targets;
-                if (isInlet) {
-                    targets = patch.getOutputs();
-                } else {
-                    targets = patch.getInputs();
-                }
-                for (AppCompatImageView targetConnector : targets) {
-                    targetConnector.getHitRect(bounds);
-                    location = getPositionOfView(targetConnector);
-                    bounds.left *= scale;
-                    bounds.right *= scale;
-                    bounds.top *= scale;
-                    bounds.bottom *= scale;
-                    if (bounds.contains(x - location[0] + bounds.left, y - location[1] + bounds.top)) {
-                        Connection connection;
-                        if (isInlet) {
-                            connection = patchGraphManager.connect(patch.getPatchId(), (int) targetConnector.getTag(), dragPatchOrigin, (int) dragConnectorOrigin.getTag());
-                            patchGraphFragment.getWireDrawer().addConnection(connection, targetConnector, dragConnectorOrigin);
-                        } else {
-                            connection = patchGraphManager.connect(dragPatchOrigin, (int) dragConnectorOrigin.getTag(), patch.getPatchId(), (int) targetConnector.getTag());
-                            patchGraphFragment.getWireDrawer().addConnection(connection, dragConnectorOrigin, targetConnector);
-                        }
-                        processor.connect(connection);
-                    }
-                }
-            }
-        }
-    }
-
-    public void disconnect(int patchId, View outlet, boolean isInlet) {
-        Patch patch = patchGraphManager.getPatch(patchId);
-        List<Connection> connectionList;
-        int connectorId = (int) outlet.getTag();
-        if (isInlet) {
-            connectionList = patch.getInputConnections();
-            for (int i = 0; i < connectionList.size(); i++) {
-                Connection connection = connectionList.get(i);
-                if (connection.getTargetInlet() == connectorId) {
-                    patchGraphManager.disconnect(connection.getId());
-                    patchGraphFragment.getWireDrawer().removeConnection(connection);
-                    processor.disconnect(connection);
-                    i--;
-                }
-            }
-        } else {
-            connectionList = patch.getOutputConnections();
-            for (int i = 0; i < connectionList.size(); i++) {
-                Connection connection = connectionList.get(i);
-                if (connection.getSourceOutlet() == connectorId) {
-                    patchGraphManager.disconnect(connection.getId());
-                    patchGraphFragment.getWireDrawer().removeConnection(connection);
-                    processor.disconnect(connection);
-                    i--;
-                }
-            }
-        }
-    }
-
-    public Patch delete(int patchId) {
-        Patch patch = patchGraphManager.removePatch(patchId);
-        patchGraphFragment.getWireDrawer().removePatch(patch);
         return patch;
     }
 
-    public void deleteAll() {
-        Patch[] patches = new Patch[this.patchGraphManager.getPatches().size()];
-        this.patchGraphManager.getPatches().toArray(patches);
-        processor.clear(patches);
-        Patch[] patchesToRemove = patchGraphManager.removeAllPatches();
-        for (Patch patch: patchesToRemove) {
-            patchGraphFragment.getWireDrawer().removePatch(patch);
-            this.processor.delete(patch);
-        }
-    }
-
-    public void save(Context context, String filename) {
-        JSONSerializer jsonSerializer = new JSONSerializer();
-        jsonSerializer.save(context, patchGraphManager, filename);
-    }
-
-    public PatchView[] load(Context context, String filename) {
-        JSONSerializer jsonSerializer = new JSONSerializer();
-        Patch[] patches = new Patch[this.patchGraphManager.getPatches().size()];
-        this.patchGraphManager.getPatches().toArray(patches);
-        processor.clear(patches);
-
-        this.patchGraphManager = jsonSerializer.load(context, filename);
-        patches = new Patch[this.patchGraphManager.getPatches().size()];
-        this.patchGraphManager.getPatches().toArray(patches);
-        PatchView[] patchViews = new PatchView[patches.length];
-        for (int i = 0; i < patches.length; i++) {
-            Patch patch = patches[i];
-            PatchView patchView = createPatchView(patch);
-            processor.createPatch(patch.getTypeName(), patch.getId());
-            patch.initialize(processor);
-            patchViews[i] = patchView;
-        }
-        return patchViews;
-    }
-
     private PatchView createPatchView(Patch patch) {
-        PatchView patchView;
+        PatchView patchView = null;
+        Context context = patchGraphFragment.getActivity();
+        WireDrawer wireDrawer = patchGraphFragment.getWireDrawer();
+        PatchGraphPresenter patchGraphPresenter = patchGraphFragment.getPatchGraphPresenter();
         switch (patch.getTypeName()) {
             case "vco":
-                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchVCOView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "vca":
-                patchView = new PatchVCAView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchVCAView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "vcf":
-                patchView = new PatchVCFView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchVCFView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "eg":
-                patchView = new PatchEGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchEGView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "dac":
-                patchView = new PatchDACView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchDACView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "kb":
-                patchView = new PatchKBView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchKBView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "lfo":
-                patchView = new PatchLFOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchLFOView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "mix":
-                patchView = new PatchMIXView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchMIXView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "ng":
-                patchView = new PatchNGView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchNGView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             case "sh":
-                patchView = new PatchSHView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
+                patchView = new PatchSHView(context, wireDrawer, patchGraphPresenter, patch);
                 break;
             default:
-                patchView = new PatchVCOView(patchGraphFragment.getActivity(), patchGraphFragment.getWireDrawer(), patchGraphFragment.getPatchGraphPresenter(), patch);
                 break;
         }
         return patchView;
     }
 
-    public int[] getPositionOfView(View view) {
+    private void tryConnectWithTarget(int x, int y, boolean isInlet, float scale, PatchView patch,
+                                      AppCompatImageView[] targets) {
+        int[] location;
+        Rect bounds = new Rect();
+        for (AppCompatImageView targetConnector : targets) {
+            targetConnector.getHitRect(bounds);
+            location = getPositionOfView(targetConnector);
+            bounds.left *= scale;
+            bounds.right *= scale;
+            bounds.top *= scale;
+            bounds.bottom *= scale;
+            if (bounds.contains(x - location[0] + bounds.left,
+                                y - location[1] + bounds.top)) {
+                connectWithTarget(isInlet, patch, targetConnector);
+            }
+        }
+    }
+
+    private int[] getPositionOfView(View view) {
         int[] position = new int[2];
         view.getLocationOnScreen(position);
         WindowManager windowManager = patchGraphFragment.getActivity().getWindowManager();
@@ -278,5 +277,33 @@ public class PatchGraphPresenter {
         position[0] -= (realWidth - displayWidth) / 2;
 
         return position;
+    }
+
+    private void connectWithTarget(boolean isInlet, PatchView patch,
+                                   AppCompatImageView targetConnector) {
+        Connection connection;
+        if (isInlet) {
+            connection = patchGraphManager.connect(patch.getPatchId(),
+                                                   (int) targetConnector.getTag(),
+                                                   dragPatchOrigin,
+                                                   (int) dragConnectorOrigin.getTag());
+            patchGraphFragment.getWireDrawer().addConnection(connection, targetConnector,
+                                                             dragConnectorOrigin);
+        } else {
+            connection = patchGraphManager.connect(dragPatchOrigin,
+                                                   (int) dragConnectorOrigin.getTag(),
+                                                   patch.getPatchId(),
+                                                   (int) targetConnector.getTag());
+            patchGraphFragment.getWireDrawer().addConnection(connection,
+                                                             dragConnectorOrigin,
+                                                             targetConnector);
+        }
+        processor.connect(connection);
+    }
+
+    private void disconnectTarget(Connection connection) {
+        patchGraphManager.disconnect(connection.getId());
+        patchGraphFragment.getWireDrawer().removeConnection(connection);
+        processor.disconnect(connection);
     }
 }

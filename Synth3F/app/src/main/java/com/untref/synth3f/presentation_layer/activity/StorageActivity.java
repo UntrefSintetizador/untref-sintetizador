@@ -28,30 +28,32 @@ public class StorageActivity extends AppCompatActivity {
     private ListView listView;
     private View lastViewSelected;
     private boolean removeAll;
+    private EditText inputFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_activity);
         populateList();
-        setMode(getIntent().getIntExtra("mode", 0));
-        closeApp = getIntent().getBooleanExtra("closeApp", false);
-        removeAll = getIntent().getBooleanExtra("removeAll", false);
+        inputFileName = findViewById(R.id.inputFilename);
+        setMode(getIntent().getIntExtra(getResources().getString(R.string.intent_mode), 0));
+        closeApp = getIntent().getBooleanExtra(getResources().getString(R.string.intent_close_app), false);
+        removeAll = getIntent().getBooleanExtra(getResources().getString(R.string.intent_remove_all), false);
         createClickEvents();
     }
 
     private void populateList() {
         List<String> list = getFilenameList(getBaseContext());
         listView = findViewById(R.id.filenameList);
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+                                                 list);
         listView.setAdapter(adapter);
     }
 
     private void setMode(int mode) {
         saveMode = mode == PatchGraphFragment.REQUEST_SAVE;
-        TextView inputFileNameView = findViewById(R.id.inputFilename);
-        inputFileNameView.setVisibility(saveMode ? View.VISIBLE : View.INVISIBLE);
-        inputFileNameView.setHint(R.string.save_hint);
+        inputFileName.setVisibility(saveMode ? View.VISIBLE : View.INVISIBLE);
+        inputFileName.setHint(R.string.save_hint);
         Button buttonSave = findViewById(R.id.buttonSave);
         buttonSave.setText(getString(saveMode ? R.string.dialog_save : R.string.dialog_load));
     }
@@ -66,14 +68,14 @@ public class StorageActivity extends AppCompatActivity {
                             lastViewSelected.setBackgroundColor(0);
                         }
                         lastViewSelected = view;
-                        ((EditText) findViewById(R.id.inputFilename)).setText(((TextView) view).getText());
+                        inputFileName.setText(((TextView) view).getText());
                     }
                 });
         findViewById(R.id.buttonSave).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String filename = ((EditText) findViewById(R.id.inputFilename)).getText().toString();
+                        String filename = inputFileName.getText().toString();
                         List<String> filenameList = getFilenameList(getBaseContext());
                         if (saveMode && filenameList.contains(filename)) {
                             handleFileOverwriting(filename);
@@ -87,7 +89,6 @@ public class StorageActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent returnIntent = new Intent();
-
                         setResult(PatchGraphFragment.RESULT_CANCEL, returnIntent);
                         finish();
                     }
@@ -106,7 +107,6 @@ public class StorageActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-
         dialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE,
                 getString(R.string.dialog_accept),
                 new DialogInterface.OnClickListener() {
@@ -120,9 +120,9 @@ public class StorageActivity extends AppCompatActivity {
 
     private void returnToFragment(String filename) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("filename", filename);
-        returnIntent.putExtra("closeApp", closeApp);
-        returnIntent.putExtra("removeAll", removeAll);
+        returnIntent.putExtra(getResources().getString(R.string.intent_filename), filename);
+        returnIntent.putExtra(getResources().getString(R.string.intent_close_app), closeApp);
+        returnIntent.putExtra(getResources().getString(R.string.intent_remove_all), removeAll);
 
         setResult(PatchGraphFragment.RESULT_OK, returnIntent);
         finish();

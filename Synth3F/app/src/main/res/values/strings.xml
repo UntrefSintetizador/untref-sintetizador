@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Synth3F</string>
-    <string name="action_salir">Salir</string>
+    <string name="action_quit">Quit</string>
     <string name="piano">PIANO</string>
 
     <!-- Menu options -->
@@ -27,7 +27,6 @@
     <string name="dialog_load">Open</string>
     <string name="dialog_clean_screen">Clean screen without saving</string>
 
-
     <!-- Keyboard -->
     <string name="close">Close</string>
     <string name="octave_up">Octave +</string>
@@ -37,10 +36,39 @@
     <string name="intent_filename">filename</string>
     <string name="intent_close_app">closeApp</string>
     <string name="intent_mode">mode</string>
+    <string name="intent_remove_all">removeAll</string>
+
+    <!-- Parameter names -->
+    <string name="parameter_on_off">on-off</string>
+    <string name="parameter_att_freq">att_freq</string>
+    <string name="parameter_att_freq0">att_freq0</string>
+    <string name="parameter_att_freq1">att_freq1</string>
+    <string name="parameter_att_pw">att_pw</string>
+    <string name="parameter_att_signal">att_signal</string>
+    <string name="parameter_att_control">att_control</string>
+    <string name="parameter_master">master</string>
+    <string name="parameter_ch1">ch1</string>
+    <string name="parameter_ch2">ch2</string>
+    <string name="parameter_ch3">ch3</string>
+    <string name="parameter_ch4">ch4</string>
+    <string name="parameter_attack">attack</string>
+    <string name="parameter_decay">decay</string>
+    <string name="parameter_sustain">sustain</string>
+    <string name="parameter_release">release</string>
+    <string name="parameter_bpm">BPM</string>
+    <string name="parameter_offset">offset</string>
+    <string name="parameter_freq">freq</string>
+    <string name="parameter_q">q</string>
+    <string name="parameter_pw">pw</string>
+    <string name="parameter_shape">shape</string>
+    <string name="parameter_mode">mode</string>
+    <string name="parameter_clip">clip</string>
+    <string name="parameter_base">base</string>
+    <string name="parameter_glide">glide</string>
 
     <string name="close_dialog_message">Save changes before closing?</string>
     <string name="save_hint">Name</string>
-    <string name="intent_remove_all">removeAll</string>
     <string name="parameter_value_hint">0</string>
     <string name="zoom_icon_description">zoom</string>
+    <string name="pd_patch_name_prefix">x_</string>
 </resources>

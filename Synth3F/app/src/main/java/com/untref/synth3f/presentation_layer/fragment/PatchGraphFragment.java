@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -16,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
@@ -54,7 +52,7 @@ public class PatchGraphFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.patchGraphPresenter = new PatchGraphPresenter(this, processor);
+        patchGraphPresenter = new PatchGraphPresenter(this, processor);
     }
 
     @Override
@@ -106,8 +104,7 @@ public class PatchGraphFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SAVE) {
             if (resultCode == RESULT_OK) {
-                patchGraphPresenter.save(context,
-                                         data.getStringExtra(getString(R.string.intent_filename)));
+                patchGraphPresenter.save(context, data.getStringExtra(getString(R.string.intent_filename)));
                 boolean closeApp = data.getBooleanExtra(getString(R.string.intent_close_app), false);
                 if (closeApp) {
                     getActivity().finishAffinity();
@@ -119,10 +116,8 @@ public class PatchGraphFragment extends Fragment {
             }
         }
 
-        if (requestCode == REQUEST_LOAD) {
-            if (resultCode == RESULT_OK) {
-                loadFile(data.getStringExtra(getString(R.string.intent_filename)));
-            }
+        if (requestCode == REQUEST_LOAD && resultCode == RESULT_OK) {
+            loadFile(data.getStringExtra(getString(R.string.intent_filename)));
         }
     }
 
@@ -199,7 +194,6 @@ public class PatchGraphFragment extends Fragment {
         wireDrawer.bringToFront();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void createDragAndDropEvent() {
         View.OnTouchListener listener = new DragAndDropListener();
         patchGraphView.findViewById(R.id.menuButtonDragVCO).setOnTouchListener(listener);
@@ -331,9 +325,15 @@ public class PatchGraphFragment extends Fragment {
 
         PatchView[] patchViews = patchGraphPresenter.load(context, filename);
         HashMap<Integer, Integer> patchToView = new HashMap<>();
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        putLoadedPatchesInLayout(mapLayout, patchViews, patchToView, displayMetrics);
+        connectPatches(patchViews, patchToView, displayMetrics);
+    }
 
-        DisplayMetrics displayMetrics = PatchGraphFragment.this.getResources().getDisplayMetrics();
-        int hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
+    private void putLoadedPatchesInLayout(ConstraintLayout mapLayout, PatchView[] patchViews,
+                                          HashMap<Integer, Integer> patchToView,
+                                          DisplayMetrics displayMetrics) {
+        int hardcodedSize = getPatchSize(displayMetrics);
         for (int i = 0; i < patchViews.length; i++) {
             PatchView patchView = patchViews[i];
             patchView.setId(findUnusedId());
@@ -356,17 +356,22 @@ public class PatchGraphFragment extends Fragment {
 
             patchToView.put(patchView.getPatchId(), i);
         }
+    }
 
+    private int getPatchSize(DisplayMetrics displayMetrics) {
+        return (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
+    }
+
+    private void connectPatches(PatchView[] patchViews, HashMap<Integer, Integer> patchToView,
+                                DisplayMetrics displayMetrics) {
         wireDrawer.clear();
-
-        View start;
-        View end;
 
         for (PatchView patchView : patchViews) {
             for (Connection connection : patchView.getPatch().getOutputConnections()) {
                 processor.connect(connection);
-                start = patchView.getOutputs()[connection.getSourceOutlet()];
-                end = patchViews[patchToView.get(connection.getTargetPatch())].getInputs()[connection.getTargetInlet()];
+                PatchView target = patchViews[patchToView.get(connection.getTargetPatch())];
+                View start = patchView.getOutputs()[connection.getSourceOutlet()];
+                View end = target.getInputs()[connection.getTargetInlet()];
                 wireDrawer.startDraw(patchView, patchView.getColor());
                 wireDrawer.addConnection(connection, start, end);
             }
@@ -392,8 +397,6 @@ public class PatchGraphFragment extends Fragment {
 
         private PatchView patchView;
 
-        private int hardcodedSize = 150;
-
         /**
          * Detecta los eventos realizados por el usuario sobre los patches
          *
@@ -403,14 +406,9 @@ public class PatchGraphFragment extends Fragment {
          *              ACTION_UP (dejo de tocar la pantalla)
          * @return false (si no hay un patchView), true en caso contrario
          */
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            view.performClick();
-
-            DisplayMetrics displayMetrics =
-                    PatchGraphFragment.this.getResources().getDisplayMetrics();
-            hardcodedSize = (int) (displayMetrics.heightPixels / 12 / MapView.MAX_ZOOM);
-
             int x = (int) mapView.convertScreenToLayoutX(event.getRawX());
             int y = (int) mapView.convertScreenToLayoutY(event.getRawY());
 
@@ -424,7 +422,7 @@ public class PatchGraphFragment extends Fragment {
                     if (patchView == null) {
                         return false;
                     }
-                    doActionDown(x, y);
+                    addPatchViewToLayout(x, y);
                     break;
                 case MotionEvent.ACTION_MOVE:
                     if (patchView == null) {
@@ -438,14 +436,17 @@ public class PatchGraphFragment extends Fragment {
                     }
                     patchView.endMovePatch(x, y, event);
                     break;
+                default:
+                    break;
             }
             return true;
         }
 
-        private void doActionDown(int x, int y) {
+        private void addPatchViewToLayout(int x, int y) {
+            int size = getPatchSize(PatchGraphFragment.this.getResources().getDisplayMetrics());
             ConstraintLayout.LayoutParams drawerLayoutParams = new ConstraintLayout.LayoutParams(
-                    hardcodedSize * patchView.widthRatio(),
-                    hardcodedSize * 4
+                    size * patchView.widthRatio(),
+                    size * 4
             );
             ConstraintLayout mapLayout = getActivity().findViewById(R.id.map);
             mapLayout.addView(patchView, drawerLayoutParams);

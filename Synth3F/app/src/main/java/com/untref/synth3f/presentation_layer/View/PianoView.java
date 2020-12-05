@@ -11,37 +11,37 @@ import com.untref.synth3f.presentation_layer.presenters.PatchKBPresenter;
 
 public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
 
-    private static final int MIN_OCTIVE = 0;
-    private static final int MAX_OCTIVE = 8;
+    private static final int MIN_OCTAVE = 0;
+    private static final int MAX_OCTAVE = 8;
     private PatchKBPresenter presenter;
-    private TextView label_octava;
+    private TextView octaveLabel;
+    // TODO: replace uses of the attribute defined here by uses of this class
     private com.evilduck.piano.views.instrument.PianoView piano;
     private KBPatch patch;
 
     public PianoView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
     }
 
     public void init(View view, KBPatch patch) {
         this.patch = patch;
         piano = findViewById(R.id.pianito);
 
-        label_octava = view.findViewById(R.id.label_octave);
-        label_octava.setText(String.valueOf(patch.octava));
-        updateLabelOctava();
+        octaveLabel = view.findViewById(R.id.label_octave);
+        octaveLabel.setText(String.valueOf(patch.octava));
+        updateOctaveLabel();
 
         view.findViewById(R.id.button_octave_up).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                incrementOctava();
+                incrementOctave();
             }
         });
 
         view.findViewById(R.id.button_octave_down).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reduceOctava();
+                reduceOctave();
             }
         });
     }
@@ -61,22 +61,22 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
         presenter.setValue("gate", 0);
     }
 
-    private void reduceOctava() {
-        if (patch.octava > MIN_OCTIVE) {
+    private void reduceOctave() {
+        if (patch.octava > MIN_OCTAVE) {
             patch.octava--;
-            updateLabelOctava();
+            updateOctaveLabel();
         }
     }
 
-    private void incrementOctava() {
-        if (patch.octava < MAX_OCTIVE) {
+    private void incrementOctave() {
+        if (patch.octava < MAX_OCTAVE) {
             patch.octava++;
-            updateLabelOctava();
+            updateOctaveLabel();
         }
     }
 
-    private void updateLabelOctava() {
+    private void updateOctaveLabel() {
         piano.setINITIAL_OCTIVE(patch.octava);
-        label_octava.setText(String.valueOf(patch.octava));
+        octaveLabel.setText(String.valueOf(patch.octava));
     }
 }

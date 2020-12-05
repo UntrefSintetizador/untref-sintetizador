@@ -1,7 +1,6 @@
 package com.untref.synth3f.presentation_layer.View;
 
 import android.content.Context;
-import android.graphics.Color;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.entities.Patch;
@@ -11,9 +10,13 @@ import com.untref.synth3f.presentation_layer.presenters.PatchPresenter;
 
 public class PatchLFOView extends PatchView {
 
-
-    public PatchLFOView(Context context, WireDrawer wireDrawer, PatchGraphPresenter patchGraphPresenter, Patch patch) {
+    public PatchLFOView(Context context, WireDrawer wireDrawer,
+                        PatchGraphPresenter patchGraphPresenter, Patch patch) {
         super(context, wireDrawer, patchGraphPresenter, patch);
+    }
+
+    public PatchLFOView(Context context) {
+        super(context);
     }
 
     @Override
@@ -25,7 +28,8 @@ public class PatchLFOView extends PatchView {
     }
 
     @Override
-    protected PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter, Patch patch) {
+    protected PatchPresenter createPresenter(PatchGraphPresenter patchGraphPresenter,
+                                             Patch patch) {
         return new PatchLFOPresenter(this, patchGraphPresenter, patch);
     }
 }

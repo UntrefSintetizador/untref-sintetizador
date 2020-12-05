@@ -3,12 +3,12 @@ package com.untref.synth3f.presentation_layer.View;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.untref.synth3f.R;
+import com.untref.synth3f.entities.Parameter;
 
 import java.math.BigDecimal;
 
@@ -19,8 +19,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     private PatchMenuView patchMenuView;
 
     private String parameterName;
-    private float maxValue;
-    private float minValue;
     private int precision;
     private float value;
     private MenuScaleFunction scaleFunction;
@@ -34,34 +32,18 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     private Paint borderCirclePaint;
     private Paint markPaint;
 
-    public Knob(Context context) {
-        super(context);
-    }
-
-    /**
-     *  @param context contexto
-     * @param patchMenuView patchMenuView
-     * @param parameterName el nombre (string) que representa al knob
-     * @param minValue valor minimo que puede representar el knob
-     * @param maxValue valor maximo que puede representar el knob
-     * @param precision la precision de los ajustes de los valores
-     * @param value valor actual que representa el knob
-     * @param scaleFunction la funcion de escala de los valores
-     * @param color color
-     * @param knobSize
-     */
-    public Knob(Context context, PatchMenuView patchMenuView, String parameterName,
-                float minValue, float maxValue, int precision, float value,
-                MenuScaleFunction scaleFunction, int color) {
+    public Knob(Context context, PatchMenuView patchMenuView, Parameter parameter, int color) {
         super(context);
         this.patchMenuView = patchMenuView;
-        this.parameterName = parameterName;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        this.precision = precision;
-        this.value = value;
-        this.scaleFunction = scaleFunction;
+        this.parameterName = parameter.getName();
+        this.precision = parameter.getPrecision();
+        this.value = parameter.getValue();
+        this.scaleFunction = parameter.getScaleFunction();
         init(color);
+    }
+
+    public Knob(Context context) {
+        super(context);
     }
 
     /**
@@ -107,11 +89,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         this.linkingFunction = linkingFunction;
     }
 
-    @Override
-    public boolean performClick() {
-        return super.performClick();
-    }
-
     /**
      * Al tocar el knob, segun los movimientos que se le hagan, se ajustan los parametros que este
      * representa.
@@ -121,12 +98,10 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         int y = (int) motionEvent.getRawY();
 
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-
             case MotionEvent.ACTION_DOWN:
                 initialTouch = y;
                 patchMenuView.setParameterToEdit(parameterName, value);
                 break;
-
             case MotionEvent.ACTION_MOVE:
                 int clampedRotation = getClampedRotation(rotationWhileNotMoving, y, initialTouch);
                 convertRotationToValue(clampedRotation);
@@ -134,11 +109,10 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
                 checkLinkedKnob();
                 patchMenuView.setValue(parameterName, value, true);
                 break;
-
             case MotionEvent.ACTION_UP:
-                rotationWhileNotMoving = getClampedRotation(rotationWhileNotMoving, y, initialTouch);
+                rotationWhileNotMoving = getClampedRotation(rotationWhileNotMoving, y,
+                                                            initialTouch);
                 break;
-
             default:
                 break;
         }
@@ -180,7 +154,8 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     }
 
     private void setValueCheckingLinks(float value, boolean checksLink) {
-        this.value = Math.max(minValue, Math.min(maxValue, value));
+        this.value = Math.max(scaleFunction.getMinValue(),
+                              Math.min(scaleFunction.getMaxValue(), value));
         normalizeValue();
         rotationWhileNotMoving = calculateRotation();
         setRotation(rotationWhileNotMoving);
@@ -197,7 +172,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
     }
 
     private void checkLinkedKnob() {
-
         if (linkedKnob != null) {
             linkedKnob.setValueCheckingLinks(linkingFunction.calculate(value), false);
             patchMenuView.setValue(linkedKnobParameterName, linkedKnob.getValue(), false);
@@ -210,7 +184,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
 
     private int calculateRotation() {
         float percentage = scaleFunction.calculateInverse(value);
-
         return (int) (percentage * MAX_ROTATION * 2) - MAX_ROTATION;
     }
 

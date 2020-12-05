@@ -10,8 +10,6 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.SeekBar;
 
-import com.untref.synth3f.R;
-
 public class MapView extends ConstraintLayout {
 
     public static float MIN_ZOOM = 1.0f;
@@ -46,19 +44,23 @@ public class MapView extends ConstraintLayout {
     }
 
     public float convertLayoutToScreenX(float x) {
-        return (x - getAffectedView().getWidth() / 2) * scale + translationX + getAffectedView().getWidth() / 2;
+        return (x - getAffectedView().getWidth() / 2) * scale + translationX +
+                getAffectedView().getWidth() / 2;
     }
 
     public float convertLayoutToScreenY(float y) {
-        return (y - getAffectedView().getHeight() / 2) * scale + translationY + getAffectedView().getHeight() / 2;
+        return (y - getAffectedView().getHeight() / 2) * scale + translationY +
+                getAffectedView().getHeight() / 2;
     }
 
     public float convertScreenToLayoutX(float x) {
-        return (x - translationX - getAffectedView().getWidth() / 2) / scale + getAffectedView().getWidth() / 2;
+        return (x - translationX - getAffectedView().getWidth() / 2) / scale +
+                getAffectedView().getWidth() / 2;
     }
 
     public float convertScreenToLayoutY(float y) {
-        return (y - translationY - getAffectedView().getHeight() / 2) / scale + getAffectedView().getHeight() / 2;
+        return (y - translationY - getAffectedView().getHeight() / 2) / scale +
+                getAffectedView().getHeight() / 2;
     }
 
     public void setZoomSeekBar(VerticalSeekBar zoomSeekBar) {
@@ -104,9 +106,11 @@ public class MapView extends ConstraintLayout {
 
             @Override
             public boolean onScaleBegin(ScaleGestureDetector scaleGestureDetector) {
-                initialFocusX = scaleGestureDetector.getFocusX() - getAffectedView().getWidth() / 2;
+                initialFocusX = scaleGestureDetector.getFocusX() -
+                                getAffectedView().getWidth() / 2;
                 initialDistanceX = (initialFocusX - translationX) / scale;
-                initialFocusY = scaleGestureDetector.getFocusY() - getAffectedView().getHeight() / 2;
+                initialFocusY = scaleGestureDetector.getFocusY() -
+                                getAffectedView().getHeight() / 2;
                 initialDistanceY = (initialFocusY - translationY) / scale;
                 return true;
             }
@@ -134,7 +138,8 @@ public class MapView extends ConstraintLayout {
             }
 
             @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+                                    float distanceY) {
                 if (e2.getPointerCount() == 1) {
                     translationX = startTranslationX - startX + e2.getRawX();
                     translationY = startTranslationY - startY + e2.getRawY();
@@ -144,7 +149,8 @@ public class MapView extends ConstraintLayout {
             }
 
             @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                                   float velocityY) {
                 return true;
             }
         };
@@ -153,8 +159,8 @@ public class MapView extends ConstraintLayout {
     }
 
     private void translate() {
-        float maxTranslationX = getAffectedView().getWidth() / 2 * scale - getAffectedView().getWidth() / 2;
-        float maxTranslationY = getAffectedView().getHeight() / 2 * scale - getAffectedView().getHeight() / 2;
+        float maxTranslationX = getAffectedView().getWidth() / 2 * (scale - 1);
+        float maxTranslationY = getAffectedView().getHeight() / 2 * (scale - 1);
         translationX = Math.min(Math.max(translationX, -maxTranslationX), maxTranslationX);
         translationY = Math.min(Math.max(translationY, -maxTranslationY), maxTranslationY);
         getAffectedView().setX(translationX);
