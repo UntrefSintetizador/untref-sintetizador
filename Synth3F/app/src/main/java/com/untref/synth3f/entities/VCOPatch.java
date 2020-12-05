@@ -1,5 +1,8 @@
 package com.untref.synth3f.entities;
 
+import android.content.res.Resources;
+
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class VCOPatch extends Patch {
@@ -14,16 +17,16 @@ public class VCOPatch extends Patch {
     public float pw = 50;
 
     @Override
-    public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + getId() + "_";
-        processor.sendValue(name + "on-off", on_off);
-        processor.sendValue(name + "att_freq0", att_freq0);
-        processor.sendValue(name + "att_freq1", att_freq1);
-        processor.sendValue(name + "att_pw", att_pw);
-        processor.sendValue(name + "shape", shape);
-        processor.sendValue(name + "freq", freq);
-        processor.sendValue(name + "offset", offset);
-        processor.sendValue(name + "pw", pw);
+    public void initialize(Processor processor, Resources resources) {
+        String name = resources.getString(R.string.pd_patch_name_prefix) + getTypeName() + "_" + getId() + "_";
+        processor.sendValue(name + resources.getString(R.string.parameter_on_off), on_off);
+        processor.sendValue(name + resources.getString(R.string.parameter_att_freq0), att_freq0);
+        processor.sendValue(name + resources.getString(R.string.parameter_att_freq1), att_freq1);
+        processor.sendValue(name + resources.getString(R.string.parameter_att_pw), att_pw);
+        processor.sendValue(name + resources.getString(R.string.parameter_shape), shape);
+        processor.sendValue(name + resources.getString(R.string.parameter_freq), freq);
+        processor.sendValue(name + resources.getString(R.string.parameter_offset), offset);
+        processor.sendValue(name + resources.getString(R.string.parameter_pw), pw);
     }
 
     @Override

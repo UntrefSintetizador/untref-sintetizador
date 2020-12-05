@@ -1,5 +1,8 @@
 package com.untref.synth3f.entities;
 
+import android.content.res.Resources;
+
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class VCFPatch extends Patch {
@@ -12,14 +15,14 @@ public class VCFPatch extends Patch {
     public float q = 1f;
 
     @Override
-    public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + getId() + "_";
-        processor.sendValue(name + "on-off", on_off);
-        processor.sendValue(name + "att_signal", att_signal);
-        processor.sendValue(name + "att_freq", att_freq);
-        processor.sendValue(name + "mode", mode);
-        processor.sendValue(name + "freq", freq);
-        processor.sendValue(name + "q", q);
+    public void initialize(Processor processor, Resources resources) {
+        String name = resources.getString(R.string.pd_patch_name_prefix) + getTypeName() + "_" + getId() + "_";
+        processor.sendValue(name + resources.getString(R.string.parameter_on_off), on_off);
+        processor.sendValue(name + resources.getString(R.string.parameter_att_signal), att_signal);
+        processor.sendValue(name + resources.getString(R.string.parameter_att_freq), att_freq);
+        processor.sendValue(name + resources.getString(R.string.parameter_mode), mode);
+        processor.sendValue(name + resources.getString(R.string.parameter_freq), freq);
+        processor.sendValue(name + resources.getString(R.string.parameter_q), q);
     }
 
     @Override

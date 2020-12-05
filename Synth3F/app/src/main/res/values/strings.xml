@@ -65,6 +65,8 @@
     <string name="parameter_clip">clip</string>
     <string name="parameter_base">base</string>
     <string name="parameter_glide">glide</string>
+    <string name="parameter_gate">gate</string>
+    <string name="parameter_midi_note">midi_note</string>
 
     <string name="close_dialog_message">Save changes before closing?</string>
     <string name="save_hint">Name</string>

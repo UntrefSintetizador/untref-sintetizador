@@ -71,7 +71,7 @@ public class PatchGraphPresenter {
         int newId = patchGraphFragment.findUnusedId();
         patchView.setId(newId);
         processor.createPatch(type, patch.getId());
-        patch.initialize(processor);
+        patch.initialize(processor, patchView.getResources());
         return patchView;
     }
 
@@ -158,7 +158,7 @@ public class PatchGraphPresenter {
             Patch patch = patches[i];
             PatchView patchView = createPatchView(patch);
             processor.createPatch(patch.getTypeName(), patch.getId());
-            patch.initialize(processor);
+            patch.initialize(processor, patchView.getResources());
             patchViews[i] = patchView;
         }
         return patchViews;

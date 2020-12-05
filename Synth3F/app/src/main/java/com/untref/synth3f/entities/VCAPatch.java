@@ -1,5 +1,8 @@
 package com.untref.synth3f.entities;
 
+import android.content.res.Resources;
+
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class VCAPatch extends Patch {
@@ -10,12 +13,12 @@ public class VCAPatch extends Patch {
     public float clip = 0f;
 
     @Override
-    public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + getId() + "_";
-        processor.sendValue(name + "on-off", on_off);
-        processor.sendValue(name + "att_control", att_control);
-        processor.sendValue(name + "base", base);
-        processor.sendValue(name + "clip", clip);
+    public void initialize(Processor processor, Resources resources) {
+        String name = resources.getString(R.string.pd_patch_name_prefix) + getTypeName() + "_" + getId() + "_";
+        processor.sendValue(name + resources.getString(R.string.parameter_on_off), on_off);
+        processor.sendValue(name + resources.getString(R.string.parameter_att_control), att_control);
+        processor.sendValue(name + resources.getString(R.string.parameter_base), base);
+        processor.sendValue(name + resources.getString(R.string.parameter_clip), clip);
     }
 
     @Override

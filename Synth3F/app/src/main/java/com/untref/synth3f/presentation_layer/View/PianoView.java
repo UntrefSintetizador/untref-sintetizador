@@ -52,13 +52,13 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
 
     @Override
     protected void sendNote(int note) {
-        presenter.setValue("midi_note", note);
-        presenter.setValue("gate", 1);
+        presenter.setValue(getResources().getString(R.string.parameter_midi_note), note);
+        presenter.setValue(getResources().getString(R.string.parameter_gate), 1);
     }
 
     @Override
     protected void releaseNote() {
-        presenter.setValue("gate", 0);
+        presenter.setValue(getResources().getString(R.string.parameter_gate), 0);
     }
 
     private void reduceOctave() {

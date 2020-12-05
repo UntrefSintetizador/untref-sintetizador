@@ -1,5 +1,8 @@
 package com.untref.synth3f.entities;
 
+import android.content.res.Resources;
+
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class MIXPatch extends Patch {
@@ -12,14 +15,14 @@ public class MIXPatch extends Patch {
     public float master = 1f;
 
     @Override
-    public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + getId() + "_";
-        processor.sendValue(name + "on-off", on_off);
-        processor.sendValue(name + "ch1", ch1);
-        processor.sendValue(name + "ch2", ch2);
-        processor.sendValue(name + "ch3", ch3);
-        processor.sendValue(name + "ch4", ch4);
-        processor.sendValue(name + "master", master);
+    public void initialize(Processor processor, Resources resources) {
+        String name = resources.getString(R.string.pd_patch_name_prefix) + getTypeName() + "_" + getId() + "_";
+        processor.sendValue(name + resources.getString(R.string.parameter_on_off), on_off);
+        processor.sendValue(name + resources.getString(R.string.parameter_ch1), ch1);
+        processor.sendValue(name + resources.getString(R.string.parameter_ch2), ch2);
+        processor.sendValue(name + resources.getString(R.string.parameter_ch3), ch3);
+        processor.sendValue(name + resources.getString(R.string.parameter_ch4), ch4);
+        processor.sendValue(name + resources.getString(R.string.parameter_master), master);
     }
 
     @Override

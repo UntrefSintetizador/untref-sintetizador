@@ -1,5 +1,8 @@
 package com.untref.synth3f.entities;
 
+import android.content.res.Resources;
+
+import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 
 public class EGPatch extends Patch {
@@ -12,14 +15,14 @@ public class EGPatch extends Patch {
     public float gate = 1f;
 
     @Override
-    public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + getId() + "_";
-        processor.sendValue(name + "on-off", on_off);
-        processor.sendValue(name + "attack", attack);
-        processor.sendValue(name + "decay", decay);
-        processor.sendValue(name + "sustain", sustain);
-        processor.sendValue(name + "release", release);
-        processor.sendValue(name + "gate", gate);
+    public void initialize(Processor processor, Resources resources) {
+        String name = resources.getString(R.string.pd_patch_name_prefix) + getTypeName() + "_" + getId() + "_";
+        processor.sendValue(name + resources.getString(R.string.parameter_on_off), on_off);
+        processor.sendValue(name + resources.getString(R.string.parameter_attack), attack);
+        processor.sendValue(name + resources.getString(R.string.parameter_decay), decay);
+        processor.sendValue(name + resources.getString(R.string.parameter_sustain), sustain);
+        processor.sendValue(name + resources.getString(R.string.parameter_release), release);
+        processor.sendValue(name + resources.getString(R.string.parameter_gate), gate);
     }
 
     @Override

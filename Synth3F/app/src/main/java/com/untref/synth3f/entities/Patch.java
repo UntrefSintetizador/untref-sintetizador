@@ -1,5 +1,7 @@
 package com.untref.synth3f.entities;
 
+import android.content.res.Resources;
+
 import com.untref.synth3f.domain_layer.helpers.Processor;
 
 import java.util.ArrayList;
@@ -66,7 +68,7 @@ public abstract class Patch {
         return this.posY;
     }
 
-    public abstract void initialize(Processor processor);
+    public abstract void initialize(Processor processor, Resources resources);
 
     public abstract String getTypeName();
 
