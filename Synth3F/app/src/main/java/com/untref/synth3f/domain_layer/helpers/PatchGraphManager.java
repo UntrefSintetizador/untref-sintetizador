@@ -5,7 +5,6 @@ import com.untref.synth3f.entities.Patch;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -25,22 +24,20 @@ public class PatchGraphManager {
      * Almacena un nuevo patch y le asigna un ID.
      *
      * @param patch Patch a almacenar.
-     * @return ID asignada al patch.
      */
-    public Integer addPatch(Patch patch) {
-        this.maxId += 1;
+    public void addPatch(Patch patch) {
+        maxId += 1;
         patch.setId(maxId);
         patchMap.put(maxId, patch);
-        return maxId;
     }
 
     /**
      * Elimina la informacion que contiene
      */
     public void clear() {
-        this.maxId = 0;
-        this.patchMap = new HashMap<>();
-        this.connectionMap = new HashMap<>();
+        maxId = 0;
+        patchMap = new HashMap<>();
+        connectionMap = new HashMap<>();
     }
 
     /**
@@ -53,8 +50,9 @@ public class PatchGraphManager {
      * @param targetInlet  ID del la entrada del patch.
      * @return Conexion creada con los valores recibidos y una ID.
      */
-    public Connection connect(int sourcePatch, int sourceOutlet, int targetPatch, int targetInlet) {
-        this.maxId += 1;
+    public Connection connect(int sourcePatch, int sourceOutlet, int targetPatch,
+                              int targetInlet) {
+        maxId += 1;
         Connection connection = new Connection();
         connection.setId(maxId);
         connection.setSourcePatch(sourcePatch);
@@ -72,13 +70,11 @@ public class PatchGraphManager {
      * Remueve la conexion de los conjuntos de entrada y salida de los patches correspondientes.
      *
      * @param connectionId ID de la conexion a eliminar.
-     * @return Conexion eliminada.
      */
-    public Connection disconnect(int connectionId) {
+    public void disconnect(int connectionId) {
         Connection connection = connectionMap.remove(connectionId);
         patchMap.get(connection.getSourcePatch()).removeOutputConnection(connection);
         patchMap.get(connection.getTargetPatch()).removeInputConnection(connection);
-        return connection;
     }
 
     /**
@@ -140,18 +136,15 @@ public class PatchGraphManager {
     }
 
     public Patch[] removeAllPatches(){
-        Patch[] patchesToRemove = new Patch[this.patchMap.size()];
+        Patch[] patchesToRemove = new Patch[patchMap.size()];
         int positionToAddPatch = 0;
-        Iterator it = this.patchMap.keySet().iterator();
-        while(it.hasNext()) {
-            Integer key = (Integer) it.next();
-            Patch patch = this.patchMap.get(key);
+        for (Integer key : patchMap.keySet()) {
+            Patch patch = patchMap.get(key);
             patchesToRemove[positionToAddPatch] = patch;
             positionToAddPatch++;
         }
-        for (int i = 0; i < patchesToRemove.length; i++){
-            Patch patch = patchesToRemove[i];
-            this.removePatch(patch.getId());
+        for (Patch patch : patchesToRemove) {
+            removePatch(patch.getId());
         }
         return patchesToRemove;
     }

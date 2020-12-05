@@ -7,8 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//CAMBIAR NOMBRE
-public class ConfigFactory {
+public class ConfigProvider {
     private static Map.Entry<String, String> currentEntry;
     private static LinkedHashMap<String, String> engines;
     private static Iterator<Map.Entry<String, String>> enginesIterator;
@@ -24,7 +23,6 @@ public class ConfigFactory {
     }
 
     public static void changeEngine() {
-
         if (!enginesIterator.hasNext()) {
             enginesIterator = generateIterator();
         }
@@ -38,9 +36,8 @@ public class ConfigFactory {
 
         try {
             Class<?> configClass = Class.forName(currentEntry.getValue());
-            Constructor constructor = configClass.getConstructor();
+            Constructor<?> constructor = configClass.getConstructor();
             result = (Config) constructor.newInstance();
-
         } catch (Exception a) {
             a.printStackTrace();
         }

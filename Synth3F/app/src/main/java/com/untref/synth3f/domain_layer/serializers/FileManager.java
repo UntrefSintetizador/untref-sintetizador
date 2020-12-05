@@ -17,7 +17,8 @@ public class FileManager {
 
     private static final String FILE_FOLDER = "synth3f_saves";
 
-    public static void writeOnFile(Context context, String filename, String data) throws IOException {
+    public static void writeOnFile(Context context, String filename, String data)
+            throws IOException {
         File file = new File(getFileFolder(context), filename);
         if (!file.exists()) {
             file.createNewFile();
@@ -70,8 +71,11 @@ public class FileManager {
         String state = Environment.getExternalStorageState();
         File fileFolder = null;
         if (Environment.MEDIA_MOUNTED.equals(state)) {
-            fileFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), FILE_FOLDER);
-            //Si el directorio no existe y no se puede crear usar directorio privado
+            fileFolder = new File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+                    FILE_FOLDER
+            );
+            // If directory does not exist and cannot create private directory
             if (!fileFolder.isDirectory() && !fileFolder.mkdir()) {
                 fileFolder = null;
             }

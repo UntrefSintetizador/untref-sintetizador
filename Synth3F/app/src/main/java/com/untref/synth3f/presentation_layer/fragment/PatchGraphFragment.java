@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.untref.synth3f.R;
-import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
+import com.untref.synth3f.domain_layer.helpers.ConfigProvider;
 import com.untref.synth3f.domain_layer.helpers.Processor;
 import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.presentation_layer.View.MapView;
@@ -242,7 +242,7 @@ public class PatchGraphFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         patchGraphPresenter.save(context, "_temp_");
-                        ConfigFactory.changeEngine();
+                        ConfigProvider.changeEngine();
                         loadFile("_temp_");
                     }
                 }

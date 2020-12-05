@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.untref.synth3f.R;
 import com.untref.synth3f.domain_layer.helpers.Config;
-import com.untref.synth3f.domain_layer.helpers.ConfigFactory;
+import com.untref.synth3f.domain_layer.helpers.ConfigProvider;
 import com.untref.synth3f.presentation_layer.fragment.PatchGraphFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         patchGraphFragment = new PatchGraphFragment();
         transaction.add(R.id.graph, patchGraphFragment);
         transaction.commit();
-        config = ConfigFactory.create();
+        config = ConfigProvider.create();
         config.setContext(this);
         patchGraphFragment.setProcessor(config.getProcessor());
         patchGraphFragment.setContext(this);

@@ -34,9 +34,11 @@ public class JSONSerializer {
         try {
             String json = FileManager.getStringFromFile(context, filename);
             Log.i("json", json);
-            Gson gson = new GsonBuilder().registerTypeAdapter(Patch.class, new InterfaceAdapter<Patch>()).create();
-            Type type = new TypeToken<PatchGraphManager>() {
-            }.getType();
+            Gson gson = new GsonBuilder().registerTypeAdapter(
+                    Patch.class,
+                    new InterfaceAdapter<Patch>()
+            ).create();
+            Type type = new TypeToken<PatchGraphManager>() {}.getType();
             patchGraphManager = gson.fromJson(json, type);
             assignConnections(patchGraphManager);
         } catch (Exception e) {
@@ -59,7 +61,9 @@ public class JSONSerializer {
                 .setExclusionStrategies(new ExclusionStrategy() {
                     @Override
                     public boolean shouldSkipField(FieldAttributes f) {
-                        return f.getDeclaringClass() == Patch.class && (f.getName().equals("outputConnections") || f.getName().equals("inputConnections"));
+                        return f.getDeclaringClass() == Patch.class &&
+                               (f.getName().equals("outputConnections") ||
+                                f.getName().equals("inputConnections"));
                     }
 
                     @Override
@@ -68,8 +72,7 @@ public class JSONSerializer {
                     }
                 })
                 .create();
-        Type type = new TypeToken<PatchGraphManager>() {
-        }.getType();
+        Type type = new TypeToken<PatchGraphManager>() {}.getType();
         String json = gson.toJson(patchGraphManager, type);
         Log.i("json", json);
         try {
@@ -79,13 +82,15 @@ public class JSONSerializer {
         }
     }
 
-    private void assignConnections(PatchGraphManager patchGraphManager) throws IllegalAccessException, NoSuchFieldException {
+    private void assignConnections(PatchGraphManager patchGraphManager)
+            throws IllegalAccessException, NoSuchFieldException {
         Field f = patchGraphManager.getClass().getDeclaredField("patchMap");
         f.setAccessible(true);
         Map<Integer, Patch> patchMap = (Map<Integer, Patch>) f.get(patchGraphManager);
         f = patchGraphManager.getClass().getDeclaredField("connectionMap");
         f.setAccessible(true);
-        Map<Integer, Connection> connectionMap = (Map<Integer, Connection>) f.get(patchGraphManager);
+        Map<Integer, Connection> connectionMap =
+                (Map<Integer, Connection>) f.get(patchGraphManager);
         for (Connection connection : connectionMap.values()) {
             patchMap.get(connection.getSourcePatch()).addOutputConnection(connection);
             patchMap.get(connection.getTargetPatch()).addInputConnection(connection);
