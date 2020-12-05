@@ -13,7 +13,7 @@ public class VCFPatch extends Patch {
 
     @Override
     public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
+        String name = "x_" + getTypeName() + "_" + getId() + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "att_signal", att_signal);
         processor.sendValue(name + "att_freq", att_freq);

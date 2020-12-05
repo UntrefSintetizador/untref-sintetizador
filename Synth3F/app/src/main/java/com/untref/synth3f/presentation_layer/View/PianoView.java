@@ -28,7 +28,7 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
         piano = findViewById(R.id.pianito);
 
         octaveLabel = view.findViewById(R.id.label_octave);
-        octaveLabel.setText(String.valueOf(patch.octava));
+        octaveLabel.setText(String.valueOf(patch.octave));
         updateOctaveLabel();
 
         view.findViewById(R.id.button_octave_up).setOnClickListener(new View.OnClickListener() {
@@ -62,21 +62,21 @@ public class PianoView extends com.evilduck.piano.views.instrument.PianoView {
     }
 
     private void reduceOctave() {
-        if (patch.octava > MIN_OCTAVE) {
-            patch.octava--;
+        if (patch.octave > MIN_OCTAVE) {
+            patch.octave--;
             updateOctaveLabel();
         }
     }
 
     private void incrementOctave() {
-        if (patch.octava < MAX_OCTAVE) {
-            patch.octava++;
+        if (patch.octave < MAX_OCTAVE) {
+            patch.octave++;
             updateOctaveLabel();
         }
     }
 
     private void updateOctaveLabel() {
-        piano.setINITIAL_OCTIVE(patch.octava);
-        octaveLabel.setText(String.valueOf(patch.octava));
+        piano.setINITIAL_OCTIVE(patch.octave);
+        octaveLabel.setText(String.valueOf(patch.octave));
     }
 }

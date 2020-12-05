@@ -34,20 +34,20 @@ public abstract class Patch {
         return outputConnections;
     }
 
-    public boolean addInputConnection(Connection connection) {
-        return inputConnections.add(connection);
+    public void addInputConnection(Connection connection) {
+        inputConnections.add(connection);
     }
 
-    public boolean removeInputConnection(Connection connection) {
-        return inputConnections.remove(connection);
+    public void removeInputConnection(Connection connection) {
+        inputConnections.remove(connection);
     }
 
-    public boolean addOutputConnection(Connection connection) {
-        return outputConnections.add(connection);
+    public void addOutputConnection(Connection connection) {
+        outputConnections.add(connection);
     }
 
-    public boolean removeOutputConnection(Connection connection) {
-        return outputConnections.remove(connection);
+    public void removeOutputConnection(Connection connection) {
+        outputConnections.remove(connection);
     }
 
     public void setPosX(float posX) {

@@ -15,7 +15,7 @@ public class VCOPatch extends Patch {
 
     @Override
     public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
+        String name = "x_" + getTypeName() + "_" + getId() + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "att_freq0", att_freq0);
         processor.sendValue(name + "att_freq1", att_freq1);

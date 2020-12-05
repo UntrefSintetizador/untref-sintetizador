@@ -8,11 +8,11 @@ public class KBPatch extends Patch {
     public float gate = 1f;
     public float midi_note = 0f;
     public float glide = 0f;
-    public int octava = 4;
+    public int octave = 4;
 
     @Override
     public void initialize(Processor processor) {
-        String name = "x_" + getTypeName() + "_" + Integer.toString(getId()) + "_";
+        String name = "x_" + getTypeName() + "_" + getId() + "_";
         processor.sendValue(name + "on-off", on_off);
         processor.sendValue(name + "gate", gate);
         processor.sendValue(name + "midi_note", midi_note);
