@@ -5,23 +5,23 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.untref.synth3f.domain_layer.helpers.DragMenu;
+import com.untref.synth3f.domain_layer.helpers.ScrollMenu;
 
-public class DragMenuView extends LinearLayout {
+public class ScrollMenuView extends LinearLayout {
 
     private static final int PAGE_SIZE = 4;
     private boolean opened;
-    private DragMenu dragMenu;
+    private ScrollMenu scrollMenu;
 
-    public DragMenuView(Context context) {
+    public ScrollMenuView(Context context) {
         super(context);
     }
 
-    public DragMenuView(Context context, @Nullable AttributeSet attrs) {
+    public ScrollMenuView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DragMenuView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ScrollMenuView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -30,26 +30,26 @@ public class DragMenuView extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             viewVisibilities[i] = GONE;
         }
-        dragMenu = new DragMenu(viewVisibilities, PAGE_SIZE, VISIBLE, GONE);
+        scrollMenu = new ScrollMenu(viewVisibilities, PAGE_SIZE, VISIBLE, GONE);
         updateVisibility();
     }
 
     public void scrollLeft() {
-        dragMenu.scrollLeft();
+        scrollMenu.scrollLeft();
         updateVisibility();
     }
 
     public void scrollRight() {
-        dragMenu.scrollRight();
+        scrollMenu.scrollRight();
         updateVisibility();
     }
 
     public boolean toggle() {
         if (opened) {
-            dragMenu.close();
+            scrollMenu.close();
             opened = false;
         } else {
-            dragMenu.open();
+            scrollMenu.open();
             opened = true;
         }
         updateVisibility();
@@ -59,7 +59,7 @@ public class DragMenuView extends LinearLayout {
 
     private void updateVisibility() {
         for (int i = 0; i < getChildCount(); i++) {
-            int viewVisibility = dragMenu.getVisibility(i);
+            int viewVisibility = scrollMenu.getVisibility(i);
             getChildAt(i).setVisibility(viewVisibility);
         }
     }

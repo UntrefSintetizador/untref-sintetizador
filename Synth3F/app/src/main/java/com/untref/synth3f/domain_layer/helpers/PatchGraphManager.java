@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Almacena la informacion de los patches y sus conexiones.
+ * Almacena patches y sus conexiones. Permite conectar y desconectar patches.
  */
 public class PatchGraphManager {
 
@@ -32,7 +32,7 @@ public class PatchGraphManager {
     }
 
     /**
-     * Elimina la informacion que contiene
+     * Elimina toda la informacion almacenada. Reinicia su estado.
      */
     public void clear() {
         maxId = 0;
@@ -41,14 +41,13 @@ public class PatchGraphManager {
     }
 
     /**
-     * Conecta los patches entre el inlet y outlet recibidos.
-     * Incluye la conexion en los conjuntos de entrada y salida de los patches correspondientes.
+     * Conecta una salida de un patch con una entrada de otro patch.
      *
      * @param sourcePatch  ID del patch de salida.
-     * @param sourceOutlet ID del la salida del patch.
+     * @param sourceOutlet ID del conector de salida del patch.
      * @param targetPatch  ID del patch de entrada.
-     * @param targetInlet  ID del la entrada del patch.
-     * @return Conexion creada con los valores recibidos y una ID.
+     * @param targetInlet  ID del conector de entrada del patch.
+     * @return la conexion resultante con un nuevo ID asignado.
      */
     public Connection connect(int sourcePatch, int sourceOutlet, int targetPatch,
                               int targetInlet) {
@@ -66,8 +65,7 @@ public class PatchGraphManager {
     }
 
     /**
-     * Elimina una conexion.
-     * Remueve la conexion de los conjuntos de entrada y salida de los patches correspondientes.
+     * Dado un ID de conexion, desconecta a los patches involucrados en dicha conexion.
      *
      * @param connectionId ID de la conexion a eliminar.
      */
@@ -80,8 +78,8 @@ public class PatchGraphManager {
     /**
      * Retorna la conexion con la ID solicitada.
      *
-     * @param connectionId ID de la conexion a solicitada.
-     * @return Conexion con la ID solicitada.
+     * @param connectionId ID de la conexion a obtener.
+     * @return la conexion con la ID solicitada.
      */
     public Connection getConnection(int connectionId) {
         return connectionMap.get(connectionId);
@@ -90,7 +88,7 @@ public class PatchGraphManager {
     /**
      * Retorna todas sus conexiones.
      *
-     * @return Collection con todas las conexiones.
+     * @return un objeto Collection con todas las conexiones.
      */
     public Collection<Connection> getConnections() {
         return connectionMap.values();
@@ -100,7 +98,7 @@ public class PatchGraphManager {
      * Retorna el patch con la ID solicitada.
      *
      * @param patchId ID del patch a obtener.
-     * @return Patch con la ID solicitada.
+     * @return el patch con la ID solicitada.
      */
     public Patch getPatch(int patchId) {
         return patchMap.get(patchId);
@@ -109,7 +107,7 @@ public class PatchGraphManager {
     /**
      * Retorna todos sus patches.
      *
-     * @return Collection con todos los patches.
+     * @return todos los patches almacenados.
      */
     public Collection<Patch> getPatches() {
         return patchMap.values();
@@ -117,7 +115,7 @@ public class PatchGraphManager {
 
     /**
      * Elimina el patch con la ID solicitada.
-     * Remueve las conexiones de los conjuntos de entrada y salida de los patches correspondientes.
+     * Si el patch a eliminar esta conectado con otros patches, se eliminaran dichas conexiones
      *
      * @param patchId ID del patch a eliminar.
      * @return Patch eliminado.
@@ -135,6 +133,11 @@ public class PatchGraphManager {
         return patch;
     }
 
+    /**
+     * Elimina todos los patches almacenados, junto con sus conexiones.
+     *
+     * @return todos los patches eliminados.
+     */
     public Patch[] removeAllPatches(){
         Patch[] patchesToRemove = new Patch[patchMap.size()];
         int positionToAddPatch = 0;

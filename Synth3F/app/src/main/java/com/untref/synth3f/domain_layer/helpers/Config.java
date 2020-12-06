@@ -3,7 +3,7 @@ package com.untref.synth3f.domain_layer.helpers;
 import com.untref.synth3f.presentation_layer.activity.MainActivity;
 
 /**
- * Inicializa y configura la herramienta de procesamiento del sonido.
+ * Inicializa y configura la herramienta de procesamiento de audio.
  * Debe ofrecer un metodo para liberar todos los recursos utilizados.
  */
 public interface Config {
@@ -14,9 +14,9 @@ public interface Config {
     void cleanup();
 
     /**
-     * Retorna una instancia IProcessor lista para ser utilizada.
+     * Retorna una instancia de procesador lista para ser utilizada.
      *
-     * @return IProccesor inicializado.
+     * @return procesador inicializado.
      */
     Processor getProcessor();
 
@@ -28,19 +28,20 @@ public interface Config {
     boolean isServiceRunning();
 
     /**
-     * Utiliza el contexto para inicializar la herramienta. Puede ser requerido para funcionar.
+     * Utiliza el contexto de la aplicacion para inicializar la herramienta.
+     * El contexto es requerido para el correcto funcionamiento de este objeto.
      *
-     * @param c Instancia de MainActivity.
+     * @param c Instancia del contexto como MainActivity.
      */
     void setContext(MainActivity c);
 
     /**
-     * Comienza la reproduccion del sonido.
+     * Comienza la reproduccion de audio.
      */
     void startAudio();
 
     /**
-     * Detiene la reproduccion del sonido.
+     * Detiene la reproduccion de audio.
      */
     void stopAudio();
 }

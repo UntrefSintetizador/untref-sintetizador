@@ -16,7 +16,7 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <com.untref.synth3f.presentation_layer.View.DragMenuView
+    <com.untref.synth3f.presentation_layer.View.ScrollMenuView
         android:id="@+id/drag_menu_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/menuButtonDragSH" />
 
-    </com.untref.synth3f.presentation_layer.View.DragMenuView>
+    </com.untref.synth3f.presentation_layer.View.ScrollMenuView>
 
     <Button
         android:id="@+id/menuDelete"

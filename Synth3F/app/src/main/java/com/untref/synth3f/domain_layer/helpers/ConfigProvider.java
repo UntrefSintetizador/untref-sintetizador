@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Genera la configuracion de un motor de procesamiento de audio.
+ */
 public class ConfigProvider {
     private static Map.Entry<String, String> currentEntry;
     private static LinkedHashMap<String, String> engines;
@@ -22,6 +25,10 @@ public class ConfigProvider {
         Log.i("Engine", "Current engine is " + currentEntry.getKey());
     }
 
+    /**
+     * Cambia el motor de procesamiento de audio. Este motor se usara para generar la configuracion
+     * correspondiente.
+     */
     public static void changeEngine() {
         if (!enginesIterator.hasNext()) {
             enginesIterator = generateIterator();
@@ -31,6 +38,11 @@ public class ConfigProvider {
         Log.i("Engine", "Current engine is " + currentEntry.getKey());
     }
 
+    /**
+     * Dado un motor de procesamiento de audio, retorna su configuracion correspondiente.
+     *
+     * @return la configuracion del motor de procesamiento de audio.
+     */
     public static Config create() {
         Config result = null;
 

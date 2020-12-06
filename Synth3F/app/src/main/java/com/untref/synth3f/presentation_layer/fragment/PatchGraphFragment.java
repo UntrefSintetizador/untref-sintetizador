@@ -24,7 +24,7 @@ import com.untref.synth3f.presentation_layer.View.MapView;
 import com.untref.synth3f.presentation_layer.View.OptionsMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchMenuView;
 import com.untref.synth3f.presentation_layer.View.PatchView;
-import com.untref.synth3f.presentation_layer.View.DragMenuView;
+import com.untref.synth3f.presentation_layer.View.ScrollMenuView;
 import com.untref.synth3f.presentation_layer.View.VerticalSeekBar;
 import com.untref.synth3f.presentation_layer.View.WireDrawer;
 import com.untref.synth3f.presentation_layer.activity.StorageActivity;
@@ -47,7 +47,7 @@ public class PatchGraphFragment extends Fragment {
     private PatchMenuView patchMenuView;
     private boolean modeConnect;
     private OptionsMenuView optionsMenuView;
-    private DragMenuView dragMenuView;
+    private ScrollMenuView scrollMenuView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,8 +63,8 @@ public class PatchGraphFragment extends Fragment {
         mapView = patchGraphView.findViewById(R.id.mapView);
         VerticalSeekBar zoomSeekBar = patchGraphView.findViewById(R.id.zoom_seek_bar);
         mapView.setZoomSeekBar(zoomSeekBar);
-        dragMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
-        dragMenuView.init();
+        scrollMenuView = patchGraphView.findViewById(R.id.drag_menu_view);
+        scrollMenuView.init();
         optionsMenuView = patchGraphView.findViewById(R.id.options_menu_view);
         optionsMenuView.init();
         createDragAndDropEvent();
@@ -282,27 +282,27 @@ public class PatchGraphFragment extends Fragment {
     }
 
     private void createDragMenuEvents() {
-        dragMenuView.findViewById(R.id.menuButtonScrollLeft).setOnClickListener(
+        scrollMenuView.findViewById(R.id.menuButtonScrollLeft).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dragMenuView.scrollLeft();
+                        scrollMenuView.scrollLeft();
                     }
                 }
         );
-        dragMenuView.findViewById(R.id.menuButtonScrollRight).setOnClickListener(
+        scrollMenuView.findViewById(R.id.menuButtonScrollRight).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dragMenuView.scrollRight();
+                        scrollMenuView.scrollRight();
                     }
                 }
         );
-        dragMenuView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
+        scrollMenuView.findViewById(R.id.menuButtonOpenDragMenu).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (dragMenuView.toggle()) {
+                        if (scrollMenuView.toggle()) {
                             view.setBackgroundResource(R.drawable.open_drag_menu_on);
                         } else {
                             view.setBackgroundResource(R.drawable.open_drag_menu_off);

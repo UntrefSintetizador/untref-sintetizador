@@ -4,7 +4,7 @@ import com.untref.synth3f.entities.Connection;
 import com.untref.synth3f.entities.Patch;
 
 /**
- * Acceso para el uso de la herramienta de procesamiento del sonido.
+ * Acceso para el uso de la herramienta de procesamiento de audio.
  */
 public interface Processor {
 
@@ -16,7 +16,7 @@ public interface Processor {
     void clear(Patch[] patches);
 
     /**
-     * Connecta los patches entre el inlet y outlet recibidos.
+     * Conecta los patches entre el inlet y outlet recibidos.
      *
      * @param connection Datos de la conexion.
      */
@@ -47,8 +47,7 @@ public interface Processor {
     /**
      * Asigna el valor del parametro solicitado al patch en la herramienta.
      *
-     * @param name  Nombre de la variable a modificar en el formato
-     *              "x_" + patch.getTypeName() + "_" + Integer.toString(patch.getId()) + "_" + name
+     * @param name  Nombre de la variable a modificar.
      * @param value Valor a asignar.
      */
     void sendValue(String name, Float value);
