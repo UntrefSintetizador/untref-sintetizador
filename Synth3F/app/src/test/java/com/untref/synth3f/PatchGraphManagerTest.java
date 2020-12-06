@@ -51,4 +51,22 @@ public class PatchGraphManagerTest {
         assertThat(sourceOutput.getTargetInlet(), is(inletId));
         assertThat(sourceOutput.getTargetPatch(), is(destinyPatch.getId()));
     }
+
+    @Test
+    public void disconnectTwoPatches() {
+        Patch sourcePatch = new VCOPatch();
+        Patch destinyPatch = new DACPatch();
+        int outletId = 0;
+        int inletId = 1;
+        PatchGraphManager patchGraphManager = new PatchGraphManager();
+        patchGraphManager.addPatch(sourcePatch);
+        patchGraphManager.addPatch(destinyPatch);
+        Connection connection = patchGraphManager.connect(sourcePatch.getId(), outletId,
+                                                          destinyPatch.getId(), inletId);
+
+        patchGraphManager.disconnect(connection.getId());
+
+        assertThat(sourcePatch.getOutputConnections().size(), is(0));
+        assertThat(destinyPatch.getInputConnections().size(), is(0));
+    }
 }
