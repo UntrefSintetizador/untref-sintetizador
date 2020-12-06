@@ -25,31 +25,36 @@ public class PatchGraphManagerTest {
         patchGraphManager.addPatch(firstPatch);
         patchGraphManager.addPatch(secondPatch);
         patchGraphManager.addPatch(thirdPatch);
+        int firstPatchId = firstPatch.getId();
+        int secondPatchId = secondPatch.getId();
+        int thirdPatchId = thirdPatch.getId();
 
-        assertThat(firstPatch.getId(), is(not(secondPatch.getId())));
-        assertThat(secondPatch.getId(), is(not(thirdPatch.getId())));
-        assertThat(thirdPatch.getId(), is(not(firstPatch.getId())));
+        assertThat(firstPatchId, is(not(secondPatchId)));
+        assertThat(secondPatchId, is(not(thirdPatchId)));
+        assertThat(thirdPatchId, is(not(firstPatchId)));
     }
 
     @Test
     public void connectTwoPatches() {
         Patch sourcePatch = new VCOPatch();
         Patch destinyPatch = new DACPatch();
-        int outletId = 0;
-        int inletId = 1;
+        int outletConnectorId = 0;
+        int inletConnectorId = 1;
         PatchGraphManager patchGraphManager = new PatchGraphManager();
         patchGraphManager.addPatch(sourcePatch);
         patchGraphManager.addPatch(destinyPatch);
+        int destinyPatchId = destinyPatch.getId();
 
-        patchGraphManager.connect(sourcePatch.getId(), outletId, destinyPatch.getId(), inletId);
-
+        patchGraphManager.connect(sourcePatch.getId(), outletConnectorId, destinyPatchId,
+                                  inletConnectorId);
         Connection sourceOutput = sourcePatch.getOutputConnections().get(0);
         Connection destinyInput = destinyPatch.getInputConnections().get(0);
+        int sourceOutputTargetInletId = sourceOutput.getTargetInlet();
+        int sourceOutputTargetPatchId = sourceOutput.getTargetPatch();
+
         assertThat(sourceOutput, is(destinyInput));
-        assertThat(sourceOutput.getSourceOutlet(), is(outletId));
-        assertThat(sourceOutput.getSourcePatch(), is(sourcePatch.getId()));
-        assertThat(sourceOutput.getTargetInlet(), is(inletId));
-        assertThat(sourceOutput.getTargetPatch(), is(destinyPatch.getId()));
+        assertThat(sourceOutputTargetInletId, is(inletConnectorId));
+        assertThat(sourceOutputTargetPatchId, is(destinyPatchId));
     }
 
     @Test
@@ -65,8 +70,11 @@ public class PatchGraphManagerTest {
                                                           destinyPatch.getId(), inletId);
 
         patchGraphManager.disconnect(connection.getId());
+        int numberOfOutputConnectionsInSourcePatch = sourcePatch.getOutputConnections().size();
+        int numberOfInputConnectionsInDestinyPatch = destinyPatch.getInputConnections().size();
 
-        assertThat(sourcePatch.getOutputConnections().size(), is(0));
-        assertThat(destinyPatch.getInputConnections().size(), is(0));
+        assertThat(numberOfOutputConnectionsInSourcePatch, is(0));
+        assertThat(numberOfInputConnectionsInDestinyPatch, is(0));
     }
+
 }
