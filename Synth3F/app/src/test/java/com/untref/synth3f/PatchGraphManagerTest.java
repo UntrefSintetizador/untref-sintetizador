@@ -96,4 +96,19 @@ public class PatchGraphManagerTest {
         assertThat(numberOfInputConnectionsInDestinyPatch, is(ZERO));
     }
 
+    @Test
+    public void removeAPatchFromManager() {
+        Patch patchToRemove = new VCOPatch();
+        Patch otherPatch = new DACPatch();
+        PatchGraphManager patchGraphManager = new PatchGraphManager();
+        patchGraphManager.addPatch(patchToRemove);
+        patchGraphManager.addPatch(otherPatch);
+
+        patchGraphManager.removePatch(patchToRemove.getId());
+        Collection<Patch> addedPatches = patchGraphManager.getPatches();
+
+        assertThat(addedPatches, not(hasItem(patchToRemove)));
+        assertThat(addedPatches, hasItem(otherPatch));
+    }
+
 }
