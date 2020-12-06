@@ -111,4 +111,18 @@ public class PatchGraphManagerTest {
         assertThat(addedPatches, hasItem(otherPatch));
     }
 
+    @Test
+    public void removeAllPatchesFromManager() {
+        Patch onePatchToRemove = new VCOPatch();
+        Patch otherPatchToRemove = new DACPatch();
+        PatchGraphManager patchGraphManager = new PatchGraphManager();
+        patchGraphManager.addPatch(onePatchToRemove);
+        patchGraphManager.addPatch(otherPatchToRemove);
+
+        patchGraphManager.removeAllPatches();
+        int numberOfAddedPatches = patchGraphManager.getPatches().size();
+
+        assertThat(numberOfAddedPatches, is(ZERO));
+    }
+
 }
