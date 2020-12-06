@@ -9,11 +9,30 @@ import com.untref.synth3f.entities.VCOPatch;
 
 import org.junit.Test;
 
+import java.util.Collection;
+
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PatchGraphManagerTest {
+
+    private static final int ZERO = 0;
+
+    @Test
+    public void addTwoPatches() {
+        Patch onePatch = new VCOPatch();
+        Patch otherPatch = new DACPatch();
+        PatchGraphManager patchGraphManager = new PatchGraphManager();
+
+        patchGraphManager.addPatch(onePatch);
+        patchGraphManager.addPatch(otherPatch);
+        Collection<Patch> addedPatches = patchGraphManager.getPatches();
+
+        assertThat(addedPatches, hasItem(onePatch));
+        assertThat(addedPatches, hasItem(otherPatch));
+    }
 
     @Test
     public void addingAPatchMakesManagerSetUniqueIdToPatch() {
@@ -73,8 +92,8 @@ public class PatchGraphManagerTest {
         int numberOfOutputConnectionsInSourcePatch = sourcePatch.getOutputConnections().size();
         int numberOfInputConnectionsInDestinyPatch = destinyPatch.getInputConnections().size();
 
-        assertThat(numberOfOutputConnectionsInSourcePatch, is(0));
-        assertThat(numberOfInputConnectionsInDestinyPatch, is(0));
+        assertThat(numberOfOutputConnectionsInSourcePatch, is(ZERO));
+        assertThat(numberOfInputConnectionsInDestinyPatch, is(ZERO));
     }
 
 }
