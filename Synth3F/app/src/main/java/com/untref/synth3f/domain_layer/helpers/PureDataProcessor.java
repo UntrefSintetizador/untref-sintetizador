@@ -1,7 +1,6 @@
 package com.untref.synth3f.domain_layer.helpers;
 
 import android.os.Handler;
-import android.util.Log;
 import android.util.Pair;
 
 import com.untref.synth3f.entities.Connection;
@@ -26,7 +25,6 @@ public class PureDataProcessor implements Processor {
 
     @Override
     public void sendValue(String name, Float value) {
-        Log.i(name, Float.toString(value));
         PdBase.sendFloat(name, value);
     }
 
@@ -36,8 +34,6 @@ public class PureDataProcessor implements Processor {
         String name = "x_" + type + "_" + patchId;
         pureDataIDs.put(patchId, newId);
         Object[] array = {10, 10, "x_" + type, name};
-        Log.i("Create", mainPatchName + " " + "obj" + " 10 10 " + "x_" + type + " " +
-              name);
         PdBase.sendMessage(mainPatchName, "obj", array);
     }
 
@@ -50,15 +46,10 @@ public class PureDataProcessor implements Processor {
         Object[] array = {10, 10, "x_fade", fadeName};
         pureDataIDs.put(connection.getId(), newId);
         PdBase.sendMessage(mainPatchName, "obj", array);
-        Log.i("Create Fade", mainPatchName + " " + "obj" + " 10 10 x_fade " + fadeName);
         array = new Object[]{sourcePatch, connection.getSourceOutlet(), newId, 0};
         PdBase.sendMessage(mainPatchName, "connect", array);
-        Log.i("Connect", mainPatchName + " " + "connect " + sourcePatch + " " +
-              connection.getSourceOutlet() + " " + newId + " 0");
         array = new Object[]{newId, 0, targetPatch, connection.getTargetInlet()};
         PdBase.sendMessage(mainPatchName, "connect", array);
-        Log.i("Connect", mainPatchName + " " + "connect " + newId + " 0 " + targetPatch +
-              " " + connection.getTargetInlet());
         PdBase.sendFloat(fadeName, 1);
     }
 

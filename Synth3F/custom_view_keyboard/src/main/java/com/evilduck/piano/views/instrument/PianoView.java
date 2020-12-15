@@ -23,7 +23,6 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -351,7 +350,6 @@ public class PianoView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
         measurementChanged = true;
-        Log.d(VIEW_LOG_TAG, "measurement changed");
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }

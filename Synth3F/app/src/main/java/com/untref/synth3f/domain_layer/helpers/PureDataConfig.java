@@ -7,7 +7,6 @@ import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.untref.synth3f.R;
@@ -222,7 +221,6 @@ public class PureDataConfig implements Config {
             }
 
         } catch (IOException e) {
-            Log.e("Synth3F", e.toString());
             context.finish();
 
         } finally {

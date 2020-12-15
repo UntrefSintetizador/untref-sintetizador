@@ -1,7 +1,6 @@
 package com.untref.synth3f.domain_layer.serializers;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -33,7 +32,6 @@ public class JSONSerializer {
         PatchGraphManager patchGraphManager;
         try {
             String json = FileManager.getStringFromFile(context, filename);
-            Log.i("json", json);
             Gson gson = new GsonBuilder().registerTypeAdapter(
                     Patch.class,
                     new InterfaceAdapter<Patch>()
@@ -74,7 +72,6 @@ public class JSONSerializer {
                 .create();
         Type type = new TypeToken<PatchGraphManager>() {}.getType();
         String json = gson.toJson(patchGraphManager, type);
-        Log.i("json", json);
         try {
             FileManager.writeOnFile(context, filename, json);
         } catch (IOException e) {

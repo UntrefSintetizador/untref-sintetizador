@@ -1,7 +1,5 @@
 package com.untref.synth3f.domain_layer.helpers;
 
-import android.util.Log;
-
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -21,8 +19,6 @@ public class ConfigProvider {
         engines.put("Faust", "com.untref.synth3f.domain_layer.helpers.FaustConfig");
         enginesIterator = generateIterator();
         currentEntry = enginesIterator.next();
-
-        Log.i("Engine", "Current engine is " + currentEntry.getKey());
     }
 
     /**
@@ -35,7 +31,6 @@ public class ConfigProvider {
         }
 
         currentEntry = enginesIterator.next();
-        Log.i("Engine", "Current engine is " + currentEntry.getKey());
     }
 
     /**
