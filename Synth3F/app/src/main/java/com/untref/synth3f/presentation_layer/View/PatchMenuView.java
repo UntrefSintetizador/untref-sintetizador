@@ -306,7 +306,6 @@ public class PatchMenuView extends TableLayout {
         if (envelopeEditor.isOpen()) {
             TableRow editorRow = new TableRow(getContext());
             editorRow.addView(envelopeEditor);
-            editorRow.setBackgroundColor(0);
             addView(editorRow);
             TableRow.LayoutParams editorParams =
                     (TableRow.LayoutParams) envelopeEditor.getLayoutParams();
@@ -320,13 +319,10 @@ public class PatchMenuView extends TableLayout {
         for (int i = 0; i < knobList.size(); i = i + KNOBS_PER_ROW) {
             TableRow textTableRow = new TableRow(getContext());
             TableRow knobTableRow = new TableRow(getContext());
-            textTableRow.setBackgroundColor(0);
-            knobTableRow.setBackgroundColor(0);
             int knobsInRow = Math.min(KNOBS_PER_ROW, knobList.size() - i);
             for (int j = 0; j < knobsInRow; j++) {
                 Knob knob = knobList.get(i + j);
                 TextView textView = new TextView(getContext());
-                textView.setBackgroundColor(0);
                 textView.setText(knob.getName());
                 textView.setTextAppearance(getContext(), R.style.PatchMenuText);
                 textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
@@ -346,7 +342,6 @@ public class PatchMenuView extends TableLayout {
     private void fixRowsWidth() {
         if (knobList.isEmpty()) {
             TableRow dummyRow = new TableRow(getContext());
-            dummyRow.setBackgroundColor(0);
             addView(dummyRow);
         }
         ViewGroup lastRow = (ViewGroup) getChildAt(getChildCount() - 1);

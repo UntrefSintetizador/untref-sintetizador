@@ -8,7 +8,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:background">@color/grey</item>
         <item name="android:fontFamily">@font/roboto_condensed_light</item>
     </style>
 
@@ -16,7 +15,12 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:editTextColor">@color/white</item>
+        <item name="android:background">@color/grey</item>
         <item name="buttonStyle">@style/StorageButton</item>
+    </style>
+
+    <style name="Theme.AppCompat.Dialog.Alert.Synth3F">
+        <item name="android:background">@color/grey</item>
     </style>
 
     <style name="StorageButton" parent="Widget.AppCompat.Button.Borderless">

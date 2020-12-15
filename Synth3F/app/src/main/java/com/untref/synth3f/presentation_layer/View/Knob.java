@@ -141,7 +141,6 @@ public class Knob extends AppCompatImageView implements View.OnTouchListener {
         setRotation(rotationWhileNotMoving);
         setClickable(true);
         setOnTouchListener(this);
-        setBackgroundColor(0);
         centerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         centerCirclePaint.setColor(color);
         borderCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);

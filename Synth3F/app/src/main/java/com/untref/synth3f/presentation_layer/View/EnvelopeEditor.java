@@ -56,7 +56,6 @@ public class EnvelopeEditor extends AppCompatImageView implements View.OnTouchLi
         borderRect = new RectF(30, 30, width - 30, height);
         envelopePath = new Path();
         initLinePoints();
-        setBackgroundColor(0);
         setOnTouchListener(this);
     }
 

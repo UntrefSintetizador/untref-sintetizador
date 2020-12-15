@@ -138,7 +138,7 @@ public class PatchGraphFragment extends Fragment {
     }
 
     public void handleBackPressedCallback() {
-        int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert;
+        int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert_Synth3F;
         AlertDialog alertDialog = new AlertDialog.Builder(context, dialogStyle).create();
         alertDialog.setTitle(R.string.new_preset_dialog_title);
         alertDialog.setMessage(getResources().getString(R.string.close_dialog_message));
@@ -472,7 +472,7 @@ public class PatchGraphFragment extends Fragment {
         public void onClick(View v) {
             Resources resources = PatchGraphFragment.this.getResources();
             Context context = PatchGraphFragment.this.context;
-            int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert;
+            int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert_Synth3F;
             final AlertDialog alertDialog = new AlertDialog.Builder(context, dialogStyle).create();
             alertDialog.setTitle(R.string.new_preset_dialog_title);
             alertDialog.setMessage(resources.getString(R.string.new_preset_dialog_message));

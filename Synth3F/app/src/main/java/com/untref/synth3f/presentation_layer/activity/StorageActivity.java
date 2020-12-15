@@ -64,9 +64,6 @@ public class StorageActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         listView.setItemChecked(position, true);
                         view.setBackgroundResource(R.color.blue);
-                        if (lastViewSelected != null) {
-                            lastViewSelected.setBackgroundColor(0);
-                        }
                         lastViewSelected = view;
                         inputFileName.setText(((TextView) view).getText());
                     }
@@ -96,7 +93,7 @@ public class StorageActivity extends AppCompatActivity {
     }
 
     private void handleFileOverwriting(final String filename) {
-        int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert;
+        int dialogStyle = R.style.Theme_AppCompat_Dialog_Alert_Synth3F;
         AlertDialog dialog = new AlertDialog.Builder(this, dialogStyle).create();
         dialog.setTitle(getString(R.string.overwrite_dialog_title));
         dialog.setMessage(getString(R.string.overwrite_dialog_message));
